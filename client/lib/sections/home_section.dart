@@ -2,9 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../services/api_service.dart';
+import '../widgets/parse_rich_text.dart';
 
-class HomeSection extends StatelessWidget {
+class HomeSection extends StatefulWidget {
   const HomeSection({super.key});
+
+  @override
+  State<HomeSection> createState() => _HomeSectionState();
+}
+
+class _HomeSectionState extends State<HomeSection> {
+  final ApiService _apiService = ApiService();
+  String _aspirations = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAspirations();
+  }
+
+  void _loadAspirations() async {
+    final text = await _apiService.getAspirations();
+    if (mounted) setState(() => _aspirations = text);
+  }
 
   Future<void> _launchUrl(String url) async {
     final Uri uri = Uri.parse(url);
@@ -97,7 +118,33 @@ class HomeSection extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              
+              // Aspirations Block Moved Here
+              if (_aspirations.isNotEmpty) ...[
+                const SizedBox(height: 60),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(25),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF112240),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.3)),
+                     boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 5))]
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                        Text("💡 MY ASPIRATION", style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 14, fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+                        const SizedBox(height: 10),
+                        ParseRichText(
+                          text: _aspirations,
+                          baseStyle: const TextStyle(fontSize: 18, height: 1.6, color: Colors.white, fontStyle: FontStyle.italic),
+                        ),
+                    ],
+                  ),
+                ),
+              ]
             ],
           ),
         ),
@@ -106,36 +153,3 @@ class HomeSection extends StatelessWidget {
   }
 }
 
-class _HomeButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onTap;
-  final bool outline;
-
-  const _HomeButton({required this.label, required this.onTap, this.outline = false});
-
-  @override
-  Widget build(BuildContext context) {
-    if (outline) {
-      return OutlinedButton(
-        onPressed: onTap,
-        style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
-          side: BorderSide(color: Theme.of(context).primaryColor),
-          foregroundColor: Theme.of(context).primaryColor,
-          textStyle: const TextStyle(fontSize: 16),
-        ),
-        child: Text(label),
-      );
-    }
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20),
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: const Color(0xFF0A192F),
-        textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      ),
-      child: Text(label),
-    );
-  }
-}

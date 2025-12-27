@@ -31,23 +31,7 @@ class PortfolioApp extends StatelessWidget {
           secondary: Color(0xFF112240),
         ),
       ),
-      builder: (context, child) {
-        final mediaQuery = MediaQuery.of(context);
-        // "75% zoom" effect on Mobile
-        if (mediaQuery.size.width < 800) {
-           return MediaQuery(
-             data: mediaQuery.copyWith(
-               textScaleFactor: 0.85, // Scale text down a bit
-             ),
-             child: Transform.scale(
-               scale: 0.8, // Closer to 75% requested by user
-               alignment: Alignment.topCenter,
-               child: child!,
-             ),
-           );
-        }
-        return child!;
-      },
+
       home: const HomePage(),
     );
   }
