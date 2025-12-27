@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  // If we ever decide to use a backend for dynamic features (like sending emails)
-  // we can keep the baseUrl. But for data, we use local assets.
-  final String baseUrl = 'http://localhost:3000/api'; 
+  // Use Render URL in production, Localhost in debug
+  final String baseUrl = kReleaseMode 
+      ? 'https://portfolio-server-mzfs.onrender.com/api' 
+      : 'http://localhost:3000/api';
 
   Future<Map<String, dynamic>> _loadData() async {
     final String response = await rootBundle.loadString('assets/data.json');
