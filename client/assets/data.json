@@ -17,6 +17,20 @@
         },
         {
             "id": 2,
+            "title": "Freelance Fullstack Developer",
+            "company": "Self-Employed",
+            "date_range": "Sep 2025 - Present",
+            "summary": "Remote · Web & Mobile Development",
+            "visible": true,
+            "details": [
+                "Developing custom **web and mobile applications** for diverse clients using Flutter, React, and Node.js.",
+                "Delivering **end-to-end solutions**, from UI/UX design to backend integration and deployment.",
+                "Consulting on **digital strategy** and optimizing existing codebases for performance and scalability."
+            ],
+            "type": "other"
+        },
+        {
+            "id": 3,
             "title": "Data Engineering Intern",
             "company": "London Success Academy",
             "date_range": "Sep 2025 - Oct 2025",
@@ -30,7 +44,7 @@
             "type": "industry"
         },
         {
-            "id": 3,
+            "id": 4,
             "title": "Analytics Delivery Intern",
             "company": "OCTAVE - John Keells Group",
             "date_range": "Mar 2023 - May 2023",
@@ -43,7 +57,7 @@
             "type": "industry"
         },
         {
-            "id": 4,
+            "id": 5,
             "title": "Data Science Intern",
             "company": "OCTAVE - John Keells Group",
             "date_range": "Mar 2022 - Jun 2022",
@@ -58,7 +72,7 @@
             "type": "industry"
         },
         {
-            "id": 5,
+            "id": 6,
             "title": "Customer Service Associate",
             "company": "UNIQLO",
             "date_range": "Aug 2025 - Oct 2025",
@@ -72,7 +86,7 @@
             "type": "other"
         },
         {
-            "id": 6,
+            "id": 7,
             "title": "Customer Service Associate",
             "company": "EG On The Move (Petrogas)",
             "date_range": "Jan 2025 - Aug 2025",
@@ -87,7 +101,7 @@
             "type": "other"
         },
         {
-            "id": 7,
+            "id": 8,
             "title": "Retail Associate - Christmas Temp",
             "company": "TK Maxx",
             "date_range": "Nov 2024 - Jan 2025",
@@ -102,7 +116,7 @@
             "type": "other"
         },
         {
-            "id": 8,
+            "id": 9,
             "title": "Student Support Worker",
             "company": "Clear Links Support Ltd.",
             "date_range": "Oct 2024 - Apr 2025",
@@ -117,7 +131,7 @@
             "type": "other"
         },
         {
-            "id": 9,
+            "id": 10,
             "title": "Class Teacher",
             "company": "St. Mary’s Church, Dehiwala",
             "date_range": "Aug 2022 - Aug 2024",
@@ -132,7 +146,7 @@
             "type": "other"
         },
         {
-            "id": 10,
+            "id": 11,
             "title": "BSc (Hons) Computer Science",
             "company": "University of Westminster, United Kingdom",
             "date_range": "Sep 2022 - Jul 2025",
@@ -147,7 +161,7 @@
             "type": "education"
         },
         {
-            "id": 11,
+            "id": 12,
             "title": "Certificate in Business Analytics",
             "company": "CIMA, United Kingdom",
             "date_range": "Aug 2024",
@@ -160,7 +174,7 @@
             "type": "education"
         },
         {
-            "id": 12,
+            "id": 13,
             "title": "Primary & Secondary Education",
             "company": "St. Bridget's Convent, Colombo 07, Sri Lanka",
             "date_range": "Jan 2008 - Feb 2022",
