@@ -14,34 +14,49 @@ class ApiService {
     return json.decode(response);
   }
 
+  // Helper to filter items with "visible": false
+  List<dynamic> _filterVisible(List<dynamic> list) {
+    return list.where((item) {
+      if (item is Map && item.containsKey('visible') && item['visible'] == false) {
+        return false;
+      }
+      return true;
+    }).toList();
+  }
+
   Future<List<dynamic>> getProjects() async {
     final data = await _loadData();
-    return data['projects'];
+    return _filterVisible(data['projects']);
   }
 
   Future<List<dynamic>> getExperience() async {
     final data = await _loadData();
-    return data['experience'];
+    return _filterVisible(data['experience']);
   }
 
   Future<List<dynamic>> getSkills() async {
     final data = await _loadData();
-    return data['skills'];
+    return _filterVisible(data['skills']);
   }
 
   Future<List<dynamic>> getPublications() async {
      final data = await _loadData();
-     return data['publications'];
+     return _filterVisible(data['publications']);
   }
 
   Future<List<dynamic>> getVolunteering() async {
      final data = await _loadData();
-     return data['volunteering'];
+     return _filterVisible(data['volunteering']);
   }
 
   Future<List<dynamic>> getFeatured() async {
      final data = await _loadData();
-     return data['featured'];
+     return _filterVisible(data['featured']);
+  }
+
+  Future<String> getAspirations() async {
+     final data = await _loadData();
+     return data['aspirations'] ?? '';
   }
 
   Future<bool> sendContactMessage(String name, String email, String message) async {

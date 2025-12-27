@@ -31,6 +31,23 @@ class PortfolioApp extends StatelessWidget {
           secondary: Color(0xFF112240),
         ),
       ),
+      builder: (context, child) {
+        final mediaQuery = MediaQuery.of(context);
+        // "75% zoom" effect on Mobile
+        if (mediaQuery.size.width < 800) {
+           return MediaQuery(
+             data: mediaQuery.copyWith(
+               textScaleFactor: 0.85, // Scale text down a bit
+             ),
+             child: Transform.scale(
+               scale: 0.8, // Closer to 75% requested by user
+               alignment: Alignment.topCenter,
+               child: child!,
+             ),
+           );
+        }
+        return child!;
+      },
       home: const HomePage(),
     );
   }
@@ -61,15 +78,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('RC', style: GoogleFonts.outfit(fontWeight: FontWeight.bold, color: const Color(0xFF64FFDA))),
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          // On mobile, you might want a Drawer instead, but for now we fit them or Wrap
           if (MediaQuery.of(context).size.width > 800) ...[
             TextButton(onPressed: () => _scrollTo(_aboutKey), child: const Text('About')),
             TextButton(onPressed: () => _scrollTo(_experienceKey), child: const Text('Experience')),
@@ -77,12 +96,41 @@ class _HomePageState extends State<HomePage> {
             TextButton(onPressed: () => _scrollTo(_projectsKey), child: const Text('Projects')),
             TextButton(onPressed: () => _scrollTo(_contactKey), child: const Text('Contact')),
           ] else ...[
-            IconButton(icon: const Icon(Icons.menu), onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Mobile Menu Implementation Todo")));
-            })
+            IconButton(
+              icon: const Icon(Icons.menu, color: Color(0xFF64FFDA)), 
+              onPressed: () => _scaffoldKey.currentState?.openEndDrawer()
+            )
           ],
           const SizedBox(width: 20),
         ],
+      ),
+      endDrawer: Drawer(
+        backgroundColor: const Color(0xFF112240),
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+          children: [
+            ListTile(
+              title: const Text('About', style: TextStyle(color: Colors.white, fontSize: 18)),
+              onTap: () { Navigator.pop(context); _scrollTo(_aboutKey); },
+            ),
+            ListTile(
+              title: const Text('Experience', style: TextStyle(color: Colors.white, fontSize: 18)),
+              onTap: () { Navigator.pop(context); _scrollTo(_experienceKey); },
+            ),
+            ListTile(
+              title: const Text('Skills', style: TextStyle(color: Colors.white, fontSize: 18)),
+              onTap: () { Navigator.pop(context); _scrollTo(_skillsKey); },
+            ),
+            ListTile(
+              title: const Text('Projects', style: TextStyle(color: Colors.white, fontSize: 18)),
+              onTap: () { Navigator.pop(context); _scrollTo(_projectsKey); },
+            ),
+            ListTile(
+              title: const Text('Contact', style: TextStyle(color: Colors.white, fontSize: 18)),
+              onTap: () { Navigator.pop(context); _scrollTo(_contactKey); },
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
@@ -96,7 +144,7 @@ class _HomePageState extends State<HomePage> {
             const AdditionalSections(),
             ContactSection(key: _contactKey),
             const SizedBox(height: 50),
-            const Text("© 2024 Rachel Cooray", style: TextStyle(color: Colors.white54)),
+            const Text("© 2025 Rachel Cooray", style: TextStyle(color: Colors.white54)),
             const SizedBox(height: 20),
           ],
         ),

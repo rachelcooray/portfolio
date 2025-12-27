@@ -1,4 +1,5 @@
 {
+    "aspirations": "I aspire to leverage **Data Science** and **AI** to solve complex, real-world problems, driving innovation and making a meaningful impact on society through data-driven decision making.",
     "experience": [
         {
             "id": 1,
@@ -6,6 +7,7 @@
             "company": "OCTAVE - John Keells Group",
             "date_range": "Oct 2025 - Present",
             "summary": "Colombo, Sri Lanka · On-site",
+            "visible": true,
             "details": [
                 "Optimized distributor performance by identifying underperformers and high-potential distributors, designed KPI-driven incentive structures that increased potential margins by **68%** for an FMCG company.",
                 "Ran advanced margin and sales-incentive simulations, uncovering **actionable strategies** to recapture lost sales in flood-affected outlets.",
@@ -19,6 +21,7 @@
             "company": "London Success Academy",
             "date_range": "Sep 2025 - Oct 2025",
             "summary": "London, UK · Remote",
+            "visible": true,
             "details": [
                 "Built complete **ETL pipelines on GCP** for clickstream and transaction data, delivering analytics-ready datasets for business intelligence.",
                 "Scaled data processing using **PySpark** and **Parquet partitioning**, improving query efficiency by **40%**.",
@@ -32,6 +35,7 @@
             "company": "OCTAVE - John Keells Group",
             "date_range": "Mar 2023 - May 2023",
             "summary": "Colombo, Sri Lanka · On-site",
+            "visible": true,
             "details": [
                 "Built **Power BI dashboards** for stakeholders to visualize sales performance and route efficiency.",
                 "Conducted field observations and proposed improvements, enabling effective rollout of **new processes** and **data-backed decisions**."
@@ -44,6 +48,7 @@
             "company": "Octave Big Data Analytics & Consulting Services",
             "date_range": "Mar 2022 - Jun 2022",
             "summary": "Colombo, Sri Lanka · Remote",
+            "visible": true,
             "details": [
                 "Assisted in **data collection, cleaning, and analysis**, ensuring accuracy and reliability of datasets.",
                 "Supported **statistical and machine learning model development** for data-driven research projects.",
@@ -58,6 +63,7 @@
             "company": "UNIQLO",
             "date_range": "Aug 2025 - Oct 2025",
             "summary": "Coal Drops Yard, UK · Visual Merchandising, Customer Service",
+            "visible": true,
             "details": [
                 "Provided **exceptional customer service** in a high-paced environment.",
                 "Managed **visual merchandising standards**.",
@@ -71,6 +77,7 @@
             "company": "EG On The Move (Petrogas)",
             "date_range": "Jan 2025 - Aug 2025",
             "summary": "Enfield, UK · Customer Service, Cashiering",
+            "visible": true,
             "details": [
                 "Assisted customers with purchases, providing **friendly and efficient customer service**.",
                 "Managed **point-of-sale transactions** accurately and efficiently.",
@@ -85,6 +92,7 @@
             "company": "TK Maxx",
             "date_range": "Nov 2024 - Jan 2025",
             "summary": "Stratford, UK · Customer Service, Retail",
+            "visible": true,
             "details": [
                 "Delivered **excellent customer service** to ensure a positive shopping experience.",
                 "Assisted with **stock management** and replenishment to maintain product availability.",
@@ -99,6 +107,7 @@
             "company": "Clear Links Support Ltd.",
             "date_range": "Oct 2024 - Apr 2025",
             "summary": "London, UK · Education, Interpersonal Communication",
+            "visible": true,
             "details": [
                 "Assisted university students with **note-taking** and **academic support**.",
                 "Provided practical assistance during lectures and tutorials to **enhance learning**.",
@@ -113,6 +122,7 @@
             "company": "St. Mary’s Church, Dehiwala",
             "date_range": "Aug 2022 - Aug 2024",
             "summary": "Dehiwala, Sri Lanka · Education",
+            "visible": true,
             "details": [
                 "Delivered **engaging lessons** tailored to primary school learners.",
                 "Adapted teaching methods to accommodate **diverse learning needs**.",
@@ -127,6 +137,7 @@
             "company": "University of Westminster, United Kingdom",
             "date_range": "Sep 2022 - Jul 2025",
             "summary": "Grade: First Class Honours",
+            "visible": true,
             "details": [
                 "Specialized in **Data Science**.",
                 "Scholarship: **UOW/IIT School of Computing and Engineering Scholarship** (2024/25).",
@@ -141,6 +152,7 @@
             "company": "CIMA, United Kingdom",
             "date_range": "Aug 2024",
             "summary": "Financial & Management Accounting",
+            "visible": true,
             "details": [
                 "Covered **Economics**, **Management** and **Financial Accounting**.",
                 "Business Law and Corporate Governance."
@@ -153,6 +165,7 @@
             "company": "St. Bridget's Convent, Colombo 07, Sri Lanka",
             "date_range": "Jan 2008 - Feb 2022",
             "summary": "Head Prefect (2020) | GCE O/L | GCE A/L",
+            "visible": true,
             "details": [
                 "GCE A/L Examination (2021): **Chemistry - A**, **Combined Mathematics - B**, **Physics - B**.",
                 "GCE O/L Examination (2018): **9 Distinctions (A Grade)**.",
@@ -236,6 +249,7 @@
                 "Render"
             ],
             "link": "https://pcos-care-web-app.onrender.com",
+            "visible": true,
             "image": "assets/images/pcoscare.png"
         },
         {
@@ -248,6 +262,7 @@
                 "Visualization"
             ],
             "link": "https://rachelcooray.github.io/carbon-footprint-tracker/",
+            "visible": true,
             "image": "assets/images/carbonfootprint.png"
         },
         {
@@ -259,6 +274,7 @@
                 "Recommendation Systems"
             ],
             "link": null,
+            "visible": true,
             "image": "assets/images/futsal.png"
         },
         {
@@ -271,6 +287,7 @@
                 "CSR"
             ],
             "link": null,
+            "visible": true,
             "image": "assets/images/street-vendor.png"
         }
     ],
@@ -280,6 +297,7 @@
             "title": "PCOS Care: A Machine Learning-Based Web Application for Early Risk Prediction of Polycystic Ovary Syndrome",
             "conference": "IEEE ICAHS 2025, Tunisia",
             "link": null,
+            "visible": true,
             "image": null
         }
     ],
@@ -297,7 +315,8 @@
             "source": "University of Westminster",
             "link": "https://blog.westminster.ac.uk/wearewestminster/celebrating-innovation-at-the-computer-science-and-engineering-final-year-project-showcase/",
             "image": "assets/images/netcompany-group-pic.jpg",
-            "description": "Featured for showcase innovation."
+            "description": "Featured for showcase innovation.",
+            "visible": true
         },
         {
             "id": 2,
@@ -305,7 +324,8 @@
             "source": "University of Westminster",
             "link": "https://www.westminster.ac.uk/news/westminster-computer-science-and-engineering-students-receive-prizes-from-netcompany-at-annual-final-year-project-showcase",
             "image": "assets/images/blog.png",
-            "description": "Awarded 3rd Place for PCOS Care project."
+            "description": "Awarded 3rd Place for PCOS Care project.",
+            "visible": true
         },
         {
             "id": 3,
@@ -313,7 +333,8 @@
             "source": "LMD",
             "link": "https://lmd.lk/youth-forum-32/",
             "image": "assets/images/youth-forum.png",
-            "description": "Interview on youth leadership."
+            "description": "Interview on youth leadership.",
+            "visible": true
         },
         {
             "id": 4,
@@ -321,7 +342,8 @@
             "source": "Daily FT",
             "link": "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
             "image": "assets/images/daily-ft.png",
-            "description": "New Generation Awards recognition."
+            "description": "New Generation Awards recognition.",
+            "visible": true
         }
     ]
 }
