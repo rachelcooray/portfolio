@@ -180,10 +180,8 @@
             "category": "Programming Languages",
             "items": [
                 "Python",
-                "R",
-                "Java",
-                "Dart",
                 "SQL",
+                "Dart",
                 "JavaScript"
             ]
         },
@@ -194,9 +192,7 @@
                 "Machine Learning",
                 "Pandas & NumPy",
                 "Scikit-learn",
-                "PySpark",
-                "Data Visualization",
-                "Predictive Modeling"
+                "Data Visualization"
             ]
         },
         {
@@ -205,10 +201,7 @@
             "items": [
                 "Flutter",
                 "Node.js",
-                "Figma",
-                "HTML5 & CSS3",
-                "Streamlit",
-                "API Development"
+                "HTML5 & CSS3"
             ]
         },
         {
@@ -216,10 +209,8 @@
             "category": "Cloud & Tools",
             "items": [
                 "Google Cloud Platform",
-                "BigQuery",
                 "Power BI",
                 "Git & GitHub",
-                "Docker",
                 "Excel (Advanced)"
             ]
         },
@@ -228,11 +219,9 @@
             "category": "Professional Skills",
             "items": [
                 "Business Analytics",
-                "Agile Methodology",
-                "Leadership",
-                "Project Management",
                 "Problem Solving",
-                "Communication"
+                "Communication",
+                "Financial Accounting"
             ]
         }
     ],
