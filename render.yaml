@@ -4,7 +4,7 @@ services:
     name: portfolio-client
     env: static
     rootDir: client
-    buildCommand: flutter build web --release
+    buildCommand: ./render_build.sh
     staticPublishPath: build/web
     # Redirect all 404s to index.html for Flutter routing
     routes:
