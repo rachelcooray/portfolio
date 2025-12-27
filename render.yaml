@@ -1,0 +1,29 @@
+services:
+  # 1. The Frontend (Flutter Web)
+  - type: static
+    name: portfolio-client
+    env: static
+    rootDir: client
+    buildCommand: flutter build web --release
+    staticPublishPath: build/web
+    # Redirect all 404s to index.html for Flutter routing
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+
+  # 2. The Backend (Node.js - Contact Form)
+  # Optional: You can delete this block if you switch to Formspree
+  - type: web
+    name: portfolio-server
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: EMAIL_USER
+        sync: false # User must enter this in Render Dashboard
+      - key: EMAIL_PASS
+        sync: false # User must enter this in Render Dashboard
