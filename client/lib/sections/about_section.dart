@@ -28,7 +28,7 @@ class AboutSection extends StatelessWidget {
 
     // Define the text widget separately
     const Widget aboutText = Text(
-      "I'm Rachel Cooray, a Computer Science First Class Graduate and Data Science Intern at OCTAVE - John Keells Group.\n\n"
+      "I'm Rachel Cooray, a First Class Computer Science Graduate, Freelance Fullstack Developer, and Data Science Intern at OCTAVE - John Keells Group.\n\n"
       "I have hands-on experience in Data Engineering, Machine Learning, and Full Stack Development. "
       "Recently, my project 'PCOS Care' won 3rd place at the University of Westminster Final Year Project Showcase. "
       "Strong communicator who translates complex data into actionable insights, optimizes business processes, and builds end-to-end solutions. "
