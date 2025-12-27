@@ -118,6 +118,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         controller: _scrollController,
+        physics: const ClampingScrollPhysics(),
         child: Column(
           children: [
             HomeSection(key: _homeKey),
