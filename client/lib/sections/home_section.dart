@@ -139,7 +139,7 @@ class _HomeSectionState extends State<HomeSection> {
                         const SizedBox(height: 10),
                         ParseRichText(
                           text: _aspirations,
-                          baseStyle: const TextStyle(fontSize: 18, height: 1.6, color: Colors.white),
+                          baseStyle: GoogleFonts.outfit(fontSize: 18, height: 1.6, color: Colors.white),
                         ),
                     ],
                   ),
