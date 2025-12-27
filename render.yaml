@@ -1,6 +1,6 @@
 services:
   # 1. The Frontend (Flutter Web)
-  - type: static
+  - type: web
     name: portfolio-client
     env: static
     rootDir: client
