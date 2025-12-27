@@ -9,9 +9,13 @@ class ApiService {
       ? 'https://portfolio-server-mzfs.onrender.com/api' 
       : 'http://localhost:3000/api';
 
+  Map<String, dynamic>? _cachedData;
+
   Future<Map<String, dynamic>> _loadData() async {
+    if (_cachedData != null) return _cachedData!;
     final String response = await rootBundle.loadString('assets/data.json');
-    return json.decode(response);
+    _cachedData = json.decode(response);
+    return _cachedData!;
   }
 
   // Helper to filter items with "visible": false

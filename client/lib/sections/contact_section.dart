@@ -136,6 +136,7 @@ class _ContactSectionState extends State<ContactSection> {
                         border: OutlineInputBorder(),
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter your name' : null,
+                      scrollPadding: const EdgeInsets.only(bottom: 150),
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -145,6 +146,7 @@ class _ContactSectionState extends State<ContactSection> {
                         border: OutlineInputBorder(),
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter your email' : null,
+                      scrollPadding: const EdgeInsets.only(bottom: 150),
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -156,6 +158,7 @@ class _ContactSectionState extends State<ContactSection> {
                         alignLabelWithHint: true,
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter a message' : null,
+                      scrollPadding: const EdgeInsets.only(bottom: 150),
                     ),
                     const SizedBox(height: 30),
                     ElevatedButton(

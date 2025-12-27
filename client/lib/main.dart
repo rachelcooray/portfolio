@@ -129,8 +129,7 @@ class _HomePageState extends State<HomePage> {
             ContactSection(key: _contactKey),
             const SizedBox(height: 50),
             const Text("© 2025 Rachel Cooray", style: TextStyle(color: Colors.white54)),
-            // Extra padding at bottom to prevent "jump" when keyboard opens on mobile
-            const SizedBox(height: 300),
+            const SizedBox(height: 50),
           ],
         ),
       ),
