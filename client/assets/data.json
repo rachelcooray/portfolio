@@ -77,7 +77,7 @@
             "company": "UNIQLO",
             "date_range": "Aug 2025 - Oct 2025",
             "summary": "Coal Drops Yard, UK · Visual Merchandising, Customer Service",
-            "visible": false,
+            "visible": true,
             "details": [
                 "Provided **exceptional customer service** in a high-paced environment.",
                 "Managed **visual merchandising standards**.",
@@ -91,7 +91,7 @@
             "company": "EG On The Move (Petrogas)",
             "date_range": "Jan 2025 - Aug 2025",
             "summary": "Enfield, UK · Customer Service, Cashiering",
-            "visible": false,
+            "visible": true,
             "details": [
                 "Assisted customers with purchases, providing **friendly and efficient customer service**.",
                 "Managed **point-of-sale transactions** accurately and efficiently.",
@@ -106,7 +106,7 @@
             "company": "TK Maxx",
             "date_range": "Nov 2024 - Jan 2025",
             "summary": "Stratford, UK · Customer Service, Retail",
-            "visible": false,
+            "visible": true,
             "details": [
                 "Delivered **excellent customer service** to ensure a positive shopping experience.",
                 "Assisted with **stock management** and replenishment to maintain product availability.",
@@ -121,7 +121,7 @@
             "company": "Clear Links Support Ltd.",
             "date_range": "Oct 2024 - Apr 2025",
             "summary": "London, UK · Education, Interpersonal Communication",
-            "visible": false,
+            "visible": true,
             "details": [
                 "Assisted university students with **note-taking** and **academic support**.",
                 "Provided practical assistance during lectures and tutorials to **enhance learning**.",
@@ -136,7 +136,7 @@
             "company": "St. Mary’s Church, Dehiwala",
             "date_range": "Aug 2022 - Aug 2024",
             "summary": "Dehiwala, Sri Lanka · Education",
-            "visible": false,
+            "visible": true,
             "details": [
                 "Delivered **engaging lessons** tailored to primary school learners.",
                 "Adapted teaching methods to accommodate **diverse learning needs**.",
