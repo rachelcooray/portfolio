@@ -82,6 +82,9 @@ class _ProjectCardState extends State<_ProjectCard> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
+    final cardWidth = isMobile ? 310.0 : 280.0;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -91,7 +94,7 @@ class _ProjectCardState extends State<_ProjectCard> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           curve: Curves.easeInOutCubic,
-          width: 300,
+          width: cardWidth,
           transform: _isHovered ? (Matrix4.identity()..scale(1.02, 1.02)) : Matrix4.identity(),
           decoration: BoxDecoration(
             color: const Color(0xFF112240),
@@ -140,8 +143,10 @@ class _ProjectCardState extends State<_ProjectCard> {
                       // Title
                       Text(
                         widget.project['title'] ?? '',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.outfit(
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
@@ -191,7 +196,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                   child: Container(
                     padding: const EdgeInsets.all(25),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0A192F).withOpacity(0.9),
+                      color: const Color(0xFF0A192F).withOpacity(0.95),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,7 +206,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            fontSize: 18,
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -218,17 +223,18 @@ class _ProjectCardState extends State<_ProjectCard> {
                                 ),
                                 child: Text(
                                   tech.toString(),
-                                  style: const TextStyle(color: Colors.white70, fontSize: 12),
+                                  style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
                                 ),
                               );
                             }).toList(),
                           ),
                         ),
+                        const SizedBox(height: 10),
                         Text(
                           widget.project['description'] ?? '',
-                          maxLines: 4,
+                          maxLines: 5,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(color: Colors.white60, fontSize: 13, height: 1.4),
+                          style: const TextStyle(color: Colors.white70, fontSize: 15, height: 1.5),
                         ),
                       ],
                     ),
