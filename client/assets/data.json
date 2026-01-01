@@ -324,7 +324,7 @@
         {
             "id": 3,
             "title": "Best School Prefect",
-            "organization": "WIM & NYSC New Generation Awards",
+            "organization": "Women in Management & National Youth Services Council New Generation Awards",
             "year": "2020",
             "summary": "Recognized for exceptional leadership and contributions to the school and community."
         }
@@ -380,7 +380,7 @@
             "source": "Daily FT",
             "link": "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
             "image": "assets/images/daily-ft.png",
-            "description": "New Generation Awards recognition.",
+            "description": "Women in Management & National Youth Services Council New Generation Awards recognition.",
             "visible": true
         }
     ]
