@@ -55,7 +55,7 @@ class _HomeSectionState extends State<HomeSection> {
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
-              ).animate().fadeIn(duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.3, end: 0, curve: Curves.easeInOut),
+              ).animate().fadeIn(duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
               const SizedBox(height: 20),
               SelectableText(
                 'Rachel Cooray.',
@@ -64,7 +64,7 @@ class _HomeSectionState extends State<HomeSection> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-              ).animate().fadeIn(delay: 200.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.2, end: 0, curve: Curves.easeInOut),
+              ).animate().fadeIn(delay: 150.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
               SizedBox(
                 height: 70, // Fixed height to prevent layout jump during typing
                 child: DefaultTextStyle(
@@ -82,7 +82,7 @@ class _HomeSectionState extends State<HomeSection> {
                     ],
                   ),
                 ),
-              ).animate().fadeIn(delay: 400.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.1, end: 0, curve: Curves.easeInOut),
+              ).animate().fadeIn(delay: 300.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
               const SizedBox(height: 30),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 600),
@@ -90,7 +90,7 @@ class _HomeSectionState extends State<HomeSection> {
                   'I am a Computer Science graduate specializing in Data Science. I build accessible, pixel-perfect, and performant web experiences and analyze complex datasets.',
                   style: TextStyle(fontSize: 18, height: 1.5, color: Colors.white60),
                 ),
-              ).animate().fadeIn(delay: 600.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.1, end: 0, curve: Curves.easeInOut),
+              ).animate().fadeIn(delay: 450.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
               const SizedBox(height: 50),
               Row(
                 children: [
@@ -130,9 +130,9 @@ class _HomeSectionState extends State<HomeSection> {
                     ),
                   ),
                 ],
-              ).animate().fadeIn(delay: 800.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.1, end: 0, curve: Curves.easeInOut),
+              ).animate().fadeIn(delay: 600.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
               
-              // Aspirations Block Moved Here
+              // Aspirations Block
               if (_aspirations.isNotEmpty) ...[
                 const SizedBox(height: 60),
                 Container(
@@ -155,10 +155,10 @@ class _HomeSectionState extends State<HomeSection> {
                         ),
                     ],
                   ),
-                ),
+                ).animate().fadeIn(delay: 750.ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic),
               ]
             ],
-          ),
+          ).animate().fadeIn(duration: 800.ms, curve: Curves.easeInOutCubic).scale(begin: const Offset(0.98, 0.98), end: const Offset(1, 1), curve: Curves.easeInOutCubic),
         ),
       ),
     );

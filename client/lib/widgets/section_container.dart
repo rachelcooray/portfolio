@@ -31,23 +31,23 @@ class SectionContainer extends StatelessWidget {
                 title,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 14, // Smaller, more modern section label
+                  fontSize: 14,
                   fontFamily: 'Fira Code',
                   letterSpacing: 2,
                 ),
-              ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0, curve: Curves.easeOutCubic),
+              ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.1, end: 0, curve: Curves.easeInOutCubic), // Reduced distance
               const SizedBox(height: 10),
               Text(
                 subtitle,
-                style: GoogleFonts.outfit( // Use Outfit for headings
+                style: GoogleFonts.outfit(
                   fontSize: MediaQuery.of(context).size.width < 800 ? 36 : 48,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   height: 1.2,
                 ),
-              ).animate().fadeIn(delay: 200.ms, duration: 800.ms).slideY(begin: 0.3, end: 0, curve: Curves.easeOutCubic),
-              const SizedBox(height: 60), // More whitespace
-              child.animate().fadeIn(delay: 400.ms, duration: 800.ms).slideY(begin: 0.2, end: 0, curve: Curves.easeOutCubic),
+              ).animate().fadeIn(delay: 200.ms, duration: 600.ms).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic), // Reduced distance (15px approx)
+              const SizedBox(height: 60),
+              child.animate().fadeIn(delay: 400.ms, duration: 600.ms).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic), // Subtle 10px approx
             ],
           ),
         ),

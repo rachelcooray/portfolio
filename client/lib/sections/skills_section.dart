@@ -49,8 +49,8 @@ class SkillsSection extends StatelessWidget {
                       children: items.map((skill) {
                         final chip = _SkillChip(label: skill)
                             .animate()
-                            .fadeIn(delay: (400 + (globalSkillIndex * 50)).ms, duration: 400.ms)
-                            .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack);
+                            .fadeIn(delay: (400 + (globalSkillIndex * 50)).ms, duration: 450.ms, curve: Curves.easeInOutCubic)
+                            .slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic);
                         globalSkillIndex++;
                         return chip;
                       }).toList(),
@@ -83,19 +83,19 @@ class _SkillChipState extends State<_SkillChip> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 250),
+        curve: Curves.easeInOutCubic,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        transform: _isHovered ? Matrix4.translationValues(0, -5, 0) : Matrix4.identity(),
+        transform: _isHovered ? (Matrix4.identity()..scale(1.02, 1.02)) : Matrix4.identity(),
         decoration: BoxDecoration(
           color: const Color(0xFF112240),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-             color: _isHovered ? const Color(0xFF64FFDA) : Colors.transparent,
+             color: _isHovered ? const Color(0xFF64FFDA).withOpacity(0.5) : Colors.transparent,
              width: 1.5
           ),
           boxShadow: _isHovered 
-              ? [BoxShadow(color: const Color(0xFF64FFDA).withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 5))]
+              ? [BoxShadow(color: const Color(0xFF64FFDA).withOpacity(0.1), blurRadius: 15, offset: const Offset(0, 5))]
               : [],
         ),
         child: Row(

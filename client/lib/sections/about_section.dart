@@ -29,7 +29,7 @@ class AboutSection extends StatelessWidget {
           ),
         ),
       ),
-    ).animate().fadeIn(delay: 600.ms, duration: 800.ms).slideX(begin: 0.2, end: 0, curve: Curves.easeOutCubic);
+    ).animate().fadeIn(delay: 600.ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic);
 
     // Define the text widget separately
     Widget aboutText = Column(
@@ -42,7 +42,7 @@ class AboutSection extends StatelessWidget {
             height: 1.6,
             color: Colors.white,
           ),
-        ).animate().fadeIn(delay: 500.ms, duration: 600.ms).slideY(begin: 0.1, end: 0),
+        ).animate().fadeIn(delay: 500.ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic),
 
         const SizedBox(height: 30),
 
@@ -120,6 +120,6 @@ class AboutSection extends StatelessWidget {
           ),
         ],
       ),
-    ).animate().fadeIn(delay: (700 + (index * 150)).ms, duration: 600.ms).slideX(begin: -0.05, end: 0);
+    ).animate().fadeIn(delay: (700 + (index * 100)).ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic);
   }
 }

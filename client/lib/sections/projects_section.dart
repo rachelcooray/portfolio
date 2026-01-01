@@ -49,7 +49,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                 final project = projects[index];
                 return Padding(
                   padding: const EdgeInsets.only(right: 30),
-                  child: _ProjectCard(project: project).animate().fadeIn(delay: (400 + (index * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0, curve: Curves.easeOutCubic),
+                  child: _ProjectCard(project: project).animate().fadeIn(delay: (400 + (index * 100)).ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideX(begin: 0.05, end: 0, curve: Curves.easeInOutCubic),
                 );
               },
             ),
@@ -69,7 +69,7 @@ class _ProjectCard extends StatefulWidget {
   State<_ProjectCard> createState() => _ProjectCardState();
 }
 
-class _ProjectCardState extends State<_ProjectCard> with SingleTickerProviderStateMixin {
+class _ProjectCardState extends State<_ProjectCard> {
   bool _isHovered = false;
 
   Future<void> _launchUrl(String? url) async {
@@ -89,26 +89,27 @@ class _ProjectCardState extends State<_ProjectCard> with SingleTickerProviderSta
       child: GestureDetector(
         onTap: () => _launchUrl(widget.project['link']),
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic,
-          width: 320,
-          transform: _isHovered ? Matrix4.translationValues(0, -10, 0) : Matrix4.identity(),
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOutCubic,
+          width: 300,
+          transform: _isHovered ? (Matrix4.identity()..scale(1.02, 1.02)) : Matrix4.identity(),
           decoration: BoxDecoration(
-            color: const Color(0xFF112240).withOpacity(0.8),
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(
-              color: _isHovered ? Theme.of(context).primaryColor : Colors.white10,
-              width: 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: _isHovered 
-                    ? Theme.of(context).primaryColor.withOpacity(0.2) 
-                    : Colors.black.withOpacity(0.3),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
-              )
-            ],
+            color: const Color(0xFF112240),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: _isHovered ? const Color(0xFF64FFDA).withOpacity(0.5) : Colors.white10),
+            boxShadow: _isHovered
+                ? [
+                    BoxShadow(
+                        color: const Color(0xFF64FFDA).withOpacity(0.1),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10))
+                  ]
+                : [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 10,
+                        offset: const Offset(0, 5))
+                  ],
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),

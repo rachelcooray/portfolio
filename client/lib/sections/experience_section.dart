@@ -43,7 +43,7 @@ class ExperienceSection extends StatelessWidget {
                      date: e['date_range'],
                      summary: e['summary'],
                      details: List<String>.from(e['details'] ?? []),
-                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0);
+                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic);
                    globalIndex++;
                    return tile;
                  }),
@@ -59,7 +59,7 @@ class ExperienceSection extends StatelessWidget {
                      date: e['date_range'],
                      summary: e['summary'],
                      details: List<String>.from(e['details'] ?? []),
-                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0);
+                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic);
                    globalIndex++;
                    return tile;
                  }),
@@ -75,7 +75,7 @@ class ExperienceSection extends StatelessWidget {
                      date: e['date_range'],
                      summary: e['summary'],
                      details: List<String>.from(e['details'] ?? []),
-                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0);
+                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic);
                    globalIndex++;
                    return tile;
                  }),

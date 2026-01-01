@@ -44,8 +44,8 @@ class _AwardsSectionState extends State<AwardsSection> {
               final award = entry.value;
               return _AwardItem(award: award)
                   .animate()
-                  .fadeIn(delay: (400 + (index * 150)).ms, duration: 600.ms)
-                  .slideY(begin: 0.1, end: 0, curve: Curves.easeOutCubic);
+                  .fadeIn(delay: (400 + (index * 100)).ms, duration: 450.ms, curve: Curves.easeInOutCubic)
+                  .slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic);
             }).toList(),
           );
         },

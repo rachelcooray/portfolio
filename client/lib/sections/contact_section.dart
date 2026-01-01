@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../services/api_service.dart';
 
 class ContactSection extends StatefulWidget {
@@ -64,71 +66,32 @@ class _ContactSectionState extends State<ContactSection> {
                   fontFamily: 'Fira Code',
                   letterSpacing: 2,
                 ),
-              ),
-              const SizedBox(height: 20),
-               Text(
+              ).animate().fadeIn(duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
+              const SizedBox(height: 10),
+              Text(
                 'Let’s Build Something Together',
-                textAlign: TextAlign.center,
                 style: GoogleFonts.outfit(
-                  fontSize: MediaQuery.of(context).size.width < 800 ? 36 : 48,
+                  fontSize: MediaQuery.of(context).size.width < 800 ? 32 : 48,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
-                  height: 1.2,
                 ),
-              ),
-              const SizedBox(height: 30),
+              ).animate().fadeIn(delay: 150.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
+              const SizedBox(height: 25),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 600),
                 child: const Text(
-                  'Whether you need a scalable web application, a data-driven mobile solution, or deep analytical insights, I’m here to help you turn your vision into reality.',
+                  'I am currently looking for new opportunities in Data Science and Fullstack Development. Whether you have a question or just want to say hi, I’ll try my best to get back to you!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white60,
+                    color: Colors.white70,
+                    fontSize: 16,
                     height: 1.6,
                   ),
                 ),
-              ),
+              ).animate().fadeIn(delay: 300.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
               const SizedBox(height: 50),
               
-              // Social Links & Resume
-              Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 20,
-                runSpacing: 20,
-                children: [
-                   _SocialButton(
-                    icon: Icons.email, 
-                    label: "Email Me", 
-                    onTap: () => launchUrl(Uri.parse('mailto:rachel.cooray@example.com'))
-                  ),
-                  _SocialButton(
-                    icon: Icons.code,
-                    label: "GitHub", 
-                    onTap: () => launchUrl(Uri.parse('https://github.com/rachelcooray'))
-                  ),
-                   _SocialButton(
-                    icon: Icons.business,
-                    label: "LinkedIn", 
-                    onTap: () => launchUrl(Uri.parse('https://www.linkedin.com/in/rachel-cooray-069034235/'))
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      launchUrl(Uri.parse('rachelcooray-cv.pdf'));
-                    }, 
-                    icon: const Icon(Icons.download), 
-                    label: const Text("Download CV"),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      foregroundColor: const Color(0xFF0A192F),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    )
-                  )
-                ],
-              ),
-              
-              const SizedBox(height: 80),
+              // Contact Form
               Form(
                 key: _formKey,
                 child: Column(
@@ -141,7 +104,6 @@ class _ContactSectionState extends State<ContactSection> {
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF64FFDA))),
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter your name' : null,
-                      scrollPadding: const EdgeInsets.only(bottom: 150),
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -152,7 +114,6 @@ class _ContactSectionState extends State<ContactSection> {
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF64FFDA))),
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter your email' : null,
-                      scrollPadding: const EdgeInsets.only(bottom: 150),
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
@@ -160,31 +121,57 @@ class _ContactSectionState extends State<ContactSection> {
                       maxLines: 5,
                       decoration: const InputDecoration(
                         labelText: 'Message',
-                        hintText: 'Tell me about your project or opportunity...',
                         border: OutlineInputBorder(),
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF64FFDA))),
-                        alignLabelWithHint: true,
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter a message' : null,
-                      scrollPadding: const EdgeInsets.only(bottom: 150),
                     ),
-                    const SizedBox(height: 40),
-                    ElevatedButton(
-                      onPressed: _isSubmitting ? null : _submit,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 25),
-                        backgroundColor: Colors.transparent,
-                        foregroundColor: Theme.of(context).primaryColor,
-                        side: BorderSide(color: Theme.of(context).primaryColor, width: 2),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    const SizedBox(height: 30),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: _isSubmitting ? null : _submit,
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Theme.of(context).primaryColor,
+                          side: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                        ),
+                        child: _isSubmitting 
+                          ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2)) 
+                          : Text('Start a Conversation', style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.bold)),
                       ),
-                      child: _isSubmitting 
-                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2)) 
-                        : const Text('Start a Conversation', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),
-              ),
+              ).animate().fadeIn(delay: 450.ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic),
+              
+              const SizedBox(height: 60),
+              
+              // Social Links
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 20,
+                runSpacing: 20,
+                children: [
+                   _SocialButton(
+                    icon: Icons.code, 
+                    label: "GitHub", 
+                    onTap: () => launchUrl(Uri.parse('https://github.com/rachelcooray'))
+                  ),
+                   _SocialButton(
+                    icon: Icons.business, 
+                    label: "LinkedIn", 
+                    onTap: () => launchUrl(Uri.parse('https://www.linkedin.com/in/rachel-cooray-069034235/'))
+                  ),
+                  _SocialButton(
+                    icon: Icons.download, 
+                    label: "Download CV", 
+                    onTap: () => launchUrl(Uri.parse('rachelcooray-cv.pdf'))
+                  ),
+                ],
+              ).animate().fadeIn(delay: 600.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),
             ],
           ),
         ),

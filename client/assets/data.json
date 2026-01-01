@@ -301,24 +301,24 @@
     "awards": [
         {
             "id": 1,
-            "title": "Best School Prefect",
-            "organization": "WIM & NYSC New Generation Awards",
-            "year": "2020",
-            "summary": "Recognized for exceptional leadership and contributions to the school and community."
-        },
-        {
-            "id": 2,
             "title": "3rd Best Research Project",
             "organization": "University of Westminster Final Year Showcase",
             "year": "2025",
             "summary": "Awarded for 'PCOS Care', showcasing innovation in Machine Learning and Healthcare."
         },
         {
-            "id": 3,
+            "id": 2,
             "title": "Microsoft Hackathon Finalist",
             "organization": "Microsoft",
             "year": "2024",
             "summary": "Participated in developing innovative tech solutions for real-world problems."
+        },
+        {
+            "id": 3,
+            "title": "Best School Prefect",
+            "organization": "WIM & NYSC New Generation Awards",
+            "year": "2020",
+            "summary": "Recognized for exceptional leadership and contributions to the school and community."
         }
     ],
     "publications": [
