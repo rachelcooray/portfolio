@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/section_container.dart';
 
 class AboutSection extends StatelessWidget {
@@ -6,25 +8,44 @@ class AboutSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile = MediaQuery.of(context).size.width < 800;
+    bool isMobile = MediaQuery.of(context).size.width < 800;
     
-    // Define the image widget separately for reuse
+    // Define the profile image widget separately
     Widget profileImage = Container(
+      width: 300,
       height: 300,
-      width: isMobile ? double.infinity : null, // Full width on mobile
       decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).primaryColor, width: 2),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Theme.of(context).primaryColor),
-        color: const Color(0xFF112240),
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          'assets/images/profile.png',
-          fit: BoxFit.cover,
-        ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Positioned(
+            top: 20,
+            left: 20,
+            child: Container(
+              width: 300,
+              height: 300,
+              decoration: BoxDecoration(
+                border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.5), width: 2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+          Image.asset(
+            'assets/images/profile.png',
+            fit: BoxFit.cover,
+            width: 300,
+            height: 300,
+            errorBuilder: (context, error, stackTrace) => Container(
+              color: Colors.grey[800],
+              child: const Icon(Icons.person, size: 100, color: Colors.white),
+            ),
+          ),
+        ],
       ),
-    );
+    ).animate().fadeIn(delay: 600.ms, duration: 800.ms).slideX(begin: 0.2, end: 0, curve: Curves.easeOutCubic);
 
     // Define the text widget separately
     Widget aboutText = Column(
@@ -33,12 +54,12 @@ class AboutSection extends StatelessWidget {
         SelectableText(
           "I'm a First Class Computer Science Graduate and Fullstack Developer with a passion for turning complex data into intuitive digital experiences.",
           style: GoogleFonts.outfit(fontSize: 18, height: 1.6, color: Colors.white),
-        ),
+        ).animate().fadeIn(delay: 500.ms, duration: 600.ms).slideY(begin: 0.1, end: 0),
         const SizedBox(height: 30),
-        _buildBulletPoint(context, "Graduate Excellence", "First Class Honours with the 3rd Best Research Project award out of 200+ students."),
-        _buildBulletPoint(context, "Industry Impact", "Optimized distributor performance, increasing potential margins by 68% for a major FMCG company."),
-        _buildBulletPoint(context, "Fullstack Versatility", "Delivering end-to-end web and mobile solutions from UI/UX design to scalable backend integration."),
-        _buildBulletPoint(context, "Strategic Vision", "Combining technical expertise with business analytics to solve real-world problems."),
+        _buildBulletPoint(context, "Graduate Excellence", "First Class Honours with the 3rd Best Research Project award out of 200+ students.", 0),
+        _buildBulletPoint(context, "Industry Impact", "Optimized distributor performance, increasing potential margins by 68% for a major FMCG company.", 1),
+        _buildBulletPoint(context, "Fullstack Versatility", "Delivering end-to-end web and mobile solutions from UI/UX design to scalable backend integration.", 2),
+        _buildBulletPoint(context, "Strategic Vision", "Combining technical expertise with business analytics to solve real-world problems.", 3),
       ],
     );
 
@@ -65,7 +86,7 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget _buildBulletPoint(BuildContext context, String title, String description) {
+  Widget _buildBulletPoint(BuildContext context, String title, String description, int index) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: Row(
@@ -86,6 +107,6 @@ class AboutSection extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).animate().fadeIn(delay: (700 + (index * 150)).ms, duration: 600.ms).slideX(begin: -0.05, end: 0);
   }
 }

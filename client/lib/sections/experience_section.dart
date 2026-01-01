@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math'; // For Flip Animation
+import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/section_container.dart';
 import '../services/api_service.dart';
 
@@ -28,42 +29,56 @@ class ExperienceSection extends StatelessWidget {
           final other = allExperience.where((e) => e['type'] == 'other').toList();
           final education = allExperience.where((e) => e['type'] == 'education').toList();
 
+          int globalIndex = 0;
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                if (industry.isNotEmpty) ...[
                  _SectionHeader(title: "Industry Experience"),
-                 ...industry.map((e) => _ExperienceTile(
-                   title: e['title'],
-                   company: e['company'],
-                   date: e['date_range'], // Matches DB column
-                   summary: e['summary'],
-                   details: List<String>.from(e['details'] ?? []),
-                 )),
+                 ...industry.map((e) {
+                   final tile = _ExperienceTile(
+                     title: e['title'],
+                     company: e['company'],
+                     date: e['date_range'],
+                     summary: e['summary'],
+                     details: List<String>.from(e['details'] ?? []),
+                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0);
+                   globalIndex++;
+                   return tile;
+                 }),
                  const SizedBox(height: 40),
                ],
                
                if (other.isNotEmpty) ...[
                  _SectionHeader(title: "Other Experience"),
-                 ...other.map((e) => _ExperienceTile(
-                   title: e['title'],
-                   company: e['company'],
-                   date: e['date_range'],
-                   summary: e['summary'],
-                   details: List<String>.from(e['details'] ?? []),
-                 )),
+                 ...other.map((e) {
+                   final tile = _ExperienceTile(
+                     title: e['title'],
+                     company: e['company'],
+                     date: e['date_range'],
+                     summary: e['summary'],
+                     details: List<String>.from(e['details'] ?? []),
+                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0);
+                   globalIndex++;
+                   return tile;
+                 }),
                  const SizedBox(height: 40),
                ],
 
                if (education.isNotEmpty) ...[
                  _SectionHeader(title: "Education"),
-                 ...education.map((e) => _ExperienceTile(
-                   title: e['title'],
-                   company: e['company'],
-                   date: e['date_range'],
-                   summary: e['summary'],
-                   details: List<String>.from(e['details'] ?? []),
-                 )),
+                 ...education.map((e) {
+                   final tile = _ExperienceTile(
+                     title: e['title'],
+                     company: e['company'],
+                     date: e['date_range'],
+                     summary: e['summary'],
+                     details: List<String>.from(e['details'] ?? []),
+                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0);
+                   globalIndex++;
+                   return tile;
+                 }),
                ]
             ],
           );

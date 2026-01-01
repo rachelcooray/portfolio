@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../services/api_service.dart';
 import '../widgets/section_container.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -47,7 +49,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                 final project = projects[index];
                 return Padding(
                   padding: const EdgeInsets.only(right: 30),
-                  child: _ProjectCard(project: project),
+                  child: _ProjectCard(project: project).animate().fadeIn(delay: (400 + (index * 100)).ms, duration: 600.ms).slideX(begin: 0.1, end: 0, curve: Curves.easeOutCubic),
                 );
               },
             ),

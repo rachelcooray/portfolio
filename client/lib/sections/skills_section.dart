@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/section_container.dart';
 import '../services/api_service.dart';
 
@@ -21,6 +22,7 @@ class SkillsSection extends StatelessWidget {
           }
 
           final categories = snapshot.data ?? [];
+          int globalSkillIndex = 0;
           
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +46,14 @@ class SkillsSection extends StatelessWidget {
                     Wrap(
                       spacing: 12,
                       runSpacing: 12,
-                      children: items.map((skill) => _SkillChip(label: skill)).toList(),
+                      children: items.map((skill) {
+                        final chip = _SkillChip(label: skill)
+                            .animate()
+                            .fadeIn(delay: (400 + (globalSkillIndex * 50)).ms, duration: 400.ms)
+                            .slideY(begin: 0.2, end: 0, curve: Curves.easeOutBack);
+                        globalSkillIndex++;
+                        return chip;
+                      }).toList(),
                     ),
                   ],
                 ),

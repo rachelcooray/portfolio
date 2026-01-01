@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../services/api_service.dart';
 import '../widgets/section_container.dart';
 
@@ -38,7 +39,14 @@ class _AwardsSectionState extends State<AwardsSection> {
 
           final awards = snapshot.data!;
           return Column(
-            children: awards.map((award) => _AwardItem(award: award)).toList(),
+            children: awards.asMap().entries.map((entry) {
+              final index = entry.key;
+              final award = entry.value;
+              return _AwardItem(award: award)
+                  .animate()
+                  .fadeIn(delay: (400 + (index * 150)).ms, duration: 600.ms)
+                  .slideY(begin: 0.1, end: 0, curve: Curves.easeOutCubic);
+            }).toList(),
           );
         },
       ),
