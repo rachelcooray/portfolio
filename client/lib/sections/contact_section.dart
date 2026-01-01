@@ -80,7 +80,7 @@ class _ContactSectionState extends State<ContactSection> {
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 600),
                 child: const Text(
-                  'I am currently looking for new opportunities in Data Science and Fullstack Development. Whether you have a question or just want to say hi, I’ll try my best to get back to you!',
+                  'I am currently looking for new opportunities in Data Science and Fullstack Development. Whether you have a question or just want to say hi, reach out, I’ll get back to you soon!'',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white70,
