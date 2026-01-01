@@ -5,6 +5,7 @@ import 'sections/about_section.dart';
 import 'sections/experience_section.dart';
 import 'sections/skills_section.dart';
 import 'sections/projects_section.dart';
+import 'sections/awards_section.dart';
 import 'widgets/additional_sections.dart';
 import 'sections/contact_section.dart';
 
@@ -52,6 +53,7 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey _experienceKey = GlobalKey();
   final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _projectsKey = GlobalKey();
+  final GlobalKey _awardsKey = GlobalKey(); // Added GlobalKey for AwardsSection
   final GlobalKey _contactKey = GlobalKey();
 
   void _scrollTo(GlobalKey key) {
@@ -78,6 +80,7 @@ class _HomePageState extends State<HomePage> {
             TextButton(onPressed: () => _scrollTo(_experienceKey), child: const Text('Experience')),
             TextButton(onPressed: () => _scrollTo(_skillsKey), child: const Text('Skills')),
             TextButton(onPressed: () => _scrollTo(_projectsKey), child: const Text('Projects')),
+            TextButton(onPressed: () => _scrollTo(_awardsKey), child: const Text('Awards')), // Added Awards button
             TextButton(onPressed: () => _scrollTo(_contactKey), child: const Text('Contact')),
           ] else ...[
             IconButton(
@@ -110,6 +113,10 @@ class _HomePageState extends State<HomePage> {
               onTap: () { Navigator.pop(context); _scrollTo(_projectsKey); },
             ),
             ListTile(
+              title: const Text('Awards', style: TextStyle(color: Colors.white, fontSize: 18)), // Added Awards to drawer
+              onTap: () { Navigator.pop(context); _scrollTo(_awardsKey); },
+            ),
+            ListTile(
               title: const Text('Contact', style: TextStyle(color: Colors.white, fontSize: 18)),
               onTap: () { Navigator.pop(context); _scrollTo(_contactKey); },
             ),
@@ -126,6 +133,7 @@ class _HomePageState extends State<HomePage> {
             ExperienceSection(key: _experienceKey),
             SkillsSection(key: _skillsKey),
             ProjectsSection(key: _projectsKey),
+            AwardsSection(key: _awardsKey), // Added AwardsSection
             const AdditionalSections(),
             ContactSection(key: _contactKey),
             const SizedBox(height: 50),

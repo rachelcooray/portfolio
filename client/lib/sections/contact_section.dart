@@ -57,35 +57,39 @@ class _ContactSectionState extends State<ContactSection> {
             // crossAxisAlignment: CrossAxisAlignment.center, // Default is center for Column in ConstrainedBox if not stretched
             children: [
                Text(
-                '08. What\'s Next?',
+                '06. What\'s Next?',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
+                  fontSize: 14,
                   fontFamily: 'Fira Code',
+                  letterSpacing: 2,
                 ),
               ),
               const SizedBox(height: 20),
                Text(
-                'Get In Touch',
+                'Let’s Build Something Together',
+                textAlign: TextAlign.center,
                 style: GoogleFonts.outfit(
-                  fontSize: 40,
+                  fontSize: MediaQuery.of(context).size.width < 800 ? 36 : 48,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
+                  height: 1.2,
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 600),
                 child: const Text(
-                  'I’m excited to take on new opportunities and freelance projects. Reach out anytime - I’ll get back to you soon!',
+                  'Whether you need a scalable web application, a data-driven mobile solution, or deep analytical insights, I’m here to help you turn your vision into reality.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.white60,
-                    height: 1.5,
+                    height: 1.6,
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 50),
               
               // Social Links & Resume
               Wrap(
@@ -99,18 +103,17 @@ class _ContactSectionState extends State<ContactSection> {
                     onTap: () => launchUrl(Uri.parse('mailto:rachel.cooray@example.com'))
                   ),
                   _SocialButton(
-                    icon: Icons.code, // Placeholder for GitHub
+                    icon: Icons.code,
                     label: "GitHub", 
                     onTap: () => launchUrl(Uri.parse('https://github.com/rachelcooray'))
                   ),
                    _SocialButton(
-                    icon: Icons.business, // Placeholder for LinkedIn
+                    icon: Icons.business,
                     label: "LinkedIn", 
                     onTap: () => launchUrl(Uri.parse('https://www.linkedin.com/in/rachel-cooray-069034235/'))
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
-                      // Placeholder for actual resume URL
                       launchUrl(Uri.parse('rachelcooray-cv.pdf'));
                     }, 
                     icon: const Icon(Icons.download), 
@@ -119,12 +122,13 @@ class _ContactSectionState extends State<ContactSection> {
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: const Color(0xFF0A192F),
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     )
                   )
                 ],
               ),
               
-              const SizedBox(height: 50),
+              const SizedBox(height: 80),
               Form(
                 key: _formKey,
                 child: Column(
@@ -134,6 +138,7 @@ class _ContactSectionState extends State<ContactSection> {
                       decoration: const InputDecoration(
                         labelText: 'Name',
                         border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF64FFDA))),
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter your name' : null,
                       scrollPadding: const EdgeInsets.only(bottom: 150),
@@ -144,6 +149,7 @@ class _ContactSectionState extends State<ContactSection> {
                       decoration: const InputDecoration(
                         labelText: 'Email',
                         border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF64FFDA))),
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter your email' : null,
                       scrollPadding: const EdgeInsets.only(bottom: 150),
@@ -154,24 +160,27 @@ class _ContactSectionState extends State<ContactSection> {
                       maxLines: 5,
                       decoration: const InputDecoration(
                         labelText: 'Message',
+                        hintText: 'Tell me about your project or opportunity...',
                         border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF64FFDA))),
                         alignLabelWithHint: true,
                       ),
                       validator: (v) => v == null || v.isEmpty ? 'Please enter a message' : null,
                       scrollPadding: const EdgeInsets.only(bottom: 150),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 40),
                     ElevatedButton(
                       onPressed: _isSubmitting ? null : _submit,
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 25),
                         backgroundColor: Colors.transparent,
                         foregroundColor: Theme.of(context).primaryColor,
-                        side: BorderSide(color: Theme.of(context).primaryColor),
+                        side: BorderSide(color: Theme.of(context).primaryColor, width: 2),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                       ),
                       child: _isSubmitting 
-                        ? const CircularProgressIndicator() 
-                        : const Text('Say Hello', style: TextStyle(fontSize: 16)),
+                        ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2)) 
+                        : const Text('Start a Conversation', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                   ],
                 ),

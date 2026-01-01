@@ -243,6 +243,7 @@
         {
             "id": 1,
             "title": "PCOS Care",
+            "role": "Lead Developer & Researcher",
             "description": "Machine Learning-Based PCOS Risk Prediction Web Application. Applied feature selection (Chi-Square, ANOVA), SMOTE, and dual-model prediction, achieving 93.75% recall with the enhanced Random Forest model. Built an end-to-end ML web app with Python, Flask API, and Streamlit, deployed and user tested.",
             "tech": [
                 "Python",
@@ -258,6 +259,7 @@
         {
             "id": 2,
             "title": "Carbon Footprint Tracker",
+            "role": "Data Analyst & UI Designer",
             "description": "Developed a carbon footprint calculation and visualization tool that helps individuals estimate their environmental impact using activity-based emissions factors. Built interactive dashboards and automated calculations to recommend reductions in energy, transport, and lifestyle emissions.",
             "tech": [
                 "Python",
@@ -271,6 +273,7 @@
         {
             "id": 3,
             "title": "Futsal Team Recommendation",
+            "role": "Mobile App Developer",
             "description": "Collaborative and Content-based Filtering Recommendation System. Developed a Flutter app that matched players to teams by skill, availability, and location, reducing team assembly time significantly. Centralized stadium booking with real-time availability, pricing, and management.",
             "tech": [
                 "Flutter",
@@ -283,6 +286,7 @@
         {
             "id": 4,
             "title": "CSR Analytics Project - Street Vendors",
+            "role": "Field Researcher & Analyst",
             "description": "Led a field survey of 16 street food vendors, uncovering critical hygiene gaps and operational inefficiencies affecting food safety and customer experience. Delivered data-driven interventions adopted by the CSR team, improving hygiene standards, resource allocation, and vendor business practices.",
             "tech": [
                 "Data Analytics",
@@ -292,6 +296,29 @@
             "link": null,
             "visible": true,
             "image": "assets/images/street-vendor.png"
+        }
+    ],
+    "awards": [
+        {
+            "id": 1,
+            "title": "Best School Prefect",
+            "organization": "WIM & NYSC New Generation Awards",
+            "year": "2020",
+            "summary": "Recognized for exceptional leadership and contributions to the school and community."
+        },
+        {
+            "id": 2,
+            "title": "3rd Best Research Project",
+            "organization": "University of Westminster Final Year Showcase",
+            "year": "2025",
+            "summary": "Awarded for 'PCOS Care', showcasing innovation in Machine Learning and Healthcare."
+        },
+        {
+            "id": 3,
+            "title": "Microsoft Hackathon Finalist",
+            "organization": "Microsoft",
+            "year": "2024",
+            "summary": "Participated in developing innovative tech solutions for real-world problems."
         }
     ],
     "publications": [

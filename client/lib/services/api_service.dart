@@ -43,6 +43,11 @@ class ApiService {
     return _filterVisible(data['skills']);
   }
 
+  Future<List<dynamic>> getAwards() async {
+    final data = await _loadData();
+    return data['awards'] ?? [];
+  }
+
   Future<List<dynamic>> getPublications() async {
      final data = await _loadData();
      return _filterVisible(data['publications']);

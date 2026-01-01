@@ -27,24 +27,30 @@ class AboutSection extends StatelessWidget {
     );
 
     // Define the text widget separately
-    const Widget aboutText = Text(
-      "I'm Rachel Cooray, a First Class Computer Science Graduate, Freelance Fullstack Developer, and Data Science Intern at OCTAVE - John Keells Group.\n\n"
-      "I have hands-on experience in Data Engineering, Machine Learning, and Full Stack Development. "
-      "Recently, my project 'PCOS Care' won 3rd place at the University of Westminster Final Year Project Showcase. "
-      "Strong communicator who translates complex data into actionable insights, optimizes business processes, and builds end-to-end solutions. "
-      "Solid foundation in business analytics, enabling alignment of technical solutions with strategic objectives.",
-      style: TextStyle(fontSize: 18, height: 1.6, color: Colors.white70),
+    Widget aboutText = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SelectableText(
+          "I'm a First Class Computer Science Graduate and Fullstack Developer with a passion for turning complex data into intuitive digital experiences.",
+          style: GoogleFonts.outfit(fontSize: 18, height: 1.6, color: Colors.white),
+        ),
+        const SizedBox(height: 30),
+        _buildBulletPoint(context, "Graduate Excellence", "First Class Honours with the 3rd Best Research Project award out of 200+ students."),
+        _buildBulletPoint(context, "Industry Impact", "Optimized distributor performance, increasing potential margins by 68% for a major FMCG company."),
+        _buildBulletPoint(context, "Fullstack Versatility", "Delivering end-to-end web and mobile solutions from UI/UX design to scalable backend integration."),
+        _buildBulletPoint(context, "Strategic Vision", "Combining technical expertise with business analytics to solve real-world problems."),
+      ],
     );
 
     return SectionContainer(
-      title: '01. About Me',
-      subtitle: 'Designing Solutions with Data',
+      title: '01. Who I Am',
+      subtitle: 'About Me — Who I Am & What I Build',
       child: isMobile 
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               profileImage,
-              const SizedBox(height: 30),
+              const SizedBox(height: 50),
               aboutText,
             ],
           )
@@ -52,10 +58,34 @@ class AboutSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(flex: 3, child: aboutText),
-              const SizedBox(width: 50),
+              const SizedBox(width: 60),
               Expanded(flex: 2, child: profileImage),
             ],
           ),
+    );
+  }
+
+  Widget _buildBulletPoint(BuildContext context, String title, String description) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("▹", style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20)),
+          const SizedBox(width: 15),
+          Expanded(
+            child: RichText(
+              text: TextSpan(
+                style: GoogleFonts.outfit(fontSize: 16, height: 1.5, color: Colors.white70),
+                children: [
+                  TextSpan(text: "$title: ", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)),
+                  TextSpan(text: description),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

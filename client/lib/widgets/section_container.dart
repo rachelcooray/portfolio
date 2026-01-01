@@ -18,10 +18,10 @@ class SectionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: backgroundColor,
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 80),
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 100), // Increased vertical spacing
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 900),
+          constraints: const BoxConstraints(maxWidth: 1000), // Slightly wider
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -29,20 +29,22 @@ class SectionContainer extends StatelessWidget {
                 title,
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
-                  fontSize: 18,
+                  fontSize: 14, // Smaller, more modern section label
                   fontFamily: 'Fira Code',
+                  letterSpacing: 2,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 subtitle,
-                style: const TextStyle(
-                  fontSize: 40,
+                style: GoogleFonts.outfit( // Use Outfit for headings
+                  fontSize: MediaQuery.of(context).size.width < 800 ? 36 : 48,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
+                  height: 1.2,
                 ),
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 60), // More whitespace
               child,
             ],
           ),

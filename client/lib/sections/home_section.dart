@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import '../services/api_service.dart';
 import '../widgets/parse_rich_text.dart';
 
@@ -53,7 +55,7 @@ class _HomeSectionState extends State<HomeSection> {
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
+              ).animate().fadeIn(duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.3, end: 0, curve: Curves.easeInOut),
               const SizedBox(height: 20),
               SelectableText(
                 'Rachel Cooray.',
@@ -62,15 +64,25 @@ class _HomeSectionState extends State<HomeSection> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-              ),
-              SelectableText(
-                'Data Scientist & Developer.',
-                style: GoogleFonts.outfit(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white70,
+              ).animate().fadeIn(delay: 200.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.2, end: 0, curve: Curves.easeInOut),
+              SizedBox(
+                height: 70, // Fixed height to prevent layout jump during typing
+                child: DefaultTextStyle(
+                  style: GoogleFonts.outfit(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white70,
+                  ),
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    animatedTexts: [
+                      TypewriterAnimatedText('Data Scientist.', speed: const Duration(milliseconds: 100)),
+                      TypewriterAnimatedText('Fullstack Developer.', speed: const Duration(milliseconds: 100)),
+                      TypewriterAnimatedText('AI/ML Enthusiast.', speed: const Duration(milliseconds: 100)),
+                    ],
+                  ),
                 ),
-              ),
+              ).animate().fadeIn(delay: 400.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.1, end: 0, curve: Curves.easeInOut),
               const SizedBox(height: 30),
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 600),
@@ -78,7 +90,7 @@ class _HomeSectionState extends State<HomeSection> {
                   'I am a Computer Science graduate specializing in Data Science. I build accessible, pixel-perfect, and performant web experiences and analyze complex datasets.',
                   style: TextStyle(fontSize: 18, height: 1.5, color: Colors.white60),
                 ),
-              ),
+              ).animate().fadeIn(delay: 600.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.1, end: 0, curve: Curves.easeInOut),
               const SizedBox(height: 50),
               Row(
                 children: [
@@ -118,7 +130,7 @@ class _HomeSectionState extends State<HomeSection> {
                     ),
                   ),
                 ],
-              ),
+              ).animate().fadeIn(delay: 800.ms, duration: 600.ms, curve: Curves.easeInOut).slideY(begin: 0.1, end: 0, curve: Curves.easeInOut),
               
               // Aspirations Block Moved Here
               if (_aspirations.isNotEmpty) ...[
