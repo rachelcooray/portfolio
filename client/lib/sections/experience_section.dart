@@ -4,8 +4,47 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/section_container.dart';
 import '../services/api_service.dart';
 
-class ExperienceSection extends StatelessWidget {
+class ExperienceSection extends StatefulWidget {
   const ExperienceSection({super.key});
+
+  @override
+  State<ExperienceSection> createState() => _ExperienceSectionState();
+}
+
+class _ExperienceSectionState extends State<ExperienceSection> with TickerProviderStateMixin {
+  bool _isOtherExpanded = false;
+  late AnimationController _otherExpandController;
+  late Animation<double> _otherExpandAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _otherExpandController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 450),
+    );
+    _otherExpandAnimation = CurvedAnimation(
+      parent: _otherExpandController,
+      curve: Curves.easeInOutCubic,
+    );
+  }
+
+  @override
+  void dispose() {
+    _otherExpandController.dispose();
+    super.dispose();
+  }
+
+  void _toggleOther() {
+    setState(() {
+      _isOtherExpanded = !_isOtherExpanded;
+      if (_isOtherExpanded) {
+        _otherExpandController.forward();
+      } else {
+        _otherExpandController.reverse();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,18 +90,37 @@ class ExperienceSection extends StatelessWidget {
                ],
                
                if (other.isNotEmpty) ...[
-                 _SectionHeader(title: "Other Experience"),
-                 ...other.map((e) {
-                   final tile = _ExperienceTile(
-                     title: e['title'],
-                     company: e['company'],
-                     date: e['date_range'],
-                     summary: e['summary'],
-                     details: List<String>.from(e['details'] ?? []),
-                   ).animate().fadeIn(delay: (400 + (globalIndex * 100)).ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic);
-                   globalIndex++;
-                   return tile;
-                 }),
+                 GestureDetector(
+                   onTap: _toggleOther,
+                   child: MouseRegion(
+                     cursor: SystemMouseCursors.click,
+                     child: _SectionHeader(
+                       title: "Other Experience",
+                       isCollapsible: true,
+                       isExpanded: _isOtherExpanded,
+                     ),
+                   ),
+                 ),
+                 SizeTransition(
+                   sizeFactor: _otherExpandAnimation,
+                   axisAlignment: -1.0,
+                   child: Column(
+                     children: [
+                       ...other.map((e) {
+                         final tile = _ExperienceTile(
+                           title: e['title'],
+                           company: e['company'],
+                           date: e['date_range'],
+                           summary: e['summary'],
+                           details: List<String>.from(e['details'] ?? []),
+                         );
+                         // Note: Animation here might be tricky if it resets on toggle. 
+                         // Better to have it static or use a different entrance inside the transition if needed.
+                         return tile;
+                       }),
+                     ],
+                   ),
+                 ),
                  const SizedBox(height: 40),
                ],
 
@@ -90,19 +148,42 @@ class ExperienceSection extends StatelessWidget {
 
 class _SectionHeader extends StatelessWidget {
   final String title;
-  const _SectionHeader({required this.title});
+  final bool isCollapsible;
+  final bool isExpanded;
+
+  const _SectionHeader({
+    required this.title,
+    this.isCollapsible = false,
+    this.isExpanded = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Theme.of(context).primaryColor,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          if (isCollapsible) ...[
+            const SizedBox(width: 10),
+            AnimatedRotation(
+              turns: isExpanded ? 0.5 : 0,
+              duration: const Duration(milliseconds: 300),
+              child: Icon(
+                Icons.expand_more,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }

@@ -3,18 +3,17 @@ import '../services/api_service.dart';
 import '../widgets/section_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AdditionalSections extends StatefulWidget {
-  const AdditionalSections({super.key});
+// --- Publications Section ---
+class PublicationsSection extends StatefulWidget {
+  const PublicationsSection({super.key});
 
   @override
-  State<AdditionalSections> createState() => _AdditionalSectionsState();
+  State<PublicationsSection> createState() => _PublicationsSectionState();
 }
 
-class _AdditionalSectionsState extends State<AdditionalSections> {
+class _PublicationsSectionState extends State<PublicationsSection> {
   final ApiService _apiService = ApiService();
   List<dynamic> _publications = [];
-  List<dynamic> _volunteering = [];
-  List<dynamic> _featured = [];
 
   @override
   void initState() {
@@ -24,17 +23,112 @@ class _AdditionalSectionsState extends State<AdditionalSections> {
 
   Future<void> _fetchData() async {
     final pubs = await _apiService.getPublications();
-    final vol = await _apiService.getVolunteering();
-    final feat = await _apiService.getFeatured();
     if (mounted) {
-      setState(() {
-        _publications = pubs;
-        _volunteering = vol;
-        _featured = feat;
-      });
+      setState(() => _publications = pubs);
     }
   }
-  
+
+  @override
+  Widget build(BuildContext context) {
+    if (_publications.isEmpty) return const SizedBox.shrink();
+    return SectionContainer(
+      title: '05. Publications',
+      subtitle: 'Research & Papers',
+      backgroundColor: const Color(0xFF112240),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: _publications.map((pub) {
+          return Card(
+            color: Colors.white.withOpacity(0.05),
+            margin: const EdgeInsets.only(bottom: 20),
+            child: ListTile(
+              leading: const Icon(Icons.menu_book, color: Color(0xFF64FFDA), size: 40),
+              title: Text(pub['title'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
+              subtitle: Text(pub['conference'] ?? '', style: const TextStyle(color: Color(0xFF64FFDA))),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+// --- Volunteering Section ---
+class VolunteeringSection extends StatefulWidget {
+  const VolunteeringSection({super.key});
+
+  @override
+  State<VolunteeringSection> createState() => _VolunteeringSectionState();
+}
+
+class _VolunteeringSectionState extends State<VolunteeringSection> {
+  final ApiService _apiService = ApiService();
+  List<dynamic> _volunteering = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    final vol = await _apiService.getVolunteering();
+    if (mounted) {
+      setState(() => _volunteering = vol);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_volunteering.isEmpty) return const SizedBox.shrink();
+    return SectionContainer(
+      title: '06. Volunteering',
+      subtitle: 'Societies & Memberships',
+      child: SizedBox(
+        width: double.infinity,
+        child: Wrap(
+          alignment: WrapAlignment.start,
+          spacing: 15,
+          runSpacing: 15,
+          children: _volunteering.map((vol) => Chip(
+            avatar: const Icon(Icons.group, size: 16, color: Color(0xFF64FFDA)),
+            label: Text(vol.toString()),
+            backgroundColor: const Color(0xFF112240),
+            labelStyle: const TextStyle(color: Colors.white),
+            padding: const EdgeInsets.all(10),
+            side: BorderSide.none,
+          )).toList(),
+        ),
+      ),
+    );
+  }
+}
+
+// --- Featured Section ---
+class FeaturedSection extends StatefulWidget {
+  const FeaturedSection({super.key});
+
+  @override
+  State<FeaturedSection> createState() => _FeaturedSectionState();
+}
+
+class _FeaturedSectionState extends State<FeaturedSection> {
+  final ApiService _apiService = ApiService();
+  List<dynamic> _featured = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    final feat = await _apiService.getFeatured();
+    if (mounted) {
+      setState(() => _featured = feat);
+    }
+  }
+
   Future<void> _launchUrl(String? url) async {
     if (url == null) return;
     final Uri uri = Uri.parse(url);
@@ -45,71 +139,24 @@ class _AdditionalSectionsState extends State<AdditionalSections> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        if (_publications.isNotEmpty)
-          SectionContainer(
-            title: '06. Publications',
-            subtitle: 'Research & Papers',
-             backgroundColor: const Color(0xFF112240),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: _publications.map((pub) {
-                return Card(
-                  color: Colors.white.withValues(alpha: 0.05),
-                  margin: const EdgeInsets.only(bottom: 20),
-                  child: ListTile(
-                    leading: const Icon(Icons.menu_book, color: Color(0xFF64FFDA), size: 40),
-                    title: Text(pub['title'] ?? '', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
-                    subtitle: Text(pub['conference'] ?? '', style: const TextStyle(color: Color(0xFF64FFDA))),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-          
-        if (_volunteering.isNotEmpty)
-          SectionContainer(
-            title: '07. Volunteering',
-            subtitle: 'Societies & Memberships',
-            child: SizedBox(
-              width: double.infinity,
-              child: Wrap(
-                alignment: WrapAlignment.start,
-                spacing: 15,
-                runSpacing: 15,
-                children: _volunteering.map((vol) => Chip(
-                  avatar: const Icon(Icons.group, size: 16, color: Color(0xFF64FFDA)),
-                  label: Text(vol.toString()),
-                  backgroundColor: const Color(0xFF112240),
-                  labelStyle: const TextStyle(color: Colors.white),
-                  padding: const EdgeInsets.all(10),
-                  side: BorderSide.none,
-                )).toList(),
-              ),
-            ),
-          ),
-
-        if (_featured.isNotEmpty)
-          SectionContainer(
-            title: '08. Featured',
-            subtitle: 'In The News',
-            backgroundColor: const Color(0xFF112240),
-            child: SizedBox(
-               height: 450, // Increased height to accommodate taller images
-               child: ListView.builder(
-                 scrollDirection: Axis.horizontal,
-                 itemCount: _featured.length,
-                 itemBuilder: (context, index) {
-                   return Padding(
-                     padding: const EdgeInsets.only(right: 20),
-                     child: _FeaturedCard(item: _featured[index], onLaunch: _launchUrl),
-                   );
-                 },
-               ),
-            ),
-          )
-      ],
+    if (_featured.isEmpty) return const SizedBox.shrink();
+    return SectionContainer(
+      title: '08. Featured',
+      subtitle: 'In The News',
+      backgroundColor: const Color(0xFF112240),
+      child: SizedBox(
+        height: 450,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: _featured.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: _FeaturedCard(item: _featured[index], onLaunch: _launchUrl),
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -130,7 +177,7 @@ class _FeaturedCardState extends State<_FeaturedCard> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-       onEnter: (_) => setState(() => _isHovered = true),
+      onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -155,7 +202,6 @@ class _FeaturedCardState extends State<_FeaturedCard> {
           ),
           child: Stack(
             children: [
-               // Default View
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
@@ -166,7 +212,7 @@ class _FeaturedCardState extends State<_FeaturedCard> {
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
                           widget.item['image'],
-                          height: 230, // Increased to 230 per user request
+                          height: 230,
                           width: double.infinity,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
@@ -183,12 +229,12 @@ class _FeaturedCardState extends State<_FeaturedCard> {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                         color: Colors.white,
+                        color: Colors.white,
                       ),
-                       maxLines: 2,
-                       overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                     const SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       widget.item['source'] ?? '', 
                       style: const TextStyle(color: Colors.white70, fontSize: 14)
@@ -196,13 +242,11 @@ class _FeaturedCardState extends State<_FeaturedCard> {
                   ],
                 ),
               ),
-              
-               // Hover Overlay
-               AnimatedOpacity(
+              AnimatedOpacity(
                 duration: const Duration(milliseconds: 200),
                 opacity: _isHovered ? 1.0 : 0.0,
                 child: Container(
-                   decoration: BoxDecoration(
+                  decoration: BoxDecoration(
                     color: const Color(0xFF112240).withValues(alpha: 0.95),
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -210,9 +254,9 @@ class _FeaturedCardState extends State<_FeaturedCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                     children: [
+                    children: [
                       Text(
-                         widget.item['title'] ?? '',
+                        widget.item['title'] ?? '',
                         style: const TextStyle(color: Color(0xFF64FFDA), fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       const SizedBox(height: 10),
@@ -223,17 +267,17 @@ class _FeaturedCardState extends State<_FeaturedCard> {
                           overflow: TextOverflow.fade,
                         ),
                       ),
-                       const SizedBox(height: 10),
-                       const Row(
-                         children: [
-                           Text("Read More ", style: TextStyle(color: Color(0xFF64FFDA))),
-                           Icon(Icons.arrow_forward, size: 16, color: Color(0xFF64FFDA))
-                         ],
-                       )
-                     ],
+                      const SizedBox(height: 10),
+                      const Row(
+                        children: [
+                          Text("Read More ", style: TextStyle(color: Color(0xFF64FFDA))),
+                          Icon(Icons.arrow_forward, size: 16, color: Color(0xFF64FFDA))
+                        ],
+                      )
+                    ],
                   ),
                 ),
-               ),
+              ),
             ],
           ),
         ),

@@ -24,7 +24,7 @@ class _AwardsSectionState extends State<AwardsSection> {
   @override
   Widget build(BuildContext context) {
     return SectionContainer(
-      title: '05. Achievements',
+      title: '07. Achievements',
       subtitle: 'Awards & Recognition',
       child: FutureBuilder<List<dynamic>>(
         future: _awardsFuture,
