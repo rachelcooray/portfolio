@@ -77,7 +77,7 @@ class _HomeSectionState extends State<HomeSection> {
                     repeatForever: true,
                     animatedTexts: [
                       TypewriterAnimatedText('Data Scientist.', speed: const Duration(milliseconds: 100)),
-                      TypewriterAnimatedText('Fullstack Developer.', speed: const Duration(milliseconds: 100)),
+                      TypewriterAnimatedText('Full-stack Developer.', speed: const Duration(milliseconds: 100)),
                       TypewriterAnimatedText('AI/ML Enthusiast.', speed: const Duration(milliseconds: 100)),
                     ],
                   ),
