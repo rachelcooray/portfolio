@@ -45,6 +45,7 @@ class ApiService {
 
   Future<List<dynamic>> getAwards() async {
     final data = await _loadData();
+    print('Awards data: ${data['awards']}');
     return data['awards'] ?? [];
   }
 

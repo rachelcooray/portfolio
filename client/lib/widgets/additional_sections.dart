@@ -49,7 +49,7 @@ class _AdditionalSectionsState extends State<AdditionalSections> {
       children: [
         if (_publications.isNotEmpty)
           SectionContainer(
-            title: '05. Publications',
+            title: '06. Publications',
             subtitle: 'Research & Papers',
              backgroundColor: const Color(0xFF112240),
             child: Column(
@@ -70,7 +70,7 @@ class _AdditionalSectionsState extends State<AdditionalSections> {
           
         if (_volunteering.isNotEmpty)
           SectionContainer(
-            title: '06. Volunteering',
+            title: '07. Volunteering',
             subtitle: 'Societies & Memberships',
             child: SizedBox(
               width: double.infinity,
@@ -92,7 +92,7 @@ class _AdditionalSectionsState extends State<AdditionalSections> {
 
         if (_featured.isNotEmpty)
           SectionContainer(
-            title: '07. Featured',
+            title: '08. Featured',
             subtitle: 'In The News',
             backgroundColor: const Color(0xFF112240),
             child: SizedBox(

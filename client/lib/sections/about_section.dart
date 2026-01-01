@@ -18,32 +18,16 @@ class AboutSection extends StatelessWidget {
         border: Border.all(color: Theme.of(context).primaryColor, width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Positioned(
-            top: 20,
-            left: 20,
-            child: Container(
-              width: 300,
-              height: 300,
-              decoration: BoxDecoration(
-                border: Border.all(color: Theme.of(context).primaryColor.withOpacity(0.5), width: 2),
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.asset(
+          'assets/images/profile.png',
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => Container(
+            color: Colors.grey[800],
+            child: const Icon(Icons.person, size: 100, color: Colors.white),
           ),
-          Image.asset(
-            'assets/images/profile.png',
-            fit: BoxFit.cover,
-            width: 300,
-            height: 300,
-            errorBuilder: (context, error, stackTrace) => Container(
-              color: Colors.grey[800],
-              child: const Icon(Icons.person, size: 100, color: Colors.white),
-            ),
-          ),
-        ],
+        ),
       ),
     ).animate().fadeIn(delay: 600.ms, duration: 800.ms).slideX(begin: 0.2, end: 0, curve: Curves.easeOutCubic);
 
@@ -52,20 +36,49 @@ class AboutSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SelectableText(
-          "I'm a First Class Computer Science Graduate and Fullstack Developer with a passion for turning complex data into intuitive digital experiences.",
-          style: GoogleFonts.outfit(fontSize: 18, height: 1.6, color: Colors.white),
+          "I'm a First Class Computer Science graduate with industry experience in data science, analytics, and full-stack development. I transform complex data into meaningful insights and build end-to-end digital solutions that drive business impact.",
+          style: GoogleFonts.outfit(
+            fontSize: 18,
+            height: 1.6,
+            color: Colors.white,
+          ),
         ).animate().fadeIn(delay: 500.ms, duration: 600.ms).slideY(begin: 0.1, end: 0),
+
         const SizedBox(height: 30),
-        _buildBulletPoint(context, "Graduate Excellence", "First Class Honours with the 3rd Best Research Project award out of 200+ students.", 0),
-        _buildBulletPoint(context, "Industry Impact", "Optimized distributor performance, increasing potential margins by 68% for a major FMCG company.", 1),
-        _buildBulletPoint(context, "Fullstack Versatility", "Delivering end-to-end web and mobile solutions from UI/UX design to scalable backend integration.", 2),
-        _buildBulletPoint(context, "Strategic Vision", "Combining technical expertise with business analytics to solve real-world problems.", 3),
+
+        _buildBulletPoint(
+          context,
+          "Data Science & Analytics",
+          "Specialized in Python-based ML, ETL pipelines (GCP), KPI optimisation, and delivering insights that enable data-driven decisions.",
+          0,
+        ),
+
+        _buildBulletPoint(
+          context,
+          "Academic Excellence",
+          "First Class Honours, Scholarship recipient, and awarded 3rd Best Research Project out of 400+ students with an IEEE conference publication.",
+          1,
+        ),
+
+        _buildBulletPoint(
+          context,
+          "Industry Impact",
+          "Improved distributor margins and delivered high-value analytics dashboards for leadership decision-making for a major FMCG company.",
+          2,
+        ),
+
+        _buildBulletPoint(
+          context,
+          "Full-Stack & Cloud Engineering",
+          "Experience building scalable web and mobile applications using Flutter, Flask, Node.js, and cloud-based data pipelines.",
+          3,
+        ),
       ],
     );
 
     return SectionContainer(
-      title: '01. Who I Am',
-      subtitle: 'About Me — Who I Am & What I Build',
+      title: '01. About Me',
+      subtitle: 'Who I Am & What I Build',
       child: isMobile 
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -57,7 +57,7 @@ class _ContactSectionState extends State<ContactSection> {
             // crossAxisAlignment: CrossAxisAlignment.center, // Default is center for Column in ConstrainedBox if not stretched
             children: [
                Text(
-                '06. What\'s Next?',
+                '09. What\'s Next?',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontSize: 14,
