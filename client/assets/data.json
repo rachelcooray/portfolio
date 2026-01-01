@@ -263,6 +263,9 @@
             "description": "Developed a carbon footprint calculation and visualization tool that helps individuals estimate their environmental impact using activity-based emissions factors. Built interactive dashboards and automated calculations to recommend reductions in energy, transport, and lifestyle emissions.",
             "tech": [
                 "Python",
+                "Flutter",
+                "Serverpod",
+                "Database",
                 "Data Analysis",
                 "Visualization"
             ],
@@ -277,6 +280,9 @@
             "description": "Collaborative and Content-based Filtering Recommendation System. Developed a Flutter app that matched players to teams by skill, availability, and location, reducing team assembly time significantly. Centralized stadium booking with real-time availability, pricing, and management.",
             "tech": [
                 "Flutter",
+                "Node",
+                "Flask",
+                "Machine Learning",
                 "Recommendation Systems"
             ],
             "link": null,
@@ -289,7 +295,9 @@
             "role": "Field Researcher & Analyst",
             "description": "Led a field survey of 16 street food vendors, uncovering critical hygiene gaps and operational inefficiencies affecting food safety and customer experience. Delivered data-driven interventions adopted by the CSR team, improving hygiene standards, resource allocation, and vendor business practices.",
             "tech": [
+                "Data Collection",
                 "Data Analytics",
+                "Data Visualisation",
                 "Field Research",
                 "CSR"
             ],
@@ -308,10 +316,10 @@
         },
         {
             "id": 2,
-            "title": "Microsoft Hackathon Finalist",
-            "organization": "Microsoft",
+            "title": "Hackathon Finalist - GenAI for Neurodiversity",
+            "organization": "Microsoft EMBRACE Employee Resource Group",
             "year": "2024",
-            "summary": "Participated in developing innovative tech solutions for real-world problems."
+            "summary": "Built an AI-powered chatbot prototype designed to guide and support individuals and caregivers newly diagnosed with neurodiverse conditions."
         },
         {
             "id": 3,
