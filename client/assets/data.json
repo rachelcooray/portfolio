@@ -275,6 +275,23 @@
         },
         {
             "id": 3,
+            "title": "CV Writing Assistant",
+            "role": "Data Analyst & UI Designer",
+            "description": "Built an AI-powered CV analysis tool that extracts text from PDFs and uses Google's Gemini models to provide actionable, recruiter-style feedback. Features client-side PDF processing and a prompt-engineered senior recruiter persona.",
+            "tech": [
+                "React",
+                "Vite",
+                "Gemini API",
+                "PDF.js",
+                "Tailwind CSS",
+                "GitHub Actions"
+            ],
+            "link": "https://rachelcooray.github.io/Rachel-Cooray-s-CV-writing-Assistant/",
+            "visible": true,
+            "image": "assets/images/cv-writer.png"
+        },
+        {
+            "id": 4,
             "title": "Futsal Team Recommendation",
             "role": "Mobile App Developer",
             "description": "Collaborative and Content-based Filtering Recommendation System. Developed a Flutter app that matched players to teams by skill, availability, and location, reducing team assembly time significantly. Centralized stadium booking with real-time availability, pricing, and management.",
@@ -290,7 +307,7 @@
             "image": "assets/images/futsal.png"
         },
         {
-            "id": 4,
+            "id": 5,
             "title": "CSR Analytics Project - Street Vendors",
             "role": "Field Researcher & Analyst",
             "description": "Led a field survey of 16 street food vendors, uncovering critical hygiene gaps and operational inefficiencies affecting food safety and customer experience. Delivered data-driven interventions adopted by the CSR team, improving hygiene standards, resource allocation, and vendor business practices.",
