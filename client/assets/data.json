@@ -276,7 +276,7 @@
         {
             "id": 3,
             "title": "CV Writing Assistant",
-            "role": "Data Analyst & UI Designer",
+            "role": "Frontend Developer & AI Engineer",
             "description": "Built an AI-powered CV analysis tool that extracts text from PDFs and uses Google's Gemini models to provide actionable, recruiter-style feedback. Features client-side PDF processing and a prompt-engineered senior recruiter persona.",
             "tech": [
                 "React",
