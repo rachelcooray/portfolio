@@ -292,6 +292,23 @@
         },
         {
             "id": 4,
+            "title": "CIMA AI Study Assistant",
+            "role": "Full Stack Developer & AI Engineer",
+            "description": "Generative AI Study Assistant for CIMA Operational Level exams. Built a custom RAG (Retrieval-Augmented Generation) pipeline using Google's Gemini 2.0 Flash model to analyze uploaded PDF study materials with strict syllabus adherence. Features dual study modes (Explain/Solve), subject locking for E1/P1/F1, and a secure Node.js/Express backend serving a responsive React/Tailwind frontend.",
+            "tech": [
+                "React",
+                "Node.js",
+                "Google Gemini API",
+                "LangChain",
+                "Tailwind CSS",
+                "Render"
+            ],
+            "link": "https://cima-tutor-web.onrender.com",
+            "visible": true,
+            "image": "assets/images/ai-tutor.png"
+        },
+        {
+            "id": 5,
             "title": "Futsal Team Recommendation",
             "role": "Mobile App Developer",
             "description": "Collaborative and Content-based Filtering Recommendation System. Developed a Flutter app that matched players to teams by skill, availability, and location, reducing team assembly time significantly. Centralized stadium booking with real-time availability, pricing, and management.",
@@ -307,7 +324,7 @@
             "image": "assets/images/futsal.png"
         },
         {
-            "id": 5,
+            "id": 6,
             "title": "CSR Analytics Project - Street Vendors",
             "role": "Field Researcher & Analyst",
             "description": "Led a field survey of 16 street food vendors, uncovering critical hygiene gaps and operational inefficiencies affecting food safety and customer experience. Delivered data-driven interventions adopted by the CSR team, improving hygiene standards, resource allocation, and vendor business practices.",
