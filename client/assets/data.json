@@ -338,6 +338,23 @@
             "link": null,
             "visible": true,
             "image": "assets/images/street-vendor.png"
+        },
+        {
+            "id": 7,
+            "title": "Fantasy Coin Collector",
+            "role": "Game Developer & Creative Technologist",
+            "description": "A high-performance 2D dungeon crawler built from scratch using HTML5 Canvas and Vanilla JavaScript. Features a custom-written physics engine, procedural map generation algorithms, and a particle system for visual effects. Implements the Web Audio API for real-time sound synthesis and uses LocalStorage for persistent progression, achievements, and high scores. Fully responsive with touch controls for mobile support.",
+            "tech": [
+                "HTML5 Canvas",
+                "Vanilla JavaScript",
+                "Web Audio API",
+                "Procedural Generation",
+                "CSS3 Animations",
+                "GitHub Pages"
+            ],
+            "link": "https://rachelcooray.github.io/FantasyCoinCollector/",
+            "visible": true,
+            "image": "assets/images/coin-collector.png"
         }
     ],
     "awards": [
