@@ -1,18 +1,5 @@
 services:
-  # 1. The Frontend (Flutter Web)
-  - type: web
-    name: portfolio-client
-    env: static
-    rootDir: client
-    buildCommand: ./render_build.sh
-    staticPublishPath: build/web
-    # Redirect all 404s to index.html for Flutter routing
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-
-  # 2. The Backend (Node.js - Contact Form)
+  # 1. The Backend (Node.js - Contact Form)
   # Optional: You can delete this block if you switch to Formspree
   - type: web
     name: portfolio-server
