@@ -1,0 +1,438 @@
+{
+    "aspirations": "I aspire to build scalable **Web & Mobile Solutions** and leverage **Data Science** to solve complex problems, helping businesses innovate through data-driven and user-centric applications.",
+    "experience": [
+        {
+            "id": 1,
+            "title": "Data Science Intern",
+            "company": "OCTAVE - John Keells Group",
+            "date_range": "Oct 2025 - Present",
+            "summary": "Colombo, Sri Lanka · On-site",
+            "visible": true,
+            "details": [
+                "Optimized distributor performance by identifying underperformers and high-potential distributors, designed KPI-driven incentive structures that increased potential margins by **68%** for an FMCG company.",
+                "Ran advanced margin and sales-incentive simulations, uncovering **actionable strategies** to recapture lost sales in flood-affected outlets.",
+                "Developed interactive **Power BI dashboards** for management, enabling real-time tracking of targets, achievements, and distributor performance, improving **decision-making speed**."
+            ],
+            "type": "industry"
+        },
+        {
+            "id": 2,
+            "title": "Freelance Fullstack Developer",
+            "company": "Self-Employed",
+            "date_range": "Sep 2025 - Present",
+            "summary": "Remote · Web & Mobile Development",
+            "visible": true,
+            "details": [
+                "Developing custom **web and mobile applications** for diverse clients using Flutter, React, and Node.js.",
+                "Delivering **end-to-end solutions**, from UI/UX design to backend integration and deployment.",
+                "Consulting on **digital strategy** and optimizing existing codebases for performance and scalability."
+            ],
+            "type": "other"
+        },
+        {
+            "id": 3,
+            "title": "Data Engineering Intern",
+            "company": "London Success Academy",
+            "date_range": "Sep 2025 - Oct 2025",
+            "summary": "London, UK · Remote",
+            "visible": true,
+            "details": [
+                "Built complete **ETL pipelines on GCP** for clickstream and transaction data, delivering analytics-ready datasets for business intelligence.",
+                "Scaled data processing using **PySpark** and **Parquet partitioning**, improving query efficiency by **40%**.",
+                "Produced insights on **revenue**, **daily active users (DAU)**, and **conversion funnels**, enabling data-driven business strategy and growth decisions."
+            ],
+            "type": "industry"
+        },
+        {
+            "id": 4,
+            "title": "Analytics Delivery Intern",
+            "company": "OCTAVE - John Keells Group",
+            "date_range": "Mar 2023 - May 2023",
+            "summary": "Colombo, Sri Lanka · On-site",
+            "visible": true,
+            "details": [
+                "Built **Power BI dashboards** for stakeholders to visualize sales performance and route efficiency.",
+                "Conducted field observations and proposed improvements, enabling effective rollout of **new processes** and **data-backed decisions**."
+            ],
+            "type": "industry"
+        },
+        {
+            "id": 5,
+            "title": "Data Science Intern",
+            "company": "OCTAVE - John Keells Group",
+            "date_range": "Mar 2022 - Jun 2022",
+            "summary": "Colombo, Sri Lanka · Remote",
+            "visible": true,
+            "details": [
+                "Assisted in **data collection, cleaning, and analysis**, ensuring accuracy and reliability of datasets.",
+                "Supported **statistical and machine learning model development** for data-driven research projects.",
+                "Produced visual reports and insights to communicate findings clearly to stakeholders.",
+                "Contributed to projects including **Hotel Customer Analysis** and a **CSR initiative for Street Vendors**."
+            ],
+            "type": "industry"
+        },
+        {
+            "id": 6,
+            "title": "Customer Advisor",
+            "company": "UNIQLO",
+            "date_range": "Aug 2025 - Oct 2025",
+            "summary": "Coal Drops Yard, UK · Visual Merchandising, Customer Service",
+            "visible": true,
+            "details": [
+                "Provided **exceptional customer service** in a high-paced environment.",
+                "Managed **visual merchandising standards**.",
+                "Collaborated with team to meet **sales targets**."
+            ],
+            "type": "other"
+        },
+        {
+            "id": 7,
+            "title": "Customer Service Associate",
+            "company": "EG On The Move (Petrogas)",
+            "date_range": "Jan 2025 - Aug 2025",
+            "summary": "Enfield, UK · Customer Service, Cashiering",
+            "visible": true,
+            "details": [
+                "Assisted customers with purchases, providing **friendly and efficient customer service**.",
+                "Managed **point-of-sale transactions** accurately and efficiently.",
+                "Maintained and organized inventory, ensuring **stock levels** were up to date.",
+                "Addressed customer queries and issues, contributing to a **positive shopping experience**."
+            ],
+            "type": "other"
+        },
+        {
+            "id": 8,
+            "title": "Retail Associate - Christmas Temp",
+            "company": "TK Maxx",
+            "date_range": "Nov 2024 - Jan 2025",
+            "summary": "Stratford, UK · Customer Service, Retail",
+            "visible": true,
+            "details": [
+                "Delivered **excellent customer service** to ensure a positive shopping experience.",
+                "Assisted with **stock management** and replenishment to maintain product availability.",
+                "Supported merchandising and display setup to align with **store standards**.",
+                "Handled transactions and general store support tasks efficiently."
+            ],
+            "type": "other"
+        },
+        {
+            "id": 9,
+            "title": "Student Support Worker",
+            "company": "Clear Links Support Ltd.",
+            "date_range": "Oct 2024 - Apr 2025",
+            "summary": "London, UK · Education, Interpersonal Communication",
+            "visible": true,
+            "details": [
+                "Assisted university students with **note-taking** and **academic support**.",
+                "Provided practical assistance during lectures and tutorials to **enhance learning**.",
+                "Developed strong **communication skills** by interacting with diverse students.",
+                "Strengthened **organizational skills** through coordinating materials and schedules."
+            ],
+            "type": "other"
+        },
+        {
+            "id": 10,
+            "title": "Class Teacher",
+            "company": "St. Mary’s Church, Dehiwala",
+            "date_range": "Aug 2022 - Aug 2024",
+            "summary": "Dehiwala, Sri Lanka · Education",
+            "visible": true,
+            "details": [
+                "Delivered **engaging lessons** tailored to primary school learners.",
+                "Adapted teaching methods to accommodate **diverse learning needs**.",
+                "Fostered a **positive and inclusive** classroom environment.",
+                "Developed lesson plans and educational materials to **enhance learning outcomes**."
+            ],
+            "type": "other"
+        },
+        {
+            "id": 11,
+            "title": "BSc (Hons) Computer Science",
+            "company": "University of Westminster, United Kingdom",
+            "date_range": "Sep 2022 - Jul 2025",
+            "summary": "Grade: First Class Honours",
+            "visible": true,
+            "details": [
+                "Specialized in **Data Science**.",
+                "Scholarship: **UOW/IIT School of Computing and Engineering Scholarship** (2024/25).",
+                "Awards: **3rd Best Research Project** at University Showcase, IEEE ICAHS 2025 Conference Publication in Tunisia.",
+                "Membership Activities: **Rotaract Club**, **IEEE Club**, **Sri Lankan Society**."
+            ],
+            "type": "education"
+        },
+        {
+            "id": 12,
+            "title": "Certificate in Business Analytics",
+            "company": "CIMA, United Kingdom",
+            "date_range": "Aug 2024",
+            "summary": "Financial & Management Accounting",
+            "visible": true,
+            "details": [
+                "Covered **Economics**, **Management** and **Financial Accounting**.",
+                "Business Law and Corporate Governance."
+            ],
+            "type": "education"
+        },
+        {
+            "id": 13,
+            "title": "Primary & Secondary Education",
+            "company": "St. Bridget's Convent, Colombo 07, Sri Lanka",
+            "date_range": "Jan 2008 - Feb 2022",
+            "summary": "Head Prefect (2020) | GCE O/L | GCE A/L",
+            "visible": true,
+            "details": [
+                "GCE A/L Examination (2021): **Chemistry - A**, **Combined Mathematics - B**, **Physics - B**.",
+                "GCE O/L Examination (2018): **9 Distinctions (A Grade)**.",
+                "Leadership and Activities: **School Head Prefect (2020)**, Swimming Team, Interact Club."
+            ],
+            "type": "education"
+        }
+    ],
+    "skills": [
+        {
+            "id": 1,
+            "category": "Programming Languages",
+            "items": [
+                "Python",
+                "SQL",
+                "Dart",
+                "JavaScript"
+            ]
+        },
+        {
+            "id": 2,
+            "category": "Data Science & AI",
+            "items": [
+                "Machine Learning",
+                "Pandas & NumPy",
+                "Scikit-learn",
+                "Data Visualization"
+            ]
+        },
+        {
+            "id": 3,
+            "category": "Web & Mobile Dev",
+            "items": [
+                "Flutter",
+                "Node.js",
+                "HTML5 & CSS3"
+            ]
+        },
+        {
+            "id": 4,
+            "category": "Cloud & Tools",
+            "items": [
+                "Google Cloud Platform",
+                "Power BI",
+                "Git & GitHub",
+                "Excel (Advanced)"
+            ]
+        },
+        {
+            "id": 5,
+            "category": "Professional Skills",
+            "items": [
+                "Business Analytics",
+                "Problem Solving",
+                "Communication",
+                "Financial Accounting"
+            ]
+        }
+    ],
+    "projects": [
+        {
+            "id": 1,
+            "title": "PCOS Care",
+            "role": "Lead Developer & Researcher",
+            "description": "Machine Learning-Based PCOS Risk Prediction Web Application. Applied feature selection (Chi-Square, ANOVA), SMOTE, and dual-model prediction, achieving 93.75% recall with the enhanced Random Forest model. Built an end-to-end ML web app with Python, Flask API, and Streamlit, deployed and user tested.",
+            "tech": [
+                "Python",
+                "Machine Learning",
+                "Flask",
+                "Streamlit",
+                "Render"
+            ],
+            "link": "https://pcos-care-web-app.onrender.com",
+            "visible": true,
+            "image": "assets/images/pcoscare.png"
+        },
+        {
+            "id": 2,
+            "title": "Carbon Footprint Tracker",
+            "role": "Data Analyst & UI Designer",
+            "description": "Developed a carbon footprint calculation and visualization tool that helps individuals estimate their environmental impact using activity-based emissions factors. Built interactive dashboards and automated calculations to recommend reductions in energy, transport, and lifestyle emissions.",
+            "tech": [
+                "Python",
+                "Flutter",
+                "Serverpod",
+                "Database",
+                "Data Analysis",
+                "Visualization"
+            ],
+            "link": "https://rachelcooray.github.io/carbon-footprint-tracker/",
+            "visible": true,
+            "image": "assets/images/carbonfootprint.png"
+        },
+        {
+            "id": 3,
+            "title": "CV Writing Assistant",
+            "role": "Frontend Developer & AI Engineer",
+            "description": "Built an AI-powered CV analysis tool that extracts text from PDFs and uses Google's Gemini models to provide actionable, recruiter-style feedback. Features client-side PDF processing and a prompt-engineered senior recruiter persona.",
+            "tech": [
+                "React",
+                "Vite",
+                "Gemini API",
+                "PDF.js",
+                "Tailwind CSS",
+                "GitHub Actions"
+            ],
+            "link": "https://cv-writer.onrender.com",
+            "visible": true,
+            "image": "assets/images/cv-writer.png"
+        },
+        {
+            "id": 4,
+            "title": "CIMA AI Study Assistant",
+            "role": "Full Stack Developer & AI Engineer",
+            "description": "Generative AI Study Assistant for CIMA Operational Level exams. Built a custom RAG (Retrieval-Augmented Generation) pipeline using Google's Gemini 2.0 Flash model to analyze uploaded PDF study materials with strict syllabus adherence. Features dual study modes (Explain/Solve), subject locking for E1/P1/F1, and a secure Node.js/Express backend serving a responsive React/Tailwind frontend.",
+            "tech": [
+                "React",
+                "Node.js",
+                "Google Gemini API",
+                "LangChain",
+                "Tailwind CSS",
+                "Render"
+            ],
+            "link": "https://cima-tutor-web.onrender.com",
+            "visible": true,
+            "image": "assets/images/ai-tutor.png"
+        },
+        {
+            "id": 5,
+            "title": "Futsal Team Recommendation",
+            "role": "Mobile App Developer",
+            "description": "Collaborative and Content-based Filtering Recommendation System. Developed a Flutter app that matched players to teams by skill, availability, and location, reducing team assembly time significantly. Centralized stadium booking with real-time availability, pricing, and management.",
+            "tech": [
+                "Flutter",
+                "Node",
+                "Flask",
+                "Machine Learning",
+                "Recommendation Systems"
+            ],
+            "link": null,
+            "visible": true,
+            "image": "assets/images/futsal.png"
+        },
+        {
+            "id": 6,
+            "title": "CSR Analytics Project - Street Vendors",
+            "role": "Field Researcher & Analyst",
+            "description": "Led a field survey of 16 street food vendors, uncovering critical hygiene gaps and operational inefficiencies affecting food safety and customer experience. Delivered data-driven interventions adopted by the CSR team, improving hygiene standards, resource allocation, and vendor business practices.",
+            "tech": [
+                "Data Collection",
+                "Data Analytics",
+                "Data Visualisation",
+                "Field Research",
+                "CSR"
+            ],
+            "link": null,
+            "visible": true,
+            "image": "assets/images/street-vendor.png"
+        },
+        {
+            "id": 7,
+            "title": "Fantasy Coin Collector",
+            "role": "Game Developer & Creative Technologist",
+            "description": "A high-performance 2D dungeon crawler built from scratch using HTML5 Canvas and Vanilla JavaScript. Features a custom-written physics engine, procedural map generation algorithms, and a particle system for visual effects. Implements the Web Audio API for real-time sound synthesis and uses LocalStorage for persistent progression, achievements, and high scores. Fully responsive with touch controls for mobile support.",
+            "tech": [
+                "HTML5 Canvas",
+                "Vanilla JavaScript",
+                "Web Audio API",
+                "Procedural Generation",
+                "CSS3 Animations",
+                "GitHub Pages"
+            ],
+            "link": "https://rachelcooray.github.io/FantasyCoinCollector/",
+            "visible": true,
+            "image": "assets/images/coin-collector.png"
+        }
+    ],
+    "awards": [
+        {
+            "id": 1,
+            "title": "3rd Best Research Project",
+            "organization": "University of Westminster Final Year Showcase",
+            "year": "2025",
+            "summary": "Awarded for 'PCOS Care', showcasing innovation in Machine Learning and Healthcare."
+        },
+        {
+            "id": 2,
+            "title": "Hackathon Finalist - GenAI for Neurodiversity",
+            "organization": "Microsoft EMBRACE Employee Resource Group",
+            "year": "2024",
+            "summary": "Built an AI-powered chatbot prototype designed to guide and support individuals and caregivers newly diagnosed with neurodiverse conditions."
+        },
+        {
+            "id": 3,
+            "title": "Best School Prefect",
+            "organization": "Women in Management & National Youth Services Council New Generation Awards",
+            "year": "2020",
+            "summary": "Recognized for exceptional leadership and contributions to the school and community."
+        }
+    ],
+    "publications": [
+        {
+            "id": 1,
+            "title": "PCOS Care: A Machine Learning-Based Web Application for Early Risk Prediction of Polycystic Ovary Syndrome",
+            "conference": "IEEE ICAHS 2025, Tunisia",
+            "link": null,
+            "visible": true,
+            "image": null
+        }
+    ],
+    "volunteering": [
+        "Rotaract Club",
+        "IEEE Club",
+        "Sri Lankan Society UoW",
+        "CIMA Student Member",
+        "BCS Member"
+    ],
+    "featured": [
+        {
+            "id": 1,
+            "title": "Celebrating Innovation at the Computer Science & Engineering Final Year Project Showcase",
+            "source": "University of Westminster",
+            "link": "https://blog.westminster.ac.uk/wearewestminster/celebrating-innovation-at-the-computer-science-and-engineering-final-year-project-showcase/",
+            "image": "assets/images/netcompany-group-pic.jpg",
+            "description": "Featured for showcase innovation.",
+            "visible": true
+        },
+        {
+            "id": 2,
+            "title": "Westminster CS Students Receive Prizes",
+            "source": "University of Westminster",
+            "link": "https://www.westminster.ac.uk/news/westminster-computer-science-and-engineering-students-receive-prizes-from-netcompany-at-annual-final-year-project-showcase",
+            "image": "assets/images/blog.png",
+            "description": "Awarded 3rd Place for PCOS Care project.",
+            "visible": true
+        },
+        {
+            "id": 3,
+            "title": "LMD Youth Forum Interview",
+            "source": "LMD",
+            "link": "https://lmd.lk/youth-forum-32/",
+            "image": "assets/images/youth-forum.png",
+            "description": "Interview on youth leadership.",
+            "visible": true
+        },
+        {
+            "id": 4,
+            "title": "WIM & NYSC Recognise Youth",
+            "source": "Daily FT",
+            "link": "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
+            "image": "assets/images/daily-ft.png",
+            "description": "Women in Management & National Youth Services Council New Generation Awards recognition.",
+            "visible": true
+        }
+    ]
+}
