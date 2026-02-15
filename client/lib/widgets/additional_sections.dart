@@ -83,24 +83,15 @@ class _VolunteeringSectionState extends State<VolunteeringSection> {
     if (_volunteering.isEmpty) return const SizedBox.shrink();
 
     final memberships = List<String>.from(_volunteering['memberships'] ?? []);
-    final projects = List<String>.from(_volunteering['projects'] ?? []);
 
     return SectionContainer(
       title: '06. Volunteering',
-      subtitle: 'Societies & Projects',
+      subtitle: 'Societies & Memberships',
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (memberships.isNotEmpty) ...[
-            _buildSubHeader("Societies & Memberships"),
-            const SizedBox(height: 15),
             _buildChips(memberships),
-            const SizedBox(height: 40),
-          ],
-          if (projects.isNotEmpty) ...[
-            _buildSubHeader("Volunteer Projects"),
-            const SizedBox(height: 15),
-            _buildChips(projects),
           ],
         ],
       ),
