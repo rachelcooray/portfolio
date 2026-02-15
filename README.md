@@ -2,8 +2,7 @@
 
 Welcome to my personal portfolio website. This project showcases my work, skills, and professional experience as a Data Scientist and Developer.
 
-**[🌐 Visit- **Live Site**: https://rachelcooray.com
-)**
+**[🌐 Visit Live Website](https://rachelcooray.com)**
 
 ## Overview
 This site is designed to demonstrate my ability to build modern, responsive, and aesthetically pleasing web applications. It serves as a central hub for my resume, project demonstrations, and contact information.
