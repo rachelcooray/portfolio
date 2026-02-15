@@ -1,0 +1,11 @@
+# Exclude sensitive data
+*.csv
+About Me - All details.csv
+About Me - All details_backup.csv
+
+# Standard ignores
+.DS_Store
+node_modules/
+dist/
+build/
+.dart_tool/

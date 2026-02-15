@@ -17,15 +17,15 @@
         },
         {
             "id": 2,
-            "title": "Freelance Fullstack Developer",
-            "company": "Self-Employed",
-            "date_range": "Sep 2025 - Present",
-            "summary": "Remote · Web & Mobile Development",
+            "title": "Co-founder & Fullstack Developer",
+            "company": "Layer1Studio",
+            "date_range": "Dec 2025 - Present",
+            "summary": "Remote · Web & Mobile Development for SMEs & Startups",
             "visible": true,
             "details": [
-                "Developing custom **web and mobile applications** for diverse clients using Flutter, React, and Node.js.",
+                "Developing custom **web and mobile applications** for diverse clients (SMEs & Startups) using Flutter, React, and Node.js.",
                 "Delivering **end-to-end solutions**, from UI/UX design to backend integration and deployment.",
-                "Consulting on **digital strategy** and optimizing existing codebases for performance and scalability."
+                "Providing **digital strategy consulting** and optimizing existing codebases for performance and scalability."
             ],
             "type": "other"
         },
@@ -388,6 +388,14 @@
             "link": null,
             "visible": true,
             "image": null
+        },
+        {
+            "id": 2,
+            "title": "PCOS Care: Special Edition Selection - Selected",
+            "conference": "MSIT Journal, 2026",
+            "link": null,
+            "visible": true,
+            "image": null
         }
     ],
     "volunteering": [
@@ -395,7 +403,10 @@
         "IEEE Club",
         "Sri Lankan Society UoW",
         "CIMA Student Member",
-        "BCS Member"
+        "BCS Member",
+        "St Mary's Church: Lector, Choir, organiser of Shramadanas and charity projects",
+        "St Bridget's Convent: Interact Club (2017-2020)- Smile For Life, Lend A Hand, Interaction", "IIMAC - Interschool Interact Marketing and Advertising challenge",
+        "Kala Pola 2025: Community Engagement Volunteer (supporting 500+ artists)"
     ],
     "featured": [
         {
