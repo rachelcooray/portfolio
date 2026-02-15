@@ -360,24 +360,31 @@
     "awards": [
         {
             "id": 1,
-            "title": "3rd Best Research Project",
-            "organization": "University of Westminster Final Year Showcase",
+            "title": "3rd Place - Final Year Research Project",
+            "organization": "Westminster - School of Computer Science and Engineering, Netcompany and SmartDCC",
             "year": "2025",
-            "summary": "Awarded for 'PCOS Care', showcasing innovation in Machine Learning and Healthcare."
+            "summary": "Awarded for 'PCOS Care', showcasing innovation in Machine Learning and Healthcare at the University of Westminster."
         },
         {
             "id": 2,
             "title": "Hackathon Finalist - GenAI for Neurodiversity",
             "organization": "Microsoft EMBRACE Employee Resource Group",
             "year": "2024",
-            "summary": "Built an AI-powered chatbot prototype designed to guide and support individuals and caregivers newly diagnosed with neurodiverse conditions."
+            "summary": "Associated with University of Westminster. The team developed an AI-powered chatbot prototype designed to guide and support individuals and caregivers newly diagnosed with neurodiverse conditions."
         },
         {
             "id": 3,
-            "title": "Best School Prefect",
-            "organization": "Women in Management & National Youth Services Council New Generation Awards",
+            "title": "University of Westminster IIT School of Computing and Engineering Scholarship 2024/25",
+            "organization": "University of Westminster",
+            "year": "2024",
+            "summary": "Awarded for Academic Excellence and involvement in Extracurricular Activities at the University."
+        },
+        {
+            "id": 4,
+            "title": "Best School Prefect - Award at the “New Generation Awards” 2020",
+            "organization": "Women in Management (WIM) & National Youth Service Council Sri Lanka",
             "year": "2020",
-            "summary": "Recognized for exceptional leadership and contributions to the school and community."
+            "summary": "Recognized for extraordinary young leadership. The awards highlights contributions to communities and the nation across sectors such as social service, innovation, arts, and creative science."
         }
     ],
     "publications": [
@@ -405,7 +412,8 @@
         "CIMA Student Member",
         "BCS Member",
         "St Mary's Church: Lector, Choir, organiser of Shramadanas and charity projects",
-        "St Bridget's Convent: Interact Club (2017-2020)- Smile For Life, Lend A Hand, Interaction", "IIMAC - Interschool Interact Marketing and Advertising challenge",
+        "St Bridget's Convent: Interact Club (2017-2020)- Smile For Life, Lend A Hand, Interaction",
+        "IIMAC - Interschool Interact Marketing and Advertising challenge",
         "Kala Pola 2025: Community Engagement Volunteer (supporting 500+ artists)"
     ],
     "featured": [
