@@ -63,7 +63,7 @@ class VolunteeringSection extends StatefulWidget {
 
 class _VolunteeringSectionState extends State<VolunteeringSection> {
   final ApiService _apiService = ApiService();
-  List<dynamic> _volunteering = [];
+  Map<String, dynamic> _volunteering = {};
 
   @override
   void initState() {
@@ -81,24 +81,59 @@ class _VolunteeringSectionState extends State<VolunteeringSection> {
   @override
   Widget build(BuildContext context) {
     if (_volunteering.isEmpty) return const SizedBox.shrink();
+
+    final memberships = List<String>.from(_volunteering['memberships'] ?? []);
+    final projects = List<String>.from(_volunteering['projects'] ?? []);
+
     return SectionContainer(
       title: '06. Volunteering',
-      subtitle: 'Societies & Memberships',
-      child: SizedBox(
-        width: double.infinity,
-        child: Wrap(
-          alignment: WrapAlignment.start,
-          spacing: 15,
-          runSpacing: 15,
-          children: _volunteering.map((vol) => Chip(
-            avatar: const Icon(Icons.group, size: 16, color: Color(0xFF64FFDA)),
-            label: Text(vol.toString()),
-            backgroundColor: const Color(0xFF112240),
-            labelStyle: const TextStyle(color: Colors.white),
-            padding: const EdgeInsets.all(10),
-            side: BorderSide.none,
-          )).toList(),
-        ),
+      subtitle: 'Societies & Projects',
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (memberships.isNotEmpty) ...[
+            _buildSubHeader("Societies & Memberships"),
+            const SizedBox(height: 15),
+            _buildChips(memberships),
+            const SizedBox(height: 40),
+          ],
+          if (projects.isNotEmpty) ...[
+            _buildSubHeader("Volunteer Projects"),
+            const SizedBox(height: 15),
+            _buildChips(projects),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSubHeader(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF64FFDA),
+      ),
+    );
+  }
+
+  Widget _buildChips(List<String> items) {
+    return SizedBox(
+      width: double.infinity,
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        spacing: 15,
+        runSpacing: 15,
+        children: items.map((item) => Chip(
+          avatar: const Icon(Icons.volunteer_activism, size: 16, color: Color(0xFF64FFDA)),
+          label: Text(item),
+          backgroundColor: const Color(0xFF112240),
+          labelStyle: const TextStyle(color: Colors.white, fontSize: 13),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          side: BorderSide(color: const Color(0xFF64FFDA).withOpacity(0.2)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        )).toList(),
       ),
     );
   }

@@ -54,9 +54,9 @@ class ApiService {
      return _filterVisible(data['publications']);
   }
 
-  Future<List<dynamic>> getVolunteering() async {
+  Future<Map<String, dynamic>> getVolunteering() async {
      final data = await _loadData();
-     return _filterVisible(data['volunteering']);
+     return data['volunteering'] ?? {};
   }
 
   Future<List<dynamic>> getFeatured() async {
