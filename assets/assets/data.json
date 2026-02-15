@@ -370,7 +370,7 @@
             "title": "Hackathon Finalist - GenAI for Neurodiversity",
             "organization": "Microsoft EMBRACE Employee Resource Group",
             "year": "2024",
-            "summary": "Associated with University of Westminster. The team developed an AI-powered chatbot prototype designed to guide and support individuals and caregivers newly diagnosed with neurodiverse conditions."
+            "summary": "The team developed an AI-powered chatbot prototype designed to guide and support individuals and caregivers newly diagnosed with neurodiverse conditions."
         },
         {
             "id": 3,
@@ -405,17 +405,21 @@
             "image": null
         }
     ],
-    "volunteering": [
-        "Rotaract Club",
-        "IEEE Club",
-        "Sri Lankan Society UoW",
-        "CIMA Student Member",
-        "BCS Member",
-        "St Mary's Church: Lector, Choir, organiser of Shramadanas and charity projects",
-        "St Bridget's Convent: Interact Club (2017-2020)- Smile For Life, Lend A Hand, Interaction",
-        "IIMAC - Interschool Interact Marketing and Advertising challenge",
-        "Kala Pola 2025: Community Engagement Volunteer (supporting 500+ artists)"
-    ],
+    "volunteering": {
+        "memberships": [
+            "Rotaract Club",
+            "IEEE Club",
+            "Sri Lankan Society UoW",
+            "CIMA Student Member",
+            "BCS Member"
+        ],
+        "projects": [
+            "St Mary's Church: Lector, Choir, organiser of Shramadanas and charity projects",
+            "St Bridget's Convent: Interact Club (2017-2020)- Smile For Life, Lend A Hand, Interaction",
+            "IIMAC - Interschool Interact Marketing and Advertising challenge",
+            "Kala Pola 2025: Community Engagement Volunteer (supporting 500+ artists)"
+        ]
+    },
     "featured": [
         {
             "id": 1,
