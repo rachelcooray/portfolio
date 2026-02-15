@@ -27,6 +27,9 @@ jobs:
         # The base-href must match the repository name for Project Pages
         run: flutter build web --release --base-href "/"
 
+      - name: Create CNAME
+        run: echo "rachelcooray.com" > ./client/build/web/CNAME
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
