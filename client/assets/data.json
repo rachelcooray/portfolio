@@ -4,11 +4,13 @@
         {
             "id": 14,
             "title": "Analyst, Data and AI",
-            "company": "PLACEHOLDER_COMPANY_PENDING_CONFIRMATION",
+            "company": "OCTAVE - John Keells Group",
             "date_range": "Jul 2026 - Present",
-            "summary": "PLACEHOLDER_LOCATION_PENDING_CONFIRMATION",
-            "visible": false,
-            "details": [],
+            "summary": "Colombo, Sri Lanka · On-site",
+            "visible": true,
+            "details": [
+                "Progressed into a full-time Analyst role at OCTAVE following the Analytics Delivery Associate position."
+            ],
             "type": "industry"
         },
         {
