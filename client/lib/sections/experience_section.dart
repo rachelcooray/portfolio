@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math'; // For Flip Animation
 import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/section_container.dart';
 import '../services/api_service.dart';
@@ -35,8 +34,7 @@ class _ExperienceSectionState extends State<ExperienceSection> {
 
           final allExperience = snapshot.data ?? [];
 
-          // Most relevant first: industry / data & tech roles, in the order
-          // given (most recent and most senior first).
+          // Most relevant first: industry / data & tech roles, newest first.
           final industry = allExperience.where((e) => e['type'] == 'industry').toList();
           final retail = allExperience.where((e) => e['type'] == 'other' && e['subtype'] == 'retail_cs').toList();
           // Anything tagged "other" without a recognised subtype still shows, ungrouped, so nothing silently disappears.
@@ -166,6 +164,10 @@ class _CollapsibleGroup extends StatelessWidget {
   }
 }
 
+/// A plain, always-legible card — title/company/date/summary are visible
+/// up front, no interaction required to read the headline of the role.
+/// If there's more to say, a clearly-labelled "Details" row expands
+/// inline (a dropdown), not a click-to-flip gimmick.
 class _ExperienceTile extends StatefulWidget {
   final String title;
   final String company;
@@ -185,85 +187,21 @@ class _ExperienceTile extends StatefulWidget {
   State<_ExperienceTile> createState() => _ExperienceTileState();
 }
 
-class _ExperienceTileState extends State<_ExperienceTile> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  bool _showFront = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 600)
-    );
-    _animation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut)
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _toggleFlip() {
-    if (widget.details.isEmpty) return;
-    if (_showFront) {
-      _controller.forward();
-    } else {
-      _controller.reverse();
-    }
-    _showFront = !_showFront;
-  }
+class _ExperienceTileState extends State<_ExperienceTile> {
+  bool _expanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: _toggleFlip,
-      child: AnimatedBuilder(
-        animation: _animation,
-        builder: (context, child) {
-          final angle = _animation.value * pi;
-          final isBack = _animation.value >= 0.5;
-
-          return Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001) // Perspective
-              ..rotateY(angle),
-            alignment: Alignment.center,
-            child: isBack
-                ? Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.identity()..rotateY(pi), // Mirror back side to look correct
-                    child: _buildBack(),
-                  )
-                : _buildFront(),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildCardBase({required Widget child}) {
     return Container(
-      height: 220,
       width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 20),
-      // Use Stack to achieve the left accent line effect safely
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: AppColors.surfaceAlt,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppColors.divider),
+      ),
       child: Stack(
         children: [
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: AppColors.surfaceAlt,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: AppColors.divider),
-            ),
-            child: child,
-          ),
-          // Left Accent Line
           Positioned(
             left: 0,
             top: 0,
@@ -275,76 +213,79 @@ class _ExperienceTileState extends State<_ExperienceTile> with SingleTickerProvi
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16),
                   bottomLeft: Radius.circular(16),
-                )
+                ),
               ),
             ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFront() {
-    return _buildCardBase(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-           Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             children: [
-               Expanded(child: Text(widget.title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.text))),
-               if (widget.details.isNotEmpty)
-                 const Icon(Icons.touch_app, color: AppColors.divider, size: 20),
-             ],
-           ),
-           const SizedBox(height: 10),
-           Text(widget.company, style: const TextStyle(fontSize: 16, color: AppColors.accent, fontWeight: FontWeight.w600)),
-           const SizedBox(height: 5),
-           Text(widget.date, style: const TextStyle(fontSize: 14, color: AppColors.textFaint, fontFamily: 'Fira Code')),
-           const SizedBox(height: 15),
-           Text(widget.summary, style: const TextStyle(fontSize: 16, color: AppColors.textMuted, height: 1.4)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBack() {
-    return _buildCardBase(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-             children: [
-               const Text("Key Details", style: TextStyle(color: AppColors.accent, fontWeight: FontWeight.bold)),
-               const Icon(Icons.undo, color: AppColors.divider, size: 20)
-             ],
-           ),
-           const SizedBox(height: 10),
-           Expanded(
-             child: SingleChildScrollView( // Allow scrolling if content exceeds fixed height
-               child: Column(
-                 children: widget.details.map((detail) => Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("▹ ", style: TextStyle(color: AppColors.accent, fontSize: 14)),
-                        Expanded(
-                          child: Text(
-                            detail.replaceAll('**', ''),
-                            style: const TextStyle(color: AppColors.textMuted, height: 1.4, fontSize: 14),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: Text(widget.title, style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold, color: AppColors.text))),
+                    Text(widget.date, style: const TextStyle(fontSize: 13, color: AppColors.textFaint, fontFamily: 'Fira Code')),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                Text(widget.company, style: const TextStyle(fontSize: 15.5, color: AppColors.accent, fontWeight: FontWeight.w600)),
+                const SizedBox(height: 8),
+                Text(widget.summary, style: const TextStyle(fontSize: 15, color: AppColors.textMuted, height: 1.4)),
+                if (widget.details.isNotEmpty) ...[
+                  const SizedBox(height: 14),
+                  GestureDetector(
+                    onTap: () => setState(() => _expanded = !_expanded),
+                    child: MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(_expanded ? 'Hide details' : 'Show details', style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600, color: AppColors.accent)),
+                          const SizedBox(width: 6),
+                          AnimatedRotation(
+                            turns: _expanded ? 0.5 : 0,
+                            duration: const Duration(milliseconds: 200),
+                            child: const Icon(Icons.expand_more, size: 18, color: AppColors.accent),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  )).toList(),
-               ),
-             ),
-           )
+                  ),
+                  AnimatedCrossFade(
+                    firstChild: const SizedBox(width: double.infinity, height: 0),
+                    secondChild: Padding(
+                      padding: const EdgeInsets.only(top: 14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: widget.details.map((detail) => Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text("▹ ", style: TextStyle(color: AppColors.accent, fontSize: 14)),
+                                  Expanded(
+                                    child: Text(
+                                      detail.replaceAll('**', ''),
+                                      style: const TextStyle(color: AppColors.textMuted, height: 1.45, fontSize: 14),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )).toList(),
+                      ),
+                    ),
+                    crossFadeState: _expanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                    duration: const Duration(milliseconds: 220),
+                    sizeCurve: Curves.easeInOutCubic,
+                  ),
+                ],
+              ],
+            ),
+          ),
         ],
-      )
+      ),
     );
   }
 }

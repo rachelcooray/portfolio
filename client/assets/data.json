@@ -24,20 +24,6 @@
             "type": "industry"
         },
         {
-            "id": 1,
-            "title": "Data Science & Analytics Delivery Intern",
-            "company": "OCTAVE - John Keells Group",
-            "date_range": "Oct 2025 - Apr 2026",
-            "summary": "Colombo, Sri Lanka · On-site",
-            "visible": true,
-            "details": [
-                "Optimized distributor performance by identifying underperformers and high-potential distributors, designed KPI-driven incentive structures that increased potential margins by **68%** for an FMCG company.",
-                "Ran advanced margin and sales-incentive simulations, uncovering **actionable strategies** to recapture lost sales in flood-affected outlets.",
-                "Developed interactive **Power BI dashboards** for management, enabling real-time tracking of targets, achievements, and distributor performance, improving **decision-making speed**."
-            ],
-            "type": "industry"
-        },
-        {
             "id": 2,
             "title": "Co-founder & Fullstack Developer",
             "company": "Layer1Studio",
@@ -48,6 +34,20 @@
                 "Developing custom **web and mobile applications** for diverse clients (SMEs & Startups) using Flutter, React, and Node.js.",
                 "Delivering **end-to-end solutions**, from UI/UX design to backend integration and deployment.",
                 "Providing **digital strategy consulting** and optimizing existing codebases for performance and scalability."
+            ],
+            "type": "industry"
+        },
+        {
+            "id": 1,
+            "title": "Data Science & Analytics Delivery Intern",
+            "company": "OCTAVE - John Keells Group",
+            "date_range": "Oct 2025 - Apr 2026",
+            "summary": "Colombo, Sri Lanka · On-site",
+            "visible": true,
+            "details": [
+                "Optimized distributor performance by identifying underperformers and high-potential distributors, designed KPI-driven incentive structures that increased potential margins by **68%** for an FMCG company.",
+                "Ran advanced margin and sales-incentive simulations, uncovering **actionable strategies** to recapture lost sales in flood-affected outlets.",
+                "Developed interactive **Power BI dashboards** for management, enabling real-time tracking of targets, achievements, and distributor performance, improving **decision-making speed**."
             ],
             "type": "industry"
         },
@@ -448,6 +448,20 @@
     ],
     "volunteer_experience": [
         {
+            "id": 3,
+            "title": "Event Support Volunteer",
+            "organization": "John Keells Foundation",
+            "date_range": "Sep 2026",
+            "duration": "1 mo",
+            "category": "Arts and Culture",
+            "visible": true,
+            "details": [
+                "Supported registration and guest check-in at the launch of Artist Spotlight (8th edition) by John Keells Foundation and City of Dreams, featuring Channa Ekanayake's 'What Lives Between' at Cinnamon Life.",
+                "Assisted with on-site event operations, including coordinating artwork sales enquiries and guest flow during the exhibition opening.",
+                "Supported the events team in delivering a smooth guest experience at a high-profile cultural exhibition launch."
+            ]
+        },
+        {
             "id": 1,
             "title": "Event Assistant",
             "organization": "John Keells Foundation",
@@ -473,20 +487,6 @@
                 "Volunteered at John Keells Foundation’s Kala Pola, organised in collaboration with the George Keyt Foundation, assisting with event coordination and operational activities.",
                 "Supported event management tasks to help ensure the smooth execution of activities and visitor engagement throughout the programme.",
                 "Conducted visitor counting to monitor footfall data to support attendance tracking and event reporting processes."
-            ]
-        },
-        {
-            "id": 3,
-            "title": "Event Support Volunteer",
-            "organization": "John Keells Foundation",
-            "date_range": "Sep 2026",
-            "duration": "1 mo",
-            "category": "Arts and Culture",
-            "visible": true,
-            "details": [
-                "Supported registration and guest check-in at the launch of Artist Spotlight (8th edition) by John Keells Foundation and City of Dreams, featuring Channa Ekanayake's 'What Lives Between' at Cinnamon Life.",
-                "Assisted with on-site event operations, including coordinating artwork sales enquiries and guest flow during the exhibition opening.",
-                "Supported the events team in delivering a smooth guest experience at a high-profile cultural exhibition launch."
             ]
         }
     ],
