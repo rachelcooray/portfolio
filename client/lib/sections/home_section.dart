@@ -91,7 +91,7 @@ class _HomeSectionState extends State<HomeSection> {
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 620),
                 child: const Text(
-                  'First Class Honours BSc (Hons) Computer Science, University of Westminster. IEEE-published researcher. Currently a Data Science & Analytics Delivery Intern at OCTAVE, John Keells Group.',
+                  'Data Scientist, full-stack engineer, and educator working across applied AI, business analytics, and decision-support tooling — turning research and data into systems people can actually act on.',
                   style: TextStyle(fontSize: 18, height: 1.55, color: AppColors.textMuted),
                 ),
               ).animate().fadeIn(delay: 450.ms, duration: 450.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.1, end: 0, curve: Curves.easeInOutCubic),

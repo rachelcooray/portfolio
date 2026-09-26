@@ -13,10 +13,10 @@ class ExperienceSection extends StatefulWidget {
 }
 
 class _ExperienceSectionState extends State<ExperienceSection> {
-  // Collapsed by default — these are lower-relevance for a
-  // data science / tech audience, shown only if the reader wants more.
+  // Collapsed by default — lower-relevance for a data/AI audience, shown
+  // only if the reader wants more. Education & youth-work roles get their
+  // own dedicated Teaching & Mentoring section instead of living here.
   bool _retailExpanded = false;
-  bool _educationSupportExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +39,8 @@ class _ExperienceSectionState extends State<ExperienceSection> {
           // given (most recent and most senior first).
           final industry = allExperience.where((e) => e['type'] == 'industry').toList();
           final retail = allExperience.where((e) => e['type'] == 'other' && e['subtype'] == 'retail_cs').toList();
-          final educationSupport = allExperience.where((e) => e['type'] == 'other' && e['subtype'] == 'education_support').toList();
-          // Anything else tagged "other" without a recognised subtype still shows, ungrouped, so nothing silently disappears.
+          // Anything tagged "other" without a recognised subtype still shows, ungrouped, so nothing silently disappears.
+          // (education_support roles are excluded here — they surface in their own Teaching & Mentoring section.)
           final otherUngrouped = allExperience.where((e) => e['type'] == 'other' && e['subtype'] != 'retail_cs' && e['subtype'] != 'education_support').toList();
 
           int globalIndex = 0;
@@ -73,34 +73,21 @@ class _ExperienceSectionState extends State<ExperienceSection> {
                      )),
                ],
 
-               if (retail.isNotEmpty || educationSupport.isNotEmpty) ...[
+               if (retail.isNotEmpty) ...[
                  const SizedBox(height: 30),
                  const Divider(color: AppColors.divider, height: 1),
                  const SizedBox(height: 24),
-                 Text(
+                 const Text(
                    'Also worked in',
-                   style: const TextStyle(fontSize: 13, color: AppColors.textFaint, fontWeight: FontWeight.w600, letterSpacing: 0.5),
+                   style: TextStyle(fontSize: 13, color: AppColors.textFaint, fontWeight: FontWeight.w600, letterSpacing: 0.5),
                  ),
                  const SizedBox(height: 12),
-               ],
-
-               if (retail.isNotEmpty)
                  _CollapsibleGroup(
                    title: 'Retail & Customer Service',
                    count: retail.length,
                    isExpanded: _retailExpanded,
                    onTap: () => setState(() => _retailExpanded = !_retailExpanded),
                    items: retail,
-                 ),
-
-               if (educationSupport.isNotEmpty) ...[
-                 const SizedBox(height: 12),
-                 _CollapsibleGroup(
-                   title: 'Education & Youth Work',
-                   count: educationSupport.length,
-                   isExpanded: _educationSupportExpanded,
-                   onTap: () => setState(() => _educationSupportExpanded = !_educationSupportExpanded),
-                   items: educationSupport,
                  ),
                ],
             ],

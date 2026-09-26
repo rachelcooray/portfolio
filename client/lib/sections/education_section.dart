@@ -17,7 +17,6 @@ class _EducationSectionState extends State<EducationSection> {
     return SectionContainer(
       title: 'Education',
       subtitle: 'Where I Studied',
-      backgroundColor: AppColors.surface,
       child: FutureBuilder<List<dynamic>>(
         future: ApiService().getExperience(),
         builder: (context, snapshot) {

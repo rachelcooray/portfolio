@@ -284,6 +284,37 @@
             "image": "assets/images/pcoscare.png"
         },
         {
+            "id": 8,
+            "title": "GenAI Chatbot for Neurodiversity Support",
+            "role": "AI Engineer, Microsoft EMBRACE Hackathon",
+            "description": "Built an AI-powered chatbot prototype for the Microsoft EMBRACE Employee Resource Group hackathon, designed to guide and support individuals and caregivers newly diagnosed with neurodiverse conditions. Finalist entry, built with a small cross-functional team under hackathon time constraints.",
+            "tech": [
+                "Generative AI",
+                "Conversational Design",
+                "Prototyping"
+            ],
+            "link": null,
+            "visible": true,
+            "image": null
+        },
+        {
+            "id": 4,
+            "title": "CIMA AI Study Assistant",
+            "role": "Full Stack Developer & AI Engineer",
+            "description": "Generative AI Study Assistant for CIMA Operational Level exams. Built a custom RAG (Retrieval-Augmented Generation) pipeline using Google's Gemini 2.0 Flash model to analyze uploaded PDF study materials with strict syllabus adherence. Features dual study modes (Explain/Solve), subject locking for E1/P1/F1, and a secure Node.js/Express backend serving a responsive React/Tailwind frontend.",
+            "tech": [
+                "React",
+                "Node.js",
+                "Google Gemini API",
+                "LangChain",
+                "Tailwind CSS",
+                "Render"
+            ],
+            "link": "https://cima-tutor-web.onrender.com",
+            "visible": true,
+            "image": "assets/images/ai-tutor.png"
+        },
+        {
             "id": 2,
             "title": "Carbon Footprint Tracker",
             "role": "Data Analyst & UI Designer",
@@ -316,23 +347,6 @@
             "link": "https://cv-writer.onrender.com",
             "visible": true,
             "image": "assets/images/cv-writer.png"
-        },
-        {
-            "id": 4,
-            "title": "CIMA AI Study Assistant",
-            "role": "Full Stack Developer & AI Engineer",
-            "description": "Generative AI Study Assistant for CIMA Operational Level exams. Built a custom RAG (Retrieval-Augmented Generation) pipeline using Google's Gemini 2.0 Flash model to analyze uploaded PDF study materials with strict syllabus adherence. Features dual study modes (Explain/Solve), subject locking for E1/P1/F1, and a secure Node.js/Express backend serving a responsive React/Tailwind frontend.",
-            "tech": [
-                "React",
-                "Node.js",
-                "Google Gemini API",
-                "LangChain",
-                "Tailwind CSS",
-                "Render"
-            ],
-            "link": "https://cima-tutor-web.onrender.com",
-            "visible": true,
-            "image": "assets/images/ai-tutor.png"
         },
         {
             "id": 5,
@@ -460,6 +474,20 @@
                 "Supported event management tasks to help ensure the smooth execution of activities and visitor engagement throughout the programme.",
                 "Conducted visitor counting to monitor footfall data to support attendance tracking and event reporting processes."
             ]
+        },
+        {
+            "id": 3,
+            "title": "Event Support Volunteer",
+            "organization": "John Keells Foundation",
+            "date_range": "Sep 2026",
+            "duration": "1 mo",
+            "category": "Arts and Culture",
+            "visible": true,
+            "details": [
+                "Supported registration and guest check-in at the launch of Artist Spotlight (8th edition) by John Keells Foundation and City of Dreams, featuring Channa Ekanayake's 'What Lives Between' at Cinnamon Life.",
+                "Assisted with on-site event operations, including coordinating artwork sales enquiries and guest flow during the exhibition opening.",
+                "Supported the events team in delivering a smooth guest experience at a high-profile cultural exhibition launch."
+            ]
         }
     ],
     "volunteering": [
@@ -475,7 +503,7 @@
             "title": "JKH Intercompany Swimming Meet 2026: Team OCTAVE Wins the Overall Women's Championship",
             "source": "John Keells Holdings",
             "link": "https://www.linkedin.com/company/john-keells-holdings/posts/?lipi=urn%3Ali%3Apage%3Ad_flagship3_company%3Bnn2zJMoFSKS23o4EHOG2Vw%3D%3D",
-            "image": "assets/images/jkh-swimming-2026.jpg",
+            "image": "assets/images/swimmingmeet.jpeg",
             "description": "Represented OCTAVE at the John Keells Group Intercompany Swimming Meet — won 3 individual golds and gold in every relay in the Under-25 age group, as OCTAVE was named overall women's champion.",
             "visible": true
         },

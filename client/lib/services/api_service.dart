@@ -64,6 +64,12 @@ class ApiService {
      return _filterVisible(data['volunteer_experience'] ?? []);
   }
 
+  Future<List<dynamic>> getTeachingExperience() async {
+     final data = await _loadData();
+     final all = _filterVisible(data['experience'] ?? []);
+     return all.where((e) => e['type'] == 'other' && e['subtype'] == 'education_support').toList();
+  }
+
   Future<List<dynamic>> getFeatured() async {
      final data = await _loadData();
      return _filterVisible(data['featured']);
