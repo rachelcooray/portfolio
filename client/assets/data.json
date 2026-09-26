@@ -2,10 +2,32 @@
     "aspirations": "I aspire to build scalable **Web & Mobile Solutions** and leverage **Data Science** to solve complex problems, helping businesses innovate through data-driven and user-centric applications.",
     "experience": [
         {
+            "id": 14,
+            "title": "Analyst, Data and AI",
+            "company": "PLACEHOLDER_COMPANY_PENDING_CONFIRMATION",
+            "date_range": "Jul 2026 - Present",
+            "summary": "PLACEHOLDER_LOCATION_PENDING_CONFIRMATION",
+            "visible": false,
+            "details": [],
+            "type": "industry"
+        },
+        {
+            "id": 13,
+            "title": "Analytics Delivery Associate",
+            "company": "OCTAVE - John Keells Group",
+            "date_range": "Apr 2026 - Jun 2026",
+            "summary": "Colombo, Sri Lanka · On-site",
+            "visible": true,
+            "details": [
+                "Progressed from the Data Science & Analytics Delivery Intern role into an associate position within the same analytics delivery team."
+            ],
+            "type": "industry"
+        },
+        {
             "id": 1,
             "title": "Data Science & Analytics Delivery Intern",
             "company": "OCTAVE - John Keells Group",
-            "date_range": "Oct 2025 - Present",
+            "date_range": "Oct 2025 - Apr 2026",
             "summary": "Colombo, Sri Lanka · On-site",
             "visible": true,
             "details": [
@@ -83,7 +105,8 @@
                 "Managed **visual merchandising standards**.",
                 "Collaborated with team to meet **sales targets**."
             ],
-            "type": "other"
+            "type": "other",
+            "subtype": "retail_cs"
         },
         {
             "id": 7,
@@ -98,7 +121,8 @@
                 "Maintained and organized inventory, ensuring **stock levels** were up to date.",
                 "Addressed customer queries and issues, contributing to a **positive shopping experience**."
             ],
-            "type": "other"
+            "type": "other",
+            "subtype": "retail_cs"
         },
         {
             "id": 8,
@@ -113,7 +137,8 @@
                 "Supported merchandising and display setup to align with **store standards**.",
                 "Handled transactions and general store support tasks efficiently."
             ],
-            "type": "other"
+            "type": "other",
+            "subtype": "retail_cs"
         },
         {
             "id": 9,
@@ -128,7 +153,8 @@
                 "Developed strong **communication skills** by interacting with diverse students.",
                 "Strengthened **organizational skills** through coordinating materials and schedules."
             ],
-            "type": "other"
+            "type": "other",
+            "subtype": "education_support"
         },
         {
             "id": 10,
@@ -143,7 +169,8 @@
                 "Fostered a **positive and inclusive** classroom environment.",
                 "Developed lesson plans and educational materials to **enhance learning outcomes**."
             ],
-            "type": "other"
+            "type": "other",
+            "subtype": "education_support"
         },
         {
             "id": 11,
@@ -405,6 +432,36 @@
             "image": null
         }
     ],
+    "volunteer_experience": [
+        {
+            "id": 1,
+            "title": "Event Assistant",
+            "organization": "John Keells Foundation",
+            "date_range": "Apr 2026",
+            "duration": "1 mo",
+            "category": "Arts and Culture",
+            "visible": true,
+            "details": [
+                "Participated as an usher for the La Bamba musical at Cinnamon Life, assisting guests with seating and venue guidance.",
+                "Responded to attendee inquiries and provided support to ensure a comfortable and enjoyable event experience.",
+                "Assisted with crowd coordination and guest flow management to help maintain a smooth and organized environment throughout the performance."
+            ]
+        },
+        {
+            "id": 2,
+            "title": "Volunteer",
+            "organization": "John Keells Foundation",
+            "date_range": "Feb 2026",
+            "duration": "1 mo",
+            "category": "Arts and Culture",
+            "visible": true,
+            "details": [
+                "Volunteered at John Keells Foundation’s Kala Pola, organised in collaboration with the George Keyt Foundation, assisting with event coordination and operational activities.",
+                "Supported event management tasks to help ensure the smooth execution of activities and visitor engagement throughout the programme.",
+                "Conducted visitor counting to monitor footfall data to support attendance tracking and event reporting processes."
+            ]
+        }
+    ],
     "volunteering": [
         "Rotaract Club",
         "IEEE Club",
@@ -413,6 +470,15 @@
         "BCS Member"
     ],
     "featured": [
+        {
+            "id": 5,
+            "title": "JKH Intercompany Swimming Meet 2026: Team OCTAVE Wins the Overall Women's Championship",
+            "source": "John Keells Holdings",
+            "link": "https://www.linkedin.com/company/john-keells-holdings/posts/?lipi=urn%3Ali%3Apage%3Ad_flagship3_company%3Bnn2zJMoFSKS23o4EHOG2Vw%3D%3D",
+            "image": "assets/images/jkh-swimming-2026.jpg",
+            "description": "Represented OCTAVE at the John Keells Group Intercompany Swimming Meet — won 3 individual golds and gold in every relay in the Under-25 age group, as OCTAVE was named overall women's champion.",
+            "visible": true
+        },
         {
             "id": 1,
             "title": "Celebrating Innovation at the Computer Science & Engineering Final Year Project Showcase",

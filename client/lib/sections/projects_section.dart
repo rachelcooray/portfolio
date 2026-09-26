@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../services/api_service.dart';
 import '../widgets/section_container.dart';
+import '../theme/palette.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectsSection extends StatefulWidget {
@@ -25,14 +26,13 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   @override
   Widget build(BuildContext context) {
     return SectionContainer(
-      title: '04. Selected Case Studies',
-      subtitle: 'Projects',
-      backgroundColor: const Color(0xFF0F172A),
+      title: 'Projects',
+      subtitle: 'Selected Case Studies',
       child: FutureBuilder<List<dynamic>>(
         future: _projectsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: AppColors.accent));
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -95,24 +95,16 @@ class _ProjectCardState extends State<_ProjectCard> {
           duration: const Duration(milliseconds: 250),
           curve: Curves.easeInOutCubic,
           width: cardWidth,
-          transform: _isHovered ? (Matrix4.identity()..scale(1.02, 1.02)) : Matrix4.identity(),
           decoration: BoxDecoration(
-            color: const Color(0xFF112240),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: _isHovered ? const Color(0xFF64FFDA).withOpacity(0.5) : Colors.white10),
-            boxShadow: _isHovered
-                ? [
-                    BoxShadow(
-                        color: const Color(0xFF64FFDA).withOpacity(0.1),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10))
-                  ]
-                : [
-                    BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 10,
-                        offset: const Offset(0, 5))
-                  ],
+            color: AppColors.surfaceAlt,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: _isHovered ? AppColors.accent : AppColors.divider),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(_isHovered ? 0.08 : 0.04),
+                  blurRadius: _isHovered ? 20 : 10,
+                  offset: Offset(0, _isHovered ? 10 : 5))
+            ],
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
@@ -129,7 +121,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                         height: 160,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.black26,
+                          color: AppColors.surface,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: widget.project['image'] != null
@@ -137,7 +129,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(widget.project['image'], fit: BoxFit.cover),
                               )
-                            : Icon(Icons.folder_open, size: 40, color: Theme.of(context).primaryColor),
+                            : const Icon(Icons.folder_open, size: 40, color: AppColors.accent),
                       ),
                       const SizedBox(height: 20),
                       // Title
@@ -145,18 +137,18 @@ class _ProjectCardState extends State<_ProjectCard> {
                         widget.project['title'] ?? '',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.outfit(
-                          fontSize: 20,
+                        style: GoogleFonts.figtree(
+                          fontSize: 19,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: AppColors.text,
                         ),
                       ),
                       const SizedBox(height: 5),
                       // Role
                       Text(
                         widget.project['role'] ?? 'Developer',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                        style: const TextStyle(
+                          color: AppColors.accent,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
                         ),
@@ -167,8 +159,8 @@ class _ProjectCardState extends State<_ProjectCard> {
                         children: [
                           Text(
                             "View Details",
-                            style: GoogleFonts.outfit(
-                              color: Colors.white70,
+                            style: GoogleFonts.figtree(
+                              color: AppColors.textMuted,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
@@ -177,10 +169,10 @@ class _ProjectCardState extends State<_ProjectCard> {
                           AnimatedPadding(
                             duration: const Duration(milliseconds: 200),
                             padding: EdgeInsets.only(left: _isHovered ? 8 : 0),
-                            child: Icon(
+                            child: const Icon(
                               Icons.arrow_forward_rounded,
                               size: 16,
-                              color: Theme.of(context).primaryColor,
+                              color: AppColors.accent,
                             ),
                           ),
                         ],
@@ -188,7 +180,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                     ],
                   ),
                 ),
-                
+
                 // Hover Overlay for Tech Stack
                 AnimatedOpacity(
                   duration: const Duration(milliseconds: 200),
@@ -196,17 +188,17 @@ class _ProjectCardState extends State<_ProjectCard> {
                   child: Container(
                     padding: const EdgeInsets.all(25),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0A192F).withOpacity(0.95),
+                      color: AppColors.surfaceAlt.withOpacity(0.97),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Tech Stack",
                           style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                            color: AppColors.accent,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 17,
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -218,12 +210,12 @@ class _ProjectCardState extends State<_ProjectCard> {
                               return Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                                 decoration: BoxDecoration(
-                                  color: Colors.white10,
+                                  color: AppColors.surface,
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Text(
                                   tech.toString(),
-                                  style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+                                  style: const TextStyle(color: AppColors.text, fontSize: 13, fontWeight: FontWeight.w500),
                                 ),
                               );
                             }).toList(),
@@ -234,7 +226,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                           widget.project['description'] ?? '',
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(color: Colors.white70, fontSize: 15, height: 1.5),
+                          style: const TextStyle(color: AppColors.textMuted, fontSize: 14, height: 1.5),
                         ),
                       ],
                     ),

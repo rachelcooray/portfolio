@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'rachelcooraytest@gmail.com', // Your email
-        pass: 'vnwx fkpo tjvt wafv'       // Your App Password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -32,7 +32,7 @@ app.post('/api/contact', async (req, res) => {
     // Email Content
     const mailOptions = {
         from: email, // Sender address
-        to: 'rachelcooraytest@gmail.com', // Where you want to receive it
+        to: process.env.EMAIL_USER, // Where you want to receive it
         subject: `Portfolio Contact: ${name}`,
         text: `You have received a new message from your portfolio website.\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     };

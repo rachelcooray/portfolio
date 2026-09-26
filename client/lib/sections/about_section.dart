@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/section_container.dart';
+import '../theme/palette.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
@@ -9,23 +9,24 @@ class AboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isMobile = MediaQuery.of(context).size.width < 800;
-    
+
     // Define the profile image widget separately
     Widget profileImage = Container(
-      width: 300,
-      height: 300,
+      width: 280,
+      height: 280,
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).primaryColor, width: 2),
-        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: AppColors.divider, width: 1),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20, offset: const Offset(0, 10))],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(15),
         child: Image.asset(
           'assets/images/profile.png',
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) => Container(
-            color: Colors.grey[800],
-            child: const Icon(Icons.person, size: 100, color: Colors.white),
+            color: AppColors.surface,
+            child: const Icon(Icons.person, size: 100, color: AppColors.textFaint),
           ),
         ),
       ),
@@ -35,12 +36,12 @@ class AboutSection extends StatelessWidget {
     Widget aboutText = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SelectableText(
+        const SelectableText(
           "I'm a First Class Computer Science graduate with industry experience in data science, analytics, and full-stack development. I transform complex data into meaningful insights and build end-to-end digital solutions that drive business impact.",
-          style: GoogleFonts.outfit(
+          style: TextStyle(
             fontSize: 18,
             height: 1.6,
-            color: Colors.white,
+            color: AppColors.text,
           ),
         ).animate().fadeIn(delay: 500.ms, duration: 600.ms, curve: Curves.easeInOutCubic).slideY(begin: 0.05, end: 0, curve: Curves.easeInOutCubic),
 
@@ -77,9 +78,9 @@ class AboutSection extends StatelessWidget {
     );
 
     return SectionContainer(
-      title: '01. About Me',
+      title: 'About',
       subtitle: 'Who I Am & What I Build',
-      child: isMobile 
+      child: isMobile
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -105,14 +106,14 @@ class AboutSection extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("▹", style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 20)),
+          const Text("▹", style: TextStyle(color: AppColors.accent, fontSize: 20)),
           const SizedBox(width: 15),
           Expanded(
             child: RichText(
               text: TextSpan(
-                style: GoogleFonts.outfit(fontSize: 16, height: 1.5, color: Colors.white70),
+                style: const TextStyle(fontSize: 16, height: 1.5, color: AppColors.textMuted),
                 children: [
-                  TextSpan(text: "$title: ", style: TextStyle(color: Theme.of(context).primaryColor, fontWeight: FontWeight.bold)),
+                  TextSpan(text: "$title: ", style: const TextStyle(color: AppColors.text, fontWeight: FontWeight.bold)),
                   TextSpan(text: description),
                 ],
               ),

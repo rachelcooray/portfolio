@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../services/api_service.dart';
 import '../widgets/section_container.dart';
+import '../theme/palette.dart';
 
 class AwardsSection extends StatefulWidget {
   const AwardsSection({super.key});
@@ -24,13 +25,14 @@ class _AwardsSectionState extends State<AwardsSection> {
   @override
   Widget build(BuildContext context) {
     return SectionContainer(
-      title: '07. Achievements',
+      title: 'Achievements',
       subtitle: 'Awards & Recognition',
+      backgroundColor: AppColors.surface,
       child: FutureBuilder<List<dynamic>>(
         future: _awardsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator(color: AppColors.accent));
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -62,13 +64,13 @@ class _AwardItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Container(
         padding: const EdgeInsets.all(25),
         decoration: BoxDecoration(
-          color: const Color(0xFF112240),
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.white10),
+          color: AppColors.surfaceAlt,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.divider),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,10 +78,10 @@ class _AwardItem extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                color: AppColors.accent.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.emoji_events, color: Theme.of(context).primaryColor, size: 24),
+              child: const Icon(Icons.emoji_events, color: AppColors.accent, size: 24),
             ),
             const SizedBox(width: 25),
             Expanded(
@@ -92,17 +94,17 @@ class _AwardItem extends StatelessWidget {
                       Flexible(
                         child: Text(
                           award['title'] ?? '',
-                          style: GoogleFonts.outfit(
-                            fontSize: 20,
+                          style: GoogleFonts.figtree(
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: AppColors.text,
                           ),
                         ),
                       ),
                       Text(
                         award['year'] ?? '',
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
+                        style: const TextStyle(
+                          color: AppColors.accent,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Fira Code',
                         ),
@@ -112,18 +114,18 @@ class _AwardItem extends StatelessWidget {
                   const SizedBox(height: 5),
                   Text(
                     award['organization'] ?? '',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
+                    style: const TextStyle(
+                      color: AppColors.accent,
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 12),
                   Text(
                     award['summary'] ?? '',
                     style: const TextStyle(
-                      color: Colors.white60,
-                      fontSize: 15,
+                      color: AppColors.textMuted,
+                      fontSize: 14,
                       height: 1.5,
                     ),
                   ),

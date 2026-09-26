@@ -7,7 +7,7 @@ class ParseRichText extends StatelessWidget {
   const ParseRichText({
     super.key, 
     required this.text, 
-    this.baseStyle = const TextStyle(fontSize: 14, color: Colors.white70),
+    this.baseStyle = const TextStyle(fontSize: 14, color: Color(0xFF55504A)),
   });
 
   List<InlineSpan> _parse(BuildContext context) {
@@ -21,10 +21,7 @@ class ParseRichText extends StatelessWidget {
       }
       spans.add(TextSpan(
         text: match.group(1),
-        style: baseStyle.copyWith(
-          color: Theme.of(context).primaryColor,
-          fontWeight: FontWeight.bold,
-        ),
+        style: baseStyle.copyWith(fontWeight: FontWeight.bold),
       ));
       start = match.end;
     }

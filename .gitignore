@@ -5,6 +5,8 @@ About Me - All details_backup.csv
 
 # Standard ignores
 .DS_Store
+.env
+server/.env
 node_modules/
 dist/
 build/
