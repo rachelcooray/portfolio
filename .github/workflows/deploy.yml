@@ -14,24 +14,22 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: subosito/flutter-action@v2
+      - uses: actions/setup-node@v4
         with:
-          channel: 'stable'
-      
-      - name: Install dependencies
-        working-directory: ./client
-        run: flutter pub get
+          node-version: '22'
+          cache: 'npm'
 
-      - name: Build Web
-        working-directory: ./client
-        # The base-href must match the repository name for Project Pages
-        run: flutter build web --release --base-href "/"
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
 
       - name: Create CNAME
-        run: echo "rachelcooray.com" > ./client/build/web/CNAME
+        run: echo "rachelcooray.com" > ./out/CNAME
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./client/build/web
+          publish_dir: ./out
