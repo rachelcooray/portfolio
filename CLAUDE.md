@@ -6,11 +6,21 @@ Flutter app that still lives on `main`.
 
 ## Where this lives
 
-- This worktree: `/Users/rachelcooray/Desktop/Portfolio-redesign`, branch
-  `redesign`.
+- This worktree: `/Users/rachelcooray/Desktop/Portfolio/redesign-app`,
+  branch `redesign`. Nested inside the main worktree's folder (not a
+  sibling) because the dev-server tooling's sandbox can only reach paths
+  under the session root — a sibling folder (`../Portfolio-redesign`)
+  failed with a `getcwd`/permission error. Excluded from `main`'s git
+  status via `.git/info/exclude` (local-only, not committed to `main`).
 - The stable, currently-deployed site: `/Users/rachelcooray/Desktop/Portfolio`,
   branch `main`. Don't touch it from here — they're separate worktrees of
   the same repo, sharing git history but not working-tree files.
+- Dev server: `.claude/launch.json` lives at the session root
+  (`/Users/rachelcooray/Desktop/Portfolio/.claude/launch.json`), not in
+  this worktree — it `cd`s into `redesign-app` and prepends nvm's Node
+  to PATH before running `npm run dev`. If dependencies are ever missing
+  after a fresh checkout of this worktree (node_modules is gitignored,
+  correctly), run `npm install` here first.
 - Robot prototype lab (reference only, never edit): `~/Desktop/Portfolio-robot`.
   Its own `CLAUDE.md` documents the model pipeline, face-drawing approach,
   and gotchas (bone names, scale compensation, etc.) — read it before
@@ -107,10 +117,20 @@ Tailwind CSS v4, three.js + GSAP (not yet wired in — Milestone 3).
 1. **Setup** — done: worktree, Next.js scaffold (static export, Tailwind,
    TypeScript), `content.ts`, knowledge export script, this file, deploy
    workflow updated.
-2. Static site (full layout, handoff palette/type, light+dark, no robot) —
-   not started.
+2. **Static site** — mostly done: `globals.css` has the full handoff
+   palette as CSS custom properties (light + `prefers-color-scheme: dark`
+   variants), Fraunces/Figtree loaded via `next/font/google`, every
+   section from `content.ts` rendered on a single page
+   (`src/app/page.tsx`) with `data-guide-id` attributes already in place
+   for the robot to target later. No skill pill tags, no shadowed cards,
+   no gradients, per the master prompt's visual rules. Not done yet:
+   actual visual QA in a real browser (only verified via rendered text +
+   one screenshot so far), responsive check below 768px, nav
+   active-state/scroll-spy.
 3. Robot (port from the lab, recolour to burgundy, bigger face) —
-   not started.
+   not started. `<aside>` placeholder for the robot column already
+   reserved in `page.tsx` (320px, right, sticky full-height, hidden
+   below `lg`).
 4. Tour (GSAP timeline, build-ins, highlighter swipes) — not started.
 5. Voice (Daniel pipeline, visemes, sync) — not started.
 6. Q&A (Cloudflare Worker, streaming, knowledge-base-only answers) —

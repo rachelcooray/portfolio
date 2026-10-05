@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg: #ffffff;
+  --surface: #f7f7f8;
+  --surface-alt: #ffffff;
+  --text: #111111;
+  --text-muted: #6b7280;
+  --text-faint: #9ca3af;
+  --divider: #e5e7eb;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --accent: #8b1e3f;
+  --accent-hover: #6b1730;
+  --accent-soft: #f6e4e9;
+
+  --highlighter: #f2d45c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --bg: #15100f;
+    --surface: #1d1716;
+    --surface-alt: #221a19;
+    --text: #f3ede9;
+    --text-muted: #b9aca6;
+    --text-faint: #8b7d77;
+    --divider: #352a28;
+
+    --accent: #d98fa3;
+    --accent-hover: #e6abba;
+    --accent-soft: #3a2024;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-divider: var(--divider);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-highlighter: var(--highlighter);
+  --font-heading: var(--font-fraunces);
+  --font-sans: var(--font-figtree);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
