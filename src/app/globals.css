@@ -14,6 +14,13 @@
   --accent-soft: #f6e4e9;
 
   --highlighter: #f2d45c;
+
+  /* Liquid Glass tokens — the tint is the light bg, slightly warmed and
+     dropped to partial opacity, so panels pick up whatever color field
+     is drifting behind them rather than reading as plain grey boxes. */
+  --glass-fill: rgba(255, 252, 248, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: rgba(60, 20, 30, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +36,10 @@
     --accent: #d98fa3;
     --accent-hover: #e6abba;
     --accent-soft: #3a2024;
+
+    --glass-fill: rgba(30, 20, 20, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-shadow: rgba(0, 0, 0, 0.35);
   }
 }
 
@@ -51,4 +62,128 @@
 body {
   background: var(--bg);
   color: var(--text);
+}
+
+/* The robot's "highlighter swipe" — applied to whatever it's pointing at.
+   A background sweep in from the left, like a highlighter pen stroke,
+   not a static highlight. Reserved color, never the brand accent. */
+@keyframes guide-highlight-sweep {
+  from { background-size: 0% 100%; }
+  to { background-size: 100% 100%; }
+}
+
+.guide-highlight {
+  background-image: linear-gradient(var(--highlighter), var(--highlighter));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 0% 35%;
+  animation: guide-highlight-sweep 0.4s ease-out forwards;
+  border-radius: 4px;
+  transition: background-size 0.3s ease-out;
+  scroll-margin: 100px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-highlight {
+    animation: none;
+    background-size: 100% 35%;
+  }
+}
+
+/* Liquid Glass — used only for floating UI (nav bar, robot panel,
+   controls, subtitle bar), never content sections/cards. Needs a color
+   field moving behind it (see .bg-color-field below) or it just looks
+   like a grey box. */
+.glass {
+  background: var(--glass-fill);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 8px 32px var(--glass-shadow);
+}
+
+.glass-interactive {
+  transition: transform 150ms ease, filter 150ms ease;
+}
+.glass-interactive:hover {
+  filter: brightness(1.05);
+}
+.glass-interactive:active {
+  transform: scale(0.98);
+}
+
+/* Respect the user's transparency preference and unsupported browsers —
+   fall back to a solid panel, no blur. */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--surface-alt);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--surface-alt);
+  }
+}
+
+/* The slow-drifting color field glass panels pick up a tint from.
+   Fixed behind everything, generous blur so it reads as soft color
+   wash, not shapes. Static under reduced motion. */
+.bg-color-field {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.bg-color-field span {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.35;
+}
+.bg-color-field span:nth-child(1) {
+  width: 60vw;
+  height: 60vw;
+  background: var(--accent);
+  top: -15vw;
+  left: -10vw;
+  animation: drift-a 50s ease-in-out infinite alternate;
+}
+.bg-color-field span:nth-child(2) {
+  width: 50vw;
+  height: 50vw;
+  background: var(--highlighter);
+  bottom: -20vw;
+  right: -15vw;
+  opacity: 0.18;
+  animation: drift-b 60s ease-in-out infinite alternate;
+}
+.bg-color-field span:nth-child(3) {
+  width: 40vw;
+  height: 40vw;
+  background: var(--accent-soft);
+  top: 30vh;
+  right: 10vw;
+  animation: drift-c 45s ease-in-out infinite alternate;
+}
+@keyframes drift-a {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(6vw, 8vh) scale(1.1); }
+}
+@keyframes drift-b {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-8vw, -6vh) scale(1.05); }
+}
+@keyframes drift-c {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(-5vw, 5vh) scale(0.95); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bg-color-field span {
+    animation: none;
+  }
 }

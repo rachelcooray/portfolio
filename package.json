@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "knowledge": "tsx scripts/export-knowledge.ts"
+    "knowledge": "tsx scripts/export-knowledge.ts",
+    "voice": "tsx scripts/generate-voice.ts"
   },
   "dependencies": {
     "next": "16.3.8",

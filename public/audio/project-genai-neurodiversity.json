@@ -1,0 +1,119 @@
+{
+  "words": [
+    {
+      "word": "At",
+      "start": 0,
+      "end": 0.134
+    },
+    {
+      "word": "a",
+      "start": 0.134,
+      "end": 0.2
+    },
+    {
+      "word": "Microsoft",
+      "start": 0.2,
+      "end": 0.802
+    },
+    {
+      "word": "EMBRACE",
+      "start": 0.802,
+      "end": 1.27
+    },
+    {
+      "word": "hackathon,",
+      "start": 1.27,
+      "end": 1.938
+    },
+    {
+      "word": "her",
+      "start": 1.938,
+      "end": 2.138
+    },
+    {
+      "word": "team",
+      "start": 2.138,
+      "end": 2.406
+    },
+    {
+      "word": "built",
+      "start": 2.406,
+      "end": 2.74
+    },
+    {
+      "word": "an",
+      "start": 2.74,
+      "end": 2.873
+    },
+    {
+      "word": "AI",
+      "start": 2.873,
+      "end": 3.007
+    },
+    {
+      "word": "chatbot",
+      "start": 3.007,
+      "end": 3.475
+    },
+    {
+      "word": "to",
+      "start": 3.475,
+      "end": 3.609
+    },
+    {
+      "word": "support",
+      "start": 3.609,
+      "end": 4.076
+    },
+    {
+      "word": "people",
+      "start": 4.076,
+      "end": 4.477
+    },
+    {
+      "word": "newly",
+      "start": 4.477,
+      "end": 4.811
+    },
+    {
+      "word": "diagnosed",
+      "start": 4.811,
+      "end": 5.413
+    },
+    {
+      "word": "with",
+      "start": 5.413,
+      "end": 5.68
+    },
+    {
+      "word": "neurodiverse",
+      "start": 5.68,
+      "end": 6.482
+    },
+    {
+      "word": "conditions",
+      "start": 6.482,
+      "end": 7.15
+    },
+    {
+      "word": "—",
+      "start": 7.15,
+      "end": 7.217
+    },
+    {
+      "word": "they",
+      "start": 7.217,
+      "end": 7.484
+    },
+    {
+      "word": "were",
+      "start": 7.484,
+      "end": 7.752
+    },
+    {
+      "word": "finalists.",
+      "start": 7.752,
+      "end": 8.42
+    }
+  ]
+}

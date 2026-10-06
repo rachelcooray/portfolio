@@ -22,6 +22,9 @@ export type Narration = {
   short: string;
   deep?: string;
   cueWord?: string;
+  // Phonetic respelling fed to the `say` command for words it mispronounces
+  // (e.g. "IEEE" -> "I triple E"). Subtitles always show `short`, never this.
+  spokenText?: string;
 };
 
 export type IntroContent = {
@@ -54,6 +57,7 @@ export type RoleItem = {
   narration: Narration;
   inTour: boolean;
   knowledgeOnly?: boolean;
+  logo?: string;
 };
 
 export type ProjectItem = {
@@ -77,6 +81,7 @@ export type RecognitionItem = {
   summary: string;
   kind: "award" | "press";
   link?: string | null;
+  image?: string | null;
 };
 
 export type EducationItem = {
@@ -103,16 +108,18 @@ export type VolunteerItem = {
 export const intro: IntroContent = {
   name: "Rachel Cooray",
   tagline: "Applies AI to real business problems.",
-  bio: "Analyst for Data and AI at OCTAVE, the advanced analytics arm of John Keells Holdings, in Colombo. Published AI researcher (IEEE). Technical co-founder of Layer1 Studio. First Class Honours BSc Computer Science, University of Westminster.",
+  bio: "Based in Colombo, Sri Lanka. Analyst for Data and AI at OCTAVE, the advanced analytics arm of John Keells Holdings. Published AI researcher (IEEE). Technical co-founder of Layer1 Studio. First Class Honours BSc Computer Science, University of Westminster.",
   photo: "/images/profile.png",
   links: [
-    { label: "LinkedIn", href: "[PLACEHOLDER: LinkedIn URL]" },
+    { label: "Email", href: "mailto:rachelcooray@gmail.com" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/rachel-cooray-069034235/" },
+    { label: "GitHub", href: "https://github.com/rachelcooray" },
     { label: "CV", href: "/rachelcooray-cv.pdf" },
     { label: "ORCID", href: "https://orcid.org/0009-0009-3192-2669" },
   ],
   narration: {
     short:
-      "Hi, I'm Rachel. I apply AI to real business problems, as an analyst at OCTAVE, a published researcher, and a technical co-founder at Layer1 Studio.",
+      "This is Rachel. She applies AI to real business problems — as an analyst at OCTAVE, a published researcher, and a technical co-founder at Layer1 Studio.",
     cueWord: "AI",
   },
 };
@@ -132,7 +139,9 @@ export const research: ResearchItem[] = [
     highlight: "Selected for the MSIT Journal special edition, 2026.",
     narration: {
       short:
-        "My IEEE-published research, PCOS Care, predicts PCOS risk early using machine learning — it placed 3rd out of over 400 students at Westminster's showcase and was later selected for a journal special edition.",
+        "Her IEEE-published research, PCOS Care, predicts PCOS risk early using machine learning — it placed 3rd out of over 400 students at Westminster's showcase and was later selected for a journal special edition.",
+      spokenText:
+        "Her I triple E-published research, PCOS Care, predicts PCOS risk early using machine learning — it placed 3rd out of over 400 students at Westminster's showcase and was later selected for a journal special edition.",
       cueWord: "IEEE",
     },
     inTour: true,
@@ -155,6 +164,7 @@ export const octave: RoleItem[] = [
     id: "role-octave-analyst",
     title: "Analyst, Data and AI",
     company: "OCTAVE - John Keells Group",
+    logo: "/images/logo-octave.jpeg",
     dateRange: "Jul 2026 - Present",
     location: "Colombo, Sri Lanka · On-site",
     details: [
@@ -172,6 +182,7 @@ export const octave: RoleItem[] = [
     id: "role-octave-associate",
     title: "Analytics Delivery Associate",
     company: "OCTAVE - John Keells Group",
+    logo: "/images/logo-octave.jpeg",
     dateRange: "Apr 2026 - Jun 2026",
     location: "Colombo, Sri Lanka · On-site",
     details: [
@@ -185,6 +196,7 @@ export const octave: RoleItem[] = [
     id: "role-octave-intern-2025",
     title: "Data Science & Analytics Delivery Intern",
     company: "OCTAVE - John Keells Group",
+    logo: "/images/logo-octave.jpeg",
     dateRange: "Oct 2025 - Apr 2026",
     location: "Colombo, Sri Lanka · On-site",
     details: [
@@ -200,6 +212,7 @@ export const octave: RoleItem[] = [
     id: "role-octave-intern-2023",
     title: "Analytics Delivery Intern",
     company: "OCTAVE - John Keells Group",
+    logo: "/images/logo-octave.jpeg",
     dateRange: "Mar 2023 - May 2023",
     location: "Colombo, Sri Lanka · On-site",
     details: [
@@ -214,6 +227,7 @@ export const octave: RoleItem[] = [
     id: "role-octave-intern-2022",
     title: "Data Science Intern",
     company: "OCTAVE - John Keells Group",
+    logo: "/images/logo-octave.jpeg",
     dateRange: "Mar 2022 - Jun 2022",
     location: "Colombo, Sri Lanka · Remote",
     details: [
@@ -238,6 +252,7 @@ export const layer1: RoleItem & {
   id: "role-layer1",
   title: "Co-founder & Fullstack Developer",
   company: "Layer1 Studio",
+  logo: "/images/layer1.png",
   dateRange: "Dec 2025 - Present",
   location: "Remote · Web & Mobile Development for SMEs & Startups",
   details: [
@@ -258,7 +273,7 @@ export const layer1: RoleItem & {
   ],
   narration: {
     short:
-      "Alongside OCTAVE, I co-founded Layer1 Studio, where we've delivered 13 projects for 4 clients — gyms, e-commerce, food shops, and more. No client names, by agreement, just the range of what we build.",
+      "Alongside OCTAVE, she co-founded Layer1 Studio, which has delivered 13 projects for 4 clients — gyms, e-commerce, food shops, and more. No client names, by agreement, just the range of what they build.",
     cueWord: "Layer1",
   },
   inTour: true,
@@ -280,8 +295,10 @@ export const projects: ProjectItem[] = [
     image: "/images/pcoscare.png",
     narration: {
       short:
-        "PCOS Care predicts PCOS risk early using machine learning, reaching over 93% recall — it's the project behind my IEEE paper.",
-      cueWord: "PCOS Care",
+        "PCOS Care predicts PCOS risk early using machine learning, reaching over 93% recall — it's the project behind her IEEE paper.",
+      spokenText:
+        "PCOS Care predicts PCOS risk early using machine learning, reaching over 93% recall — it's the project behind her I triple E paper.",
+      cueWord: "PCOS",
     },
     inTour: true,
   },
@@ -296,7 +313,7 @@ export const projects: ProjectItem[] = [
     image: null,
     narration: {
       short:
-        "At a Microsoft EMBRACE hackathon, my team built an AI chatbot to support people newly diagnosed with neurodiverse conditions — we were finalists.",
+        "At a Microsoft EMBRACE hackathon, her team built an AI chatbot to support people newly diagnosed with neurodiverse conditions — they were finalists.",
       cueWord: "EMBRACE",
     },
     inTour: true,
@@ -327,7 +344,7 @@ export const projects: ProjectItem[] = [
       // Drafted one-liner — flagged per the master prompt for approval,
       // since the full description was condensed down for the tour.
       short:
-        "I also built a Carbon Footprint Tracker — interactive dashboards that turn everyday activity into an emissions estimate, with suggestions to reduce it.",
+        "She also built a Carbon Footprint Tracker — interactive dashboards that turn everyday activity into an emissions estimate, with suggestions to reduce it.",
     },
     inTour: true,
   },
@@ -461,6 +478,7 @@ export const recognition: RecognitionItem[] = [
       "Represented OCTAVE — won 3 individual golds and gold in every relay in the Under-25 age group, as OCTAVE was named overall women's champion.",
     kind: "press",
     link: "https://www.linkedin.com/company/john-keells-holdings/posts/?lipi=urn%3Ali%3Apage%3Ad_flagship3_company%3Bnn2zJMoFSKS23o4EHOG2Vw%3D%3D",
+    image: "/images/swimmingmeet.jpeg",
   },
   {
     id: "recognition-pcos-award",
@@ -487,6 +505,16 @@ export const recognition: RecognitionItem[] = [
     kind: "award",
   },
   {
+    id: "recognition-westminster-showcase",
+    title: "Celebrating Innovation at the Computer Science & Engineering Final Year Project Showcase",
+    organization: "University of Westminster",
+    year: "2025",
+    summary: "Featured for showcase innovation.",
+    kind: "press",
+    link: "https://blog.westminster.ac.uk/wearewestminster/celebrating-innovation-at-the-computer-science-and-engineering-final-year-project-showcase/",
+    image: "/images/netcompany-group-pic.jpg",
+  },
+  {
     id: "recognition-westminster-prize",
     title: "Westminster CS Students Receive Prizes",
     organization: "University of Westminster",
@@ -494,6 +522,27 @@ export const recognition: RecognitionItem[] = [
     summary: "Press coverage of the 3rd Place award for PCOS Care.",
     kind: "press",
     link: "https://www.westminster.ac.uk/news/westminster-computer-science-and-engineering-students-receive-prizes-from-netcompany-at-annual-final-year-project-showcase",
+    image: "/images/blog.png",
+  },
+  {
+    id: "recognition-lmd-youth-forum",
+    title: "LMD Youth Forum Interview",
+    organization: "LMD",
+    year: "2020",
+    summary: "Interview on youth leadership.",
+    kind: "press",
+    link: "https://lmd.lk/youth-forum-32/",
+    image: "/images/youth-forum.png",
+  },
+  {
+    id: "recognition-daily-ft",
+    title: "WIM & NYSC Recognise Youth",
+    organization: "Daily FT",
+    year: "2020",
+    summary: "Women in Management & National Youth Services Council New Generation Awards recognition.",
+    kind: "press",
+    link: "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
+    image: "/images/daily-ft.png",
   },
 ];
 
@@ -525,7 +574,7 @@ export const educationKnowledge: EducationItem[] = [
   },
   {
     id: "education-cima",
-    title: "Certificate in Business Analytics (CIMA)",
+    title: "Certificate in Business Accounting (CIMA)",
     institution: "CIMA, United Kingdom",
     dateRange: "Aug 2024",
     summary: "Financial & Management Accounting",
@@ -592,6 +641,7 @@ export const retailExperienceKnowledge: RoleItem[] = [
     id: "role-uniqlo",
     title: "Customer Advisor",
     company: "UNIQLO",
+    logo: "/images/uniqlo.png",
     dateRange: "Aug 2025 - Oct 2025",
     location: "Coal Drops Yard, UK",
     details: ["Visual merchandising and customer service in a high-paced retail environment."],
@@ -603,6 +653,7 @@ export const retailExperienceKnowledge: RoleItem[] = [
     id: "role-eg-on-the-move",
     title: "Customer Service Associate",
     company: "EG On The Move (Petrogas)",
+    logo: "/images/logo-eg-on-the-move.png",
     dateRange: "Jan 2025 - Aug 2025",
     location: "Enfield, UK",
     details: ["Customer service and point-of-sale operations."],
@@ -614,6 +665,7 @@ export const retailExperienceKnowledge: RoleItem[] = [
     id: "role-tk-maxx",
     title: "Retail Associate — Christmas Temp",
     company: "TK Maxx",
+    logo: "/images/logo-tkmaxx.png",
     dateRange: "Nov 2024 - Jan 2025",
     location: "Stratford, UK",
     details: ["Customer service, stock management and merchandising."],

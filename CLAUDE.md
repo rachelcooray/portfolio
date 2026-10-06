@@ -22,21 +22,21 @@ Flutter app that still lives on `main`.
   after a fresh checkout of this worktree (node_modules is gitignored,
   correctly), run `npm install` here first.
 - Robot prototype lab (reference only, never edit): `~/Desktop/Portfolio-robot`.
-  Its own `CLAUDE.md` documents the model pipeline, face-drawing approach,
-  and gotchas (bone names, scale compensation, etc.) — read it before
-  touching anything robot-related.
-- `REDESIGN_HANDOFF.md` (repo root) — palette, typography, section order,
-  and final copy decided during the Flutter polishing session. Source of
-  truth for palette/copy; this file (and the master prompt) is the source
-  of truth for the robot/tour/Next.js build itself.
+  Also pushed to `origin/robot-lab` on this same repo (orphan branch) —
+  that's where Milestone 3 actually pulled the robot source/model/draco
+  files from (`git archive origin/robot-lab -- <paths> | tar -x`), not a
+  manual copy from the lab folder.
+- `REDESIGN_HANDOFF.md` (repo root) — palette, typography, original
+  section order, and copy decided during the Flutter polishing session.
+  Mostly superseded now by decisions made directly in this worktree (see
+  below) — treat it as historical context, not the current source of truth.
 
 ## Node version
 
-System Node was `20.3.0` — too old for current Next.js (`>=20.9.0`) and for
-several tools the robot lab already hit this exact issue with. Installed
-`nvm` and Node LTS (`v24.21.0`) for this project; `.nvmrc` pins `lts/*`.
-System `/usr/local/bin/node` is untouched. Every shell command in this repo
-needs nvm sourced first:
+System Node was `20.3.0` — too old for current Next.js (`>=20.9.0`).
+Installed `nvm` and Node LTS (`v24.21.0`) for this project; `.nvmrc` pins
+`lts/*`. System `/usr/local/bin/node` is untouched. Every shell command in
+this repo needs nvm sourced first:
 ```bash
 export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; nvm use --lts
 ```
@@ -44,96 +44,140 @@ export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; n
 ## Stack
 
 Next.js 16 (App Router, static export via `output: "export"`), TypeScript,
-Tailwind CSS v4, three.js + GSAP (not yet wired in — Milestone 3).
+Tailwind CSS v4, three.js + GSAP, Whisper (local, via `whisper` CLI) +
+macOS `say` for voice generation.
 
 ## Commands
 
 - `npm run dev` — dev server.
 - `npm run build` — static export to `./out`.
 - `npm run knowledge` — regenerate `knowledge/knowledge.md` from
-  `src/content/content.ts` (run this after any content change).
+  `src/content/content.ts` (run after any content change).
+- `npm run voice` — regenerate `public/audio/*` from the live tour script
+  (`src/tour/buildScript.ts`). Hash-cached — only regenerates lines whose
+  text/spokenText/voice changed. Needs `say`, `ffmpeg`, `whisper` (all
+  confirmed present on this machine).
 
-## File layout (so far)
+## File layout
 
 - `src/content/content.ts` — single typed source of truth for all page
-  content, tour narration, and the Q&A knowledge base. See the file's own
-  header comment for the shape (`narration`, `inTour`, `knowledgeOnly`).
-- `scripts/export-knowledge.ts` — builds `knowledge/knowledge.md` from
-  `content.ts`. Run via `npm run knowledge`.
-- `knowledge/knowledge.md` — generated, not hand-edited.
+  content, tour narration, and the Q&A knowledge base. Header comment
+  explains the shape (`narration`, `inTour`, `knowledgeOnly`, `logo`).
+- `src/tour/buildScript.ts` — derives the live tour script from
+  `content.ts` + `tourOrder`, skipping any line whose narration is still
+  a `[PLACEHOLDER: ...]`.
+- `src/tour/TourController.ts` — sequences the script through the Guide:
+  audio/mouth sync, subtitle reveal, scroll-into-view, pointAt on cueWord.
+- `src/robot/Guide.ts` — framework-agnostic robot controller (ported from
+  the lab). `say()` falls back to synthesized word-timing (no audio) for
+  any line without generated `/audio/{id}.json` yet.
+- `src/robot/RobotFace.ts`, `realRobotMaterials.ts` — face + materials,
+  recolored from the lab's ink-blue to the site's burgundy accent; face
+  enlarged (eyes 2x, mouth 1.5x) per spec.
+- `src/components/Robot.tsx` — mounts Guide onto a canvas, hands the
+  instance up via `onGuideReady`.
+- `src/components/RobotToggle.tsx` — the robot UI: a waving toggle button
+  (top-right), opens a floating glass panel (canvas + subtitles +
+  Play/Skip/Sound controls) on click, starts the tour. Owns the
+  TourController. Includes an audio-autoplay unlock (plays a silent clip
+  synchronously in the click handler) since the real `audioEl.play()`
+  happens several async hops later and would otherwise get silently
+  blocked by browser autoplay policy.
+- `scripts/export-knowledge.ts`, `scripts/generate-voice.ts` — the two
+  content-derived generation scripts. Both run via `tsx`.
 - `client/`, `server/` — the old Flutter app and its contact-form backend.
-  Still present for reference (real content/images/CV PDF live under
-  `client/assets/` and `client/web/`) but not part of the Next.js build.
-  Will be removed once the rebuild fully replaces it.
-- `.github/workflows/deploy.yml` — updated to build this Next.js app
-  (`npm run build`, publish `./out`) instead of Flutter. Only fires on
-  push to `main`, which this worktree never pushes to directly.
+  Still present for reference (CV PDF, original images) but not part of
+  the Next.js build.
+- `.github/workflows/deploy.yml` — builds this Next.js app instead of
+  Flutter. Only fires on push to `main`.
 
-## Content decisions worth knowing
+## Design decisions made in this worktree (supersede the handoff where they differ)
 
-- Several items in `content.ts` are deliberate `[PLACEHOLDER: ...]`
-  markers, not gaps I forgot — see the TODO list below. Never fill these
-  in with invented specifics.
-- `projects` curates 4 items into the tour (PCOS Care, the Microsoft
-  EMBRACE hackathon project, a finance content explainer, Carbon Footprint
-  Tracker); the rest of Rachel's real projects (CV Writing Assistant, CIMA
-  AI Study Assistant, Futsal, CSR Street Vendors, Fantasy Coin Collector)
-  are marked `knowledgeOnly: true` — real, not deleted, just not in the
-  curated highlights tour. Same pattern for retail/customer-service roles
-  and the full OCTAVE role history (only the current "Analyst, Data and
-  AI" role is in the tour; the Associate/Intern roles before it are
-  `knowledgeOnly`).
-- Teaching & Mentoring and Perspective sections are carried over verbatim
-  from `REDESIGN_HANDOFF.md`. Perspective is explicitly a first draft in
-  Rachel's voice — flagged there and in `content.ts` — she should read and
-  edit it before it's treated as final.
-- Narration copy I drafted myself (not lifted verbatim from existing
-  copy) needs her review per the master prompt's own instruction. See
-  TODO.
+- **Palette**: burgundy accent kept from the handoff, but the robot's
+  colors were changed to match — panels/eyes/mouth burgundy, joints a
+  darker burgundy, shell a near-white matching the site background
+  (not the handoff's warmer paper tone).
+- **Liquid Glass**: floating UI (nav bar, robot toggle/panel/controls/
+  subtitles) uses translucent `backdrop-filter: blur() saturate()` panels
+  — see `.glass` in `globals.css`. This **replaces** the master prompt's
+  original "no frosted nav, no glassmorphism" rule; that rule is no
+  longer in effect. A slow-drifting blurred burgundy/highlighter color
+  field (`.bg-color-field` in `layout.tsx`) sits fixed behind the page so
+  the glass has something to tint from — without it the panels just look
+  grey. Respects `prefers-reduced-transparency` (solid fallback) and
+  `prefers-reduced-motion` (field stops drifting).
+- **Content breadth**: the page shows everything, not a curated subset —
+  Rachel's explicit instruction ("put it all now, I'll tell you if it's
+  too much"). All projects, all OCTAVE roles, all education, skills,
+  volunteering, retail/CS experience are rendered on the page. The tour
+  narration (`tourOrder`) stays a curated ~6-line highlights reel — that's
+  a separate, narrower concern from what's visible on the page.
+- **Voice**: macOS `say -v "Jamie (Premium)"` + Whisper for word timing.
+  Narration is **third person** ("She applies AI...", not "I apply AI...")
+  since Jamie is a narrator voice, not Rachel's own. "IEEE" has a
+  `spokenText` override ("I triple E") — the `say` command mispronounces
+  it literally otherwise.
+- **Entry UX**: no autoplay-on-load. A waving robot-emoji toggle button
+  (top-right, always visible) opens the robot panel and starts the tour
+  on click — simpler than the original auto-tour/localStorage/returning-
+  visitor state machine from the master prompt, and sidesteps the
+  autoplay-audio problem since the click is the gesture.
+- Company logos (OCTAVE, Layer1 Studio, UNIQLO, EG On The Move, TK Maxx)
+  render next to their Experience entries — Rachel supplied these.
 
 ## Open items / TODO
 
-- `[PLACEHOLDER: APPROVED OCTAVE WORDING]` — the current-role narration
-  and detail bullet for "Analyst, Data and AI" need approved public
-  wording; don't invent OCTAVE-specific claims.
-- `project-finance-explainer` — a "finance content explainer" project was
-  named in the master prompt with no description. Needs a real name,
-  description, tech stack, and narration line.
-- `[PLACEHOLDER: LinkedIn URL]`, `[PLACEHOLDER: link to her fiction/pen-name
-  work]`, `[PLACEHOLDER: Sketchfab model URL]` — real links needed.
+- `[PLACEHOLDER: APPROVED OCTAVE WORDING]` — the current-role ("Analyst,
+  Data and AI") detail bullet and tour narration need approved public
+  wording. The role card itself still renders (title/dates/company are
+  real) — just the bullet and tour line are withheld. Don't invent.
+- `project-finance-explainer` — named in the master prompt with no other
+  details. Hidden from the page (filtered out, not deleted) until it has
+  a real name/description/tech/narration.
+- `[PLACEHOLDER: link to her fiction/pen-name work]`,
+  `[PLACEHOLDER: Sketchfab model URL]` — real links needed (both footer
+  lines are hidden from render until filled in). LinkedIn/GitHub/Email
+  are now real.
 - No image exists yet for the Microsoft EMBRACE hackathon project.
 - No teaching-specific CV variant exists (only one CV PDF).
-- Narration drafted by me, not yet approved: the Layer1 Studio line, the
-  Carbon Footprint Tracker one-liner (condensed from its full
-  description), and the intro line. Everything else in `research`,
-  `octave` (except the placeholder), and `projects` narration is close to
-  verbatim from already-approved copy.
-- `tourOrder` in `content.ts` is a first pass at what plays in the
-  auto-tour — only 8 items, matching "highlights tour" scope; worth
-  Rachel's sign-off before Milestone 4 builds the timeline around it.
+- Narration drafted by me, not yet approved: Layer1 Studio line, Carbon
+  Footprint Tracker one-liner. Research/OCTAVE/EMBRACE narration is close
+  to verbatim from already-approved copy.
+- Rachel mentioned having Sri Lankan-motif decorative design assets to
+  use "where appropriate" — not yet added, waiting on the actual file(s)
+  (received only as an inline chat image, no tool can save that to disk;
+  asked her to save it to `public/images/` directly).
+- Q&A section is UI-only (disabled buttons) — Milestone 6, not started.
+  Cloudflare Worker, bundled knowledge.md, rate limiting all still to do.
+- SEO/OG image, full accessibility pass, Lighthouse check — Milestone 7,
+  not started.
+- No `deep` narration (go-deeper chips) — only `short` tour lines exist.
+- Visitor-led "walk me through this" contextual prompts — not built
+  (the master prompt's spec for this was superseded by the click-to-open
+  toggle UX; worth revisiting if wanted).
+- Mobile robot framing is the same full-figure camera as desktop, just in
+  a smaller panel — not the "waist-up corner crop" the master prompt
+  originally specified. Works fine at current panel size; revisit if it
+  reads too small.
 
 ## Milestone status
 
-1. **Setup** — done: worktree, Next.js scaffold (static export, Tailwind,
-   TypeScript), `content.ts`, knowledge export script, this file, deploy
-   workflow updated.
-2. **Static site** — mostly done: `globals.css` has the full handoff
-   palette as CSS custom properties (light + `prefers-color-scheme: dark`
-   variants), Fraunces/Figtree loaded via `next/font/google`, every
-   section from `content.ts` rendered on a single page
-   (`src/app/page.tsx`) with `data-guide-id` attributes already in place
-   for the robot to target later. No skill pill tags, no shadowed cards,
-   no gradients, per the master prompt's visual rules. Not done yet:
-   actual visual QA in a real browser (only verified via rendered text +
-   one screenshot so far), responsive check below 768px, nav
-   active-state/scroll-spy.
-3. Robot (port from the lab, recolour to burgundy, bigger face) —
-   not started. `<aside>` placeholder for the robot column already
-   reserved in `page.tsx` (320px, right, sticky full-height, hidden
-   below `lg`).
-4. Tour (GSAP timeline, build-ins, highlighter swipes) — not started.
-5. Voice (Daniel pipeline, visemes, sync) — not started.
-6. Q&A (Cloudflare Worker, streaming, knowledge-base-only answers) —
-   not started.
-7. Polish (SEO, accessibility, performance) — not started.
-8. Static export + deploy + README + TODO report — not started.
+1. **Setup** — done.
+2. **Static site** — done: full palette (light + dark), typography, every
+   content section rendered with `data-guide-id`, Liquid Glass on
+   floating UI, Sri-Lanka mention in the bio.
+3. **Robot** — done: ported, recolored to burgundy, face enlarged, renders
+   live in the toggle panel.
+4. **Tour** — core working: script built from `content.ts`, sequential
+   playback, scroll-into-view + pointAt + highlighter swipe on cueWord,
+   Play/Skip/Replay/Sound controls. Not built: go-deeper chips, visitor-led
+   prompts, returning-visitor localStorage state (superseded by the
+   click-to-open model — see above).
+5. **Voice** — working for the 6 non-placeholder tour lines (Jamie
+   Premium, third person, real Whisper word timing). ElevenLabs backend
+   stubbed but not implemented.
+6. Q&A — not started.
+7. Polish — not started.
+8. Static export + deploy + README + TODO report — static export verified
+   working (`npm run build`); full deploy/README/TODO-report pass not
+   done.

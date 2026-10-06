@@ -121,7 +121,13 @@ It's also why teaching and data work don't feel like separate halves of what I d
 
 **University of Westminster IIT School of Computing and Engineering Scholarship**, University of Westminster (2024) — Awarded for academic excellence and extracurricular involvement.
 
+**Celebrating Innovation at the Computer Science & Engineering Final Year Project Showcase**, University of Westminster (2025) — Featured for showcase innovation.
+
 **Westminster CS Students Receive Prizes**, University of Westminster (2025) — Press coverage of the 3rd Place award for PCOS Care.
+
+**LMD Youth Forum Interview**, LMD (2020) — Interview on youth leadership.
+
+**WIM & NYSC Recognise Youth**, Daily FT (2020) — Women in Management & National Youth Services Council New Generation Awards recognition.
 
 ## Skills
 
@@ -139,7 +145,7 @@ Grade: First Class Honours, specialized in Data Science
 - Awards: 3rd Best Research Project at University Showcase, IEEE ICAHS 2025 Conference Publication in Tunisia.
 - Membership Activities: Rotaract Club, IEEE Club, Sri Lankan Society.
 
-**Certificate in Business Analytics (CIMA)**, CIMA, United Kingdom (Aug 2024)
+**Certificate in Business Accounting (CIMA)**, CIMA, United Kingdom (Aug 2024)
 Financial & Management Accounting
 - Covered Economics, Management and Financial Accounting.
 - Business Law and Corporate Governance.

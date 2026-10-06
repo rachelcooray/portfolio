@@ -1,0 +1,134 @@
+{
+  "words": [
+    {
+      "word": "This",
+      "start": 0,
+      "end": 0.344
+    },
+    {
+      "word": "is",
+      "start": 0.344,
+      "end": 0.516
+    },
+    {
+      "word": "Rachel.",
+      "start": 0.516,
+      "end": 1.118
+    },
+    {
+      "word": "She",
+      "start": 1.118,
+      "end": 1.376
+    },
+    {
+      "word": "applies",
+      "start": 1.376,
+      "end": 1.978
+    },
+    {
+      "word": "AI",
+      "start": 1.978,
+      "end": 2.15
+    },
+    {
+      "word": "to",
+      "start": 2.15,
+      "end": 2.322
+    },
+    {
+      "word": "real",
+      "start": 2.322,
+      "end": 2.666
+    },
+    {
+      "word": "business",
+      "start": 2.666,
+      "end": 3.353
+    },
+    {
+      "word": "problems",
+      "start": 3.353,
+      "end": 4.041
+    },
+    {
+      "word": "—",
+      "start": 4.041,
+      "end": 4.127
+    },
+    {
+      "word": "as",
+      "start": 4.127,
+      "end": 4.299
+    },
+    {
+      "word": "an",
+      "start": 4.299,
+      "end": 4.471
+    },
+    {
+      "word": "analyst",
+      "start": 4.471,
+      "end": 5.073
+    },
+    {
+      "word": "at",
+      "start": 5.073,
+      "end": 5.245
+    },
+    {
+      "word": "OCTAVE,",
+      "start": 5.245,
+      "end": 5.847
+    },
+    {
+      "word": "a",
+      "start": 5.847,
+      "end": 5.933
+    },
+    {
+      "word": "published",
+      "start": 5.933,
+      "end": 6.707
+    },
+    {
+      "word": "researcher,",
+      "start": 6.707,
+      "end": 7.653
+    },
+    {
+      "word": "and",
+      "start": 7.653,
+      "end": 7.911
+    },
+    {
+      "word": "a",
+      "start": 7.911,
+      "end": 7.997
+    },
+    {
+      "word": "technical",
+      "start": 7.997,
+      "end": 8.77
+    },
+    {
+      "word": "co-founder",
+      "start": 8.77,
+      "end": 9.63
+    },
+    {
+      "word": "at",
+      "start": 9.63,
+      "end": 9.802
+    },
+    {
+      "word": "Layer1",
+      "start": 9.802,
+      "end": 10.318
+    },
+    {
+      "word": "Studio.",
+      "start": 10.318,
+      "end": 10.92
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "words": [
+    {
+      "word": "PCOS",
+      "start": 0,
+      "end": 0.66
+    },
+    {
+      "word": "Care",
+      "start": 0.66,
+      "end": 1
+    },
+    {
+      "word": "predicts",
+      "start": 1,
+      "end": 1.36
+    },
+    {
+      "word": "PCOS",
+      "start": 1.36,
+      "end": 2.22
+    },
+    {
+      "word": "risk",
+      "start": 2.22,
+      "end": 2.58
+    },
+    {
+      "word": "early",
+      "start": 2.58,
+      "end": 2.88
+    },
+    {
+      "word": "using",
+      "start": 2.88,
+      "end": 3.22
+    },
+    {
+      "word": "machine",
+      "start": 3.22,
+      "end": 3.5
+    },
+    {
+      "word": "learning,",
+      "start": 3.5,
+      "end": 4.04
+    },
+    {
+      "word": "reaching",
+      "start": 4.4,
+      "end": 4.74
+    },
+    {
+      "word": "over",
+      "start": 4.74,
+      "end": 5.04
+    },
+    {
+      "word": "93%",
+      "start": 5.04,
+      "end": 5.32
+    },
+    {
+      "word": "recall",
+      "start": 5.32,
+      "end": 6.02
+    },
+    {
+      "word": "—",
+      "start": 6.02,
+      "end": 6.48
+    },
+    {
+      "word": "it's",
+      "start": 7.16,
+      "end": 7.3
+    },
+    {
+      "word": "the",
+      "start": 7.3,
+      "end": 7.38
+    },
+    {
+      "word": "project",
+      "start": 7.38,
+      "end": 7.62
+    },
+    {
+      "word": "behind",
+      "start": 7.62,
+      "end": 8.14
+    },
+    {
+      "word": "her",
+      "start": 8.14,
+      "end": 8.4
+    },
+    {
+      "word": "IEEE",
+      "start": 8.4,
+      "end": 8.56
+    },
+    {
+      "word": "paper.",
+      "start": 8.56,
+      "end": 9.32
+    }
+  ]
+}

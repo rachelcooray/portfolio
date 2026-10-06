@@ -53,6 +53,28 @@ const ATTENTIVE_YAW_BIAS = THREE.MathUtils.degToRad(-6);
 // movement synced to real word boundaries, not lip-accurate.
 const VISEME_CYCLE: Viseme[] = ["open", "closed", "mid", "wide", "round", "mid", "closed"];
 
+interface WordTiming {
+  word: string;
+  start: number;
+  end: number;
+  synthetic?: boolean;
+}
+
+// Conversational TTS pace (~170 words/min), used only when a line has no
+// generated audio/timing yet. A fixed per-word slot is coarser than real
+// speech rhythm, but puts subtitles/pointAt/highlighter roughly on beat.
+const SYNTHETIC_SECONDS_PER_WORD = 0.35;
+
+function synthesizeWordTiming(text: string): WordTiming[] {
+  const words = text.split(/\s+/).filter(Boolean);
+  return words.map((word, i) => ({
+    word,
+    start: i * SYNTHETIC_SECONDS_PER_WORD,
+    end: (i + 1) * SYNTHETIC_SECONDS_PER_WORD,
+    synthetic: true,
+  }));
+}
+
 // Framework-agnostic robot guide. Owns its own renderer/scene/camera so it
 // can be dropped onto any <canvas>, wrapped later in a React component.
 export class Guide {
@@ -294,17 +316,34 @@ export class Guide {
   // calls `onWord` at each word boundary so the caller can reveal
   // subtitles and trigger pointAt on the cue word. Resolves when the
   // line's words are done.
-  async say(lineId: string, onWord?: (word: string, index: number) => void): Promise<void> {
+  //
+  // `fallbackText` is used when /audio/{lineId}.json doesn't exist yet
+  // (voice generation is Milestone 5, the tour engine is Milestone 4) —
+  // synthesizes an estimated word timing at a conversational pace and
+  // skips audio playback, so the tour still works end-to-end before every
+  // line has real recorded voice. Once a line's audio/timing exists,
+  // this path is never taken for it.
+  async say(
+    lineId: string,
+    fallbackText: string,
+    onWord?: (word: string, index: number) => void,
+  ): Promise<void> {
     this.sayCancelled = false;
-    const timing: { words: { word: string; start: number; end: number }[] } = await fetch(
-      `/audio/${lineId}.json`,
-    ).then((r) => r.json());
+    const timing: { words: WordTiming[] } = await fetch(`/audio/${lineId}.json`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`no audio/timing for "${lineId}"`);
+        return r.json();
+      })
+      .catch(() => ({ words: synthesizeWordTiming(fallbackText) }));
 
-    this.audioEl.src = `/audio/${lineId}.mp3`;
-    this.audioEl.muted = this.muted;
-    if (!this.muted) {
-      this.audioEl.currentTime = 0;
-      void this.audioEl.play().catch(() => {});
+    const hasRealAudio = timing.words.length > 0 && !timing.words[0].synthetic;
+    if (hasRealAudio) {
+      this.audioEl.src = `/audio/${lineId}.mp3`;
+      this.audioEl.muted = this.muted;
+      if (!this.muted) {
+        this.audioEl.currentTime = 0;
+        void this.audioEl.play().catch(() => {});
+      }
     }
 
     this.setState("talking");
