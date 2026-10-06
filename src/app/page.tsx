@@ -1,4 +1,5 @@
 import { Section } from "@/components/Section";
+import RobotLoader from "@/components/RobotLoader";
 import {
   intro,
   research,
@@ -255,8 +256,10 @@ export default function Home() {
         </footer>
       </main>
 
-      {/* Robot column — reserved, built in Milestone 3 */}
-      <aside className="hidden lg:block w-[320px] shrink-0 border-l border-divider sticky top-0 h-screen" />
+      {/* Robot column */}
+      <aside className="hidden lg:block w-[320px] shrink-0 border-l border-divider sticky top-0 h-screen">
+        <RobotLoader />
+      </aside>
     </div>
   );
 }
