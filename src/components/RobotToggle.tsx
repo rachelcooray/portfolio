@@ -10,7 +10,7 @@ import { TourController } from "@/tour/TourController";
 // ssr:false is allowed here directly.
 const Robot = dynamic(() => import("./Robot"), { ssr: false });
 
-export default function RobotToggle() {
+export default function RobotToggle({ onWatchFilm }: { onWatchFilm?: () => void } = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -162,6 +162,16 @@ export default function RobotToggle() {
               {isMuted ? "🔇 Sound off" : "🔊 Sound on"}
             </button>
           </div>
+          {onWatchFilm && (
+            <div className="px-4 py-2.5 border-t border-divider bg-bg/55">
+              <button
+                onClick={onWatchFilm}
+                className="w-full text-sm text-accent hover:text-accent-hover"
+              >
+                🎬 Watch the film
+              </button>
+            </div>
+          )}
         </div>
       )}
     </>

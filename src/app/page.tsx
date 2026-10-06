@@ -1,5 +1,5 @@
 import { Section } from "@/components/Section";
-import RobotToggle from "@/components/RobotToggle";
+import FilmGate from "@/components/FilmGate";
 import { MOTIFS, motifStyle } from "@/components/Motif";
 import {
   intro,
@@ -25,8 +25,7 @@ const press = recognition.filter((r) => r.kind === "press");
 
 export default function Home() {
   return (
-    <>
-      <RobotToggle />
+    <FilmGate>
       <main>
         {/* Nav */}
         <header className="glass sticky top-0 z-30 pl-6 pr-20 py-5 flex items-center justify-between rounded-none border-x-0 border-t-0">
@@ -444,6 +443,6 @@ export default function Home() {
           </p>
         </footer>
       </main>
-    </>
+    </FilmGate>
   );
 }

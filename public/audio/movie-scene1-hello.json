@@ -1,0 +1,39 @@
+{
+  "words": [
+    {
+      "word": "Hello.",
+      "start": 0,
+      "end": 0.32
+    },
+    {
+      "word": "I've",
+      "start": 0.64,
+      "end": 2.42
+    },
+    {
+      "word": "been",
+      "start": 2.42,
+      "end": 2.52
+    },
+    {
+      "word": "asked",
+      "start": 2.52,
+      "end": 2.72
+    },
+    {
+      "word": "to",
+      "start": 2.72,
+      "end": 2.94
+    },
+    {
+      "word": "introduce",
+      "start": 2.94,
+      "end": 3.28
+    },
+    {
+      "word": "someone.",
+      "start": 3.28,
+      "end": 3.72
+    }
+  ]
+}

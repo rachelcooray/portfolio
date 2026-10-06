@@ -26,6 +26,9 @@ import path from "node:path";
 import os from "node:os";
 import { fileURLToPath } from "node:url";
 import { buildScript, type ScriptLine } from "../src/tour/buildScript";
+import { movieScriptLines, type MovieLine } from "../src/movie/movieScript";
+
+type VoiceLine = Pick<ScriptLine | MovieLine, "id" | "text" | "spokenText">;
 
 const run = promisify(execFile);
 
@@ -55,7 +58,7 @@ const WHISPER_MODEL = env.WHISPER_MODEL || "base.en";
 const AUDIO_DIR = path.join(ROOT, "public/audio");
 const MANIFEST_PATH = path.join(AUDIO_DIR, ".manifest.json");
 
-function hashLine(line: ScriptLine): string {
+function hashLine(line: VoiceLine): string {
   return createHash("sha1")
     .update(
       JSON.stringify({
@@ -120,7 +123,7 @@ function addSentencePauses(text: string): string {
   return text.replace(/\. (?=[A-Z])/g, ". [[slnc 1500]] ");
 }
 
-async function generateLineSystem(line: ScriptLine, tmpDir: string): Promise<void> {
+async function generateLineSystem(line: VoiceLine, tmpDir: string): Promise<void> {
   const { id, text, spokenText } = line;
   const speakText = addSentencePauses(spokenText ?? text);
 
@@ -166,7 +169,10 @@ async function generateLineSystem(line: ScriptLine, tmpDir: string): Promise<voi
 
 async function main() {
   await mkdir(AUDIO_DIR, { recursive: true });
-  const script = buildScript();
+  // Page mode's tour narration + Movie mode's film script share one
+  // pipeline/manifest/cache - both are just "lines with id/text/spokenText"
+  // as far as voice generation is concerned.
+  const script: VoiceLine[] = [...buildScript(), ...movieScriptLines];
   const manifest = await loadManifest();
   const newManifest = { ...manifest };
 

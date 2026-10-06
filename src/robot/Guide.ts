@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import gsap from "gsap";
 import { createPlaceholderRobot, placeholderBoneNames } from "./createPlaceholderRobot";
 import { Face } from "./Face";
 import { RobotFace, type Viseme } from "./RobotFace";
@@ -82,6 +83,14 @@ export class Guide {
   private readonly renderer: THREE.WebGLRenderer;
   private readonly scene: THREE.Scene;
   private readonly camera: THREE.PerspectiveCamera;
+  private readonly baseCameraZ: number;
+  private readonly baseFov: number;
+
+  // Scene lights + their designed intensities, so Movie mode can dim/raise
+  // the whole rig proportionally (setLightLevel) without losing the
+  // key/fill/rim balance designed in setupLighting().
+  private sceneLights: { light: THREE.Light; baseIntensity: number }[] = [];
+  private currentLightLevel = 1;
 
   private root: THREE.Group | null = null;
   private bones: ResolvedBones | null = null;
@@ -106,6 +115,9 @@ export class Guide {
   private muted = true;
   private readonly audioEl = new Audio();
   private sayCancelled = false;
+  private sayPaused = false;
+  private pauseStartedAt = 0;
+  private pausedDurationTotal = 0;
 
   private idleTime = 0;
   private readonly headDriftSeed = Math.random() * 1000;
@@ -132,6 +144,8 @@ export class Guide {
     this.camera = new THREE.PerspectiveCamera(32, 1, 0.1, 20);
     this.camera.position.set(0, 1.05, 4.4);
     this.camera.lookAt(0, 0.9, 0);
+    this.baseCameraZ = this.camera.position.z;
+    this.baseFov = this.camera.fov;
 
     this.setupLighting();
     this.bindEvents();
@@ -155,6 +169,12 @@ export class Guide {
     rim.position.set(2, 2.2, -2.8);
     this.scene.add(rim);
 
+    this.sceneLights.push(
+      { light: key, baseIntensity: key.intensity },
+      { light: fill, baseIntensity: fill.intensity },
+      { light: rim, baseIntensity: rim.intensity },
+    );
+
     // Soft, non-directional sky/ground fill so shadowed areas don't go
     // flat black or read as grey - no environment map (RoomEnvironment's
     // baked panel lights were HDR-bright enough that even a tiny
@@ -163,6 +183,7 @@ export class Guide {
     // lifts shadows warmly without adding specular shine.
     const hemi = new THREE.HemisphereLight(0xfff8ee, 0xd8d0c0, 0.5);
     this.scene.add(hemi);
+    this.sceneLights.push({ light: hemi, baseIntensity: hemi.intensity });
 
     const contactShadow = new THREE.Mesh(
       new THREE.CircleGeometry(0.22, 32),
@@ -352,6 +373,7 @@ export class Guide {
 
     const words = timing.words;
     const startTime = performance.now() / 1000;
+    this.pausedDurationTotal = 0;
 
     await new Promise<void>((resolve) => {
       let wordIndex = 0;
@@ -366,7 +388,11 @@ export class Guide {
           finish();
           return;
         }
-        const elapsed = performance.now() / 1000 - startTime;
+        if (this.sayPaused) {
+          requestAnimationFrame(tick);
+          return;
+        }
+        const elapsed = performance.now() / 1000 - startTime - this.pausedDurationTotal;
 
         while (wordIndex < words.length && words[wordIndex].start <= elapsed) {
           const word = words[wordIndex];
@@ -390,6 +416,91 @@ export class Guide {
   stopSpeaking() {
     this.sayCancelled = true;
     this.audioEl.pause();
+  }
+
+  // Freezes the in-progress say() exactly where it is (word sync + audio),
+  // used by Movie mode's Pause. Does not cancel it - resumeSpeaking()
+  // continues from the same point.
+  pauseSpeaking() {
+    if (this.sayPaused) return;
+    this.sayPaused = true;
+    this.pauseStartedAt = performance.now() / 1000;
+    this.audioEl.pause();
+  }
+
+  resumeSpeaking() {
+    if (!this.sayPaused) return;
+    this.sayPaused = false;
+    this.pausedDurationTotal += performance.now() / 1000 - this.pauseStartedAt;
+    if (!this.muted && this.audioEl.src) void this.audioEl.play().catch(() => {});
+  }
+
+  // --- Movie mode staging primitives -------------------------------------
+  // Minimal, reusable camera/lighting/blocking moves a cinematic sequence
+  // can compose. The model ships only idle/talk/talk2/point/wave clips (no
+  // walk cycle), so "moving" the robot between marks is a plain position
+  // tween rather than a walked transition - good enough for a stage-play
+  // feel, not literal footsteps.
+
+  moveRootX(x: number, duration = 1): Promise<void> {
+    return new Promise((resolve) => {
+      if (!this.root || this.reducedMotion) {
+        if (this.root) this.root.position.x = x;
+        resolve();
+        return;
+      }
+      gsap.to(this.root.position, { x, duration, ease: "power2.inOut", onComplete: resolve });
+    });
+  }
+
+  // Tweens FOV down/up to fake a camera push-in/pull-back without having to
+  // re-run lookAt() every frame (simpler than animating position+target).
+  pushCamera(fovDelta: number, duration = 1.4): Promise<void> {
+    return new Promise((resolve) => {
+      const targetFov = this.baseFov - fovDelta;
+      if (this.reducedMotion) {
+        this.camera.fov = targetFov;
+        this.camera.updateProjectionMatrix();
+        resolve();
+        return;
+      }
+      gsap.to(this.camera, {
+        fov: targetFov,
+        duration,
+        ease: "power2.inOut",
+        onUpdate: () => this.camera.updateProjectionMatrix(),
+        onComplete: resolve,
+      });
+    });
+  }
+
+  resetCamera(duration = 1.4): Promise<void> {
+    return this.pushCamera(0, duration);
+  }
+
+  // Scales key/fill/rim/hemi intensities together, proportionally to their
+  // designed balance, so "lights down" doesn't flatten the modelling into a
+  // single wash. level 0 = black stage, 1 = normal.
+  setLightLevel(level: number, duration = 1): Promise<void> {
+    return new Promise((resolve) => {
+      if (this.reducedMotion) {
+        this.currentLightLevel = level;
+        for (const { light, baseIntensity } of this.sceneLights) light.intensity = baseIntensity * level;
+        resolve();
+        return;
+      }
+      const proxy = { t: this.currentLightLevel };
+      this.currentLightLevel = level;
+      gsap.to(proxy, {
+        t: level,
+        duration,
+        ease: "power1.inOut",
+        onUpdate: () => {
+          for (const { light, baseIntensity } of this.sceneLights) light.intensity = baseIntensity * proxy.t;
+        },
+        onComplete: resolve,
+      });
+    });
   }
 
   // Debug-only: steps the visor's mouth through each viseme shape, then a
