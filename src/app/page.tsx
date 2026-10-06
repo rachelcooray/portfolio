@@ -1,5 +1,6 @@
 import { Section } from "@/components/Section";
 import RobotToggle from "@/components/RobotToggle";
+import { MOTIFS, motifStyle } from "@/components/Motif";
 import {
   intro,
   research,
@@ -28,11 +29,14 @@ export default function Home() {
       <RobotToggle />
       <main>
         {/* Nav */}
-        <header className="glass sticky top-0 z-30 px-6 py-5 flex items-center justify-between rounded-none border-x-0 border-t-0">
-          <span className="font-heading italic text-lg font-semibold">
+        <header className="glass sticky top-0 z-30 pl-6 pr-20 py-5 flex items-center justify-between rounded-none border-x-0 border-t-0">
+          <span className="font-heading italic text-lg font-semibold shrink-0">
             {intro.name}
           </span>
-          <nav className="hidden xl:flex gap-5 text-sm text-text-muted overflow-x-auto">
+          <nav
+            className="flex gap-4 md:gap-5 text-sm text-text-muted overflow-x-auto ml-4"
+            style={{ scrollbarWidth: "none" }}
+          >
             <a href="#research" className="hover:text-accent whitespace-nowrap">Research</a>
             <a href="#education" className="hover:text-accent whitespace-nowrap">Education</a>
             <a href="#experience" className="hover:text-accent whitespace-nowrap">Experience</a>
@@ -49,11 +53,18 @@ export default function Home() {
 
         {/* Hero / intro */}
         <Section id="intro">
-          <img
-            src={intro.photo}
-            alt={intro.name}
-            className="w-28 h-28 rounded-full object-cover mb-6"
-          />
+          <div className="relative w-40 h-40 mb-6 flex items-center justify-center">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 rounded-full"
+              style={motifStyle(MOTIFS.wreath, { width: 160 }, "none")}
+            />
+            <img
+              src={intro.photo}
+              alt={intro.name}
+              className="relative w-28 h-28 rounded-full object-cover"
+            />
+          </div>
           <h1 className="font-heading italic text-[40px] md:text-[52px] font-semibold leading-[1.05] mb-4">
             {intro.name}
           </h1>
