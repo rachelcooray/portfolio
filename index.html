@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Robot Guide Lab</title>
+  </head>
+  <body>
+    <div id="app">
+      <main class="content">
+        <h1 class="heading" data-target="heading">Rachel Cooray</h1>
+
+        <div class="card" data-target="card">
+          <p>PCOS Care, IEEE ICAHS 2025, Tunisia</p>
+        </div>
+
+        <button class="btn" data-target="button">Get in touch</button>
+      </main>
+
+      <aside class="robot-column">
+        <div class="controls">
+          <button id="play-btn" type="button">Play test</button>
+          <button id="skip-btn" type="button">Skip</button>
+          <button id="speaker-btn" type="button" aria-pressed="false" aria-label="Toggle audio">
+            🔇
+          </button>
+        </div>
+        <canvas id="robot-canvas"></canvas>
+      </aside>
+
+      <div id="subtitle-bar">
+        <span id="subtitle-text"></span>
+      </div>
+
+      <div id="debug-panel" hidden></div>
+
+      <div id="sr-live" class="sr-only" aria-live="polite"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

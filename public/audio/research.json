@@ -1,0 +1,69 @@
+{
+  "words": [
+    {
+      "word": "Her",
+      "start": 0,
+      "end": 0.1
+    },
+    {
+      "word": "research",
+      "start": 0.1,
+      "end": 0.4
+    },
+    {
+      "word": "on",
+      "start": 0.4,
+      "end": 0.78
+    },
+    {
+      "word": "early",
+      "start": 0.78,
+      "end": 1.02
+    },
+    {
+      "word": "risk",
+      "start": 1.02,
+      "end": 1.34
+    },
+    {
+      "word": "prediction",
+      "start": 1.34,
+      "end": 1.78
+    },
+    {
+      "word": "was",
+      "start": 1.78,
+      "end": 2.18
+    },
+    {
+      "word": "published",
+      "start": 2.18,
+      "end": 2.56
+    },
+    {
+      "word": "at",
+      "start": 2.56,
+      "end": 2.8
+    },
+    {
+      "word": "IEEE",
+      "start": 2.8,
+      "end": 3.02
+    },
+    {
+      "word": "ICAHS",
+      "start": 3.02,
+      "end": 4.5
+    },
+    {
+      "word": "in",
+      "start": 4.5,
+      "end": 4.76
+    },
+    {
+      "word": "Tunisia.",
+      "start": 4.76,
+      "end": 4.98
+    }
+  ]
+}

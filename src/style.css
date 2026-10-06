@@ -1,0 +1,168 @@
+:root {
+  --paper: #f7f3ea;
+  --ink: #1b2a6b;
+  --muted: #5a6380;
+  --rule: #ded7c6;
+  --highlight: #f2d45c;
+  --robot-column-width: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+
+#app {
+  position: relative;
+  min-height: 100vh;
+  /* Reserves the robot column's width for ALL normal-flow content, so
+     .content (and the subtitle bar, which mirrors this same math) never
+     sits under it, at any viewport width. */
+  padding-right: var(--robot-column-width);
+}
+
+.content {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 120px 24px 160px;
+}
+
+.heading {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin: 0 0 12px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.btn {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--paper);
+  background: var(--ink);
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  cursor: pointer;
+}
+
+.robot-column {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: var(--robot-column-width);
+  height: 100vh;
+}
+
+#robot-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* Lives in the robot column, not over .content, so it never overlaps
+   page text at any viewport width. */
+.controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.controls button {
+  font-size: 0.9rem;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(27, 42, 107, 0.2);
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.controls button[aria-pressed="true"] {
+  background: var(--highlight);
+  border-color: var(--highlight);
+}
+
+#subtitle-bar {
+  position: fixed;
+  left: 0;
+  right: var(--robot-column-width);
+  bottom: 0;
+  min-height: 56px;
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 1.05rem;
+  z-index: 5;
+}
+
+#debug-panel {
+  position: fixed;
+  bottom: 64px;
+  left: 16px;
+  background: rgba(27, 42, 107, 0.9);
+  color: var(--paper);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 10;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* Highlighter swipe: a yellow band sweeps in behind the element's text
+   when the guide points at it. The clip-path keeps the edge slightly
+   irregular rather than a clean rectangle. */
+.guide-highlight {
+  position: relative;
+}
+
+.guide-highlight::before {
+  content: "";
+  position: absolute;
+  inset: -4px -6px;
+  background: var(--highlight);
+  z-index: -1;
+  clip-path: polygon(0 8%, 100% 0, 98% 94%, 2% 100%);
+  animation: guide-highlight-swipe 400ms ease-out;
+}
+
+@keyframes guide-highlight-swipe {
+  from {
+    clip-path: polygon(0 8%, 0 0, 0 94%, 0 100%);
+  }
+  to {
+    clip-path: polygon(0 8%, 100% 0, 98% 94%, 2% 100%);
+  }
+}

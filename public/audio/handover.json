@@ -1,0 +1,54 @@
+{
+  "words": [
+    {
+      "word": "Ask",
+      "start": 0,
+      "end": 0.2
+    },
+    {
+      "word": "me",
+      "start": 0.2,
+      "end": 0.34
+    },
+    {
+      "word": "anything",
+      "start": 0.34,
+      "end": 0.62
+    },
+    {
+      "word": "about",
+      "start": 0.62,
+      "end": 0.98
+    },
+    {
+      "word": "her",
+      "start": 0.98,
+      "end": 1.22
+    },
+    {
+      "word": "work,",
+      "start": 1.22,
+      "end": 1.5
+    },
+    {
+      "word": "or",
+      "start": 1.74,
+      "end": 1.92
+    },
+    {
+      "word": "get",
+      "start": 1.92,
+      "end": 2.1
+    },
+    {
+      "word": "in",
+      "start": 2.1,
+      "end": 2.3
+    },
+    {
+      "word": "touch.",
+      "start": 2.3,
+      "end": 2.52
+    }
+  ]
+}
