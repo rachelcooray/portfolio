@@ -146,11 +146,12 @@ body {
   opacity: 0.35;
 }
 .bg-color-field span:nth-child(1) {
-  width: 60vw;
-  height: 60vw;
+  width: 50vw;
+  height: 50vw;
   background: var(--accent);
   top: -15vw;
   left: -10vw;
+  opacity: 0.14;
   animation: drift-a 50s ease-in-out infinite alternate;
 }
 .bg-color-field span:nth-child(2) {
