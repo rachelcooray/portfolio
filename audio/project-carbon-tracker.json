@@ -1,0 +1,119 @@
+{
+  "words": [
+    {
+      "word": "She",
+      "start": 0,
+      "end": 0.196
+    },
+    {
+      "word": "also",
+      "start": 0.196,
+      "end": 0.457
+    },
+    {
+      "word": "built",
+      "start": 0.457,
+      "end": 0.784
+    },
+    {
+      "word": "a",
+      "start": 0.784,
+      "end": 0.849
+    },
+    {
+      "word": "Carbon",
+      "start": 0.849,
+      "end": 1.242
+    },
+    {
+      "word": "Footprint",
+      "start": 1.242,
+      "end": 1.83
+    },
+    {
+      "word": "Tracker",
+      "start": 1.83,
+      "end": 2.287
+    },
+    {
+      "word": "—",
+      "start": 2.287,
+      "end": 2.352
+    },
+    {
+      "word": "interactive",
+      "start": 2.352,
+      "end": 3.071
+    },
+    {
+      "word": "dashboards",
+      "start": 3.071,
+      "end": 3.725
+    },
+    {
+      "word": "that",
+      "start": 3.725,
+      "end": 3.986
+    },
+    {
+      "word": "turn",
+      "start": 3.986,
+      "end": 4.247
+    },
+    {
+      "word": "everyday",
+      "start": 4.247,
+      "end": 4.77
+    },
+    {
+      "word": "activity",
+      "start": 4.77,
+      "end": 5.293
+    },
+    {
+      "word": "into",
+      "start": 5.293,
+      "end": 5.554
+    },
+    {
+      "word": "an",
+      "start": 5.554,
+      "end": 5.685
+    },
+    {
+      "word": "emissions",
+      "start": 5.685,
+      "end": 6.273
+    },
+    {
+      "word": "estimate,",
+      "start": 6.273,
+      "end": 6.861
+    },
+    {
+      "word": "with",
+      "start": 6.861,
+      "end": 7.122
+    },
+    {
+      "word": "suggestions",
+      "start": 7.122,
+      "end": 7.841
+    },
+    {
+      "word": "to",
+      "start": 7.841,
+      "end": 7.972
+    },
+    {
+      "word": "reduce",
+      "start": 7.972,
+      "end": 8.364
+    },
+    {
+      "word": "it.",
+      "start": 8.364,
+      "end": 8.56
+    }
+  ]
+}
