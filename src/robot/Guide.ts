@@ -91,6 +91,7 @@ export class Guide {
   // key/fill/rim balance designed in setupLighting().
   private sceneLights: { light: THREE.Light; baseIntensity: number }[] = [];
   private currentLightLevel = 1;
+  private readonly lightLevelProxy = { t: 1 };
 
   private root: THREE.Group | null = null;
   private bones: ResolvedBones | null = null;
@@ -310,8 +311,12 @@ export class Guide {
   // real two-bone IK toward the element's actual screen position (that's
   // the deferred Milestone 2 work) - it proves the *timing* (the gesture
   // lands on the right word) rather than true spatial aiming. Also
-  // triggers the highlighter swipe on the target element.
-  pointAt(element: HTMLElement) {
+  // triggers the highlighter swipe on the target element by default -
+  // pass `{ highlight: false }` for targets it isn't designed for (it's a
+  // thin underline sized for a line of text; on a whole card it reads as
+  // a big flat colour wipe instead of a highlight). Movie mode's card
+  // reveals use their own GSAP-driven cue instead.
+  pointAt(element: HTMLElement, options: { highlight?: boolean } = {}) {
     this.setState("pointing");
     const pointAction = this.actions.point;
     if (pointAction) {
@@ -327,6 +332,7 @@ export class Guide {
       }
     }
 
+    if (options.highlight === false) return;
     element.classList.add("guide-highlight");
     window.setTimeout(() => element.classList.remove("guide-highlight"), 1200);
   }
@@ -442,6 +448,14 @@ export class Guide {
   // tween rather than a walked transition - good enough for a stage-play
   // feel, not literal footsteps.
 
+  // Each of these tweens a stable, reusable target (never a fresh object
+  // literal per call) specifically so a new call can gsap.killTweensOf()
+  // it first - without that, an interrupted call (Skip, a chapter-bar
+  // jump, Pause/resume racing a scene change) leaves its old tween still
+  // running and fighting the new one for the same property every frame,
+  // since cancelling MovieController's own async chain doesn't stop
+  // already-started GSAP tweens.
+
   moveRootX(x: number, duration = 1): Promise<void> {
     return new Promise((resolve) => {
       if (!this.root || this.reducedMotion) {
@@ -449,6 +463,7 @@ export class Guide {
         resolve();
         return;
       }
+      gsap.killTweensOf(this.root.position);
       gsap.to(this.root.position, { x, duration, ease: "power2.inOut", onComplete: resolve });
     });
   }
@@ -464,6 +479,7 @@ export class Guide {
         resolve();
         return;
       }
+      gsap.killTweensOf(this.camera);
       gsap.to(this.camera, {
         fov: targetFov,
         duration,
@@ -478,6 +494,21 @@ export class Guide {
     return this.pushCamera(0, duration);
   }
 
+  // Synchronous, tween-free light set - no gsap.to, no promise, no
+  // dependency on tween-kill timing. Two setLightLevel() calls fired back
+  // to back in the same synchronous block (e.g. a scene's own instant
+  // reset immediately followed by its fade-up) race: the second call's
+  // killTweensOf can cancel the first tween before its duration:0 update
+  // has ever run a frame, silently turning the pair into a no-op. Use
+  // this for anywhere lighting correctness matters more than animating -
+  // currently just the hard reset on scene entry/jump.
+  forceLightLevel(level: number) {
+    gsap.killTweensOf(this.lightLevelProxy);
+    this.currentLightLevel = level;
+    this.lightLevelProxy.t = level;
+    for (const { light, baseIntensity } of this.sceneLights) light.intensity = baseIntensity * level;
+  }
+
   // Scales key/fill/rim/hemi intensities together, proportionally to their
   // designed balance, so "lights down" doesn't flatten the modelling into a
   // single wash. level 0 = black stage, 1 = normal.
@@ -485,18 +516,20 @@ export class Guide {
     return new Promise((resolve) => {
       if (this.reducedMotion) {
         this.currentLightLevel = level;
+        gsap.killTweensOf(this.lightLevelProxy);
+        this.lightLevelProxy.t = level;
         for (const { light, baseIntensity } of this.sceneLights) light.intensity = baseIntensity * level;
         resolve();
         return;
       }
-      const proxy = { t: this.currentLightLevel };
+      gsap.killTweensOf(this.lightLevelProxy);
       this.currentLightLevel = level;
-      gsap.to(proxy, {
+      gsap.to(this.lightLevelProxy, {
         t: level,
         duration,
         ease: "power1.inOut",
         onUpdate: () => {
-          for (const { light, baseIntensity } of this.sceneLights) light.intensity = baseIntensity * proxy.t;
+          for (const { light, baseIntensity } of this.sceneLights) light.intensity = baseIntensity * this.lightLevelProxy.t;
         },
         onComplete: resolve,
       });
@@ -517,6 +550,7 @@ export class Guide {
     window.removeEventListener("mousemove", this.onMouseMove);
     window.removeEventListener("resize", this.onResize);
     document.removeEventListener("visibilitychange", this.onVisibilityChange);
+    this.resizeObserver?.disconnect();
     this.mixer?.stopAllAction();
     this.face?.dispose();
     this.robotFace?.dispose();
@@ -534,10 +568,19 @@ export class Guide {
     this.isVisible = document.visibilityState === "visible";
   };
 
+  private resizeObserver: ResizeObserver | null = null;
+
   private bindEvents() {
     window.addEventListener("mousemove", this.onMouseMove);
     window.addEventListener("resize", this.onResize);
     document.addEventListener("visibilitychange", this.onVisibilityChange);
+    // Window resize alone misses CSS-driven layout changes to the canvas's
+    // own box (e.g. Movie mode docking it from full-bleed to a side
+    // column) - ResizeObserver catches those too.
+    if (typeof ResizeObserver !== "undefined") {
+      this.resizeObserver = new ResizeObserver(() => this.resize());
+      this.resizeObserver.observe(this.canvas);
+    }
   }
 
   private resize() {

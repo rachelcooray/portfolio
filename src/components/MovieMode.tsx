@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import type { Guide } from "@/robot/Guide";
 import { MovieController, type MovieElements } from "@/movie/MovieController";
-import { impactStats, sceneLabels, SCENE_COUNT_BUILT } from "@/movie/movieScript";
+import { impactStats, researchCard, octaveSteps, sceneLabels, SCENE_COUNT_BUILT } from "@/movie/movieScript";
 import { intro } from "@/content/content";
 
 const Robot = dynamic(() => import("./Robot"), { ssr: false });
@@ -21,6 +21,11 @@ function TitleChars({ text }: { text: string }) {
   );
 }
 
+// Opaque card style for Movie mode content (the brief: "cards are opaque,
+// no glass, in film mode" - the frosted/translucent look that works for
+// Page mode's floating UI reads as a glitch over the 3D robot here).
+const CARD_CLASS = "rounded-2xl px-5 py-4 bg-bg border border-divider shadow-lg";
+
 export default function MovieMode({
   startScene,
   startMuted,
@@ -35,17 +40,31 @@ export default function MovieMode({
   const [isMuted, setIsMuted] = useState(startMuted);
   const [loading, setLoading] = useState(true);
 
+  // Scenes 0-1 (cold open, title card) are full-bleed with the robot
+  // centre stage - nothing else competes for the frame. From scene 2
+  // (impact numbers) on, there's real content to show alongside the
+  // robot, so the stage docks to a fixed two-column composition: robot
+  // left, content right, never overlapping.
+  const docked = sceneIndex >= 2;
+
   const guideRef = useRef<Guide | null>(null);
   const controllerRef = useRef<MovieController | null>(null);
 
   const scrimRef = useRef<HTMLDivElement>(null);
   const letterboxTopRef = useRef<HTMLDivElement>(null);
   const letterboxBottomRef = useRef<HTMLDivElement>(null);
+  const titleEnvelopeRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const taglineRef = useRef<HTMLParagraphElement>(null);
   const captionRef = useRef<HTMLDivElement>(null);
   const srLiveRef = useRef<HTMLDivElement>(null);
+  const statGridRef = useRef<HTMLDivElement>(null);
   const statCardRefs = useRef<{ card: HTMLDivElement; valueEl: HTMLDivElement }[]>([]);
+  const researchCardRef = useRef<HTMLDivElement>(null);
+  const researchVenueRef = useRef<HTMLSpanElement>(null);
+  const awardBadgeRef = useRef<HTMLDivElement>(null);
+  const octaveGroupRef = useRef<HTMLDivElement>(null);
+  const octaveStepRefs = useRef<HTMLDivElement[]>([]);
 
   const finish = useCallback(() => {
     setIsPlaying(false);
@@ -61,11 +80,18 @@ export default function MovieMode({
         scrim: scrimRef.current!,
         letterboxTop: letterboxTopRef.current!,
         letterboxBottom: letterboxBottomRef.current!,
+        titleEnvelope: titleEnvelopeRef.current!,
         titleEl: titleRef.current!,
         taglineEl: taglineRef.current!,
         captionEl: captionRef.current!,
         srLiveEl: srLiveRef.current!,
+        statGrid: statGridRef.current!,
         statCards: statCardRefs.current,
+        researchCard: researchCardRef.current!,
+        researchVenue: researchVenueRef.current!,
+        awardBadge: awardBadgeRef.current!,
+        octaveGroup: octaveGroupRef.current!,
+        octaveSteps: octaveStepRefs.current,
       };
       const controller = new MovieController({
         guide,
@@ -141,8 +167,100 @@ export default function MovieMode({
 
   return (
     <div className="fixed inset-0 z-[100] bg-bg overflow-hidden" role="dialog" aria-label="Introduction film">
-      <div className="absolute inset-0">
-        <Robot onGuideReady={handleGuideReady} />
+      {/* Stage: always the same two nodes in the same order (so the Robot
+          component never unmounts/reloads) - only sizing/position changes
+          between the full-bleed and docked compositions. */}
+      <div className="absolute inset-0 flex flex-col md:flex-row">
+        <div
+          className={
+            docked
+              ? "relative w-full h-[42vh] md:h-full md:w-[36%] shrink-0 flex items-center justify-center transition-[width,height] duration-500"
+              : "relative w-full h-full flex items-center justify-center transition-[width,height] duration-500"
+          }
+        >
+          <Robot onGuideReady={handleGuideReady} />
+        </div>
+        <div
+          className={
+            docked
+              ? "relative flex-1 flex items-center justify-center px-6 md:px-14 min-h-0"
+              : "relative w-0 h-0 overflow-hidden"
+          }
+        >
+          {/* Scene 3: impact numbers, 2x2 grid */}
+          <div ref={statGridRef} className="grid grid-cols-2 gap-4 w-full max-w-md" style={{ opacity: 0 }}>
+            {impactStats.map((stat, i) => (
+              <div
+                key={stat.id}
+                ref={(el) => {
+                  if (el) {
+                    const valueEl = el.querySelector<HTMLDivElement>("[data-value]")!;
+                    statCardRefs.current[i] = { card: el, valueEl };
+                  }
+                }}
+                className={`${CARD_CLASS} text-center`}
+                style={{ opacity: 0 }}
+              >
+                <div data-value className="font-heading text-2xl sm:text-3xl font-semibold text-accent">
+                  {/* filled by MovieController's count-up */}
+                </div>
+                <div className="text-xs sm:text-sm text-text-muted mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Scene 4: research card. Centering transform lives on this
+              non-animated wrapper, not the ref'd element GSAP moves -
+              GSAP's x/y/scale tweens take over the whole `transform`
+              property, which would otherwise clobber a static centering
+              offset set on the same element. */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md px-6">
+            <div ref={researchCardRef} className={`${CARD_CLASS} text-center relative mx-auto`} style={{ opacity: 0 }}>
+              <div className="font-heading text-lg sm:text-xl font-semibold text-text leading-snug">
+                {researchCard.title}
+              </div>
+              <div className="mt-2 text-sm text-text-muted">
+                <span ref={researchVenueRef} className="rounded px-1">
+                  {researchCard.venue}
+                </span>
+              </div>
+              <div
+                ref={awardBadgeRef}
+                className="absolute -top-4 -right-4 w-14 h-14 rounded-full bg-accent text-white flex items-center justify-center font-heading font-semibold text-sm shadow-lg"
+                style={{ opacity: 0, transform: "scale(0) rotate(-15deg)" }}
+              >
+                3rd
+              </div>
+            </div>
+          </div>
+
+          {/* Scene 5: OCTAVE role path - same wrapper/ref split as above. */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+            <div ref={octaveGroupRef} style={{ opacity: 0 }}>
+              <div className="text-sm font-semibold text-accent uppercase tracking-wide mb-5">OCTAVE</div>
+              <div className="relative flex items-end gap-4">
+                <svg
+                  className="absolute inset-0 w-full h-full overflow-visible pointer-events-none"
+                  aria-hidden="true"
+                >
+                  <line x1="10%" y1="85%" x2="90%" y2="15%" stroke="var(--accent)" strokeWidth="2" strokeDasharray="4 5" opacity="0.5" />
+                </svg>
+                {octaveSteps.map((step, i) => (
+                  <div
+                    key={step.id}
+                    ref={(el) => {
+                      if (el) octaveStepRefs.current[i] = el;
+                    }}
+                    className={`${CARD_CLASS} font-heading font-semibold text-text relative`}
+                    style={{ opacity: 0, marginBottom: `${i * 28}px` }}
+                  >
+                    {step.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Cold-open scrim */}
@@ -162,8 +280,11 @@ export default function MovieMode({
         aria-hidden="true"
       />
 
-      {/* Title card */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none">
+      {/* Title card - full-bleed, scenes 0-1 only */}
+      <div
+        ref={titleEnvelopeRef}
+        className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+      >
         <h1
           ref={titleRef}
           className="font-heading italic text-text font-semibold leading-none whitespace-nowrap"
@@ -176,32 +297,10 @@ export default function MovieMode({
         </p>
       </div>
 
-      {/* Scene 3 stat cards */}
-      <div className="absolute inset-x-0 bottom-[22vh] flex flex-wrap justify-center gap-4 px-6 pointer-events-none">
-        {impactStats.map((stat, i) => (
-          <div
-            key={stat.id}
-            ref={(el) => {
-              if (el) {
-                const valueEl = el.querySelector<HTMLDivElement>("[data-value]")!;
-                statCardRefs.current[i] = { card: el, valueEl };
-              }
-            }}
-            className="glass rounded-2xl px-5 py-4 min-w-[140px] text-center"
-            style={{ opacity: 0, transform: `rotate(${(i - 1.5) * 4}deg)` }}
-          >
-            <div data-value className="font-heading text-2xl sm:text-3xl font-semibold text-accent">
-              {/* filled by MovieController's count-up */}
-            </div>
-            <div className="text-xs sm:text-sm text-text-muted mt-1">{stat.label}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Captions */}
+      {/* Captions - film-style, short, centred at the bottom */}
       <div
         ref={captionRef}
-        className="absolute bottom-[12vh] inset-x-0 text-center text-text text-base sm:text-lg px-10 min-h-[1.5em]"
+        className="absolute bottom-[8vh] inset-x-0 text-center text-text text-base sm:text-lg px-10 min-h-[1.5em]"
       />
       <div ref={srLiveRef} className="sr-only" role="status" aria-live="polite" />
 

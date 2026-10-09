@@ -13,47 +13,47 @@
     {
       "word": "Rachel",
       "start": 0.36,
-      "end": 0.78
+      "end": 0.6
     },
     {
       "word": "Cooray.",
-      "start": 0.78,
-      "end": 1.06
+      "start": 0.6,
+      "end": 1.28
     },
     {
       "word": "She",
-      "start": 2.76,
-      "end": 3.16
+      "start": 2.8,
+      "end": 3.2
     },
     {
       "word": "applies",
-      "start": 3.16,
-      "end": 3.4
+      "start": 3.2,
+      "end": 3.44
     },
     {
       "word": "AI",
-      "start": 3.4,
-      "end": 3.84
+      "start": 3.44,
+      "end": 3.88
     },
     {
       "word": "to",
-      "start": 3.84,
-      "end": 4.22
+      "start": 3.88,
+      "end": 4.26
     },
     {
       "word": "real",
-      "start": 4.22,
-      "end": 4.4
+      "start": 4.26,
+      "end": 4.44
     },
     {
       "word": "business",
-      "start": 4.4,
-      "end": 4.8
+      "start": 4.44,
+      "end": 4.84
     },
     {
       "word": "problems.",
-      "start": 4.8,
-      "end": 5.22
+      "start": 4.84,
+      "end": 5.24
     }
   ]
 }
