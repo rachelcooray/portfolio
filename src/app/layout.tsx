@@ -18,7 +18,7 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: "Rachel Cooray | AI Analyst and Researcher",
   description:
-    "Rachel Cooray — Data Analyst and AI Analyst applying machine learning to real business problems. Published IEEE researcher, technical co-founder of Layer1 Studio.",
+    "Rachel Cooray is an Analyst for Data and AI at OCTAVE, John Keells Holdings, and a published IEEE researcher building AI and analytics that people can understand and act on.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

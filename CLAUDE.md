@@ -106,12 +106,30 @@ macOS `say` for voice generation.
   the glass has something to tint from — without it the panels just look
   grey. Respects `prefers-reduced-transparency` (solid fallback) and
   `prefers-reduced-motion` (field stops drifting).
-- **Content breadth**: the page shows everything, not a curated subset —
-  Rachel's explicit instruction ("put it all now, I'll tell you if it's
-  too much"). All projects, all OCTAVE roles, all education, skills,
-  volunteering, retail/CS experience are rendered on the page. The tour
-  narration (`tourOrder`) stays a curated ~6-line highlights reel — that's
-  a separate, narrower concern from what's visible on the page.
+- **Content breadth**: originally "show everything" (Rachel's early
+  instruction). Superseded 7 Oct 2026 by her "Page Copy, Top to Bottom"
+  doc, which restructures and trims the page deliberately — see "Page
+  copy source" below. The tour narration (`tourOrder`) stays its own
+  separate, narrower ~6-line highlights reel either way.
+- **Page copy source**: `src/content/content.ts` and `src/app/page.tsx`
+  follow Rachel's "Page Copy, Top to Bottom" doc (7 Oct 2026) section by
+  section - nav (Research · Work · Projects · Ideas · Beyond Work ·
+  Contact, in that order - note this differs from the page's own visual
+  section order, which the doc also specifies and which page.tsx follows:
+  intro → impact strip → Ideas → Research → Work → Projects → Talks →
+  Recognition → Education → Beyond work → Contact), hero copy, the new
+  Impact Strip, Research's new description/award/journal bullets, Work's
+  OCTAVE/Layer1 rewrite, Projects' featured/"More projects" split,
+  the new Talks section, Recognition's merged awards+press list,
+  Education trimmed, Beyond Work's teaching/volunteering/swimming/writing
+  consolidation, and a new Contact paragraph. Ask about Rachel is hidden
+  entirely (not just disabled) per the doc, until the Q&A backend exists.
+  Case study pages (section 12 of the doc: Distributor margin
+  optimisation, PCOS Care, A Layer1 Studio delivery) are **not built** -
+  almost every field in them is bracketed/unconfirmed in the doc itself,
+  and several sections link to "the case study" (e.g. Research, the
+  OCTAVE intern bullet) before those pages exist; those links are
+  currently omitted from the page rather than pointing nowhere.
 - **Voice**: macOS `say -v "Jamie (Premium)"` + Whisper for word timing.
   Narration is **third person** ("She applies AI...", not "I apply AI...")
   since Jamie is a narrator voice, not Rachel's own. "IEEE" has a
@@ -127,34 +145,54 @@ macOS `say` for voice generation.
 
 ## Open items / TODO
 
-- `[PLACEHOLDER: APPROVED OCTAVE WORDING]` — the current-role ("Analyst,
-  Data and AI") detail bullet and tour narration need approved public
-  wording. The role card itself still renders (title/dates/company are
-  real) — just the bullet and tour line are withheld. Don't invent.
-- `project-finance-explainer` — named in the master prompt with no other
-  details. Hidden from the page (filtered out, not deleted) until it has
-  a real name/description/tech/narration.
+From Rachel's "Page Copy, Top to Bottom" doc's own checklist (7 Oct 2026),
+plus implementation notes:
+
+- **OCTAVE approval is the big one.** The Analyst role's two detail
+  bullets (four-use-case lead + "run each end to end") are her own
+  drafted wording, not invented - but her doc's checklist still lists
+  "[Confirm OCTAVE is comfortable with this level of detail]" as
+  unresolved. Built and committed on `redesign`, but **held back from
+  `main`/deploy** until she confirms. Same caveat covers the Associate
+  role's one-line bullet (doc wants different, approved wording; current
+  bullet is the older already-public text, kept rather than shown blank)
+  and the margin case study / any AI News Shorts mention.
+- IEEE Xplore/DOI link for the PCOS Care paper - not added, no link
+  supplied yet.
+- Exact MSIT Journal status (selected / accepted / in press / under
+  review) - doc presents this as an open choice; kept the existing
+  "Selected for..." wording (already public before this doc, not newly
+  invented) rather than guessing between the other two options.
+- FICTA 2027 paper ("Do LLM sales agents game incentive schemes...") -
+  doc marks it optional, publish only once comfortable; not added.
+- Student Support Worker / Class Teacher one-liners - doc wants new,
+  simpler versions; kept the existing (longer, already-public) detail
+  bullets rather than removing content pending her replacement text.
+- Gym platform and food storefront project examples (Layer1 "Examples")
+  - both bracketed "[Confirm this is Layer1 client work]" in the doc;
+  omitted entirely, not shown.
+- Link to the specific JKH swimming LinkedIn post, full LMD article
+  title, fiction/pen-name link, Sketchfab model URL, Google Scholar
+  profile - all still placeholder/missing.
 - `[PLACEHOLDER: link to her fiction/pen-name work]`,
-  `[PLACEHOLDER: Sketchfab model URL]` — real links needed (both footer
-  lines are hidden from render until filled in). LinkedIn/GitHub/Email
-  are now real.
+  `[PLACEHOLDER: Sketchfab model URL]` — footer lines hidden from render
+  until filled in.
 - No image exists yet for the Microsoft EMBRACE hackathon project.
 - No teaching-specific CV variant exists (only one CV PDF).
-- Narration drafted by me, not yet approved: Layer1 Studio line, Carbon
-  Footprint Tracker one-liner. Research/OCTAVE/EMBRACE narration is close
-  to verbatim from already-approved copy.
+- Case study pages (doc section 12) not built - see "Page copy source"
+  above.
 - Rachel mentioned having Sri Lankan-motif decorative design assets to
-  use "where appropriate" — not yet added, waiting on the actual file(s)
-  (received only as an inline chat image, no tool can save that to disk;
-  asked her to save it to `public/images/` directly).
-- Q&A section is UI-only (disabled buttons) — Milestone 6, not started.
+  use "where appropriate" — the sheet (`public/images/sl-motifs.png`) is
+  in place and used once (circular wreath around the hero photo, see
+  `src/components/Motif.tsx`); other placements were tried and reverted
+  (didn't read well cropped onto cards/strips).
+- Q&A section is UI-only and now **hidden entirely** (was disabled
+  buttons, per the new copy doc: don't show until the backend is live).
   Cloudflare Worker, bundled knowledge.md, rate limiting all still to do.
 - SEO/OG image, full accessibility pass, Lighthouse check — Milestone 7,
-  not started.
+  not started. Meta title/description now match the copy doc exactly
+  (no em dash).
 - No `deep` narration (go-deeper chips) — only `short` tour lines exist.
-- Visitor-led "walk me through this" contextual prompts — not built
-  (the master prompt's spec for this was superseded by the click-to-open
-  toggle UX; worth revisiting if wanted).
 - Mobile robot framing is the same full-figure camera as desktop, just in
   a smaller panel — not the "waist-up corner crop" the master prompt
   originally specified. Works fine at current panel size; revisit if it

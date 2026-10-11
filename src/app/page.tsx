@@ -3,25 +3,43 @@ import FilmGate from "@/components/FilmGate";
 import { MOTIFS, motifStyle } from "@/components/Motif";
 import {
   intro,
+  impactStrip,
+  researchSectionIntro,
   research,
+  researchPageExtra,
+  octaveIntro,
+  octaveEarlierSummary,
   octave,
   layer1,
+  retailExperienceSummary,
   projects,
+  talksSectionIntro,
+  talks,
+  recognition,
+  educationKnowledge,
   teachingIntro,
   teaching,
+  volunteeringSummary,
+  swimmingSummary,
+  writingSummary,
   perspective,
-  recognition,
-  skillsKnowledge,
-  educationKnowledge,
-  membershipsKnowledge,
-  volunteeringKnowledge,
-  retailExperienceKnowledge,
+  contactIntro,
   footer,
 } from "@/content/content";
 
-const currentOctaveRole = octave[0];
+const featuredProjects = projects.filter((p) => p.featured);
+const moreProjects = projects.filter((p) => !p.featured);
 const awards = recognition.filter((r) => r.kind === "award");
 const press = recognition.filter((r) => r.kind === "press");
+
+const NAV_ITEMS = [
+  { href: "#research", label: "Research" },
+  { href: "#work", label: "Work" },
+  { href: "#projects", label: "Projects" },
+  { href: "#ideas", label: "Ideas" },
+  { href: "#beyond-work", label: "Beyond Work" },
+  { href: "#contact", label: "Contact" },
+];
 
 export default function Home() {
   return (
@@ -36,17 +54,11 @@ export default function Home() {
             className="flex gap-4 md:gap-5 text-sm text-text-muted overflow-x-auto ml-4"
             style={{ scrollbarWidth: "none" }}
           >
-            <a href="#research" className="hover:text-accent whitespace-nowrap">Research</a>
-            <a href="#education" className="hover:text-accent whitespace-nowrap">Education</a>
-            <a href="#experience" className="hover:text-accent whitespace-nowrap">Experience</a>
-            <a href="#projects" className="hover:text-accent whitespace-nowrap">Projects</a>
-            <a href="#skills" className="hover:text-accent whitespace-nowrap">Skills</a>
-            <a href="#teaching" className="hover:text-accent whitespace-nowrap">Teaching</a>
-            <a href="#volunteer" className="hover:text-accent whitespace-nowrap">Volunteer</a>
-            <a href="#perspective" className="hover:text-accent whitespace-nowrap">Perspective</a>
-            <a href="#achievements" className="hover:text-accent whitespace-nowrap">Achievements</a>
-            <a href="#news" className="hover:text-accent whitespace-nowrap">In The News</a>
-            <a href="#contact" className="hover:text-accent whitespace-nowrap">Contact</a>
+            {NAV_ITEMS.map((item) => (
+              <a key={item.href} href={item.href} className="hover:text-accent whitespace-nowrap">
+                {item.label}
+              </a>
+            ))}
           </nav>
         </header>
 
@@ -55,7 +67,7 @@ export default function Home() {
           <div className="relative w-40 h-40 mb-6 flex items-center justify-center">
             <div
               aria-hidden="true"
-              className="absolute inset-0 rounded-full"
+              className="absolute inset-0"
               style={motifStyle(MOTIFS.wreath, { width: 160 }, "none")}
             />
             <img
@@ -71,6 +83,14 @@ export default function Home() {
           <p className="text-[17px] leading-relaxed text-text-muted max-w-[56ch] mb-6">
             {intro.bio}
           </p>
+          <ul className="flex flex-col gap-1.5 mb-6 text-[15px] text-text-muted">
+            {intro.snapshot.map((line, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-accent">&middot;</span>
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
           <div className="flex flex-wrap gap-4 text-sm">
             {intro.links.map((l) => (
               <a
@@ -84,73 +104,88 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* Research */}
-        <Section id="research" title="Research" surface>
-          {research.map((r) => (
-            <div key={r.id} data-guide-id={r.id} className="mb-6 last:mb-0">
-              <h3 className="font-semibold text-[17px] mb-1">{r.title}</h3>
-              <p className="text-sm text-accent mb-2">{r.venue}</p>
-              <p className="text-[15px] text-text-muted">{r.highlight}</p>
-            </div>
-          ))}
-        </Section>
-
-        {/* Education */}
-        <Section id="education" title="Education">
-          <div className="flex flex-col gap-6">
-            {educationKnowledge.map((e) => (
-              <div key={e.id} data-guide-id={e.id}>
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="font-semibold text-[16px]">{e.title}</h3>
-                  <span className="text-sm text-text-faint whitespace-nowrap">
-                    {e.dateRange}
-                  </span>
+        {/* Impact strip */}
+        <Section id="impact" surface>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {impactStrip.map((item) => (
+              <a key={item.label} href={item.href} className="group">
+                <div className="font-heading italic text-3xl md:text-4xl font-semibold text-accent group-hover:text-accent-hover transition-colors">
+                  {item.figure}
                 </div>
-                <p className="text-sm text-accent mb-1">{e.institution}</p>
-                <p className="text-sm text-text-muted mb-2">{e.summary}</p>
-                <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1">
-                  {e.details.map((d, i) => (
-                    <li key={i}>{d}</li>
-                  ))}
-                </ul>
-              </div>
+                <div className="text-sm text-text-muted mt-1">{item.label}</div>
+              </a>
             ))}
           </div>
         </Section>
 
-        {/* Experience */}
-        <Section id="experience" title="Experience" surface>
-          <div className="flex items-center gap-3 mb-4">
+        {/* Ideas */}
+        <Section id="ideas" title={perspective.title}>
+          <div className="flex flex-col gap-4">
+            {perspective.paragraphs.map((p, i) => (
+              <p key={i} className="text-[15px] text-text-muted leading-relaxed">
+                {p}
+              </p>
+            ))}
+          </div>
+        </Section>
+
+        {/* Research */}
+        <Section id="research" title="Research" surface>
+          <p className="text-[15px] text-text-muted leading-relaxed mb-8">{researchSectionIntro}</p>
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-4">
+            Published
+          </h3>
+          {research.map((r) => (
+            <div key={r.id} data-guide-id={r.id} className="mb-6 last:mb-0">
+              <h4 className="font-semibold text-[17px] mb-1">{r.title}</h4>
+              <p className="text-sm text-accent mb-3">{r.venue}</p>
+              <p className="text-[15px] text-text-muted leading-relaxed mb-3">
+                {researchPageExtra.description}
+              </p>
+              <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1">
+                <li>{researchPageExtra.award}</li>
+                <li>{researchPageExtra.journalStatus}</li>
+              </ul>
+            </div>
+          ))}
+        </Section>
+
+        {/* Work */}
+        <Section id="work" title="Work">
+          <div className="flex items-center gap-3 mb-2">
             {octave[0]?.logo && (
               <img src={octave[0].logo} alt="" className="h-8 w-auto max-w-[88px] object-contain rounded bg-surface-alt border border-divider px-1.5 py-1" />
             )}
             <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide">
-              OCTAVE &mdash; John Keells Group
+              OCTAVE, John Keells Holdings
             </h3>
           </div>
-          <div className="flex flex-col gap-6 mb-8">
-            {octave.map((role) => {
-              const details = role.details.filter((d) => !d.startsWith("[PLACEHOLDER"));
-              return (
-                <div key={role.id} data-guide-id={role.id}>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h4 className="font-semibold text-[16px]">{role.title}</h4>
-                    <span className="text-sm text-text-faint whitespace-nowrap">
-                      {role.dateRange}
-                    </span>
+          <p className="text-sm text-text-muted mb-4">{octaveIntro}</p>
+          <div className="flex flex-col gap-6 mb-4">
+            {octave
+              .filter((role) => !role.knowledgeOnly)
+              .map((role) => {
+                const details = role.details.filter((d) => !d.startsWith("[PLACEHOLDER"));
+                return (
+                  <div key={role.id} data-guide-id={role.id}>
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h4 className="font-semibold text-[16px]">{role.title}</h4>
+                      <span className="text-sm text-text-faint whitespace-nowrap">
+                        {role.dateRange}
+                      </span>
+                    </div>
+                    {details.length > 0 && (
+                      <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1 mt-1">
+                        {details.map((d, i) => (
+                          <li key={i}>{d}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <p className="text-sm text-text-muted mb-1">{role.location}</p>
-                  {details.length > 0 && (
-                    <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1">
-                      {details.map((d, i) => (
-                        <li key={i}>{d}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
+          <p className="text-[14px] text-text-muted mb-10">{octaveEarlierSummary}</p>
 
           <div className="flex items-center gap-3 mb-4">
             {layer1.logo && (
@@ -160,19 +195,15 @@ export default function Home() {
               Layer1 Studio
             </h3>
           </div>
-          <div className="mb-8" data-guide-id={layer1.id}>
-            <div className="flex items-baseline justify-between gap-4">
+          <div className="mb-10" data-guide-id={layer1.id}>
+            <div className="flex items-baseline justify-between gap-4 mb-1">
               <h4 className="font-semibold text-[16px]">{layer1.title}</h4>
               <span className="text-sm text-text-faint whitespace-nowrap">
                 {layer1.dateRange}
               </span>
             </div>
             <p className="text-sm text-text-muted mb-3">{layer1.location}</p>
-            <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1 mb-4">
-              {layer1.details.map((d, i) => (
-                <li key={i}>{d}</li>
-              ))}
-            </ul>
+            <p className="text-[15px] text-text-muted leading-relaxed mb-4">{layer1.description}</p>
             <div className="flex gap-8 mb-4">
               <div>
                 <div className="font-heading italic text-2xl font-semibold">
@@ -187,43 +218,24 @@ export default function Home() {
                 <div className="text-sm text-text-faint">projects delivered</div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-[14px] text-text-muted">
-              {layer1.clientCategories.map((c) => (
-                <div key={c}>{c}</div>
-              ))}
-            </div>
+            <p className="text-[14px] text-text-muted">
+              Clients include: {layer1.clientCategories.join(" · ")}
+            </p>
           </div>
 
-          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-4">
-            Other experience
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-2">
+            Earlier experience
           </h3>
-          <div className="flex flex-col gap-4">
-            {retailExperienceKnowledge.map((role) => (
-              <div key={role.id} className="flex gap-3">
-                {role.logo && (
-                  <img src={role.logo} alt="" className="h-8 w-auto max-w-[72px] object-contain rounded bg-surface-alt border border-divider px-1 py-1 shrink-0" />
-                )}
-                <div>
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h4 className="font-semibold text-[15px]">{role.title}</h4>
-                    <span className="text-sm text-text-faint whitespace-nowrap">
-                      {role.dateRange}
-                    </span>
-                  </div>
-                  <p className="text-sm text-accent mb-1">{role.company}</p>
-                  <p className="text-[14px] text-text-muted">{role.details[0]}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="text-[14px] text-text-muted">{retailExperienceSummary}</p>
         </Section>
 
-        {/* Projects — all of them */}
-        <Section id="projects" title="Projects">
-          <div className="grid sm:grid-cols-2 gap-8">
-            {projects
-              .filter((p) => !p.description.startsWith("[PLACEHOLDER"))
-              .map((p) => (
+        {/* Projects */}
+        <Section id="projects" title="Projects" surface>
+          <p className="text-[15px] text-text-muted leading-relaxed mb-8">
+            Things I have built, each one designed around the person who has to use the result.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-8 mb-10">
+            {featuredProjects.map((p) => (
               <div key={p.id} data-guide-id={p.id} className="group">
                 {p.image && (
                   <div className="overflow-hidden rounded-xl mb-4 border border-divider">
@@ -255,93 +267,59 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </Section>
 
-        {/* Skills */}
-        <Section id="skills" title="Skills" surface>
-          <div className="flex flex-col gap-5">
-            {skillsKnowledge.map((s) => (
-              <div key={s.category}>
-                <h3 className="font-semibold text-[15px] mb-2">{s.category}</h3>
-                <p className="text-[15px] text-text-muted">{s.items.join(" · ")}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* Teaching & Mentoring */}
-        <Section id="teaching" title="Teaching & Mentoring">
-          <p className="text-[15px] text-text-muted leading-relaxed mb-6">
-            {teachingIntro}
-          </p>
-          <div className="flex flex-col gap-5">
-            {teaching.map((t) => (
-              <div key={t.id}>
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="font-semibold text-[15px]">{t.title}</h3>
-                  <span className="text-sm text-text-faint whitespace-nowrap">
-                    {t.dateRange}
-                  </span>
-                </div>
-                <p className="text-sm text-accent">{t.institution}</p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* Volunteer */}
-        <Section id="volunteer" title="Volunteer" surface>
-          <div className="flex flex-col gap-5 mb-8">
-            {volunteeringKnowledge.map((v) => (
-              <div key={v.id}>
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="font-semibold text-[15px]">{v.title}</h3>
-                  <span className="text-sm text-text-faint whitespace-nowrap">
-                    {v.dateRange}
-                  </span>
-                </div>
-                <p className="text-sm text-accent mb-1">{v.organization}</p>
-                <p className="text-[14px] text-text-muted">{v.details[0]}</p>
-              </div>
-            ))}
-          </div>
-          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
-            Memberships
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-4">
+            More projects
           </h3>
-          <p className="text-[15px] text-text-muted">{membershipsKnowledge.join(" · ")}</p>
-        </Section>
-
-        {/* Perspective */}
-        <Section id="perspective" title={perspective.title}>
-          <div className="flex flex-col gap-4">
-            {perspective.paragraphs.map((p, i) => (
-              <p key={i} className="text-[15px] text-text-muted leading-relaxed">
-                {p}
-              </p>
+          <ul className="flex flex-col gap-4">
+            {moreProjects.map((p) => (
+              <li key={p.id}>
+                <span className="font-semibold text-[15px]">{p.title}</span>
+                <span className="text-[14px] text-text-muted">: {p.description}</span>
+                {p.link && (
+                  <>
+                    {" "}
+                    <a href={p.link} className="text-sm text-accent hover:text-accent-hover whitespace-nowrap">
+                      View project &rarr;
+                    </a>
+                  </>
+                )}
+              </li>
             ))}
-          </div>
+          </ul>
         </Section>
 
-        {/* Achievements */}
-        <Section id="achievements" title="Achievements" surface>
-          <div className="flex flex-col gap-5">
+        {/* Talks and knowledge sharing */}
+        <Section id="talks" title="Talks and knowledge sharing">
+          <p className="text-[15px] text-text-muted leading-relaxed mb-6">{talksSectionIntro}</p>
+          <ul className="flex flex-col gap-3 text-[15px] text-text-muted">
+            {talks.map((t) => (
+              <li key={t.id} className="flex gap-2">
+                <span className="text-accent">&middot;</span>
+                <span>{t.text}</span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+
+        {/* Recognition */}
+        <Section id="recognition" title="Recognition" surface>
+          <div className="flex flex-col gap-5 mb-10">
             {awards.map((r) => (
               <div key={r.id} data-guide-id={r.id}>
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="font-semibold text-[15px]">{r.title}</h3>
-                  <span className="text-sm text-text-faint whitespace-nowrap">
-                    {r.year}
-                  </span>
+                  <span className="text-sm text-text-faint whitespace-nowrap">{r.year}</span>
                 </div>
                 <p className="text-sm text-accent mb-1">{r.organization}</p>
                 <p className="text-sm text-text-muted">{r.summary}</p>
               </div>
             ))}
           </div>
-        </Section>
 
-        {/* In The News */}
-        <Section id="news" title="In The News">
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-4">
+            In the press
+          </h3>
           <div className="grid sm:grid-cols-2 gap-8">
             {press.map((r) => (
               <div key={r.id} data-guide-id={r.id} className="group">
@@ -358,9 +336,7 @@ export default function Home() {
                 )}
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="font-semibold text-[15px]">{r.title}</h3>
-                  <span className="text-sm text-text-faint whitespace-nowrap">
-                    {r.year}
-                  </span>
+                  <span className="text-sm text-text-faint whitespace-nowrap">{r.year}</span>
                 </div>
                 <p className="text-sm text-accent mb-1">{r.organization}</p>
                 <p className="text-sm text-text-muted mb-2">{r.summary}</p>
@@ -374,31 +350,79 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* Ask about Rachel — placeholder, wired up in Milestone 6 */}
-        <Section id="ask" title="Ask about Rachel" surface>
-          <p className="text-sm text-text-faint mb-4">
-            Answers grounded in a curated knowledge base.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {[
-              "What was her research about?",
-              "What does she do at OCTAVE?",
-              "What has Layer1 built?",
-            ].map((q) => (
-              <button
-                key={q}
-                disabled
-                className="px-4 py-2 rounded-full border border-divider text-sm text-text-faint cursor-not-allowed"
-                title="Coming in Milestone 6"
-              >
-                {q}
-              </button>
+        {/* Education */}
+        <Section id="education" title="Education">
+          <div className="flex flex-col gap-6">
+            {educationKnowledge.map((e) => (
+              <div key={e.id} data-guide-id={e.id}>
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="font-semibold text-[16px]">{e.title}</h3>
+                  <span className="text-sm text-text-faint whitespace-nowrap">
+                    {e.dateRange}
+                  </span>
+                </div>
+                {e.institution && <p className="text-sm text-accent mb-1">{e.institution}</p>}
+                <p className="text-sm text-text-muted">{e.summary}</p>
+              </div>
             ))}
           </div>
         </Section>
 
+        {/* Beyond work */}
+        <Section id="beyond-work" title="Beyond work" surface>
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
+            Teaching and mentoring
+          </h3>
+          <p className="text-[15px] text-text-muted leading-relaxed mb-6">{teachingIntro}</p>
+          <div className="flex flex-col gap-5 mb-10">
+            {teaching.map((t) => (
+              <div key={t.id}>
+                <div className="flex items-baseline justify-between gap-4">
+                  <h4 className="font-semibold text-[15px]">{t.title}</h4>
+                  <span className="text-sm text-text-faint whitespace-nowrap">
+                    {t.dateRange}
+                  </span>
+                </div>
+                <p className="text-sm text-accent">{t.institution}</p>
+              </div>
+            ))}
+          </div>
+
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
+            Volunteering
+          </h3>
+          <p className="text-[15px] text-text-muted leading-relaxed mb-10">{volunteeringSummary}</p>
+
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
+            Swimming
+          </h3>
+          <p className="text-[15px] text-text-muted leading-relaxed mb-10">{swimmingSummary}</p>
+
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
+            Writing
+          </h3>
+          <p className="text-[15px] text-text-muted leading-relaxed">
+            {writingSummary.text}
+            {!writingSummary.link.startsWith("[PLACEHOLDER") && (
+              <>
+                {" "}
+                <a href={writingSummary.link} className="text-accent hover:text-accent-hover">
+                  Read more &rarr;
+                </a>
+              </>
+            )}
+          </p>
+        </Section>
+
+        {/* Ask about Rachel — hidden until the live Q&A backend exists
+            (per the 7 Oct copy doc: "Only show this section once the
+            live backend is connected; until then, hide it."). */}
+
         {/* Contact */}
         <Section id="contact" title="Get in touch">
+          <p className="text-[15px] text-text-muted leading-relaxed mb-6 max-w-[56ch]">
+            {contactIntro}
+          </p>
           <div className="flex items-center gap-4">
             {/* Cropped from a Sri Lankan-motif sheet via CSS background
                 positioning (palm/moon corner ornament) — a nod to Colombo. */}
@@ -411,12 +435,23 @@ export default function Home() {
                 backgroundPosition: "-562px -329px",
               }}
             />
-            <a
-              href={`mailto:${footer.email}`}
-              className="text-accent hover:text-accent-hover"
-            >
-              {footer.email}
-            </a>
+            <div className="flex flex-wrap gap-4 text-sm">
+              <a href={`mailto:${footer.email}`} className="text-accent hover:text-accent-hover">
+                {footer.email}
+              </a>
+              <a
+                href={intro.links.find((l) => l.label === "LinkedIn")?.href}
+                className="text-accent hover:text-accent-hover"
+              >
+                LinkedIn
+              </a>
+              <a
+                href={intro.links.find((l) => l.label === "CV")?.href}
+                className="text-accent hover:text-accent-hover"
+              >
+                CV
+              </a>
+            </div>
           </div>
         </Section>
 
@@ -430,7 +465,7 @@ export default function Home() {
               </a>
             </p>
           )}
-          <p>
+          <p className="mb-2">
             {footer.robotCredit.text}
             {!footer.robotCredit.link.startsWith("[PLACEHOLDER") && (
               <>
@@ -441,6 +476,7 @@ export default function Home() {
               </>
             )}
           </p>
+          <p>{footer.copyright}</p>
         </footer>
       </main>
     </FilmGate>
