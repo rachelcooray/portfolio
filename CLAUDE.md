@@ -135,11 +135,29 @@ macOS `say` for voice generation.
   since Jamie is a narrator voice, not Rachel's own. "IEEE" has a
   `spokenText` override ("I triple E") — the `say` command mispronounces
   it literally otherwise.
-- **Entry UX**: no autoplay-on-load. A waving robot-emoji toggle button
-  (top-right, always visible) opens the robot panel and starts the tour
-  on click — simpler than the original auto-tour/localStorage/returning-
-  visitor state machine from the master prompt, and sidesteps the
-  autoplay-audio problem since the click is the gesture.
+- **Entry UX (current, 11 Oct 2026)**: first-time visitors get a 20s
+  video intro (`src/components/VideoIntro.tsx`), autoplaying muted (no
+  gesture to unlock sound) with Turn on sound / Skip controls; marked
+  seen the instant it starts (`src/movie/filmState.ts`), so it never
+  autoplays again regardless of finish/skip/leave. The video itself
+  (`public/videos/intro.mp4`) is two AI-generated takes Rachel supplied,
+  concatenated with `ffmpeg -f concat` (same codec/resolution/fps, so a
+  clean copy with no re-encode). `FilmGate.tsx` is the gate/owner, same
+  role it had for the two things this replaced:
+  - **Superseded 11 Oct 2026**: the whole Movie mode system (`src/movie/`,
+    `src/components/MovieMode.tsx`) — a 3D-robot cinematic first-visit
+    sequence, 5 scenes built (cold open through OCTAVE) before being
+    swapped for the real video. Code left in place, just unrooted from
+    FilmGate, in case it's revisited.
+  - **Superseded 11 Oct 2026**: the even earlier "no autoplay, click a
+    waving robot button" entry UX from before Movie mode existed.
+- **Robot features paused 11 Oct 2026** (Rachel: "you can pause thr robot
+  features"): `RobotToggle` (the Page-mode 3D robot panel — tour
+  narration, pointAt/highlighter-on-scroll) is commented out of
+  `FilmGate.tsx`, not deleted. The video intro above is unrelated to the
+  robot and is unaffected. Re-enabling: uncomment the import and render
+  line in `FilmGate.tsx` (also restores the "Watch the intro" replay
+  button, currently dead code since nothing renders it).
 - Company logos (OCTAVE, Layer1 Studio, UNIQLO, EG On The Move, TK Maxx)
   render next to their Experience entries — Rachel supplied these.
 

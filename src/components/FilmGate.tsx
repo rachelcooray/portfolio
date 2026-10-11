@@ -2,12 +2,18 @@
 
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import dynamic from "next/dynamic";
-import RobotToggle from "./RobotToggle";
-import { hasSeenFilm, getResumeScene } from "@/movie/filmState";
+import { hasSeenFilm } from "@/movie/filmState";
 
-const MovieMode = dynamic(() => import("./MovieMode"), { ssr: false });
+// RobotToggle (the Page-mode 3D robot panel: tour narration, pointAt/
+// highlighter on scroll) is paused per Rachel's request - not deleted,
+// just not rendered. Re-enable by restoring the import above and the
+// <RobotToggle /> line below. The video intro (VideoIntro) is unrelated
+// to the robot and stays active either way.
+// import RobotToggle from "./RobotToggle";
 
-type FilmLaunch = { scene: number; muted: boolean };
+const VideoIntro = dynamic(() => import("./VideoIntro"), { ssr: false });
+
+type FilmLaunch = { muted: boolean };
 
 const noopSubscribe = () => () => {};
 
@@ -26,34 +32,37 @@ function useMounted(): boolean {
 
 // Owns the first-visit decision (client-only - localStorage isn't known at
 // static-export/server-render time, so Page mode is what the initial HTML
-// shows; a true first-time visitor sees it swapped for the film as soon as
-// the client snapshot above resolves).
+// shows; a true first-time visitor sees it swapped for the intro video as
+// soon as the client snapshot above resolves).
 export default function FilmGate({ children }: { children: ReactNode }) {
   const mounted = useMounted();
   const [watchRequest, setWatchRequest] = useState<FilmLaunch | null>(null);
   const [dismissed, setDismissed] = useState(false);
 
-  // Derived, not stored: "mounted, never seen the film, and this session
+  // Derived, not stored: "mounted, never seen the intro, and this session
   // hasn't already finished/skipped it" is just a read of existing
   // persisted state, not new state of its own.
-  const autoLaunch: FilmLaunch | null =
-    mounted && !dismissed && !hasSeenFilm() ? { scene: getResumeScene(), muted: true } : null;
+  const autoLaunch: FilmLaunch | null = mounted && !dismissed && !hasSeenFilm() ? { muted: true } : null;
   const launch = watchRequest ?? autoLaunch;
 
-  const watchFilm = () => {
-    // This click is the gesture, so unlock audio now (same trick
-    // RobotToggle's own open button uses) and start with sound on.
-    const unlock = new Audio(
-      "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=",
-    );
-    void unlock.play().catch(() => {});
-    setWatchRequest({ scene: 0, muted: false });
-  };
+  // Was wired to RobotToggle's "Watch the intro" button - no UI calls
+  // this while the robot panel is paused (see import note above), so
+  // returning visitors currently have no way to replay the video. Restore
+  // together with RobotToggle if that's wanted back before the robot is.
+  // const watchFilm = () => {
+  //   // This click is the gesture, so unlock audio now (same trick
+  //   // RobotToggle's own open button uses) and start with sound on.
+  //   const unlock = new Audio(
+  //     "data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=",
+  //   );
+  //   void unlock.play().catch(() => {});
+  //   setWatchRequest({ muted: false });
+  // };
 
   const handleDone = () => {
     setWatchRequest(null);
     setDismissed(true);
-    // Deferred a frame: MovieMode's own unmount (which restores
+    // Deferred a frame: VideoIntro's own unmount (which restores
     // body.style.overflow) hasn't committed yet at this exact point, and
     // scrollTo is a no-op while overflow is still locked to "hidden".
     requestAnimationFrame(() => window.scrollTo(0, 0));
@@ -62,8 +71,7 @@ export default function FilmGate({ children }: { children: ReactNode }) {
   return (
     <>
       {children}
-      <RobotToggle onWatchFilm={mounted ? watchFilm : undefined} />
-      {launch && <MovieMode startScene={launch.scene} startMuted={launch.muted} onDone={handleDone} />}
+      {launch && <VideoIntro startMuted={launch.muted} onDone={handleDone} />}
     </>
   );
 }

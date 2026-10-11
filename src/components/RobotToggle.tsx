@@ -168,7 +168,7 @@ export default function RobotToggle({ onWatchFilm }: { onWatchFilm?: () => void 
                 onClick={onWatchFilm}
                 className="w-full text-sm text-accent hover:text-accent-hover"
               >
-                🎬 Watch the film
+                🎬 Watch the intro
               </button>
             </div>
           )}
