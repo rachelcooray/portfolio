@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { markFilmStarted } from "@/movie/filmState";
+import { stopLenis, startLenis } from "@/lib/lenis";
 
 // Replaces the robot cinematic (Movie mode, src/movie/*) with a real video
 // intro - two AI-generated takes Rachel supplied, merged into one 20s clip
@@ -20,8 +21,10 @@ export default function VideoIntro({
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    stopLenis();
     return () => {
       document.body.style.overflow = prevOverflow;
+      startLenis();
     };
   }, []);
 

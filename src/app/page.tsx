@@ -1,5 +1,6 @@
 import { Section } from "@/components/Section";
 import FilmGate from "@/components/FilmGate";
+import SmoothLink from "@/components/SmoothLink";
 import { MOTIFS, motifStyle } from "@/components/Motif";
 import {
   intro,
@@ -55,9 +56,9 @@ export default function Home() {
             style={{ scrollbarWidth: "none" }}
           >
             {NAV_ITEMS.map((item) => (
-              <a key={item.href} href={item.href} className="hover:text-accent whitespace-nowrap">
+              <SmoothLink key={item.href} href={item.href} className="hover:text-accent whitespace-nowrap">
                 {item.label}
-              </a>
+              </SmoothLink>
             ))}
           </nav>
         </header>
@@ -108,12 +109,12 @@ export default function Home() {
         <Section id="impact" surface>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {impactStrip.map((item) => (
-              <a key={item.label} href={item.href} className="group">
+              <SmoothLink key={item.label} href={item.href} className="group">
                 <div className="font-heading italic text-3xl md:text-4xl font-semibold text-accent group-hover:text-accent-hover transition-colors">
                   {item.figure}
                 </div>
                 <div className="text-sm text-text-muted mt-1">{item.label}</div>
-              </a>
+              </SmoothLink>
             ))}
           </div>
         </Section>

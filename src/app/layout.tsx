@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Figtree } from "next/font/google";
+import LenisProvider from "@/components/LenisProvider";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fraunces.variable} ${figtree.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text font-sans">
+        <LenisProvider />
         <div className="bg-color-field" aria-hidden="true">
           <span />
           <span />

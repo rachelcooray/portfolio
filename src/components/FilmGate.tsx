@@ -3,6 +3,7 @@
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import { hasSeenFilm } from "@/movie/filmState";
+import { getLenis } from "@/lib/lenis";
 
 // RobotToggle (the Page-mode 3D robot panel: tour narration, pointAt/
 // highlighter on scroll) is paused per Rachel's request - not deleted,
@@ -63,9 +64,14 @@ export default function FilmGate({ children }: { children: ReactNode }) {
     setWatchRequest(null);
     setDismissed(true);
     // Deferred a frame: VideoIntro's own unmount (which restores
-    // body.style.overflow) hasn't committed yet at this exact point, and
-    // scrollTo is a no-op while overflow is still locked to "hidden".
-    requestAnimationFrame(() => window.scrollTo(0, 0));
+    // body.style.overflow and restarts Lenis) hasn't committed yet at
+    // this exact point, and scrollTo is a no-op while overflow is still
+    // locked to "hidden".
+    requestAnimationFrame(() => {
+      const lenis = getLenis();
+      if (lenis) lenis.scrollTo(0, { immediate: true });
+      else window.scrollTo(0, 0);
+    });
   };
 
   return (

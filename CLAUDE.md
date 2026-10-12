@@ -44,8 +44,22 @@ export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; n
 ## Stack
 
 Next.js 16 (App Router, static export via `output: "export"`), TypeScript,
-Tailwind CSS v4, three.js + GSAP, Whisper (local, via `whisper` CLI) +
-macOS `say` for voice generation.
+Tailwind CSS v4, three.js + GSAP, Lenis (page-mode smooth scroll),
+Whisper (local, via `whisper` CLI) + macOS `say` for voice generation.
+
+## Dev server uses webpack, not Turbopack (11 Oct 2026)
+
+`next dev` defaults to Turbopack in Next 16, but Turbopack's dev-mode
+`next/font/google` resolution (`@vercel/turbopack-next/internal/font/google/font`)
+fails to resolve in this sandboxed environment specifically - reproduces
+even with a clean `.next` cache, for both fonts, every `@font-face` rule.
+`npm run dev` now runs `next dev --webpack` to route around it; confirmed
+clean (HTTP 200, real page content, no font errors) under webpack where
+the same request 500'd under Turbopack. **Production builds (`npm run
+build`) already use Turbopack successfully and are unaffected** - this
+is a dev-server-only issue, not a reason to change the build pipeline.
+If a future Next.js/Turbopack version fixes this, `--webpack` can be
+dropped from the `dev` script to get Turbopack's faster dev rebuilds back.
 
 ## Commands
 
