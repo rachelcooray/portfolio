@@ -68,7 +68,7 @@ export default function Home() {
           <div className="relative w-40 h-40 mb-6 flex items-center justify-center">
             <div
               aria-hidden="true"
-              className="absolute inset-0"
+              className="absolute inset-0 rounded-full overflow-hidden"
               style={motifStyle(MOTIFS.wreath, { width: 160 }, "none")}
             />
             <img
