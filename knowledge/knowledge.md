@@ -14,10 +14,11 @@ I build analytics and AI systems that help people make decisions they can unders
 
 ## OCTAVE (current and past roles)
 
-**Analyst, Data and AI**, OCTAVE - John Keells Group (Jul 2026 - Present)
+**Analyst, Data and AI**, OCTAVE - John Keells Group (Apr 2026 - Present (titled Analytics Delivery Associate until Jul 2026))
 Colombo, Sri Lanka · On-site
 - Lead delivery of four AI and analytics use cases for an FMCG client's beverage and ice cream distribution: distributor margin incentives, a replenishment system that recommends redistribution volumes, a permanent dispatch plan that minimises lorry costs, and a distributor efficiency model that increases line items per bill.
 - Run each use case end to end: project management, working directly with the client, presenting findings to senior leadership and finance, and coordinating the data science team's development.
+- Use AI tools to automate parts of my own analysis and reporting, some of which I have used live in client meetings.
 
 **Analytics Delivery Associate**, OCTAVE - John Keells Group (Apr 2026 - Jun 2026)
 Colombo, Sri Lanka · On-site
@@ -118,15 +119,15 @@ It's also why teaching and data work don't feel like separate halves of what I d
 
 **New Generation Awards**, Women in Management and the National Youth Services Council (2020) — For youth leadership.
 
-**Celebrating Innovation at the Computer Science and Engineering Final Year Project Showcase**, University of Westminster (2025) — Featured for showcase innovation.
+**Celebrating Innovation at the Computer Science and Engineering Final Year Project Showcase**, University of Westminster (2025) — Highlighting Rachel Cooray and fellow student innovators presenting healthcare and machine learning systems to enterprise panels.
 
-**Westminster CS Students Receive Prizes**, University of Westminster (2025) — Press coverage of the 3rd Place award for PCOS Care.
+**Westminster CS Students Receive Prizes**, University of Westminster (2025) — Recognizing top research prizes awarded by industry sponsors Netcompany and SmartDCC for the 2025 cohort.
 
-**Team OCTAVE Wins the Overall Women's Championship**, John Keells Holdings (2026) — At the JKH Intercompany Swimming Meet.
+**Team OCTAVE Wins the Overall Women's Championship**, John Keells Holdings (2026) — Rachel Cooray secured three individual gold medals and gold in every relay race in the under-25 group, leading OCTAVE to the trophy.
 
-**WIM and NYSC Recognise Youth**, Daily FT (2020) — Women in Management and National Youth Services Council New Generation Awards recognition.
+**WIM and NYSC Recognise Youth**, Daily FT (2020) — National coverage of the New Generation Awards honoring emerging young Sri Lankan women leaders.
 
-**LMD Youth Forum Interview**, LMD (2020) — Interview on youth leadership.
+**LMD Youth Forum Interview**, LMD (2020) — Interview reflecting on student governance, school headship at St. Bridget's Convent, and community development.
 
 ## Skills
 
@@ -142,7 +143,7 @@ Professional Skills: Business Analytics, Problem Solving, Communication, Financi
 Specialised in Data Science. Began at IIT, Sri Lanka, and completed the final year at Westminster.
 
 
-**Certificate in Business Accounting**, CIMA, United Kingdom (Aug 2024)
+**Certificate in Business Accounting**, Chartered Institute of Management Accountants (CIMA), United Kingdom (Aug 2024)
 Economics, management and financial accounting, business law and corporate governance.
 
 

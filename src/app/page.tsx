@@ -23,7 +23,9 @@ import {
   volunteeringSummary,
   swimmingSummary,
   writingSummary,
+  hobbies,
   perspective,
+  furtherEssays,
   contactIntro,
   footer,
 } from "@/content/content";
@@ -121,11 +123,22 @@ export default function Home() {
 
         {/* Ideas */}
         <Section id="ideas" title={perspective.title}>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 mb-12">
             {perspective.paragraphs.map((p, i) => (
               <p key={i} className="text-[15px] text-text-muted leading-relaxed">
                 {p}
               </p>
+            ))}
+          </div>
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-4">
+            Further essays and working notes
+          </h3>
+          <div className="flex flex-col gap-5">
+            {furtherEssays.map((e) => (
+              <div key={e.id}>
+                <h4 className="font-semibold text-[15px] mb-1">{e.title}</h4>
+                <p className="text-[14px] text-text-muted leading-relaxed">{e.summary}</p>
+              </div>
             ))}
           </div>
         </Section>
@@ -139,7 +152,26 @@ export default function Home() {
           {research.map((r) => (
             <div key={r.id} data-guide-id={r.id} className="mb-6 last:mb-0">
               <h4 className="font-semibold text-[17px] mb-1">{r.title}</h4>
-              <p className="text-sm text-accent mb-3">{r.venue}</p>
+              {r.authors && <p className="text-sm text-text-muted mb-1">{r.authors}</p>}
+              <p className="text-sm text-accent mb-3">
+                {r.venue}
+                {r.doi && (
+                  <>
+                    {" · "}
+                    <a href={r.doiUrl} className="hover:text-accent-hover">
+                      DOI {r.doi}
+                    </a>
+                  </>
+                )}
+                {r.appUrl && (
+                  <>
+                    {" · "}
+                    <a href={r.appUrl} className="hover:text-accent-hover">
+                      Try the app
+                    </a>
+                  </>
+                )}
+              </p>
               <p className="text-[15px] text-text-muted leading-relaxed mb-3">
                 {researchPageExtra.description}
               </p>
@@ -219,9 +251,17 @@ export default function Home() {
                 <div className="text-sm text-text-faint">projects delivered</div>
               </div>
             </div>
-            <p className="text-[14px] text-text-muted">
+            <p className="text-[14px] text-text-muted mb-4">
               Clients include: {layer1.clientCategories.join(" · ")}
             </p>
+            <h4 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-2">
+              Examples
+            </h4>
+            <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1">
+              {layer1.examples.map((ex, i) => (
+                <li key={i}>{ex}</li>
+              ))}
+            </ul>
           </div>
 
           <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-2">
@@ -402,7 +442,7 @@ export default function Home() {
           <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
             Writing
           </h3>
-          <p className="text-[15px] text-text-muted leading-relaxed">
+          <p className="text-[15px] text-text-muted leading-relaxed mb-10">
             {writingSummary.text}
             {!writingSummary.link.startsWith("[PLACEHOLDER") && (
               <>
@@ -413,6 +453,11 @@ export default function Home() {
               </>
             )}
           </p>
+
+          <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
+            Outside work
+          </h3>
+          <p className="text-[15px] text-text-muted">{hobbies.join(" · ")}</p>
         </Section>
 
         {/* Ask about Rachel — hidden until the live Q&A backend exists

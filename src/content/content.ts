@@ -40,9 +40,13 @@ export type IntroContent = {
 export type ResearchItem = {
   id: string;
   title: string;
+  authors?: string;
   venue: string;
   year: string;
   link: string | null;
+  doi?: string;
+  doiUrl?: string;
+  appUrl?: string;
   highlight: string;
   narration: Narration;
   inTour: boolean;
@@ -164,9 +168,13 @@ export const research: ResearchItem[] = [
     id: "research-pcos",
     title:
       "PCOS Care: A Machine Learning-Based Web Application for Early Risk Prediction of Polycystic Ovary Syndrome",
+    authors: "With Malarvizhi Kaniappan Chinnathai and Salma Chahed, University of Westminster",
     venue: "IEEE ICAHS 2025, Tunisia",
     year: "2025",
     link: null,
+    doi: "10.1109/ICAHS66950.2025.11553077",
+    doiUrl: "https://doi.org/10.1109/ICAHS66950.2025.11553077",
+    appUrl: "https://pcos-care-web-app.onrender.com",
     highlight: "Selected for the MSIT Journal special edition, 2026.",
     narration: {
       short:
@@ -180,11 +188,15 @@ export const research: ResearchItem[] = [
 ];
 
 // Page-only fields for the Research section (not part of the tour script).
+// description/journalStatus updated from Rachel's Google AI Studio build
+// (12 Oct 2026), which she confirmed as accurate when asked to port its
+// content in - resolves the "exact MSIT Journal status" open item.
 export const researchPageExtra = {
   description:
-    "An early-screening tool that predicts PCOS risk and shows which factors drove each prediction, so a clinician can judge the result rather than just accept it. Using Chi-Square and ANOVA feature selection, SMOTE for class balance and an enhanced Random Forest, it reached 93.75% recall. It is a risk-screening aid, not a diagnostic tool.",
+    "An early-screening web app with two levels of prediction: one from lifestyle and physical signs that anyone can answer, and one that adds hormone test results for higher accuracy. Features were chosen with clinical diagnostic criteria and statistical tests, so the model rests on signals a clinician would recognise. Using Chi-Square and ANOVA feature selection, SMOTE for class balance and an enhanced Random Forest, it reached 93.75% recall. It is a risk-screening aid, not a diagnostic tool.",
   award: "Awarded 3rd place out of 400+ final year research projects, University of Westminster, 2025.",
-  journalStatus: "Selected for the MSIT Journal special edition, 2026.",
+  journalStatus:
+    'An extended version, "A Machine Learning-Driven Framework for Early Risk Stratification of Polycystic Ovary Syndrome", was selected for the MSIT Journal special edition and is under review, 2026.',
 };
 
 // Not part of research.ts narration, but a fact worth keeping alongside it.
@@ -199,7 +211,7 @@ export const researchAward = {
 // ---------------------------------------------------------------------
 
 // Company-level summary line shown above the OCTAVE role list.
-export const octaveIntro = "Colombo, Sri Lanka · On-site · Intern to analyst in under a year";
+export const octaveIntro = "Colombo, Sri Lanka · On-site · Promoted from intern after six months";
 
 // Condensed one-liner for the two oldest OCTAVE internships (role-octave-
 // intern-2023/2022 below stay knowledgeOnly - full detail only in the
@@ -209,20 +221,26 @@ export const octaveEarlierSummary =
 
 export const octave: RoleItem[] = [
   {
-    // NOTE: wording drafted by Rachel in "Page Copy, Top to Bottom"
-    // (7 Oct 2026), not invented here — but that same doc's checklist
-    // still lists "[Confirm OCTAVE is comfortable with this level of
-    // detail]" as unresolved. Built so it's ready, but don't deploy this
-    // to the live site until that's confirmed (see CLAUDE.md TODO).
+    // Wording drafted by Rachel, not invented - originally in "Page Copy,
+    // Top to Bottom" (7 Oct), then the dateRange/bullets below updated
+    // from her Google AI Studio build (12 Oct), which reframes this as
+    // one continuous role (title changed partway through) rather than
+    // two separate stints - the separate role-octave-associate entry
+    // below is now folded into this one and kept knowledge-only instead
+    // of also rendering on the page. Still: her "Page Copy" checklist
+    // listed "[Confirm OCTAVE is comfortable with this level of detail]"
+    // as unresolved - built and committed, not yet deployed (see
+    // CLAUDE.md TODO).
     id: "role-octave-analyst",
     title: "Analyst, Data and AI",
     company: "OCTAVE - John Keells Group",
     logo: "/images/logo-octave.jpeg",
-    dateRange: "Jul 2026 - Present",
+    dateRange: "Apr 2026 - Present (titled Analytics Delivery Associate until Jul 2026)",
     location: "Colombo, Sri Lanka · On-site",
     details: [
       "Lead delivery of four AI and analytics use cases for an FMCG client's beverage and ice cream distribution: distributor margin incentives, a replenishment system that recommends redistribution volumes, a permanent dispatch plan that minimises lorry costs, and a distributor efficiency model that increases line items per bill.",
       "Run each use case end to end: project management, working directly with the client, presenting findings to senior leadership and finance, and coordinating the data science team's development.",
+      "Use AI tools to automate parts of my own analysis and reporting, some of which I have used live in client meetings.",
     ],
     narration: {
       short:
@@ -232,11 +250,10 @@ export const octave: RoleItem[] = [
     inTour: true,
   },
   {
-    // The doc marks the ideal one-line summary of this move as still
-    // pending ("[Approved wording: one line on what changed when you
-    // moved up]"). Keeping the existing, already-public detail line
-    // rather than showing nothing - it's real, not invented, just maybe
-    // not her preferred final phrasing yet.
+    // Folded into role-octave-analyst above (12 Oct update): that entry's
+    // dateRange now spans Apr 2026-Present with a "titled Associate until
+    // Jul 2026" note, so this no longer renders separately on the page -
+    // knowledge-only, same as the older internships below.
     id: "role-octave-associate",
     title: "Analytics Delivery Associate",
     company: "OCTAVE - John Keells Group",
@@ -248,6 +265,7 @@ export const octave: RoleItem[] = [
     ],
     narration: { short: "" },
     inTour: false,
+    knowledgeOnly: true,
   },
   {
     id: "role-octave-intern-2025",
@@ -305,6 +323,7 @@ export const layer1: RoleItem & {
   description: string;
   stats: { clients: number; projects: number };
   clientCategories: string[];
+  examples: string[];
 } = {
   id: "role-layer1",
   title: "Co-founder, Digital Products and Technology",
@@ -320,6 +339,12 @@ export const layer1: RoleItem & {
     "Providing digital strategy consulting and optimizing existing codebases for performance and scalability.",
   ],
   stats: { clients: 4, projects: 13 },
+  // Confirmed 12 Oct 2026 (previously withheld: "[Confirm this is Layer1
+  // client work]"). No client names, by agreement - same as before.
+  examples: [
+    "A gym management platform with memberships, online payments and a companion mobile app.",
+    "An e-commerce storefront for a food brand, designed and built end to end.",
+  ],
   clientCategories: [
     "Gyms",
     "E-commerce",
@@ -510,6 +535,23 @@ export const perspective = {
   ],
 };
 
+// Abstracts only (no full essay text exists yet) - titles link out to
+// nothing until the essays themselves are written.
+export const furtherEssays = [
+  {
+    id: "essay-accurate-model-bad-decision",
+    title: "Why an accurate model can still lead to a bad decision",
+    summary:
+      "When evaluation loss separates from operational workflow, optimizing predictive metrics alone creates blind spots for practitioners on the ground.",
+  },
+  {
+    id: "essay-legibility-incentive-design",
+    title: "Legibility over complexity in commercial incentive design",
+    summary:
+      "How simulation-tested, KPI-driven distributor structures create lasting margin gains when sales representatives can easily calculate their own payoffs.",
+  },
+];
+
 // ---------------------------------------------------------------------
 // TALKS AND KNOWLEDGE SHARING
 // ---------------------------------------------------------------------
@@ -575,7 +617,8 @@ export const recognition: RecognitionItem[] = [
     title: "Celebrating Innovation at the Computer Science and Engineering Final Year Project Showcase",
     organization: "University of Westminster",
     year: "2025",
-    summary: "Featured for showcase innovation.",
+    summary:
+      "Highlighting Rachel Cooray and fellow student innovators presenting healthcare and machine learning systems to enterprise panels.",
     kind: "press",
     link: "https://blog.westminster.ac.uk/wearewestminster/celebrating-innovation-at-the-computer-science-and-engineering-final-year-project-showcase/",
     image: "/images/netcompany-group-pic.jpg",
@@ -585,7 +628,8 @@ export const recognition: RecognitionItem[] = [
     title: "Westminster CS Students Receive Prizes",
     organization: "University of Westminster",
     year: "2025",
-    summary: "Press coverage of the 3rd Place award for PCOS Care.",
+    summary:
+      "Recognizing top research prizes awarded by industry sponsors Netcompany and SmartDCC for the 2025 cohort.",
     kind: "press",
     link: "https://www.westminster.ac.uk/news/westminster-computer-science-and-engineering-students-receive-prizes-from-netcompany-at-annual-final-year-project-showcase",
     image: "/images/blog.png",
@@ -595,7 +639,8 @@ export const recognition: RecognitionItem[] = [
     title: "Team OCTAVE Wins the Overall Women's Championship",
     organization: "John Keells Holdings",
     year: "2026",
-    summary: "At the JKH Intercompany Swimming Meet.",
+    summary:
+      "Rachel Cooray secured three individual gold medals and gold in every relay race in the under-25 group, leading OCTAVE to the trophy.",
     kind: "press",
     link: "https://www.linkedin.com/company/john-keells-holdings/posts/?lipi=urn%3Ali%3Apage%3Ad_flagship3_company%3Bnn2zJMoFSKS23o4EHOG2Vw%3D%3D",
     image: "/images/swimmingmeet.jpeg",
@@ -605,7 +650,8 @@ export const recognition: RecognitionItem[] = [
     title: "WIM and NYSC Recognise Youth",
     organization: "Daily FT",
     year: "2020",
-    summary: "Women in Management and National Youth Services Council New Generation Awards recognition.",
+    summary:
+      "National coverage of the New Generation Awards honoring emerging young Sri Lankan women leaders.",
     kind: "press",
     link: "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
     image: "/images/daily-ft.png",
@@ -615,7 +661,8 @@ export const recognition: RecognitionItem[] = [
     title: "LMD Youth Forum Interview",
     organization: "LMD",
     year: "2020",
-    summary: "Interview on youth leadership.",
+    summary:
+      "Interview reflecting on student governance, school headship at St. Bridget's Convent, and community development.",
     kind: "press",
     link: "https://lmd.lk/youth-forum-32/",
     image: "/images/youth-forum.png",
@@ -651,7 +698,7 @@ export const educationKnowledge: EducationItem[] = [
   {
     id: "education-cima",
     title: "Certificate in Business Accounting",
-    institution: "CIMA, United Kingdom",
+    institution: "Chartered Institute of Management Accountants (CIMA), United Kingdom",
     dateRange: "Aug 2024",
     summary: "Economics, management and financial accounting, business law and corporate governance.",
     details: [],
@@ -686,11 +733,15 @@ export const swimmingSummary =
   "At the 2026 JKH Intercompany Swimming Meet, I won three individual golds and gold in every relay in the under-25 group, as OCTAVE took the overall women's championship.";
 
 export const writingSummary = {
-  text: "I also write fiction, under the name Rachel Naadia Cooray.",
-  // Doc: "[Read more →]" - no link supplied yet, so the line renders
-  // without one until there's somewhere for it to point.
+  // Book title/genre/setting confirmed 12 Oct 2026 (previously just "she
+  // writes fiction"). Still no link - the line renders without one until
+  // there's somewhere for it to point.
+  text: "I also write fiction under the name Rachel Naadia Cooray. My debut novel, Carried by the Storm, a fantasy romance set in a small Cornish seaside town, is coming soon.",
   link: "[PLACEHOLDER: link to her fiction/pen-name work]",
 };
+
+// Confirmed directly by Rachel (12 Oct 2026), not drawn from any doc.
+export const hobbies = ["Swimming", "Running", "Movies and dramas", "Reading on historical facts and stories", "British history"];
 
 export const volunteeringKnowledge: VolunteerItem[] = [
   {
@@ -800,6 +851,5 @@ export const tourOrder = [
   "role-layer1",
   "project-pcos-care",
   "project-genai-neurodiversity",
-  "project-finance-explainer",
   "project-carbon-tracker",
 ] as const;
