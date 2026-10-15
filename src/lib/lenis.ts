@@ -17,7 +17,44 @@ export function getLenis(): Lenis | null {
   return lenis;
 }
 
+const REDUCED_MOTION_OVERRIDE_KEY = "rc-reduced-motion";
+
+// ReduceMotionToggle subscribes via useSyncExternalStore - plain
+// localStorage reads/writes don't by themselves trigger a re-render, so
+// setReducedMotionOverride notifies these after writing.
+const reducedMotionListeners = new Set<() => void>();
+
+export function subscribeReducedMotionOverride(listener: () => void): () => void {
+  reducedMotionListeners.add(listener);
+  return () => reducedMotionListeners.delete(listener);
+}
+
+// A visitor can't change their OS's prefers-reduced-motion setting from a
+// page, so the nav toggle needs its own persisted override that ORs with
+// the real media query - "reduced" if either says so.
+export function getReducedMotionOverride(): boolean {
+  try {
+    return localStorage.getItem(REDUCED_MOTION_OVERRIDE_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function setReducedMotionOverride(value: boolean) {
+  try {
+    if (value) localStorage.setItem(REDUCED_MOTION_OVERRIDE_KEY, "1");
+    else localStorage.removeItem(REDUCED_MOTION_OVERRIDE_KEY);
+  } catch {
+    /* ignore */
+  }
+  // Take effect immediately, not just on next load.
+  if (value) destroyLenis();
+  else initLenis();
+  reducedMotionListeners.forEach((listener) => listener());
+}
+
 export function prefersReducedMotion(): boolean {
+  if (getReducedMotionOverride()) return true;
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 

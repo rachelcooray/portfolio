@@ -1,6 +1,7 @@
 import { Section } from "@/components/Section";
 import FilmGate from "@/components/FilmGate";
 import SmoothLink from "@/components/SmoothLink";
+import ReduceMotionToggle from "@/components/ReduceMotionToggle";
 import { MOTIFS, motifStyle } from "@/components/Motif";
 import {
   intro,
@@ -62,6 +63,7 @@ export default function Home() {
                 {item.label}
               </SmoothLink>
             ))}
+            <ReduceMotionToggle />
           </nav>
         </header>
 
