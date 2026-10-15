@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useSyncExternalStore, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+// import { useSyncExternalStore } from "react"; // only needed by useMounted below
 import dynamic from "next/dynamic";
-import { hasSeenFilm } from "@/movie/filmState";
+// import { hasSeenFilm } from "@/movie/filmState"; // only needed by the paused autoLaunch below
 import { getLenis } from "@/lib/lenis";
 
 // RobotToggle (the Page-mode 3D robot panel: tour narration, pointAt/
@@ -16,34 +17,36 @@ const VideoIntro = dynamic(() => import("./VideoIntro"), { ssr: false });
 
 type FilmLaunch = { muted: boolean };
 
-const noopSubscribe = () => () => {};
+// const noopSubscribe = () => () => {}; // only needed by useMounted below
 
 // Hydration-safe "are we on the client yet" check with no setState-in-effect
 // needed: false on the server and on the first client render (matching the
 // static-exported HTML), true from the next render once React reconciles
 // against the real client snapshot. Standard useSyncExternalStore pattern
-// for this exact case.
-function useMounted(): boolean {
-  return useSyncExternalStore(
-    noopSubscribe,
-    () => true,
-    () => false,
-  );
-}
+// for this exact case. Only needed by the paused autoLaunch below - see
+// its restore note for how this plugs back in.
+// function useMounted(): boolean {
+//   return useSyncExternalStore(
+//     noopSubscribe,
+//     () => true,
+//     () => false,
+//   );
+// }
 
 // Owns the first-visit decision (client-only - localStorage isn't known at
 // static-export/server-render time, so Page mode is what the initial HTML
 // shows; a true first-time visitor sees it swapped for the intro video as
 // soon as the client snapshot above resolves).
 export default function FilmGate({ children }: { children: ReactNode }) {
-  const mounted = useMounted();
+  // Video intro paused per Rachel's request (15 Oct 2026, while she tries
+  // scroll-scrubbed B-roll footage instead) - not deleted. To restore:
+  // uncomment the hasSeenFilm import above, bring back
+  // `const mounted = useMounted();` and `const [dismissed, setDismissed]`
+  // below, and swap autoLaunch back to
+  // `mounted && !dismissed && !hasSeenFilm() ? { muted: true } : null`.
   const [watchRequest, setWatchRequest] = useState<FilmLaunch | null>(null);
-  const [dismissed, setDismissed] = useState(false);
-
-  // Derived, not stored: "mounted, never seen the intro, and this session
-  // hasn't already finished/skipped it" is just a read of existing
-  // persisted state, not new state of its own.
-  const autoLaunch: FilmLaunch | null = mounted && !dismissed && !hasSeenFilm() ? { muted: true } : null;
+  const [, setDismissed] = useState(false);
+  const autoLaunch: FilmLaunch | null = null;
   const launch = watchRequest ?? autoLaunch;
 
   // Was wired to RobotToggle's "Watch the intro" button - no UI calls
