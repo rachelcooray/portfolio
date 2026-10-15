@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Section } from "@/components/Section";
 import FilmGate from "@/components/FilmGate";
 import SmoothLink from "@/components/SmoothLink";
@@ -177,10 +178,13 @@ export default function Home() {
               <p className="text-[15px] text-text-muted leading-relaxed mb-3">
                 {researchPageExtra.description}
               </p>
-              <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1">
+              <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1 mb-4">
                 <li>{researchPageExtra.award}</li>
                 <li>{researchPageExtra.journalStatus}</li>
               </ul>
+              <Link href="/case-studies/pcos-care" className="text-sm text-accent hover:text-accent-hover">
+                Read the case study →
+              </Link>
             </div>
           ))}
         </Section>
@@ -220,7 +224,10 @@ export default function Home() {
                 );
               })}
           </div>
-          <p className="text-[14px] text-text-muted mb-10">{octaveEarlierSummary}</p>
+          <p className="text-[14px] text-text-muted mb-3">{octaveEarlierSummary}</p>
+          <Link href="/case-studies/octave" className="inline-block text-sm text-accent hover:text-accent-hover mb-10">
+            Read the case study →
+          </Link>
 
           <div className="flex items-center gap-3 mb-4">
             {layer1.logo && (
@@ -259,11 +266,14 @@ export default function Home() {
             <h4 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-2">
               Examples
             </h4>
-            <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1">
+            <ul className="list-disc list-inside text-[14px] text-text-muted space-y-1 mb-4">
               {layer1.examples.map((ex, i) => (
                 <li key={i}>{ex}</li>
               ))}
             </ul>
+            <Link href="/case-studies/layer1" className="text-sm text-accent hover:text-accent-hover">
+              Read the case study →
+            </Link>
           </div>
 
           <h3 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-2">

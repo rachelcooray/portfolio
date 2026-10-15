@@ -110,6 +110,20 @@ export type VolunteerItem = {
   details: string[];
 };
 
+export type CaseStudy = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  category: string;
+  context: string;
+  problem: string;
+  approach: string[];
+  keyDecisions: string[];
+  outcome: string[];
+  learned: string;
+  metrics: { label: string; value: string }[];
+};
+
 // ---------------------------------------------------------------------
 // INTRO
 // ---------------------------------------------------------------------
@@ -205,6 +219,113 @@ export const researchAward = {
   detail:
     "Out of 400+ students, judged with Westminster, Netcompany and SmartDCC.",
 };
+
+// ---------------------------------------------------------------------
+// CASE STUDIES (separate pages: /case-studies/[slug])
+// Ported from Rachel's Google AI Studio build (12 Oct 2026), confirmed
+// accurate - the original "Page Copy, Top to Bottom" doc left these
+// almost entirely bracketed/unconfirmed, which is why they weren't built
+// until this content existed.
+// ---------------------------------------------------------------------
+
+export const caseStudies: CaseStudy[] = [
+  {
+    slug: "octave",
+    title: "Distributor margin optimisation",
+    subtitle: "OCTAVE, John Keells Holdings",
+    category: "Commercial Incentive Design",
+    context:
+      "An FMCG company distributor network in Sri Lanka where legacy incentives prioritized pure delivery volume rather than sustainable margin contribution, masking efficiency leaks across regional routes.",
+    problem:
+      "A notable subset of regional distributors were persistently underperforming on margin targets while incurring high delivery overhead. The existing commission structure failed to incentivize high-margin beverage and ice cream lines or reward inventory turnaround, leaving management without clear levers to correct distribution behavior.",
+    approach: [
+      "Segmented distributors into underperforming and high-potential cohorts based on historical order granularity, basket mix, and localized fulfillment constraints.",
+      "Designed a multi-tier, KPI-driven incentive scheme aligning distributor bonus tiers directly with product margin contributions and basket depth.",
+      "Executed empirical margin and sales-incentive simulations under fluctuating demand patterns, including dedicated relief and recapture scenarios for flood-affected retail outlets.",
+      "Built interactive Power BI executive dashboards allowing management to monitor target versus achievement metrics and distributor profitability in real time.",
+    ],
+    keyDecisions: [
+      "Prioritized transparent, rule-based commission formulas over complex black-box scorecards so distributor field agents could calculate their daily incentives instantly.",
+      "Calibrated baseline volume thresholds against local historical seasonality to prevent windfall bonuses without actual margin expansion.",
+      "Incorporated specialized margin protections for climate-impacted territories to sustain merchant loyalty while protecting principal profitability.",
+    ],
+    outcome: [
+      "The recommended incentive structures increased potential margins by 68% in extensive historical and scenario simulations.",
+      "Real-time Power BI tracking dashboards enabled commercial executives to replace manual month-end reconciliations with live performance visibility.",
+      "Provided senior leadership and finance with actionable distributor reallocation strategies that informed subsequent dispatch planning.",
+    ],
+    learned: "A model is only useful if the incentive it recommends is one a distributor team can actually run.",
+    metrics: [
+      { label: "Potential Margins", value: "+68%" },
+      { label: "Use Cases Led", value: "4" },
+      { label: "Visibility", value: "Real-time" },
+    ],
+  },
+  {
+    slug: "pcos-care",
+    title: "PCOS Care: Early Risk Screening",
+    subtitle: "Published at IEEE ICAHS 2025 · University of Westminster",
+    category: "Healthcare & Machine Learning",
+    context:
+      "Polycystic Ovary Syndrome (PCOS) is a prevalent endocrine condition affecting up to 13% of reproductive-age women globally. Diagnostic delays frequently span years due to overlapping symptoms and unequal access to clinical endocrinology screening.",
+    problem:
+      "Existing predictive risk models in medical literature often produce opaque numerical risk scores without clinical interpretability. Furthermore, models requiring comprehensive laboratory hormone panels fail to support low-resource, community-level triage.",
+    approach: [
+      "Analyzed 541 anonymised patient records collected across 10 hospitals in Kerala, India (public benchmark dataset), with approximately one-third diagnosed with PCOS.",
+      "Implemented dual-stage feature selection using Chi-Square tests for categorical indicators and ANOVA F-tests for numerical parameters to retain medically grounded signals.",
+      "Addressed class imbalance using Synthetic Minority Over-sampling Technique (SMOTE) to prevent majority-class bias.",
+      "Trained and evaluated multiple classifiers, culminating in an optimized, enhanced Random Forest ensemble evaluated under rigorous stratified cross-validation.",
+      "Architected a two-tiered web application in Python, Flask, and Streamlit: Tier 1 screens lifestyle and physical indicators anyone can provide, while Tier 2 incorporates hormone lab tests for heightened precision.",
+    ],
+    keyDecisions: [
+      "Prioritised recall over raw accuracy, as missing an at-risk individual in early triage carries substantially higher clinical risk than a false alarm requiring routine follow-up.",
+      "Deliberately favored clinically transparent, interpretable features over black-box deep learning architectures, ensuring clinicians can inspect each contributing factor.",
+    ],
+    outcome: [
+      "Achieved 93.75% recall and 92.66% accuracy on the comprehensive clinical parameter test set.",
+      "In a 32-person structured usability study, 93.75% of participants rated the interface and risk explanation as highly intuitive.",
+      "Awarded 3rd place out of 400+ final year research projects at the University of Westminster in 2025.",
+      "Published in the IEEE ICAHS 2025 conference proceedings, with an extended framework currently under review for the MSIT Journal special edition.",
+    ],
+    learned:
+      "In clinical machine learning, transparency is not an optional aesthetic layer; it is the fundamental prerequisite for professional adoption.",
+    metrics: [
+      { label: "Model Recall", value: "93.75%" },
+      { label: "Model Accuracy", value: "92.66%" },
+      { label: "Westminster Research", value: "3rd of 400+" },
+    ],
+  },
+  {
+    slug: "layer1",
+    title: "A Layer1 Studio delivery",
+    subtitle: "Layer1 Studio Digital Products and Technology",
+    category: "Full-Stack Product Engineering",
+    context:
+      "A high-growth fitness facility and gym community operating with fragmented pen-and-paper check-ins, manual bank transfer receipts, and disconnected class timetables that frustrated members and stalled recurring revenue.",
+    problem:
+      "The administrative team spent up to 15 hours weekly verifying membership renewals and reconciling manual bank deposits, while members experienced drop-offs when trying to book peak training sessions.",
+    approach: [
+      "Translated an initial informal brief into a concise, modular software architecture spanning a responsive web platform and companion mobile member portal.",
+      "Integrated direct online payment gateway processing, automated subscription billing cycles, and real-time QR code turnstile check-ins.",
+      "Mentored and paired with junior interns on front-end components and test coverage, shipping the production build within eight weeks.",
+    ],
+    keyDecisions: [
+      "Chose a lightweight, serverless relational stack with strict optimistic UI updates to maintain sub-second response times on gym mobile networks.",
+      "Automated renewal reminders via WhatsApp and email 72 hours before expiry, minimizing unintentional member churn.",
+    ],
+    outcome: [
+      "Successfully deployed across all locations, eliminating manual payment reconciliation and cutting desk registration times by over 80%.",
+      "Demonstrated the studio delivery model that has gone on to deliver 13 bespoke technical projects across 4 diverse client accounts.",
+    ],
+    learned:
+      "Building for small business operators requires designing for operational friction first: the best software is the one that removes daily clerical dread.",
+    metrics: [
+      { label: "Total Studio Deliveries", value: "13" },
+      { label: "Client Accounts", value: "4" },
+      { label: "Admin Overhead Cut", value: "80%" },
+    ],
+  },
+];
 
 // ---------------------------------------------------------------------
 // OCTAVE (current role + progression)

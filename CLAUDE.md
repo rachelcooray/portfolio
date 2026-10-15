@@ -139,11 +139,14 @@ dropped from the `dev` script to get Turbopack's faster dev rebuilds back.
   consolidation, and a new Contact paragraph. Ask about Rachel is hidden
   entirely (not just disabled) per the doc, until the Q&A backend exists.
   Case study pages (section 12 of the doc: Distributor margin
-  optimisation, PCOS Care, A Layer1 Studio delivery) are **not built** -
-  almost every field in them is bracketed/unconfirmed in the doc itself,
-  and several sections link to "the case study" (e.g. Research, the
-  OCTAVE intern bullet) before those pages exist; those links are
-  currently omitted from the page rather than pointing nowhere.
+  optimisation, PCOS Care, A Layer1 Studio delivery) are **built** (15
+  Oct 2026) - `src/app/case-studies/[slug]/page.tsx`, a dynamic route with
+  `generateStaticParams()` for static export, reading `caseStudies` in
+  `content.ts`. That content was ported from Rachel's Google AI Studio
+  build (same source as the rest of the Phase D content port), not from
+  the original doc's bracketed placeholders. "Read the case study →"
+  links point from Research (pcos-care), Work/OCTAVE (octave), and
+  Work/Layer1 (layer1) to their respective pages.
 - **Voice**: macOS `say -v "Jamie (Premium)"` + Whisper for word timing.
   Narration is **third person** ("She applies AI...", not "I apply AI...")
   since Jamie is a narrator voice, not Rachel's own. "IEEE" has a
@@ -211,8 +214,6 @@ plus implementation notes:
   until filled in.
 - No image exists yet for the Microsoft EMBRACE hackathon project.
 - No teaching-specific CV variant exists (only one CV PDF).
-- Case study pages (doc section 12) not built - see "Page copy source"
-  above.
 - Rachel mentioned having Sri Lankan-motif decorative design assets to
   use "where appropriate" — the sheet (`public/images/sl-motifs.png`) is
   in place and used once (circular wreath around the hero photo, see
