@@ -1,0 +1,436 @@
+/**
+ * Badge/archive design (15 Oct 2026) - ported from Rachel's standalone
+ * HTML prototype ("Meet Rachel_ animated portfolio prototype.html"):
+ * Part 1 is the three.js ID-badge-on-a-lanyard scroll animation
+ * (BadgeHero.tsx), Part 2 is the plain-HTML content archive (Archive.tsx).
+ * This file is the prototype's <style> block, ported close to verbatim -
+ * font-family literals swapped for next/font/google CSS vars, --notch
+ * handling left as the prototype had it (toggled from BadgeHero's own
+ * scroll-tick function via inline style on :root).
+ */
+
+:root {
+  --ivory: #F4EFE5;
+  --paper: #FBF8F2;
+  --ink: #262322;
+  --muted: #62564F;
+  --line: #DDD3C5;
+  --burgundy: #641F35;
+  --wine: #3B1727;
+  --rose: #B8878F;
+  --rose-light: #EBD3D7;
+  --stone: #C9C0B3;
+  --notch: #F4EFE5;
+}
+
+.badge-page {
+  color-scheme: light;
+}
+
+.badge-page .serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-weight: 400;
+}
+
+.badge-page {
+  margin: 0;
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.badge-page #gl {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  touch-action: pan-y;
+}
+.badge-page .spacer {
+  position: relative;
+  height: 700vh;
+  pointer-events: none;
+  z-index: 1;
+}
+.badge-page .anchor {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+}
+.badge-page a:focus-visible,
+.badge-page button:focus-visible,
+.badge-page input:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.badge-page header.top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px max(5vw, 20px);
+  pointer-events: none;
+  color: var(--ink);
+  transition: color 0.35s, background-color 0.35s;
+}
+.badge-page header.top.dark { color: var(--ivory); }
+.badge-page header.top.solid { background: var(--ivory); }
+.badge-page header.top.solid.dark { background: var(--wine); }
+.badge-page header.top a,
+.badge-page header.top button {
+  pointer-events: auto;
+  color: inherit;
+  text-decoration: none;
+}
+.badge-page .mark {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: 30px;
+  line-height: 1;
+  padding: 8px 0;
+}
+.badge-page .navbar {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.badge-page .navbar::-webkit-scrollbar { display: none; }
+.badge-page .navbar a {
+  padding: 12px 2px;
+  white-space: nowrap;
+}
+.badge-page .menu-btn {
+  font: inherit;
+  font-weight: 600;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 10px 20px;
+  cursor: pointer;
+  min-height: 44px;
+  white-space: nowrap;
+}
+.badge-page #menu {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  background: var(--wine);
+  color: var(--ivory);
+  display: none;
+  overflow: auto;
+  padding: 90px max(6vw, 22px) 40px;
+}
+.badge-page #menu.open { display: block; }
+.badge-page #menu ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 6vw;
+  max-width: 1000px;
+}
+.badge-page #menu li { break-inside: avoid; }
+.badge-page #menu a {
+  display: block;
+  color: var(--ivory);
+  text-decoration: none;
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.15;
+  padding: 4px 0;
+}
+.badge-page #menu a:hover { color: var(--rose-light); }
+.badge-page #menu .close {
+  position: fixed;
+  top: 14px;
+  right: max(5vw, 20px);
+  color: var(--ivory);
+}
+@media (max-width: 760px) {
+  .badge-page .navbar .wide { display: none; }
+  .badge-page #menu ol { columns: 1; }
+}
+
+.badge-page .layer {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  padding: 96px max(6vw, 22px) 40px;
+}
+.badge-page .layer a { pointer-events: auto; }
+
+.badge-page #hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 1;
+  visibility: visible;
+}
+.badge-page #hero .inner { max-width: min(46vw, 640px); }
+.badge-page #hero h1 {
+  margin: 0;
+  font-size: clamp(64px, 11.5vw, 184px);
+  line-height: 0.84;
+  letter-spacing: -0.02em;
+}
+.badge-page #hero h1 span { display: block; }
+.badge-page #hero h1 .second { padding-left: 0.42em; }
+.badge-page #hero .claim {
+  margin: 30px 0 0;
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(26px, 2.4vw, 36px);
+  line-height: 1.15;
+}
+.badge-page #hero .lede {
+  margin: 14px 0 0;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.6;
+  max-width: 32em;
+  color: var(--muted);
+}
+.badge-page #hero .hint {
+  margin: 24px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.badge-page #hero .hint span { display: inline-flex; align-items: center; gap: 8px; }
+.badge-page #hero .hint i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--burgundy);
+}
+
+.badge-page .proj {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: min(36vw, 500px);
+  color: var(--ivory);
+  opacity: 0;
+  visibility: hidden;
+}
+.badge-page .proj.left { left: max(6vw, 22px); }
+.badge-page .proj.right { right: max(6vw, 22px); }
+.badge-page .proj .kind { margin: 0 0 18px; font-size: 15px; color: var(--rose-light); }
+.badge-page .proj h2 {
+  margin: 0;
+  font-size: clamp(42px, 4.8vw, 76px);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+.badge-page .proj p.body { margin: 20px 0 0; font-size: 17px; line-height: 1.6; color: #EFE2DF; }
+.badge-page .proj .count { display: block; margin-top: 24px; font-size: 14px; color: var(--rose-light); }
+.badge-page .proj .figure { font-family: var(--font-instrument-serif), Georgia, serif; font-size: 1.25em; color: var(--ivory); }
+
+@media (max-width: 760px) {
+  .badge-page #hero { justify-content: flex-start; padding-top: 86px; }
+  .badge-page #hero .inner { max-width: 100%; }
+  .badge-page #hero h1 { font-size: clamp(58px, 18vw, 104px); }
+  .badge-page #hero .claim { margin-top: 14px; font-size: 24px; }
+  .badge-page #hero .lede { display: none; }
+  .badge-page #hero .hint { margin-top: 12px; }
+  .badge-page .proj,
+  .badge-page .proj.left,
+  .badge-page .proj.right {
+    top: auto;
+    bottom: 36px;
+    left: 22px;
+    right: 22px;
+    transform: none;
+    max-width: none;
+  }
+  .badge-page .proj h2 { font-size: clamp(34px, 9.5vw, 48px); }
+  .badge-page .proj p.body { font-size: 15px; margin-top: 12px; }
+  .badge-page .proj .kind { margin-bottom: 10px; }
+}
+
+/* ---------- archive (Part 2) ---------- */
+.badge-page #archive { position: relative; z-index: 4; background: var(--ivory); color: var(--ink); }
+.badge-page .sec {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(0, 2.4fr);
+  gap: 56px;
+  padding: 104px max(6vw, 22px) 72px;
+  border-top: 1px solid var(--line);
+}
+.badge-page .sec > h2 {
+  margin: 0;
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(42px, 4.4vw, 68px);
+  line-height: 1;
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+.badge-page .sec .intro {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(24px, 2vw, 30px);
+  line-height: 1.3;
+  margin: 0 0 40px;
+  max-width: 30em;
+}
+.badge-page .entry { padding: 0 0 32px; margin: 0 0 32px; border-bottom: 1px solid var(--line); }
+.badge-page .entry:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.badge-page .row { display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; align-items: baseline; }
+.badge-page .entry h3 { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.35; max-width: 36em; }
+.badge-page .when { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.badge-page .where { margin: 6px 0 0; font-size: 16px; color: var(--muted); }
+.badge-page .entry p { margin: 12px 0 0; font-size: 17px; line-height: 1.65; max-width: 42em; }
+.badge-page .entry ul { margin: 14px 0 0; padding: 0; list-style: none; max-width: 42em; }
+.badge-page .entry li { position: relative; padding-left: 22px; font-size: 17px; line-height: 1.6; margin-top: 8px; }
+.badge-page .entry li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.72em;
+  width: 8px;
+  height: 2px;
+  background: var(--burgundy);
+}
+.badge-page .tools { margin-top: 12px; font-size: 15px; color: var(--muted); }
+.badge-page .org { margin: 0 0 6px; font-family: var(--font-instrument-serif), Georgia, serif; font-size: 34px; line-height: 1.1; display: flex; align-items: center; gap: 14px; }
+.badge-page .org img { height: 32px; width: auto; max-width: 88px; object-fit: contain; border-radius: 6px; background: var(--paper); border: 1px solid var(--line); padding: 4px 6px; }
+.badge-page .org-meta { margin: 0 0 28px; color: var(--muted); font-size: 16px; }
+.badge-page .roles { border-left: 2px solid var(--rose); padding-left: 24px; margin-bottom: 56px; }
+.badge-page .roles .entry { border-bottom: 0; padding-bottom: 0; margin-bottom: 28px; }
+.badge-page .stats { display: flex; gap: 56px; margin: 24px 0 8px; flex-wrap: wrap; }
+.badge-page .stat b { display: block; font-family: var(--font-instrument-serif), Georgia, serif; font-weight: 400; font-size: 84px; line-height: 0.9; color: var(--burgundy); }
+.badge-page .stat span { font-size: 16px; color: var(--muted); }
+.badge-page .subhead { margin: 48px 0 20px; font-size: 16px; font-weight: 600; color: var(--burgundy); }
+.badge-page .textlink { display: inline-block; margin-top: 14px; color: var(--burgundy); font-weight: 600; text-underline-offset: 5px; padding: 6px 0; }
+.badge-page .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px 40px; }
+.badge-page .skills h3 { margin: 0 0 8px; font-size: 17px; font-weight: 600; }
+.badge-page .skills p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--muted); }
+.badge-page .sec.alt { background: var(--paper); }
+.badge-page .sec.dark { background: var(--wine); color: var(--ivory); border-top-color: var(--wine); }
+.badge-page .sec.dark > h2 { color: var(--ivory); }
+.badge-page .essay p {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(22px, 1.9vw, 29px);
+  line-height: 1.45;
+  margin: 0 0 26px;
+  max-width: 30em;
+  color: #F3E8E4;
+}
+.badge-page .essay p:first-child { font-size: clamp(28px, 2.6vw, 40px); line-height: 1.25; color: var(--ivory); }
+.badge-page .essays-more { margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(244, 239, 229, 0.2); }
+.badge-page .essays-more h3 { font-size: 16px; font-weight: 600; color: var(--rose-light); margin: 0 0 20px; }
+.badge-page .essays-more .essay-note { margin-bottom: 20px; }
+.badge-page .essays-more .essay-note h4 { margin: 0 0 6px; font-size: 16px; font-weight: 600; color: var(--ivory); }
+.badge-page .essays-more .essay-note p { font-family: var(--font-manrope), sans-serif; font-size: 15px; line-height: 1.6; color: var(--rose-light); margin: 0; max-width: 42em; }
+.badge-page .ask-box { max-width: 44em; }
+.badge-page .ask-form { display: flex; gap: 10px; flex-wrap: wrap; }
+.badge-page .ask-form input {
+  flex: 1 1 260px;
+  min-height: 52px;
+  border: 1px solid var(--stone);
+  background: var(--paper);
+  border-radius: 999px;
+  padding: 0 22px;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+}
+.badge-page .btn {
+  min-height: 52px;
+  border-radius: 999px;
+  padding: 0 26px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid var(--burgundy);
+  background: var(--burgundy);
+  color: var(--paper);
+}
+.badge-page .btn.ghost { background: transparent; color: var(--burgundy); }
+.badge-page .btn:disabled { opacity: 0.55; cursor: default; }
+.badge-page .chips { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+.badge-page .chips .btn { min-height: 44px; font-size: 15px; font-weight: 500; }
+.badge-page .answer { margin-top: 28px; font-size: 18px; line-height: 1.65; white-space: pre-wrap; min-height: 1.6em; }
+.badge-page .answer.muted { color: var(--muted); }
+.badge-page .contact { padding: 120px max(6vw, 22px) 64px; background: var(--wine); color: var(--ivory); }
+.badge-page .contact h2 { margin: 0; font-size: clamp(52px, 8vw, 128px); line-height: 0.92; max-width: 11em; }
+.badge-page .contact .email {
+  display: inline-block;
+  margin-top: 40px;
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(28px, 3.4vw, 52px);
+  color: var(--ivory);
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+  word-break: break-all;
+}
+.badge-page .contact .links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; align-items: center; }
+.badge-page .contact .links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  border: 1px solid var(--rose);
+  color: var(--ivory);
+  text-decoration: none;
+  font-weight: 600;
+}
+.badge-page .contact .links a:hover { background: var(--ivory); color: var(--wine); }
+.badge-page .contact .links button {
+  background: none;
+  border: 1px solid var(--rose);
+  color: var(--ivory);
+  border-radius: 999px;
+  min-height: 48px;
+  padding: 0 24px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.badge-page .contact .fine { margin-top: 64px; font-size: 14px; color: var(--rose-light); }
+@media (max-width: 860px) {
+  .badge-page .sec { grid-template-columns: 1fr; gap: 28px; padding: 72px 22px 56px; }
+  .badge-page .sec > h2 { position: static; }
+  .badge-page .stats { gap: 36px; }
+  .badge-page .stat b { font-size: 64px; }
+  .badge-page .roles { padding-left: 18px; }
+}
+
+/* no WebGL (three.js failed to init): plain readable page. The class
+   lands on <html> (document.documentElement), same as the prototype, so
+   these selectors aren't scoped under .badge-page. */
+html.no-gl .spacer,
+html.no-gl #gl { display: none; }
+html.no-gl .layer { position: relative; opacity: 1; visibility: visible; min-height: auto; pointer-events: auto; }
+html.no-gl #hero { min-height: 100vh; }
+html.no-gl .proj {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  top: auto;
+  left: auto;
+  right: auto;
+  max-width: 640px;
+  margin: 0 0 64px;
+}
+html.no-gl #projects { background: var(--wine); padding-top: 96px; }

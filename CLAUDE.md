@@ -1,8 +1,65 @@
 # rachelcooray.com — Next.js rebuild
 
-Rebuilding the portfolio as a Next.js (static export) site with a 3D robot
-guide (three.js) that points at content and narrates it. Replaces the
+Rebuilding the portfolio as a Next.js (static export) site. Replaces the
 Flutter app that still lives on `main`.
+
+## Current design: the badge (15 Oct 2026)
+
+`src/app/page.tsx` now renders a two-part design ported from Rachel's own
+HTML/CSS/JS prototype ("Meet Rachel_ animated portfolio prototype.html"),
+**replacing** the earlier Liquid Glass / 3D-robot-guide page described
+further down this file (that content is now historical - kept below
+because the robot code itself is still in the repo, paused, not deleted).
+
+- **Part 1 — `src/components/BadgeHero.tsx`**: a three.js scene (plain
+  `import * as THREE`, not react-three-fiber) of an ID badge on a lanyard
+  that drops in, can be dragged and tap-flipped, and whose camera walks
+  through an arched hallway as the visitor scrolls a 700vh spacer, passing
+  four "selected work" overlay cards before handing off to Part 2. The
+  badge front is a canvas texture with Rachel's real photo
+  (`intro.photo`, drawn cover-fit into a rounded-rect clip) - the
+  prototype shipped a placeholder "Your photo here" box here instead.
+  Nav (top bar + full-screen `#menu` overlay) lists all sections and
+  routes through Lenis (`scrollToTarget`/`history.pushState`), same
+  pattern as the old `SmoothLink` component.
+- **Part 2 — `src/components/Archive.tsx`**: the plain-HTML content
+  section below the hero, styled with the prototype's own `.sec`/`.entry`
+  classes (`src/app/badge.css`), not Tailwind's `Section` component. Full
+  parity with every fact that was on the old Tailwind page - the
+  prototype's own archive was a trimmed, illustrative version built
+  before most of this content existed, so this is a straight content
+  carry-over, not a trim. `.sec`/`.sec.alt` alternate ivory/paper
+  backgrounds section-to-section (Rachel: "use clear background colors
+  for sections") so sections read as distinct bands, not one long scroll.
+  Includes logos (OCTAVE/Layer1/UNIQLO/EG/TK Maxx) that existed in
+  `content.ts` but were never actually rendered on the old page - now
+  shown next to their Experience entries, per Rachel's "add all the
+  images ... that's missing from the current one."
+- **Fonts**: Instrument Serif, Manrope, IBM Plex Mono (`next/font/google`,
+  `layout.tsx`) - the prototype's own typography. Fraunces/Figtree (the
+  old design's fonts) are kept only because the case-study pages
+  (`src/app/case-studies/[slug]/page.tsx`) still use them and predate
+  this pivot.
+- **"Ask about Rachel"** (`#ask`, inside `Archive.tsx`): shipped as
+  designed (form + chips), but always shows the graceful no-backend
+  fallback message - there is no live Q&A backend, and this design's own
+  UI already degrades honestly without one, so it's shown rather than
+  hidden (the old page's section was commented out entirely pending a
+  backend - different call, see the old "Milestone 6: Q&A" note below,
+  still true: no backend exists yet).
+- **Not ported from the old page**: the impact-strip figures now live in
+  a small unlabeled `.stats` row at the very top of `Archive.tsx`
+  (keeps the click-through links) rather than their own named section.
+
+## [Historical, pre-15-Oct-2026] 3D robot guide design
+
+The sections below describe the Liquid Glass / 3D-robot-narrator design
+that `page.tsx` rendered before the badge pivot above. The robot code
+(`src/robot/`, `src/tour/`, `src/components/RobotToggle.tsx`) is still in
+the repo and still paused (see "Robot features paused" below) - none of
+it is wired into the current `page.tsx`. Kept for reference in case any
+of it is revisited; not the current source of truth for what the page
+looks like.
 
 ## Where this lives
 

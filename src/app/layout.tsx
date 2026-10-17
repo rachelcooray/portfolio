@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Fraunces, Figtree } from "next/font/google";
+import { Fraunces, Figtree, Instrument_Serif, Manrope, IBM_Plex_Mono } from "next/font/google";
 import LenisProvider from "@/components/LenisProvider";
 import "./globals.css";
+import "./badge.css";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -16,6 +17,29 @@ const figtree = Figtree({
   weight: ["400", "500", "600", "700"],
 });
 
+// Badge/archive design (15 Oct 2026) - the typography from Rachel's HTML
+// prototype ("Meet Rachel" badge-and-lanyard design), now the page's own
+// fonts. Fraunces/Figtree above stay only for the case-study pages, which
+// predate this design and weren't part of the prototype.
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  weight: ["400"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 export const metadata: Metadata = {
   title: "Rachel Cooray | AI Analyst and Researcher",
   description:
@@ -26,7 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${figtree.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${figtree.variable} ${instrumentSerif.variable} ${manrope.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text font-sans">
         <LenisProvider />
