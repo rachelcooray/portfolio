@@ -12,7 +12,14 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The old Flutter app and its contact backend are kept for reference only.
+    "client/**",
+    "server/**",
   ]),
+  {
+    // Static export with unoptimised images: next/image adds nothing here.
+    rules: { "@next/next/no-img-element": "off" },
+  },
 ]);
 
 export default eslintConfig;

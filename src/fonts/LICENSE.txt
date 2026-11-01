@@ -1,0 +1,2 @@
+Instrument Serif, Manrope and IBM Plex Mono, Latin subsets from Google Fonts.
+All three are licensed under the SIL Open Font License 1.1: https://openfontlicense.org

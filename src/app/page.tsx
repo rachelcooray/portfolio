@@ -1,14 +1,15 @@
-import FilmGate from "@/components/FilmGate";
-import BadgeHero from "@/components/BadgeHero";
-import Archive from "@/components/Archive";
+import Header from "@/components/Header";
+import Stage from "@/components/Stage";
+import Sections from "@/components/Sections";
+import AskPalette from "@/components/AskPalette";
 
 export default function Home() {
   return (
-    <FilmGate>
-      <div className="badge-page">
-        <BadgeHero />
-        <Archive />
-      </div>
-    </FilmGate>
+    <>
+      <Header />
+      <Stage />
+      <Sections />
+      <AskPalette />
+    </>
   );
 }
