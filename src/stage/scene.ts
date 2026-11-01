@@ -17,6 +17,8 @@ export type StageEls = {
   skip: HTMLButtonElement;
   hint: HTMLElement;
   cards: HTMLElement[];
+  veil: HTMLElement;
+  choose: HTMLElement;
 };
 
 export type StageOpts = {
@@ -31,7 +33,9 @@ export type StageOpts = {
   domain: string;
   degree: string;
   research: string;
+  doorLabels: string[];
   onIntroDone: () => void;
+  onEnterDoor: (i: number) => void;
 };
 
 const C = {
@@ -752,17 +756,20 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
       },
     };
   }
-  // Wall 0 is the painting behind the hero; walls 1 to 4 have doors.
-  const WALL_Z = [-5, -16, -27, -38, -49];
+  // The painting hangs behind the hero; the hall of doors lies beyond it.
+  const PAINT_Z = -5;
+  const HALL_Z = -16;
+  const DOOR_X = [-3.45, -1.15, 1.15, 3.45];
   const builders = [networkSculpture, boundarySculpture, groundingSculpture, blocksSculpture];
   const STOPS = [150, 230, 310, 390];
 
+  // Each sculpture waits in the room behind its door.
   const sculptures: (Sculpture & { shadow: THREE.Mesh })[] = builders.map((b, i) => {
     const { g, update } = b();
     scene.add(g);
     const side = i % 2 === 0 ? -1 : 1;
-    g.scale.setScalar(0.8);
-    return { g, update, side, z: WALL_Z[i] - 8, shadow: blob(3.8, 3.8) };
+    g.scale.setScalar(0.42);
+    return { g, update, side, z: HALL_Z - 3.4, shadow: blob(2, 2) };
   });
 
   // ------------------------------------------------------------------
@@ -773,8 +780,6 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
   const wallM = track(std(C.wall, { roughness: 0.95, emissive: C.wall, emissiveIntensity: 0.4 }));
   const skirtM = track(std("#CDBFA5", { roughness: 0.9, emissive: "#CDBFA5", emissiveIntensity: 0.3 }));
   const cherryM = track(new THREE.MeshPhysicalMaterial({ color: C.cherry, roughness: 0.35, clearcoat: 0.8, clearcoatRoughness: 0.2 }));
-  const doorM = track(new THREE.MeshPhysicalMaterial({ color: C.accent, roughness: 0.38, clearcoat: 0.9, clearcoatRoughness: 0.18 }));
-  const panelM = track(new THREE.MeshPhysicalMaterial({ color: "#35587D", roughness: 0.4, clearcoat: 0.9, clearcoatRoughness: 0.18 }));
   const brassM = track(std(C.brass, { metalness: 0.75, roughness: 0.32 }));
 
   const WALL_W = 44,
@@ -854,58 +859,132 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
   const glaze = new THREE.Mesh(track(new THREE.PlaneGeometry(FRAME_W * 2, FRAME_T - FRAME_B)), glazeMat);
   glaze.position.set(0, (FRAME_B + FRAME_T) / 2, 0.08);
   paintingWall.add(glaze);
-  paintingWall.position.z = WALL_Z[0];
+  paintingWall.position.z = PAINT_Z;
   scene.add(paintingWall);
 
-  // Door walls.
-  const DOOR_HW = 1.5,
-    DOOR_H = 4.5;
-  type Door = { g: THREE.Group; left: THREE.Group; right: THREE.Group };
-  const doors: Door[] = [];
-  for (let k = 1; k < WALL_Z.length; k++) {
-    const g = wallWithHole(DOOR_HW, FLOOR_Y, FLOOR_Y + DOOR_H);
-    // architrave
-    const aw = 0.2,
-      ad = 0.44;
-    const posts: [number, number, number, number][] = [
-      [-(DOOR_HW + aw / 2), FLOOR_Y + (DOOR_H + aw) / 2, aw, DOOR_H + aw],
-      [DOOR_HW + aw / 2, FLOOR_Y + (DOOR_H + aw) / 2, aw, DOOR_H + aw],
-      [0, FLOOR_Y + DOOR_H + aw / 2, DOOR_HW * 2 + aw * 2, aw],
-    ];
-    for (const [x, y, w, h] of posts) {
-      const m = box(w, h, ad, cherryM);
-      m.position.set(x, y, -WALL_T / 2);
-      g.add(m);
-    }
-    const leaf = (side: number) => {
-      const pivot = new THREE.Group();
-      pivot.position.set(side * DOOR_HW, FLOOR_Y, -WALL_T / 2);
-      const lw = DOOR_HW - 0.01;
-      const body = box(lw, DOOR_H - 0.02, 0.09, doorM);
-      body.position.set(-side * (lw / 2), DOOR_H / 2, 0);
-      pivot.add(body);
-      for (const zf of [0.055, -0.055]) {
-        for (const [py, ph] of [
-          [DOOR_H * 0.68, DOOR_H * 0.42],
-          [DOOR_H * 0.24, DOOR_H * 0.3],
-        ] as [number, number][]) {
-          const pn = box(lw * 0.66, ph, 0.02, panelM);
-          pn.position.set(-side * (lw / 2), py, zf);
-          pivot.add(pn);
-        }
-        const handle = new THREE.Mesh(track(new THREE.CylinderGeometry(0.03, 0.03, 0.36, 12)), brassM);
-        handle.position.set(-side * (lw - 0.14), DOOR_H * 0.48, zf * 1.6);
-        pivot.add(handle);
+  // The hall: four tall arched doors in lacquered colours, each with a
+  // brass nameplate, a lever handle and fine vertical grooves.
+  const DOOR_W = 1.5,
+    DOOR_RECT = 2.7;
+  const DOOR_COLORS = [C.accent, C.cherry, "#A88B5E", "#1F2E45"];
+  const frameM = track(new THREE.MeshPhysicalMaterial({ color: "#2A0A14", roughness: 0.4, clearcoat: 0.7, clearcoatRoughness: 0.25 }));
+  const grooveM = track(new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.22 }));
+  const arch = (p: THREE.Path, x0: number, w: number, rectH: number, y0: number) => {
+    p.moveTo(x0, y0);
+    p.lineTo(x0 + w, y0);
+    p.lineTo(x0 + w, y0 + rectH);
+    p.absarc(x0 + w / 2, y0 + rectH, w / 2, 0, Math.PI, false);
+    p.lineTo(x0, y0);
+    return p;
+  };
+  const hall = new THREE.Group();
+  {
+    const sh = new THREE.Shape();
+    sh.moveTo(-WALL_W / 2, FLOOR_Y);
+    sh.lineTo(WALL_W / 2, FLOOR_Y);
+    sh.lineTo(WALL_W / 2, FLOOR_Y + WALL_H);
+    sh.lineTo(-WALL_W / 2, FLOOR_Y + WALL_H);
+    sh.lineTo(-WALL_W / 2, FLOOR_Y);
+    for (const x of DOOR_X) sh.holes.push(arch(new THREE.Path(), x - DOOR_W / 2 - 0.02, DOOR_W + 0.04, DOOR_RECT, FLOOR_Y));
+    const geo = track(new THREE.ExtrudeGeometry(sh, { depth: WALL_T, bevelEnabled: false, curveSegments: 32 }));
+    geo.translate(0, 0, -WALL_T);
+    hall.add(new THREE.Mesh(geo, wallM));
+    // skirting and dado, broken at every door
+    const edges = [-WALL_W / 2, ...DOOR_X.flatMap((x) => [x - DOOR_W / 2 - 0.3, x + DOOR_W / 2 + 0.3]), WALL_W / 2];
+    for (let k = 0; k < edges.length; k += 2) {
+      const a = edges[k],
+        b = edges[k + 1],
+        len = b - a;
+      for (const zf of [0.02, -WALL_T - 0.02]) {
+        const sk = box(len, 0.2, 0.04, skirtM);
+        sk.position.set(a + len / 2, FLOOR_Y + 0.1, zf);
+        const dado = box(len, 0.03, 0.03, cherryM);
+        dado.position.set(a + len / 2, FLOOR_Y + 1.05, zf);
+        hall.add(sk, dado);
       }
-      g.add(pivot);
-      return pivot;
-    };
-    const left = leaf(-1),
-      right = leaf(1);
-    g.position.z = WALL_Z[k];
-    scene.add(g);
-    doors.push({ g, left, right });
+    }
   }
+  const plateTex = (text: string) => {
+    const c = document.createElement("canvas");
+    c.width = 512;
+    c.height = 140;
+    const x = c.getContext("2d")!;
+    const g = x.createLinearGradient(0, 0, 512, 140);
+    g.addColorStop(0, "#E2C98F");
+    g.addColorStop(0.5, "#C9A964");
+    g.addColorStop(1, "#A8873F");
+    x.fillStyle = g;
+    x.fillRect(0, 0, 512, 140);
+    x.strokeStyle = "rgba(60,40,10,0.55)";
+    x.lineWidth = 4;
+    x.strokeRect(10, 10, 492, 120);
+    x.fillStyle = "rgba(255,245,215,0.5)";
+    x.font = '600 52px "IBM Plex Mono", ui-monospace, monospace';
+    x.textAlign = "center";
+    x.textBaseline = "middle";
+    x.fillText(text.toUpperCase(), 257, 73);
+    x.fillStyle = "#3A2608";
+    x.fillText(text.toUpperCase(), 256, 71);
+    const t = track(new THREE.CanvasTexture(c));
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    return t;
+  };
+  type Door = { pivot: THREE.Group; leaf: THREE.Mesh; x: number };
+  const doors: Door[] = DOOR_X.map((dx, i) => {
+    // architrave: an arched ring
+    const ring = arch(new THREE.Shape(), dx - DOOR_W / 2 - 0.2, DOOR_W + 0.4, DOOR_RECT, FLOOR_Y) as THREE.Shape;
+    ring.holes.push(arch(new THREE.Path(), dx - DOOR_W / 2 - 0.02, DOOR_W + 0.04, DOOR_RECT, FLOOR_Y));
+    const rg = track(new THREE.ExtrudeGeometry(ring, { depth: 0.14, bevelEnabled: true, bevelSize: 0.02, bevelThickness: 0.02, bevelSegments: 2, curveSegments: 32 }));
+    const frame = new THREE.Mesh(rg, frameM);
+    frame.position.z = -0.04;
+    hall.add(frame);
+
+    const lacquer = track(
+      new THREE.MeshPhysicalMaterial({ color: DOOR_COLORS[i], roughness: 0.36, clearcoat: 0.9, clearcoatRoughness: 0.16 }),
+    );
+    const lw = DOOR_W - 0.03;
+    const leafShape = arch(new THREE.Shape(), 0, lw, DOOR_RECT, 0) as THREE.Shape;
+    const lg = track(new THREE.ExtrudeGeometry(leafShape, { depth: 0.07, bevelEnabled: false, curveSegments: 32 }));
+    lg.translate(0, 0, -0.035);
+    const leaf = new THREE.Mesh(lg, lacquer);
+    const pivot = new THREE.Group();
+    pivot.position.set(dx - lw / 2, FLOOR_Y, -WALL_T / 2);
+    pivot.add(leaf);
+    for (const zf of [0.037, -0.037]) {
+      for (let k = 1; k < 10; k++) {
+        const gr = box(0.012, DOOR_RECT - 0.28, 0.004, grooveM);
+        gr.position.set((lw * k) / 10, 0.14 + (DOOR_RECT - 0.28) / 2, zf);
+        pivot.add(gr);
+      }
+      const side = zf > 0 ? 1 : -1;
+      const backing = box(0.66, 0.2, 0.012, brassM);
+      backing.position.set(lw / 2, DOOR_RECT * 0.86, zf + side * 0.006);
+      pivot.add(backing);
+      const plate = new THREE.Mesh(
+        track(new THREE.PlaneGeometry(0.62, 0.17)),
+        track(new THREE.MeshStandardMaterial({ map: plateTex(o.doorLabels[i] ?? ""), metalness: 0.55, roughness: 0.35 })),
+      );
+      plate.position.set(lw / 2, DOOR_RECT * 0.86, zf + side * 0.0135);
+      if (side < 0) plate.rotation.y = Math.PI;
+      pivot.add(plate);
+      const rose = new THREE.Mesh(track(new THREE.CylinderGeometry(0.05, 0.05, 0.02, 20)), brassM);
+      rose.rotation.x = Math.PI / 2;
+      rose.position.set(lw - 0.17, 1.3, zf + side * 0.01);
+      const lever = box(0.24, 0.035, 0.035, brassM);
+      lever.position.set(lw - 0.27, 1.3, zf + side * 0.045);
+      pivot.add(rose, lever);
+    }
+    hall.add(pivot);
+    // a warm light inside each room
+    const lamp = new THREE.PointLight(0xffe2c4, 2.2, 7, 1.6);
+    lamp.position.set(dx, FLOOR_Y + 2.2, -3);
+    hall.add(lamp);
+    return { pivot, leaf, x: dx };
+  });
+  hall.position.z = HALL_Z;
+  scene.add(hall);
+  const doorLeaves = doors.map((d) => d.leaf);
 
   // ------------------------------------------------------------------
   // Layout: everything is placed by screen fraction, so it holds up on
@@ -981,9 +1060,9 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
     els.index.style.setProperty("--fs", `${clamp(Math.round((indexH / 13) * 0.5), 9, 15)}px`);
 
     // Sculptures
-    sculptures.forEach((s) => {
-      s.g.position.set(s.side * 2.3, 0, s.z);
-      s.shadow.position.set(s.side * 2.3, FLOOR_Y + 0.01, s.z);
+    sculptures.forEach((s, i) => {
+      s.g.position.set(DOOR_X[i], FLOOR_Y + 1.5, s.z);
+      s.shadow.position.set(DOOR_X[i], FLOOR_Y + 0.01, s.z);
     });
 
     // Camera path, keyed in viewport-height percent of scroll.
@@ -991,22 +1070,19 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
     K.push([0, CAM0.clone(), LOOK0.clone()]);
     K.push([26, new THREE.Vector3(0.2, 1.3, 7.2), new THREE.Vector3(0.1, 1.2, -5)]);
     K.push([62, new THREE.Vector3(0, 3.0, -0.6), new THREE.Vector3(0, 1.4, -12)]);
-    K.push([100, new THREE.Vector3(0, 1.4, -4.6), new THREE.Vector3(0, 0.6, -14)]);
-    sculptures.forEach((s, i) => {
-      const c = STOPS[i];
-      const cx = s.side * 0.55;
-      const cam = new THREE.Vector3(cx, 1.1, s.z + 6.2);
-      const look = new THREE.Vector3(cx, -0.1, s.z);
-      K.push([c - 24, cam, look]);
-      K.push([c + 24, cam.clone(), look.clone()]);
-      // walk to the centre of the next doorway before passing through it
-      const doorZ = WALL_Z[i + 1];
-      const nextC = i < STOPS.length - 1 ? STOPS[i + 1] - 24 : 470;
-      const mid = c + 24 + (nextC - (c + 24)) * 0.55;
-      K.push([mid, new THREE.Vector3(0, 1.2, doorZ + 2.2), new THREE.Vector3(0, 1.0, doorZ - 8)]);
+    K.push([100, new THREE.Vector3(0, 1.0, -4.6), new THREE.Vector3(0, -0.6, -16)]);
+    const overviewCam = new THREE.Vector3(0, -0.1, HALL_Z + 11.2);
+    const overviewLook = new THREE.Vector3(0, -1.3, HALL_Z);
+    K.push([122, overviewCam.clone(), overviewLook.clone()]);
+    STOPS.forEach((c, i) => {
+      const side = i % 2 === 0 ? 1 : -1; // card on the right: stand right of the door
+      const cam = new THREE.Vector3(DOOR_X[i] + side * 1.1, -0.45, HALL_Z + 5.7);
+      const look = new THREE.Vector3(DOOR_X[i] + side * 0.35, -1.45, HALL_Z);
+      K.push([c - 22, cam, look]);
+      K.push([c + 22, cam.clone(), look.clone()]);
     });
-    K.push([470, new THREE.Vector3(0, 1.2, -54), new THREE.Vector3(0, 1.2, -80)]);
-    K.push([900, new THREE.Vector3(0, 1.2, -54), new THREE.Vector3(0, 1.2, -80)]);
+    K.push([438, overviewCam.clone(), overviewLook.clone()]);
+    K.push([900, overviewCam.clone(), overviewLook.clone()]);
     keys = K;
   }
   function camAt(v: number, pos: THREE.Vector3, look: THREE.Vector3) {
@@ -1130,6 +1206,46 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
     ray.setFromCamera(ndc, camera);
     return ray.intersectObjects([leafL, leafR], false).length > 0;
   };
+  let hoverDoor = -1;
+  type Entering = { i: number; start: number; t: number; from: THREE.Vector3; fired: boolean };
+  let entering: Entering | null = null;
+  const hallActive = () => {
+    const v = (window.scrollY / (window.innerHeight || 1)) * 100;
+    return introDone && v > 100 && v < 480;
+  };
+  const doorAt = () => {
+    ray.setFromCamera(ndc, camera);
+    const hits = ray.intersectObjects(doorLeaves, false);
+    return hits.length ? doorLeaves.indexOf(hits[0].object as THREE.Mesh) : -1;
+  };
+  const enterDoor = (i: number) => {
+    if (entering || i < 0) return;
+    entering = { i, start: performance.now(), t: 0, from: camera.position.clone(), fired: false };
+    root.classList.add("entering");
+    document.documentElement.style.overflow = "hidden";
+  };
+  const resetEntering = () => {
+    entering = null;
+    root.classList.remove("entering");
+    document.documentElement.style.overflow = "";
+    els.veil.style.transition = "opacity 0.7s";
+    els.veil.style.opacity = "0";
+    window.setTimeout(() => (els.veil.style.transition = ""), 800);
+  };
+  const onEnterEvent = (e: Event) => enterDoor((e as CustomEvent<{ i: number }>).detail.i);
+  const onDoneEvent = () => resetEntering();
+  const onPageShow = () => resetEntering();
+  window.addEventListener("rc:enter-door", onEnterEvent);
+  window.addEventListener("rc:door-done", onDoneEvent);
+  window.addEventListener("pageshow", onPageShow);
+  const onClick = (e: MouseEvent) => {
+    if (!hallActive() || entering) return;
+    if ((e.target as HTMLElement).closest("a, button, input, [role=dialog]")) return;
+    ndc.x = (e.clientX / window.innerWidth) * 2 - 1;
+    ndc.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    enterDoor(doorAt());
+  };
+  window.addEventListener("click", onClick);
   const onDown = (e: PointerEvent) => {
     if (!interactive || e.button > 0) return;
     const t = e.target as HTMLElement;
@@ -1150,8 +1266,14 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
   const onMove = (e: PointerEvent) => {
     mx = (e.clientX / window.innerWidth) * 2 - 1;
     my = (e.clientY / window.innerHeight) * 2 - 1;
-    if (!interactive) return;
     setNdc(e);
+    if (!interactive) {
+      if (hallActive() && !entering && !(e.target as HTMLElement).closest?.("a, button")) {
+        hoverDoor = doorAt();
+        canvas.style.cursor = hoverDoor >= 0 ? "pointer" : "";
+      } else hoverDoor = -1;
+      return;
+    }
     if (dragging) {
       if (downAt && Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 6) downAt.moved = true;
       ray.setFromCamera(ndc, camera);
@@ -1166,6 +1288,10 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
     } else if (!(e.target as HTMLElement).closest?.("a, button")) {
       canvas.style.cursor = hitsBadge() ? "grab" : "";
     }
+    if (hallActive() && !entering && !(e.target as HTMLElement).closest?.("a, button")) {
+      hoverDoor = doorAt();
+      canvas.style.cursor = hoverDoor >= 0 ? "pointer" : "";
+    } else hoverDoor = -1;
   };
   let flipTarget = 0;
   const onUp = () => {
@@ -1337,6 +1463,20 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
 
     // Camera
     camAt(v, tPos, tLook);
+    if (entering) {
+      entering.t = (now - entering.start) / 1000 / 1.5;
+      const d = doors[entering.i];
+      const a = easeInOut(clamp(entering.t / 0.55, 0, 1));
+      const b = easeInOut(sstep(0.45, 1, entering.t));
+      tPos.lerpVectors(entering.from, new THREE.Vector3(d.x, -1.1, HALL_Z + 2.4), a);
+      tPos.lerp(new THREE.Vector3(d.x + 0.2, -1.2, HALL_Z - 2.2), b);
+      tLook.set(d.x, -1.3, HALL_Z - 6);
+      els.veil.style.opacity = sstep(0.62, 1, entering.t).toFixed(3);
+      if (entering.t >= 1 && !entering.fired) {
+        entering.fired = true;
+        o.onEnterDoor(entering.i);
+      }
+    }
     const k = 1 - Math.exp(-dt * 6);
     camPos.lerp(tPos, k);
     camLook.lerp(tLook, k);
@@ -1351,16 +1491,19 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
       s.g.visible = v > 40;
     });
 
-    // Walking into the painting, then through each set of doors.
+    // Walking into the painting.
     glazeMat.opacity = 0.32 * (1 - sstep(30, 70, v));
     glaze.visible = glazeMat.opacity > 0.01;
+
+    // Each featured door eases open to show what is behind it. A door the
+    // visitor chose swings wide while the camera flies through.
     doors.forEach((d, i) => {
-      const from = i < STOPS.length - 1 ? STOPS[i] + 18 : STOPS[i] + 20;
-      const open = easeInOut(sstep(from, from + 20, v));
-      const ang = open * THREE.MathUtils.degToRad(100);
-      d.left.rotation.y = ang;
-      d.right.rotation.y = -ang;
+      let open = bump(v, STOPS[i], 14, 18) * 0.62;
+      if (entering && entering.i === i) open = Math.max(open, easeInOut(sstep(0.15, 0.95, entering.t)));
+      const hover = hoverDoor === i && !entering ? 0.06 : 0;
+      d.pivot.rotation.y += ((open + hover) * THREE.MathUtils.degToRad(100) - d.pivot.rotation.y) * 0.14;
     });
+    show(els.choose, bump(v, 452, 14, 12) * (entering ? 0 : 1));
 
     // DOM overlays
     interactive = introDone && v < 30;
@@ -1435,6 +1578,10 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
     window.removeEventListener("pointerup", onUp);
     window.removeEventListener("pointercancel", onUp);
     window.removeEventListener("keydown", onKey);
+    window.removeEventListener("click", onClick);
+    window.removeEventListener("rc:enter-door", onEnterEvent);
+    window.removeEventListener("rc:door-done", onDoneEvent);
+    window.removeEventListener("pageshow", onPageShow);
     els.skip.removeEventListener("click", onSkip);
     els.index.removeEventListener("focusin", onIndexFocus);
     canvas.removeEventListener("webglcontextlost", onLost);

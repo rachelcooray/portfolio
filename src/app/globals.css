@@ -584,6 +584,40 @@ kbd {
   border-radius: 50%;
 }
 
+/* Door transition and hall hint */
+.door-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: radial-gradient(ellipse at center, #36091a 0%, #1e0b12 75%);
+  opacity: 0;
+  pointer-events: none;
+}
+html:not(.gl) .door-veil,
+html:not(.gl) .choose-hint {
+  display: none;
+}
+.choose-hint {
+  position: fixed;
+  left: 50%;
+  top: calc(var(--hdr) + 28px);
+  transform: translateX(-50%);
+  z-index: 3;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.4vw, 52px);
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.gl.entering .work-card,
+.gl.entering .choose-hint {
+  opacity: 0 !important;
+  transition: opacity 0.3s;
+}
+
 /* Selected work, as overlays on the 3D walk-through */
 .gl .work {
   position: absolute;
@@ -1867,6 +1901,24 @@ html:not(.rm) .ask-dialog.open {
 /* Case studies                                                     */
 /* ---------------------------------------------------------------- */
 
+html:not(.rm) .cs::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #1e0b12;
+  pointer-events: none;
+  animation: veilOut 0.9s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+@keyframes veilOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 .cs-top {
   display: flex;
   justify-content: space-between;

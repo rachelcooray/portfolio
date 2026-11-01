@@ -48,8 +48,9 @@ Missing facts stay missing. Do not fill gaps.
 
 ## Design
 
-Ivory and ink with one steel-blue accent taken from the blouse in her photo
-(`--accent #2C4A6B`, `--sky #CFDCE8`). Instrument Serif, Manrope, IBM Plex
+Blue, beige and black cherry: beige ground, black cherry ink and panels,
+steel blue accent from the blouse in her photo (`--accent #2C4A6B`,
+`--cherry #4A1024`). Instrument Serif, Manrope, IBM Plex
 Mono. Fine grids, dot matrices, hairlines. No neon, no AI clichés.
 
 ## Architecture
@@ -67,7 +68,10 @@ Mono. Fine grids, dot matrices, hairlines. No neon, no AI clichés.
   that is pulled toward the camera, flips and opens. The real DOM index is
   mapped onto the right leaf every frame with a CSS `matrix3d` homography,
   so links stay keyboard and screen reader reachable. Scrolling walks the
-  camera past four abstract data sculptures, one per work card.
+  camera into a framed painting behind her and on to a hall of four arched
+  doors (OCTAVE, Research, AI builds, Layer1). Each featured door eases open
+  on a data sculpture; clicking a door or its card link flies through it
+  into a black cherry veil and opens the case study.
 - `src/components/Header.tsx`: persistent nav listing every section, Ask
   button, menu overlay below 1180px.
 - `src/components/AskPalette.tsx` + `src/lib/ask.ts`: command bar on `/`,

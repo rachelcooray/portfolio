@@ -1,11 +1,25 @@
 "use client";
 
 import { Fragment, useEffect, useRef, useState, type MouseEvent } from "react";
-import Link from "next/link";
 import { identity, sections, selectedWork, education, research } from "@/content/content";
 import { goToSection, openAsk } from "@/lib/ask";
 
 const INTRO_KEY = "rc-intro-seen";
+
+// Engraved on each door's brass nameplate, in selected work order.
+const DOOR_LABELS = ["OCTAVE", "Research", "AI builds", "Layer1"];
+
+// Where each door leads. Case studies are separate pages; the generative AI
+// door lands on the Projects section.
+function enterTarget(i: number) {
+  const href = selectedWork[i]?.href ?? "/";
+  if (href.startsWith("/")) {
+    window.location.assign(href);
+    return;
+  }
+  goToSection("projects");
+  window.setTimeout(() => window.dispatchEvent(new CustomEvent("rc:door-done")), 250);
+}
 
 function markIntroSeen() {
   try {
@@ -40,6 +54,8 @@ export default function Stage() {
   const indexRef = useRef<HTMLElement>(null);
   const skipRef = useRef<HTMLButtonElement>(null);
   const hintRef = useRef<HTMLParagraphElement>(null);
+  const veilRef = useRef<HTMLDivElement>(null);
+  const chooseRef = useRef<HTMLParagraphElement>(null);
   const workRef = useRef<HTMLDivElement>(null);
   const [flipped, setFlipped] = useState(false);
 
@@ -71,6 +87,8 @@ export default function Stage() {
               skip: skipRef.current,
               hint: hintRef.current,
               cards,
+              veil: veilRef.current!,
+              choose: chooseRef.current!,
             },
             {
               portraitSrc: identity.portrait,
@@ -84,7 +102,9 @@ export default function Stage() {
               domain: identity.domain,
               degree: "BSc Computer Science, First",
               research: "IEEE ICAHS 2025",
+              doorLabels: DOOR_LABELS,
               onIntroDone: markIntroSeen,
+              onEnterDoor: enterTarget,
             },
           );
         } catch (err) {
@@ -225,6 +245,10 @@ export default function Stage() {
       <button type="button" className="skip-intro" ref={skipRef}>
         Skip intro
       </button>
+      <div className="door-veil" ref={veilRef} aria-hidden="true" />
+      <p className="choose-hint" ref={chooseRef} aria-hidden="true">
+        Choose a door
+      </p>
       <p className="scroll-hint" ref={hintRef} aria-hidden="true">
         <span>Drag the badge</span>
         <span>Tap to flip</span>
@@ -244,22 +268,22 @@ export default function Stage() {
               </p>
               <h3>{w.title}</h3>
               <p>{w.body}</p>
-              {w.href.startsWith("/") ? (
-                <Link className="textlink" href={w.href}>
-                  {w.linkLabel}
-                </Link>
-              ) : (
-                <a
-                  className="textlink"
-                  href={w.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    goToSection("projects");
-                  }}
-                >
-                  {w.linkLabel}
-                </a>
-              )}
+              <a
+                className="textlink"
+                href={w.href}
+                onClick={(e) => {
+                  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // new tab still works
+                  e.preventDefault();
+                  // In 3D, walk through this card's door first.
+                  if (document.documentElement.classList.contains("stage-ready")) {
+                    window.dispatchEvent(new CustomEvent("rc:enter-door", { detail: { i } }));
+                  } else {
+                    enterTarget(i);
+                  }
+                }}
+              >
+                {w.linkLabel}
+              </a>
             </article>
           ))}
         </div>
