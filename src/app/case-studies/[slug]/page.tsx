@@ -18,96 +18,71 @@ export async function generateMetadata({ params }: PageProps<"/case-studies/[slu
   return {
     title: `${study.title} | Rachel Cooray`,
     description: study.context,
+    alternates: { canonical: `/case-studies/${study.slug}` },
+    openGraph: { title: study.title, description: study.context, images: ["/og.png"] },
   };
+}
+
+function List({ title, items }: { title: string; items: string[] }) {
+  return (
+    <section className="cs-block">
+      <h2>{title}</h2>
+      <ul>
+        {items.map((it, i) => (
+          <li key={i}>{it}</li>
+        ))}
+      </ul>
+    </section>
+  );
 }
 
 export default async function CaseStudyPage({ params }: PageProps<"/case-studies/[slug]">) {
   const { slug } = await params;
   const study = findStudy(slug);
   if (!study) notFound();
+  const others = caseStudies.filter((c) => c.slug !== study.slug);
 
   return (
-    <main className="px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-[680px]">
-        <Link href="/#work" className="text-sm text-accent hover:text-accent-hover">
-          ← Back to rachelcooray.com
+    <main className="cs">
+      <header className="cs-top">
+        <Link href="/" className="mark" aria-label="Rachel Cooray, home">
+          RC
         </Link>
+        <Link href="/#work" className="cs-back">
+          Back to rachelcooray.com
+        </Link>
+      </header>
+      <article className="cs-body">
+        <p className="sec-num">{study.category}</p>
+        <h1>{study.title}</h1>
+        <p className="cs-sub">{study.subtitle}</p>
+        <span className="hairline in" aria-hidden="true" />
 
-        <p className="text-sm font-semibold text-text-faint uppercase tracking-wide mt-8 mb-2">
-          {study.category}
-        </p>
-        <h1 className="font-heading italic text-[32px] md:text-[40px] font-semibold mb-2 text-text">
-          {study.title}
-        </h1>
-        <p className="text-base text-text-muted mb-10">{study.subtitle}</p>
+        <section className="cs-block">
+          <h2>Context</h2>
+          <p>{study.context}</p>
+        </section>
+        <section className="cs-block">
+          <h2>Problem</h2>
+          <p>{study.problem}</p>
+        </section>
+        <List title="Approach" items={study.approach} />
+        <List title="Key decisions" items={study.keyDecisions} />
+        <List title="Outcome" items={study.outcome} />
+        <blockquote className="cs-learned">
+          <p className="sec-num">What I learned</p>
+          <p>{study.learned}</p>
+        </blockquote>
 
-        <div className="flex flex-wrap gap-8 mb-12">
-          {study.metrics.map((m) => (
-            <div key={m.label}>
-              <div className="font-heading italic text-2xl font-semibold text-accent">
-                {m.value}
-              </div>
-              <div className="text-sm text-text-faint">{m.label}</div>
-            </div>
+        <nav className="cs-next" aria-label="Other case studies">
+          {others.map((o) => (
+            <Link key={o.slug} href={`/case-studies/${o.slug}`}>
+              <span className="sec-num">{o.category}</span>
+              <span>{o.title}</span>
+            </Link>
           ))}
-        </div>
-
-        <section className="mb-10">
-          <h2 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
-            Context
-          </h2>
-          <p className="text-[15px] text-text-muted leading-relaxed">{study.context}</p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
-            Problem
-          </h2>
-          <p className="text-[15px] text-text-muted leading-relaxed">{study.problem}</p>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
-            Approach
-          </h2>
-          <ul className="list-disc list-inside text-[15px] text-text-muted leading-relaxed space-y-2">
-            {study.approach.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
-            Key decisions
-          </h2>
-          <ul className="list-disc list-inside text-[15px] text-text-muted leading-relaxed space-y-2">
-            {study.keyDecisions.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mb-10">
-          <h2 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
-            Outcome
-          </h2>
-          <ul className="list-disc list-inside text-[15px] text-text-muted leading-relaxed space-y-2">
-            {study.outcome.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="mb-4">
-          <h2 className="text-sm font-semibold text-text-faint uppercase tracking-wide mb-3">
-            What she learned
-          </h2>
-          <p className="font-heading italic text-[19px] leading-relaxed text-text">
-            &ldquo;{study.learned}&rdquo;
-          </p>
-        </section>
-      </div>
+        </nav>
+      </article>
     </main>
   );
 }
