@@ -1,311 +1,95 @@
-# rachelcooray.com — Next.js rebuild
+# rachelcooray.com
 
-Rebuilding the portfolio as a Next.js (static export) site. Replaces the
-Flutter app that still lives on `main`.
-
-## Current design: the badge (15 Oct 2026)
-
-`src/app/page.tsx` now renders a two-part design ported from Rachel's own
-HTML/CSS/JS prototype ("Meet Rachel_ animated portfolio prototype.html"),
-**replacing** the earlier Liquid Glass / 3D-robot-guide page described
-further down this file (that content is now historical - kept below
-because the robot code itself is still in the repo, paused, not deleted).
-
-- **Part 1 — `src/components/BadgeHero.tsx`**: a three.js scene (plain
-  `import * as THREE`, not react-three-fiber) of an ID badge on a lanyard
-  that drops in, can be dragged and tap-flipped, and whose camera walks
-  through an arched hallway as the visitor scrolls a 700vh spacer, passing
-  four "selected work" overlay cards before handing off to Part 2. The
-  badge front is a canvas texture with Rachel's real photo
-  (`intro.photo`, drawn cover-fit into a rounded-rect clip) - the
-  prototype shipped a placeholder "Your photo here" box here instead.
-  Nav (top bar + full-screen `#menu` overlay) lists all sections and
-  routes through Lenis (`scrollToTarget`/`history.pushState`), same
-  pattern as the old `SmoothLink` component.
-- **Part 2 — `src/components/Archive.tsx`**: the plain-HTML content
-  section below the hero, styled with the prototype's own `.sec`/`.entry`
-  classes (`src/app/badge.css`), not Tailwind's `Section` component. Full
-  parity with every fact that was on the old Tailwind page - the
-  prototype's own archive was a trimmed, illustrative version built
-  before most of this content existed, so this is a straight content
-  carry-over, not a trim. `.sec`/`.sec.alt` alternate ivory/paper
-  backgrounds section-to-section (Rachel: "use clear background colors
-  for sections") so sections read as distinct bands, not one long scroll.
-  Includes logos (OCTAVE/Layer1/UNIQLO/EG/TK Maxx) that existed in
-  `content.ts` but were never actually rendered on the old page - now
-  shown next to their Experience entries, per Rachel's "add all the
-  images ... that's missing from the current one."
-- **Fonts**: Instrument Serif, Manrope, IBM Plex Mono (`next/font/google`,
-  `layout.tsx`) - the prototype's own typography. Fraunces/Figtree (the
-  old design's fonts) are kept only because the case-study pages
-  (`src/app/case-studies/[slug]/page.tsx`) still use them and predate
-  this pivot.
-- **"Ask about Rachel"** (`#ask`, inside `Archive.tsx`): shipped as
-  designed (form + chips), but always shows the graceful no-backend
-  fallback message - there is no live Q&A backend, and this design's own
-  UI already degrades honestly without one, so it's shown rather than
-  hidden (the old page's section was commented out entirely pending a
-  backend - different call, see the old "Milestone 6: Q&A" note below,
-  still true: no backend exists yet).
-- **Not ported from the old page**: the impact-strip figures now live in
-  a small unlabeled `.stats` row at the very top of `Archive.tsx`
-  (keeps the click-through links) rather than their own named section.
-
-## [Historical, pre-15-Oct-2026] 3D robot guide design
-
-The sections below describe the Liquid Glass / 3D-robot-narrator design
-that `page.tsx` rendered before the badge pivot above. The robot code
-(`src/robot/`, `src/tour/`, `src/components/RobotToggle.tsx`) is still in
-the repo and still paused (see "Robot features paused" below) - none of
-it is wired into the current `page.tsx`. Kept for reference in case any
-of it is revisited; not the current source of truth for what the page
-looks like.
+Next.js 16 static export (App Router, TypeScript), deployed to GitHub Pages
+from `main` by `.github/workflows/deploy.yml`.
 
 ## Where this lives
 
-- This worktree: `/Users/rachelcooray/Desktop/Portfolio/redesign-app`,
-  branch `redesign`. Nested inside the main worktree's folder (not a
-  sibling) because the dev-server tooling's sandbox can only reach paths
-  under the session root — a sibling folder (`../Portfolio-redesign`)
-  failed with a `getcwd`/permission error. Excluded from `main`'s git
-  status via `.git/info/exclude` (local-only, not committed to `main`).
-- The stable, currently-deployed site: `/Users/rachelcooray/Desktop/Portfolio`,
-  branch `main`. Don't touch it from here — they're separate worktrees of
-  the same repo, sharing git history but not working-tree files.
-- Dev server: `.claude/launch.json` lives at the session root
-  (`/Users/rachelcooray/Desktop/Portfolio/.claude/launch.json`), not in
-  this worktree — it `cd`s into `redesign-app` and prepends nvm's Node
-  to PATH before running `npm run dev`. If dependencies are ever missing
-  after a fresh checkout of this worktree (node_modules is gitignored,
-  correctly), run `npm install` here first.
-- Robot prototype lab (reference only, never edit): `~/Desktop/Portfolio-robot`.
-  Also pushed to `origin/robot-lab` on this same repo (orphan branch) —
-  that's where Milestone 3 actually pulled the robot source/model/draco
-  files from (`git archive origin/robot-lab -- <paths> | tar -x`), not a
-  manual copy from the lab folder.
-- `REDESIGN_HANDOFF.md` (repo root) — palette, typography, original
-  section order, and copy decided during the Flutter polishing session.
-  Mostly superseded now by decisions made directly in this worktree (see
-  below) — treat it as historical context, not the current source of truth.
+- `/Users/rachelcooray/Desktop/Portfolio/redesign-app`, branch `redesign`:
+  all new work. Nested inside the main worktree's folder because the dev
+  server sandbox can only reach paths under the session root.
+- `/Users/rachelcooray/Desktop/Portfolio`, branch `main`: the deployed site.
+  Never push to `main` without Rachel's approval.
+- Commit messages carry no Co-Authored-By Claude trailer.
 
-## Node version
+## Node
 
-System Node was `20.3.0` — too old for current Next.js (`>=20.9.0`).
-Installed `nvm` and Node LTS (`v24.21.0`) for this project; `.nvmrc` pins
-`lts/*`. System `/usr/local/bin/node` is untouched. Every shell command in
-this repo needs nvm sourced first:
+System Node is too old. Source nvm first:
 ```bash
 export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; nvm use --lts
 ```
 
-## Stack
-
-Next.js 16 (App Router, static export via `output: "export"`), TypeScript,
-Tailwind CSS v4, three.js + GSAP, Lenis (page-mode smooth scroll),
-Whisper (local, via `whisper` CLI) + macOS `say` for voice generation.
-
-## Dev server uses webpack, not Turbopack (11 Oct 2026)
-
-`next dev` defaults to Turbopack in Next 16, but Turbopack's dev-mode
-`next/font/google` resolution (`@vercel/turbopack-next/internal/font/google/font`)
-fails to resolve in this sandboxed environment specifically - reproduces
-even with a clean `.next` cache, for both fonts, every `@font-face` rule.
-`npm run dev` now runs `next dev --webpack` to route around it; confirmed
-clean (HTTP 200, real page content, no font errors) under webpack where
-the same request 500'd under Turbopack. **Production builds (`npm run
-build`) already use Turbopack successfully and are unaffected** - this
-is a dev-server-only issue, not a reason to change the build pipeline.
-If a future Next.js/Turbopack version fixes this, `--webpack` can be
-dropped from the `dev` script to get Turbopack's faster dev rebuilds back.
-
 ## Commands
 
-- `npm run dev` — dev server.
-- `npm run build` — static export to `./out`.
-- `npm run knowledge` — regenerate `knowledge/knowledge.md` from
-  `src/content/content.ts` (run after any content change).
-- `npm run voice` — regenerate `public/audio/*` from the live tour script
-  (`src/tour/buildScript.ts`). Hash-cached — only regenerates lines whose
-  text/spokenText/voice changed. Needs `say`, `ffmpeg`, `whisper` (all
-  confirmed present on this machine).
+- `npm run dev`: dev server (webpack; Turbopack dev fails on next/font here).
+- `npm run build`: static export to `./out`.
+- `npm run typecheck`, `npm run lint`.
+- `npm run knowledge`: regenerate `knowledge/knowledge.md` from content.
+- `npm run cv`: rebuild `public/rachelcooray-cv.pdf` (headless Chrome) and
+  `public/rachelcooray-cv.docx` (python-docx) from content. Fails if any
+  banned figure or phrase appears.
 
-## File layout
+## Content rules (from Rachel's brief, 1 Nov 2026)
 
-- `src/content/content.ts` — single typed source of truth for all page
-  content, tour narration, and the Q&A knowledge base. Header comment
-  explains the shape (`narration`, `inTour`, `knowledgeOnly`, `logo`).
-- `src/tour/buildScript.ts` — derives the live tour script from
-  `content.ts` + `tourOrder`, skipping any line whose narration is still
-  a `[PLACEHOLDER: ...]`.
-- `src/tour/TourController.ts` — sequences the script through the Guide:
-  audio/mouth sync, subtitle reveal, scroll-into-view, pointAt on cueWord.
-- `src/robot/Guide.ts` — framework-agnostic robot controller (ported from
-  the lab). `say()` falls back to synthesized word-timing (no audio) for
-  any line without generated `/audio/{id}.json` yet.
-- `src/robot/RobotFace.ts`, `realRobotMaterials.ts` — face + materials,
-  recolored from the lab's ink-blue to the site's burgundy accent; face
-  enlarged (eyes 2x, mouth 1.5x) per spec.
-- `src/components/Robot.tsx` — mounts Guide onto a canvas, hands the
-  instance up via `onGuideReady`.
-- `src/components/RobotToggle.tsx` — the robot UI: a waving toggle button
-  (top-right), opens a floating glass panel (canvas + subtitles +
-  Play/Skip/Sound controls) on click, starts the tour. Owns the
-  TourController. Includes an audio-autoplay unlock (plays a silent clip
-  synchronously in the click handler) since the real `audioEl.play()`
-  happens several async hops later and would otherwise get silently
-  blocked by browser autoplay policy.
-- `scripts/export-knowledge.ts`, `scripts/generate-voice.ts` — the two
-  content-derived generation scripts. Both run via `tsx`.
-- `client/`, `server/` — the old Flutter app and its contact-form backend.
-  Still present for reference (CV PDF, original images) but not part of
-  the Next.js build.
-- `.github/workflows/deploy.yml` — builds this Next.js app instead of
-  Flutter. Only fires on push to `main`.
+`src/content/content.ts` is the only source of truth for the site, the case
+studies, the Ask command bar and the CV. Never show anywhere:
 
-## Design decisions made in this worktree (supersede the handoff where they differ)
+- the 68% margin figure, the 93.75% recall figure, the old 40% query
+  efficiency claim, or any invented or unverifiable performance number;
+- stat strips or counter tiles, or any count of Layer1 clients or projects;
+- fiction writing or the novel;
+- "CIMA" in the study assistant's title or description (it appears only as a
+  qualification under Education);
+- any scholarship application or award she has not been given;
+- the verb "lead" for her OCTAVE use cases (use "own");
+- client names or confidential figures; em dashes.
 
-- **Palette**: burgundy accent kept from the handoff, but the robot's
-  colors were changed to match — panels/eyes/mouth burgundy, joints a
-  darker burgundy, shell a near-white matching the site background
-  (not the handoff's warmer paper tone).
-- **Liquid Glass**: floating UI (nav bar, robot toggle/panel/controls/
-  subtitles) uses translucent `backdrop-filter: blur() saturate()` panels
-  — see `.glass` in `globals.css`. This **replaces** the master prompt's
-  original "no frosted nav, no glassmorphism" rule; that rule is no
-  longer in effect. A slow-drifting blurred burgundy/highlighter color
-  field (`.bg-color-field` in `layout.tsx`) sits fixed behind the page so
-  the glass has something to tint from — without it the panels just look
-  grey. Respects `prefers-reduced-transparency` (solid fallback) and
-  `prefers-reduced-motion` (field stops drifting).
-- **Content breadth**: originally "show everything" (Rachel's early
-  instruction). Superseded 7 Oct 2026 by her "Page Copy, Top to Bottom"
-  doc, which restructures and trims the page deliberately — see "Page
-  copy source" below. The tour narration (`tourOrder`) stays its own
-  separate, narrower ~6-line highlights reel either way.
-- **Page copy source**: `src/content/content.ts` and `src/app/page.tsx`
-  follow Rachel's "Page Copy, Top to Bottom" doc (7 Oct 2026) section by
-  section - nav (Research · Work · Projects · Ideas · Beyond Work ·
-  Contact, in that order - note this differs from the page's own visual
-  section order, which the doc also specifies and which page.tsx follows:
-  intro → impact strip → Ideas → Research → Work → Projects → Talks →
-  Recognition → Education → Beyond work → Contact), hero copy, the new
-  Impact Strip, Research's new description/award/journal bullets, Work's
-  OCTAVE/Layer1 rewrite, Projects' featured/"More projects" split,
-  the new Talks section, Recognition's merged awards+press list,
-  Education trimmed, Beyond Work's teaching/volunteering/swimming/writing
-  consolidation, and a new Contact paragraph. Ask about Rachel is hidden
-  entirely (not just disabled) per the doc, until the Q&A backend exists.
-  Case study pages (section 12 of the doc: Distributor margin
-  optimisation, PCOS Care, A Layer1 Studio delivery) are **built** (15
-  Oct 2026) - `src/app/case-studies/[slug]/page.tsx`, a dynamic route with
-  `generateStaticParams()` for static export, reading `caseStudies` in
-  `content.ts`. That content was ported from Rachel's Google AI Studio
-  build (same source as the rest of the Phase D content port), not from
-  the original doc's bracketed placeholders. "Read the case study →"
-  links point from Research (pcos-care), Work/OCTAVE (octave), and
-  Work/Layer1 (layer1) to their respective pages.
-- **Voice**: macOS `say -v "Jamie (Premium)"` + Whisper for word timing.
-  Narration is **third person** ("She applies AI...", not "I apply AI...")
-  since Jamie is a narrator voice, not Rachel's own. "IEEE" has a
-  `spokenText` override ("I triple E") — the `say` command mispronounces
-  it literally otherwise.
-- **Entry UX (current, 11 Oct 2026)**: first-time visitors get a 20s
-  video intro (`src/components/VideoIntro.tsx`), autoplaying muted (no
-  gesture to unlock sound) with Turn on sound / Skip controls; marked
-  seen the instant it starts (`src/movie/filmState.ts`), so it never
-  autoplays again regardless of finish/skip/leave. The video itself
-  (`public/videos/intro.mp4`) is two AI-generated takes Rachel supplied,
-  concatenated with `ffmpeg -f concat` (same codec/resolution/fps, so a
-  clean copy with no re-encode). `FilmGate.tsx` is the gate/owner, same
-  role it had for the two things this replaced:
-  - **Superseded 11 Oct 2026**: the whole Movie mode system (`src/movie/`,
-    `src/components/MovieMode.tsx`) — a 3D-robot cinematic first-visit
-    sequence, 5 scenes built (cold open through OCTAVE) before being
-    swapped for the real video. Code left in place, just unrooted from
-    FilmGate, in case it's revisited.
-  - **Superseded 11 Oct 2026**: the even earlier "no autoplay, click a
-    waving robot button" entry UX from before Movie mode existed.
-- **Robot features paused 11 Oct 2026** (Rachel: "you can pause thr robot
-  features"): `RobotToggle` (the Page-mode 3D robot panel — tour
-  narration, pointAt/highlighter-on-scroll) is commented out of
-  `FilmGate.tsx`, not deleted. The video intro above is unrelated to the
-  robot and is unaffected. Re-enabling: uncomment the import and render
-  line in `FilmGate.tsx` (also restores the "Watch the intro" replay
-  button, currently dead code since nothing renders it).
-- Company logos (OCTAVE, Layer1 Studio, UNIQLO, EG On The Move, TK Maxx)
-  render next to their Experience entries — Rachel supplied these.
+Missing facts stay missing. Do not fill gaps.
 
-## Open items / TODO
+## Design
 
-From Rachel's "Page Copy, Top to Bottom" doc's own checklist (7 Oct 2026),
-plus implementation notes:
+Ivory and ink with one steel-blue accent taken from the blouse in her photo
+(`--accent #2C4A6B`, `--sky #CFDCE8`). Instrument Serif, Manrope, IBM Plex
+Mono. Fine grids, dot matrices, hairlines. No neon, no AI clichés.
 
-- **OCTAVE approval is the big one.** The Analyst role's two detail
-  bullets (four-use-case lead + "run each end to end") are her own
-  drafted wording, not invented - but her doc's checklist still lists
-  "[Confirm OCTAVE is comfortable with this level of detail]" as
-  unresolved. Built and committed on `redesign`, but **held back from
-  `main`/deploy** until she confirms. Same caveat covers the Associate
-  role's one-line bullet (doc wants different, approved wording; current
-  bullet is the older already-public text, kept rather than shown blank)
-  and the margin case study / any AI News Shorts mention.
-- IEEE Xplore/DOI link for the PCOS Care paper - not added, no link
-  supplied yet.
-- Exact MSIT Journal status (selected / accepted / in press / under
-  review) - doc presents this as an open choice; kept the existing
-  "Selected for..." wording (already public before this doc, not newly
-  invented) rather than guessing between the other two options.
-- FICTA 2027 paper ("Do LLM sales agents game incentive schemes...") -
-  doc marks it optional, publish only once comfortable; not added.
-- Student Support Worker / Class Teacher one-liners - doc wants new,
-  simpler versions; kept the existing (longer, already-public) detail
-  bullets rather than removing content pending her replacement text.
-- Gym platform and food storefront project examples (Layer1 "Examples")
-  - both bracketed "[Confirm this is Layer1 client work]" in the doc;
-  omitted entirely, not shown.
-- Link to the specific JKH swimming LinkedIn post, full LMD article
-  title, fiction/pen-name link, Sketchfab model URL, Google Scholar
-  profile - all still placeholder/missing.
-- `[PLACEHOLDER: link to her fiction/pen-name work]`,
-  `[PLACEHOLDER: Sketchfab model URL]` — footer lines hidden from render
-  until filled in.
-- No image exists yet for the Microsoft EMBRACE hackathon project.
-- No teaching-specific CV variant exists (only one CV PDF).
-- Rachel mentioned having Sri Lankan-motif decorative design assets to
-  use "where appropriate" — the sheet (`public/images/sl-motifs.png`) is
-  in place and used once (circular wreath around the hero photo, see
-  `src/components/Motif.tsx`); other placements were tried and reverted
-  (didn't read well cropped onto cards/strips).
-- Q&A section is UI-only and now **hidden entirely** (was disabled
-  buttons, per the new copy doc: don't show until the backend is live).
-  Cloudflare Worker, bundled knowledge.md, rate limiting all still to do.
-- SEO/OG image, full accessibility pass, Lighthouse check — Milestone 7,
-  not started. Meta title/description now match the copy doc exactly
-  (no em dash).
-- No `deep` narration (go-deeper chips) — only `short` tour lines exist.
-- Mobile robot framing is the same full-figure camera as desktop, just in
-  a smaller panel — not the "waist-up corner crop" the master prompt
-  originally specified. Works fine at current panel size; revisit if it
-  reads too small.
+## Architecture
 
-## Milestone status
+- `src/app/layout.tsx`: an inline head script picks the mode before first
+  paint: `gl` (3D stage) when the screen is at least 900 by 560, motion is
+  allowed, the device is not low power and WebGL exists; otherwise `lite`.
+  It also sets `rm` for reduced motion and `intro-run` or `intro-done`
+  (localStorage `rc-intro-seen`).
+- `src/components/Stage.tsx`: hero DOM (hello line, summary, the badge
+  index `<nav>`, the four selected work cards). Lazy-loads the scene in
+  `gl` mode; in `lite` mode the same markup renders as a flat CSS badge.
+- `src/stage/scene.ts`: plain three.js. Portrait assembles from pixels
+  (shader), a verlet lanyard runs from her collar to a two-leaf hinged badge
+  that is pulled toward the camera, flips and opens. The real DOM index is
+  mapped onto the right leaf every frame with a CSS `matrix3d` homography,
+  so links stay keyboard and screen reader reachable. Scrolling walks the
+  camera past four abstract data sculptures, one per work card.
+- `src/components/Header.tsx`: persistent nav listing every section, Ask
+  button, menu overlay below 1180px.
+- `src/components/AskPalette.tsx` + `src/lib/ask.ts`: command bar on `/`,
+  Cmd+K or the Ask button. Searches passages built by `buildPassages()` in
+  content.ts and quotes them; never generates text. Includes the "Walk me
+  through" tour.
+- `src/components/Sections.tsx`: every content section, with the cell-grid
+  heading reveal (only when JS is on and motion is allowed).
+- `src/app/case-studies/[slug]/page.tsx`: OCTAVE, PCOS Care, Layer1.
+- `client/`, `server/`: the old Flutter app and contact backend, reference
+  only, ignored by lint and the build.
 
-1. **Setup** — done.
-2. **Static site** — done: full palette (light + dark), typography, every
-   content section rendered with `data-guide-id`, Liquid Glass on
-   floating UI, Sri-Lanka mention in the bio.
-3. **Robot** — done: ported, recolored to burgundy, face enlarged, renders
-   live in the toggle panel.
-4. **Tour** — core working: script built from `content.ts`, sequential
-   playback, scroll-into-view + pointAt + highlighter swipe on cueWord,
-   Play/Skip/Replay/Sound controls. Not built: go-deeper chips, visitor-led
-   prompts, returning-visitor localStorage state (superseded by the
-   click-to-open model — see above).
-5. **Voice** — working for the 6 non-placeholder tour lines (Jamie
-   Premium, third person, real Whisper word timing). ElevenLabs backend
-   stubbed but not implemented.
-6. Q&A — not started.
-7. Polish — not started.
-8. Static export + deploy + README + TODO report — static export verified
-   working (`npm run build`); full deploy/README/TODO-report pass not
-   done.
+## Assets
+
+- `public/images/rachel-portrait.png`: cutout of her own photo made with the
+  macOS Vision foreground mask. Not generated or altered.
+- `public/images/rachel-badge.jpg`: head and shoulders crop of the same.
+- `public/og.png`: social preview, 1200 by 630.
+
+## Open items
+
+- Voice clip for the intro: Rachel may supply a short clip in her own voice.
+  Audio may only play after a tap. Wire it into the portrait once supplied.
+- Evidence area (LLM evaluation write-up, deployed agent): only if supplied.
+- LinkedIn Layer1 title should read "Co-founder and Developer" to match.

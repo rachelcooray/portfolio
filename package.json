@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "knowledge": "tsx scripts/export-knowledge.ts",
-    "voice": "tsx scripts/generate-voice.ts"
+    "cv": "tsx scripts/build-cv.ts && python3 scripts/build_cv_docx.py",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "gsap": "^3.12.5",
