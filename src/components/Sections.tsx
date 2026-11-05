@@ -453,10 +453,15 @@ export default function Sections() {
       </Sec>
 
       <Sec id="perspective" title={perspective.title} tone="ink">
-        <div className="essay" data-passage="perspective">
-          {perspective.paragraphs.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+        <div className="persp">
+          <figure className="persp-photo">
+            <img src={perspective.photo} alt={perspective.photoAlt} width={960} height={1200} loading="lazy" />
+          </figure>
+          <div className="essay" data-passage="perspective">
+            {perspective.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
         </div>
       </Sec>
 

@@ -71,6 +71,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
+        <link rel="preload" as="image" href="/images/rachel-portrait.png" />
       </head>
       <body>
         <LenisProvider />

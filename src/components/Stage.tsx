@@ -67,6 +67,22 @@ export default function Stage() {
     }
     let dispose: (() => void) | null = null;
     let cancelled = false;
+    // Never leave an empty stage: if the scene code has not arrived in time,
+    // or the scene reports it cannot draw, drop to the flat badge, which
+    // shows the same photo as a plain image. A background tab pauses frames,
+    // so once the scene exists it decides for itself.
+    const fallBack = () => {
+      if (cancelled) return;
+      cancelled = true;
+      clearTimeout(watchdog);
+      dispose?.();
+      dispose = null;
+      root.classList.remove("gl", "intro-run", "stage-ready");
+      root.classList.add("lite", "intro-done");
+    };
+    const watchdog = window.setTimeout(() => {
+      if (!dispose) fallBack();
+    }, 7000);
     const cards = [...(workRef.current?.querySelectorAll<HTMLElement>(".work-card") ?? [])];
     const introSeen = root.classList.contains("intro-done");
     if (!introSeen && !location.hash) {
@@ -105,18 +121,15 @@ export default function Stage() {
               doorLabels: DOOR_LABELS,
               onIntroDone: markIntroSeen,
               onEnterDoor: enterTarget,
+              onFail: fallBack,
             },
           );
         } catch (err) {
           console.error(err);
-          root.classList.remove("gl");
-          root.classList.add("lite", "intro-done");
+          fallBack();
         }
       })
-      .catch(() => {
-        root.classList.remove("gl");
-        root.classList.add("lite", "intro-done");
-      });
+      .catch(fallBack);
 
     // Keyboard users who tab into a work card: bring it on screen.
     const onFocus = (e: FocusEvent) => {
@@ -131,6 +144,7 @@ export default function Stage() {
 
     return () => {
       cancelled = true;
+      clearTimeout(watchdog);
       work?.removeEventListener("focusin", onFocus);
       dispose?.();
     };

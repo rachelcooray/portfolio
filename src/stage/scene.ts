@@ -36,6 +36,8 @@ export type StageOpts = {
   doorLabels: string[];
   onIntroDone: () => void;
   onEnterDoor: (i: number) => void;
+  // Called when the scene cannot draw; the page switches to the flat badge.
+  onFail: () => void;
 };
 
 const C = {
@@ -110,6 +112,9 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.debug.onShaderError = () => {
+    throw new Error("Shader failed to compile");
+  };
 
   const scene = new THREE.Scene();
   const IVORY = new THREE.Color(C.ivory);
@@ -1543,6 +1548,33 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
     else els.index.style.opacity = "1";
 
     renderer.render(scene, camera);
+
+    if (!visible) {
+      if (!portraitReady && now - introStart > 6000) throw new Error("The portrait did not load");
+      if (portraitReady && (introDone || it > 2.6)) {
+        if (v < 5 && portraitLooksBlank()) throw new Error("The scene rendered nothing");
+        visible = true;
+      }
+    }
+  }
+
+  // Some browsers run the scene but draw nothing. Once her portrait should
+  // be on screen, sample a column through it: a canvas that is still bare
+  // background means the drawing failed.
+  let visible = false;
+  const px = new Uint8Array(4);
+  const sp = new THREE.Vector3();
+  function portraitLooksBlank() {
+    const gl = renderer.getContext();
+    const w = gl.drawingBufferWidth,
+      h = gl.drawingBufferHeight;
+    sp.copy(portrait.position).project(camera);
+    const x = Math.round((sp.x * 0.5 + 0.5) * w);
+    for (let k = 0; k < 7; k++) {
+      gl.readPixels(x, Math.round(h * (0.15 + k * 0.1)), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+      if (Math.abs(px[0] - 242) > 24 || Math.abs(px[1] - 235) > 24 || Math.abs(px[2] - 221) > 24) return false;
+    }
+    return true;
   }
 
   let failed = false;
@@ -1553,8 +1585,7 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
       if (!failed) {
         failed = true;
         console.error(err);
-        root.classList.remove("gl");
-        root.classList.add("lite");
+        o.onFail();
       }
       return;
     }
@@ -1566,8 +1597,7 @@ export function createStage(els: StageEls, o: StageOpts): () => void {
   const onLost = (e: Event) => {
     e.preventDefault();
     cancelAnimationFrame(raf);
-    root.classList.remove("gl");
-    root.classList.add("lite");
+    o.onFail();
   };
   canvas.addEventListener("webglcontextlost", onLost);
 

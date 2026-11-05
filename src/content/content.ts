@@ -565,6 +565,8 @@ export const volunteer = {
 
 export const perspective = {
   title: "On decisions, not just predictions",
+  photo: "/images/rachel-speaking.jpg",
+  photoAlt: "Rachel Cooray speaking at a lectern, holding a microphone and smiling",
   paragraphs: [
     "Most of the applied AI work I have done shares one constraint: a model's output only matters if the person reading it can act on it. A risk score for PCOS is only useful if a clinician can see which factors drove it. A margin incentive model is only useful if the incentive it recommends is one a distributor team can actually run. A study assistant built on a retrieval pipeline is only useful if it stays inside the syllabus it is meant to teach, rather than answering fluently but wrong.",
     "That is the thread I keep pulling on: building analytics and AI systems that are transparent enough for the person on the other end to trust the decision, not just the number. In practice that has meant favouring interpretable feature selection over black-box performance gains, building dashboards around the specific decision someone needs to make rather than every metric available, and constraining generative systems to stay grounded in source material instead of improvising.",
