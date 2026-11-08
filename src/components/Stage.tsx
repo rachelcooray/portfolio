@@ -7,17 +7,17 @@ import { goToSection, openAsk } from "@/lib/ask";
 const INTRO_KEY = "rc-intro-seen";
 
 // Engraved on each door's brass nameplate, in selected work order.
-const DOOR_LABELS = ["OCTAVE", "Research", "AI builds", "Layer1"];
+const DOOR_LABELS = ["OCTAVE", "Research", "Layer1", "Build log"];
 
-// Where each door leads. Case studies are separate pages; the generative AI
-// door lands on the Projects section.
+// Where each door leads. Case studies are separate pages; the chatbot door
+// lands on the Build log section.
 function enterTarget(i: number) {
   const href = selectedWork[i]?.href ?? "/";
   if (href.startsWith("/")) {
     window.location.assign(href);
     return;
   }
-  goToSection("projects");
+  goToSection(href.replace("#", "") as (typeof sections)[number]["id"]);
   window.setTimeout(() => window.dispatchEvent(new CustomEvent("rc:door-done")), 250);
 }
 
@@ -171,6 +171,14 @@ export default function Stage() {
         </p>
         <Hello />
         <p className="lede">{identity.summary}</p>
+        <div className="currently">
+          <p className="eyebrow">Currently</p>
+          <ul>
+            {identity.currently.map((c) => (
+              <li key={c}>{c}</li>
+            ))}
+          </ul>
+        </div>
         <div className="hero-actions">
           <a className="btn" href="#work" onClick={(e) => go("work", e)}>
             See the work

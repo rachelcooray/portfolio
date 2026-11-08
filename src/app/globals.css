@@ -2069,3 +2069,54 @@ html:not(.rm) .cs::before {
 h2[tabindex="-1"]:focus {
   outline: none;
 }
+
+/* Content spec, 8 Nov 2026: Currently list, build log images, skills split, case study use cases. */
+.currently {
+  margin-top: 4px;
+}
+.currently ul {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+.currently li::before {
+  content: "· ";
+  color: var(--accent);
+}
+.build-img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+.skill-col .kicker {
+  margin: 10px 0 4px;
+}
+.cs-cases {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.cs-case {
+  padding-top: 12px;
+  border-top: 1px solid var(--line-2);
+}
+.cs-case h3 {
+  margin: 0 0 6px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 24px;
+}
+.cs-case p {
+  margin: 6px 0 0;
+}
+.cs-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}

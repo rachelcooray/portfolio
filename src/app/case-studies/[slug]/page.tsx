@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: PageProps<"/case-studies/[slu
   if (!study) return {};
   return {
     title: `${study.title} | Rachel Cooray`,
-    description: study.context,
+    description: study.summary,
     alternates: { canonical: `/case-studies/${study.slug}` },
-    openGraph: { title: study.title, description: study.context, images: ["/og.png"] },
+    openGraph: { title: study.title, description: study.summary, images: ["/og.png"] },
   };
 }
 
@@ -59,16 +59,54 @@ export default async function CaseStudyPage({ params }: PageProps<"/case-studies
         <span className="hairline in" aria-hidden="true" />
 
         <section className="cs-block">
-          <h2>Context</h2>
-          <p>{study.context}</p>
-        </section>
-        <section className="cs-block">
           <h2>Problem</h2>
           <p>{study.problem}</p>
         </section>
+        <section className="cs-block">
+          <h2>Why it mattered</h2>
+          <p>{study.why}</p>
+        </section>
+        <section className="cs-block">
+          <h2>My role</h2>
+          <p>{study.role}</p>
+        </section>
+        {study.useCases && (
+          <section className="cs-block">
+            <h2>The four use cases</h2>
+            <div className="cs-cases">
+              {study.useCases.map((u) => (
+                <div key={u.name} className="cs-case">
+                  <h3>{u.name}</h3>
+                  <p>
+                    <span className="sec-num">Problem</span> {u.problem}
+                  </p>
+                  <p>
+                    <span className="sec-num">Approach</span> {u.approach}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
         <List title="Approach" items={study.approach} />
-        <List title="Key decisions" items={study.keyDecisions} />
+        <section className="cs-block">
+          <h2>Tools</h2>
+          <p>{study.tools.join(", ")}</p>
+        </section>
         <List title="Outcome" items={study.outcome} />
+        {study.limits && <List title="Limits" items={study.limits} />}
+        {study.links && (
+          <section className="cs-block">
+            <h2>Links</h2>
+            <p className="cs-links">
+              {study.links.map((l) => (
+                <a key={l.href} href={l.href} className="textlink">
+                  {l.label}
+                </a>
+              ))}
+            </p>
+          </section>
+        )}
         <blockquote className="cs-learned">
           <p className="sec-num">What I learned</p>
           <p>{study.learned}</p>

@@ -7,9 +7,11 @@ import { scrollToTarget } from "@/lib/lenis";
 
 const SHORT: Partial<Record<SectionId, string>> = {
   work: "Work",
-  news: "News",
+  how: "How I work",
+  buildlog: "Builds",
+  recognition: "Recognition",
+  volunteer: "Volunteering",
   ask: "Ask",
-  achievements: "Awards",
 };
 
 export default function Header() {

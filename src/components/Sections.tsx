@@ -11,11 +11,11 @@ import {
   layer1,
   londonSuccessAcademy,
   otherRoles,
-  projects,
+  buildLog,
+  howIWork,
   skills,
   teaching,
   volunteer,
-  perspective,
   achievements,
   press,
   contact,
@@ -152,7 +152,7 @@ function InlineAsk() {
         </button>
       </form>
       <div className="chips">
-        {["What was her research about?", "How does she measure impact?", "What has Layer1 built?"].map((c) => (
+        {["What does she do at OCTAVE?", "Tell me about PCOS Care", "What has Layer1 built?"].map((c) => (
           <button key={c} type="button" className="chip" onClick={() => setQ(c)}>
             {c}
           </button>
@@ -217,12 +217,20 @@ export default function Sections() {
     return () => io.disconnect();
   }, []);
 
-  const featured = projects.filter((p) => p.featured);
-  const more = projects.filter((p) => !p.featured);
-
   return (
     <div id="main" className="archive">
-      <Sec id="research" title="Research" tone="plain">
+      <Sec id="how" title={howIWork.title} tone="plain">
+        <div className="measure" data-passage="how-i-work">
+          <div>
+            {howIWork.paragraphs.map((p, i) => (
+              <p key={i}>{p}</p>
+            ))}
+          </div>
+          <PilotChart />
+        </div>
+      </Sec>
+
+      <Sec id="research" title="Research" tone="alt">
         <p className="intro">{research.intro}</p>
         <article className="entry feature" data-passage="research-paper">
           <div className="row">
@@ -235,6 +243,7 @@ export default function Sections() {
             <a href={research.paper.appUrl}>Try the app</a>
           </p>
           <p>{research.paper.description}</p>
+          <p className="tools">Method: {research.paper.method}</p>
           <ul>
             <li>{research.paper.award}</li>
             <li>{research.paper.journal}</li>
@@ -243,7 +252,7 @@ export default function Sections() {
             Read the case study
           </Link>
         </article>
-        <h3 className="subhead">Talks and knowledge sharing</h3>
+        <h3 className="subhead">Talks</h3>
         <p className="muted">{research.talksIntro}</p>
         <ul className="plain-list">
           {research.talks.map((t, i) => (
@@ -254,52 +263,37 @@ export default function Sections() {
         </ul>
       </Sec>
 
-      <Sec id="education" title="Education" tone="alt">
-        {education.map((e) => (
-          <article key={e.id} className="entry" data-passage={e.id}>
-            <div className="row">
-              <h3>{e.title}</h3>
-              <span className="when">{e.dateRange}</span>
-            </div>
-            <p className="where">{e.institution}</p>
-            <p>{e.summary}</p>
-          </article>
-        ))}
+      <Sec id="buildlog" title="Build log" tone="plain">
+        <div className="more-grid">
+          {buildLog.map((b) => (
+            <article key={b.id} className="entry compact" data-passage={b.id}>
+              {b.image && <img src={b.image} alt={b.imageAlt ?? ""} width={640} height={360} loading="lazy" className="build-img" />}
+              <div className="row">
+                <h3>{b.title}</h3>
+                {b.year && <span className="when">{b.year}</span>}
+              </div>
+              <p>{b.built}</p>
+              <p className="tools">{b.tools.join(", ")}</p>
+              {b.learned && <p className="muted">What I learned: {b.learned}</p>}
+              {b.link && (
+                <a className="textlink" href={b.link}>
+                  View project
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
       </Sec>
 
-      <Sec id="experience" title="Experience" tone="plain">
+      <Sec id="experience" title="Experience" tone="alt">
         <div className="org">
           <img src={octave.logo} alt="" width={44} height={44} />
           <div>
             <h3 className="org-name">{octave.company}</h3>
-            <p className="org-meta">{octave.meta}</p>
+            <p className="org-meta">Colombo, Sri Lanka</p>
           </div>
         </div>
-        <p className="lead-para" data-passage="octave-own">
-          {octave.own}
-        </p>
-
-        <div className="measure" data-passage="octave-measuring">
-          <div>
-            <p className="kicker accent">{octave.measuring.title}</p>
-            <p>{octave.measuring.body}</p>
-          </div>
-          <PilotChart />
-        </div>
-
-        <div className="practice">
-          {octave.practice.map((p, i) => (
-            <div key={p.title} data-passage={`octave-practice-${i}`}>
-              <p className="kicker">{p.title}</p>
-              <p>{p.body}</p>
-            </div>
-          ))}
-        </div>
-        <p className="tools" data-passage="octave-tools">
-          Tools: {octave.tools.join(", ")}
-        </p>
-
-        <div className="roles">
+        <div className="roles" data-passage="octave-own">
           {octave.roles.map((r) => (
             <RoleEntry key={r.id} r={r} />
           ))}
@@ -330,7 +324,7 @@ export default function Sections() {
               <li key={i}>{d}</li>
             ))}
           </ul>
-          <p className="muted">Built for: {layer1.builtFor.join(" · ")}</p>
+          <p className="muted">Clients include {layer1.builtFor.join(", ").toLowerCase()}.</p>
           <Link className="textlink" href="/case-studies/layer1">
             Read the case study
           </Link>
@@ -340,16 +334,13 @@ export default function Sections() {
           <RoleEntry r={londonSuccessAcademy} />
         </div>
 
-        <h3 className="subhead">Other experience</h3>
-        <p className="muted">Customer-facing and support roles while studying in the UK.</p>
+        <h3 className="subhead">Other roles</h3>
         <div className="other-roles">
           {otherRoles.map((r) => (
             <div key={r.id} className="other" data-passage={r.id}>
               {r.logo ? <img src={r.logo} alt="" width={56} height={28} /> : <span className="logo-blank" />}
               <div>
-                <p className="other-title">
-                  {r.title}, {r.company}
-                </p>
+                <p className="other-title">{r.company}</p>
                 <p className="when">{r.dateRange}</p>
               </div>
             </div>
@@ -357,67 +348,46 @@ export default function Sections() {
         </div>
       </Sec>
 
-      <Sec id="projects" title="Projects" tone="alt">
-        <div className="proj-grid">
-          {featured.map((p) => (
-            <article key={p.id} className="proj-card" data-passage={p.id}>
-              {p.image ? (
-                <img src={p.image} alt={p.imageAlt ?? ""} width={640} height={360} loading="lazy" />
-              ) : (
-                <div className="proj-motif" aria-hidden="true">
-                  {Array.from({ length: 40 }, (_, i) => (
-                    <i key={i} className={i % 7 === 0 || i % 11 === 3 ? "on" : ""} />
-                  ))}
-                </div>
-              )}
-              <div className="proj-text">
-                <h3>{p.title}</h3>
-                <p className="where">{p.role}</p>
-                <p>{p.description}</p>
-                <p className="tools">{p.tech.join(", ")}</p>
-                {p.link && (
-                  <a className="textlink" href={p.link}>
-                    View project
-                  </a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-        <h3 className="subhead">More projects</h3>
-        <div className="more-grid">
-          {more.map((p) => (
-            <article key={p.id} className="entry compact" data-passage={p.id}>
-              <h3>{p.title}</h3>
-              <p className="where">{p.role}</p>
-              <p>{p.description}</p>
-              <p className="tools">{p.tech.join(", ")}</p>
-              {p.link && (
-                <a className="textlink" href={p.link}>
-                  View project
-                </a>
-              )}
-            </article>
-          ))}
-        </div>
+      <Sec id="education" title="Education" tone="plain">
+        {education.map((e) => (
+          <article key={e.id} className="entry" data-passage={e.id}>
+            <div className="row">
+              <h3>{e.title}</h3>
+              <span className="when">{e.dateRange}</span>
+            </div>
+            <p className="where">{e.institution}</p>
+            {e.summary && <p>{e.summary}</p>}
+          </article>
+        ))}
       </Sec>
 
-      <Sec id="skills" title="Skills" tone="plain">
+      <Sec id="skills" title="Skills" tone="alt">
         <div className="skills-grid">
           {skills.map((s) => (
             <div key={s.category} className="skill-col" data-passage={`skills-${s.category}`}>
               <h3>{s.category}</h3>
+              <p className="kicker">Used at work</p>
               <ul>
-                {s.items.map((i) => (
+                {s.work.map((i) => (
                   <li key={i}>{i}</li>
                 ))}
               </ul>
+              {s.explored.length > 0 && (
+                <>
+                  <p className="kicker">Explored</p>
+                  <ul>
+                    {s.explored.map((i) => (
+                      <li key={i}>{i}</li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </div>
           ))}
         </div>
       </Sec>
 
-      <Sec id="teaching" title="Teaching" tone="alt">
+      <Sec id="teaching" title="Teaching and mentoring" tone="plain">
         <p className="lead-para" data-passage="teaching-intro">
           {teaching.intro}
         </p>
@@ -433,39 +403,7 @@ export default function Sections() {
         ))}
       </Sec>
 
-      <Sec id="volunteer" title="Volunteer" tone="plain">
-        <p data-passage="volunteer-summary">{volunteer.summary}</p>
-        <div className="vol-list">
-          {volunteer.items.map((v) => (
-            <div key={v.id} className="vol">
-              <p className="when">{v.dateRange}</p>
-              <p className="other-title">{v.title}</p>
-              <p className="muted">{v.summary}</p>
-            </div>
-          ))}
-        </div>
-        <h3 className="subhead">Swimming</h3>
-        <p data-passage="swimming">{volunteer.swimming}</p>
-        <h3 className="subhead">Outside work</h3>
-        <p data-passage="hobbies">{volunteer.hobbies.join(" · ")}</p>
-        <h3 className="subhead">Memberships</h3>
-        <p data-passage="memberships">{volunteer.memberships.join(", ")}.</p>
-      </Sec>
-
-      <Sec id="perspective" title={perspective.title} tone="ink">
-        <div className="persp">
-          <figure className="persp-photo">
-            <img src={perspective.photo} alt={perspective.photoAlt} width={960} height={1200} loading="lazy" />
-          </figure>
-          <div className="essay" data-passage="perspective">
-            {perspective.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-        </div>
-      </Sec>
-
-      <Sec id="achievements" title="Achievements" tone="alt">
+      <Sec id="recognition" title="Recognition and press" tone="alt">
         {achievements.map((a) => (
           <article key={a.id} className="entry" data-passage={a.id}>
             <div className="row">
@@ -473,12 +411,10 @@ export default function Sections() {
               <span className="when">{a.year}</span>
             </div>
             <p className="where">{a.organization}</p>
-            <p>{a.summary}</p>
+            {a.summary && <p>{a.summary}</p>}
           </article>
         ))}
-      </Sec>
-
-      <Sec id="news" title="In the news" tone="plain">
+        <h3 className="subhead">Press</h3>
         <div className="news-grid">
           {press.map((n) => (
             <article key={n.id} className="news-card" data-passage={n.id}>
@@ -487,7 +423,6 @@ export default function Sections() {
                 {n.organization}, {n.year}
               </p>
               <h3>{n.title}</h3>
-              <p>{n.summary}</p>
               {n.link && (
                 <a className="textlink" href={n.link} target="_blank" rel="noopener noreferrer">
                   Read more
@@ -499,13 +434,30 @@ export default function Sections() {
         </div>
       </Sec>
 
+      <Sec id="volunteer" title="Volunteering" tone="plain">
+        <p data-passage="volunteer-summary">{volunteer.summary}</p>
+        <div className="vol-list">
+          {volunteer.items.map((v) => (
+            <div key={v.id} className="vol">
+              <p className="when">{v.dateRange}</p>
+              <p className="other-title">{v.title}</p>
+              <p className="muted">{v.summary}</p>
+            </div>
+          ))}
+        </div>
+        <h3 className="subhead">Memberships</h3>
+        <p data-passage="memberships">{volunteer.memberships.join(", ")}.</p>
+        <h3 className="subhead">Swimming</h3>
+        <p data-passage="swimming">{volunteer.swimming}</p>
+      </Sec>
+
       <Sec id="ask" title="Ask about Rachel" tone="alt">
         <InlineAsk />
       </Sec>
 
       <section id="contact" className="sec ink contact" data-reveal aria-labelledby="contact-title">
         <div className="sec-head">
-          <p className="sec-num">13 Contact</p>
+          <p className="sec-num">12 Contact</p>
         </div>
         <div className="sec-body">
           <h2 id="contact-title" className="contact-title">

@@ -2,29 +2,30 @@
  * Single source of truth for everything the site says: the page, the
  * case-study pages, the badge index, the Ask command bar and the CV.
  *
- * Rules for this file (from Rachel's brief, 1 Nov 2026):
- * - No invented or unverifiable performance figures about her work.
- * - No client names, no counts of Layer1 clients or projects.
- * - No stat strips or counters anywhere.
- * - OCTAVE work is described in words. Rachel "owns" use cases.
- * - No fiction or novel mentions. No scholarship mentions.
- * - "CIMA" appears only as a qualification under Education.
- * - No em dashes.
- * Anything missing stays missing. Do not fill gaps with specifics.
+ * Rules for this file (Rachel's content spec, 8 Nov 2026):
+ * - No invented or unverifiable figures. No 68% or 93.75% figures.
+ * - No stat strips or counters. No counts of Layer1 clients or projects.
+ * - OCTAVE work is described in words only: no figures, client names or
+ *   LKR amounts. Rachel "owns" use cases, never "leads" them.
+ * - No fiction writing or pen name, no FICTA, no section called Writing.
+ * - The study assistant and the CV reviewer are removed from the site.
+ * - No scholarship applications. The UOW/IIT scholarship she was given
+ *   is shown under Education and Recognition.
+ * - "CIMA" appears only as a qualification and a membership.
+ * - No em dashes. Missing facts stay missing. Do not fill gaps.
  */
 
 export type SectionId =
   | "work"
+  | "how"
   | "research"
-  | "education"
+  | "buildlog"
   | "experience"
-  | "projects"
+  | "education"
   | "skills"
   | "teaching"
+  | "recognition"
   | "volunteer"
-  | "perspective"
-  | "achievements"
-  | "news"
   | "ask"
   | "contact";
 
@@ -33,19 +34,18 @@ export type Section = { id: SectionId; label: string; number: string; hint: stri
 // The badge index, the persistent nav and the Ask command bar all read
 // this list, so the order here is the order everywhere.
 export const sections: Section[] = [
-  { id: "work", label: "Selected work", number: "01", hint: "OCTAVE, PCOS Care, generative AI builds, Layer1" },
-  { id: "research", label: "Research", number: "02", hint: "PCOS Care, IEEE ICAHS 2025" },
-  { id: "education", label: "Education", number: "03", hint: "Westminster, CIMA, St. Bridget's" },
-  { id: "experience", label: "Experience", number: "04", hint: "OCTAVE, Layer1 Studio, London Success Academy" },
-  { id: "projects", label: "Projects", number: "05", hint: "Generative AI builds, apps and analytics" },
-  { id: "skills", label: "Skills", number: "06", hint: "Tools and methods" },
-  { id: "teaching", label: "Teaching", number: "07", hint: "Classroom and university support" },
-  { id: "volunteer", label: "Volunteer", number: "08", hint: "John Keells Foundation, swimming" },
-  { id: "perspective", label: "Perspective", number: "09", hint: "On decisions, not just predictions" },
-  { id: "achievements", label: "Achievements", number: "10", hint: "Research prize, hackathon final, youth award" },
-  { id: "news", label: "In the news", number: "11", hint: "Westminster, John Keells, Daily FT, LMD" },
-  { id: "ask", label: "Ask about Rachel", number: "12", hint: "Search this page by question" },
-  { id: "contact", label: "Contact", number: "13", hint: "Email, LinkedIn, GitHub, ORCID" },
+  { id: "work", label: "Selected work", number: "01", hint: "OCTAVE, PCOS Care, Layer1, neurodiversity chatbot" },
+  { id: "how", label: "How I work", number: "02", hint: "Checking that analytics works in the field" },
+  { id: "research", label: "Research", number: "03", hint: "PCOS Care, IEEE ICAHS 2025" },
+  { id: "buildlog", label: "Build log", number: "04", hint: "What I built and with what" },
+  { id: "experience", label: "Experience", number: "05", hint: "OCTAVE, Layer1 Studio, London Success Academy" },
+  { id: "education", label: "Education", number: "06", hint: "Westminster, CIMA, St. Bridget's" },
+  { id: "skills", label: "Skills", number: "07", hint: "Used at work and explored" },
+  { id: "teaching", label: "Teaching", number: "08", hint: "Classroom, university support, interns" },
+  { id: "recognition", label: "Recognition and press", number: "09", hint: "Showcase prize, hackathon final, youth award" },
+  { id: "volunteer", label: "Volunteering", number: "10", hint: "John Keells Foundation, memberships" },
+  { id: "ask", label: "Ask about Rachel", number: "11", hint: "Search this page by question" },
+  { id: "contact", label: "Contact", number: "12", hint: "Email, LinkedIn, GitHub, ORCID, CV" },
 ];
 
 // ---------------------------------------------------------------------
@@ -64,7 +64,9 @@ export const identity = {
   hello: "Hi, I'm Rachel. I apply AI to real business problems.",
   tagline: "I apply AI to real business problems.",
   summary:
-    "Analyst, Data and AI at OCTAVE, the advanced analytics arm of John Keells Holdings. Published researcher, co-founder of Layer1 Studio, First Class Honours in Computer Science from the University of Westminster.",
+    "Analyst, Data and AI at OCTAVE, John Keells Holdings. First Class Computer Science graduate, University of Westminster. Published researcher. Co-founder of Layer1 Studio.",
+  // [CONFIRM] a third line: current personal build or research focus.
+  currently: ["Owning four AI and analytics use cases at OCTAVE.", "Building products with Layer1."],
   bio: "I build analytics and AI systems that help people make decisions they can understand and act on. I work at the point where a model's output has to become a business decision, and I care most about the step in between: making the reasoning legible to the person who has to use it.",
   portrait: "/images/rachel-portrait.png",
   portraitAlt: "Rachel Cooray, standing, in a pale blue blouse, smiling at the camera",
@@ -100,8 +102,8 @@ export const selectedWork: WorkCard[] = [
   {
     id: "work-octave",
     kicker: "OCTAVE, John Keells Holdings",
-    title: "Analytics that works in the field",
-    body: "Four AI and analytics use cases on the distributor side of an FMCG business: margin incentives, replenishment, dispatch planning and distributor efficiency. The analysis has to be sound and the business has to use it.",
+    title: "Four use cases for an FMCG client's distributors",
+    body: "Margin incentives, replenishment recommendations, a permanent dispatch plan and distributor efficiency. The analysis has to be sound and the business has to use it.",
     href: "/case-studies/octave",
     linkLabel: "Read the case study",
     side: "right",
@@ -110,30 +112,43 @@ export const selectedWork: WorkCard[] = [
     id: "work-pcos",
     kicker: "Research, IEEE ICAHS 2025, Tunisia",
     title: "PCOS Care",
-    body: "A machine learning web app for early risk screening of polycystic ovary syndrome, built so a clinician can see which factors drove each prediction. Third of more than 400 final year projects at Westminster.",
+    body: "An early risk-screening web app that shows which factors drove each prediction. Published at IEEE ICAHS 2025.",
     href: "/case-studies/pcos-care",
     linkLabel: "Read the case study",
     side: "left",
   },
   {
-    id: "work-genai",
-    kicker: "Generative AI builds",
-    title: "Grounded in the source, not improvised",
-    body: "A finance education study assistant that answers only from its syllabus, a CV reviewer that reads like a senior recruiter, and a neurodiversity support chatbot that reached the final of a Microsoft hackathon.",
-    href: "#projects",
-    linkLabel: "See the projects",
-    side: "right",
-  },
-  {
     id: "work-layer1",
     kicker: "Co-founder and Developer",
     title: "Layer1 Studio",
-    body: "Web and mobile products for small businesses, from shaping a brief to shipping and maintaining it.",
+    body: "Web and mobile products for small businesses, from rough brief to shipped product.",
     href: "/case-studies/layer1",
     linkLabel: "Read the case study",
+    side: "right",
+  },
+  {
+    id: "work-neurodiversity",
+    kicker: "Microsoft EMBRACE hackathon finalist, 2024",
+    title: "Neurodiversity support chatbot",
+    body: "A chatbot prototype that guides people newly diagnosed with neurodiverse conditions, and their carers, through what comes next.",
+    href: "#buildlog",
+    linkLabel: "See the build log",
     side: "left",
   },
 ];
+
+// ---------------------------------------------------------------------
+// HOW I WORK
+// ---------------------------------------------------------------------
+
+export const howIWork = {
+  title: "Analytics that works in the field, not just in a model",
+  paragraphs: [
+    "I make sure analytics works in the field, not just in a model. For each use case I design how we check whether it made a difference, using pilot and control groups where possible and before-and-after comparisons where not.",
+    "I start with operational measures such as billing activity, outlet reach and how closely recommendations are followed, then look at margin. Where there is no control group, I describe results as an association, not proven impact.",
+    "I join governance calls with area, regional and sales managers and bring what I learn back into the use case. I help prepare answers to finance and leadership challenges. I keep decision logs, process maps and problem statements so the reasoning is still there months later, and I reconcile numbers across dashboards and own the corrections.",
+  ],
+};
 
 // ---------------------------------------------------------------------
 // RESEARCH
@@ -141,8 +156,9 @@ export const selectedWork: WorkCard[] = [
 
 export const research = {
   intro:
-    "I research how machine learning can support decisions people can trust, starting in healthcare and now in commercial incentive design.",
+    "I research how machine learning can support decisions people can trust, starting in healthcare.",
   paper: {
+    // [CONFIRM] title, authors and DOI against the IEEE record.
     title:
       "PCOS Care: A Machine Learning-Based Web Application for Early Risk Prediction of Polycystic Ovary Syndrome",
     authors: "With Malarvizhi Kaniappan Chinnathai and Salma Chahed, University of Westminster",
@@ -152,15 +168,17 @@ export const research = {
     doiUrl: "https://doi.org/10.1109/ICAHS66950.2025.11553077",
     appUrl: "https://pcos-care-web-app.onrender.com",
     description:
-      "An early screening web app with two levels of prediction: one from lifestyle and physical signs that anyone can answer, and one that adds hormone test results. Features were chosen with clinical diagnostic criteria and statistical tests, so the model rests on signals a clinician would recognise. It is a risk screening aid, not a diagnostic tool.",
-    award: "Third place of more than 400 final year research projects, University of Westminster, 2025.",
-    journal:
-      "An extended paper, \"A Machine Learning-Driven Framework for Early Risk Stratification of Polycystic Ovary Syndrome\", is under review for the MSIT Journal special edition.",
+      "An early screening web app with two levels of prediction: one from everyday signs that anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction. It is a screening aid, not a diagnostic tool.",
+    method:
+      "Chi-Square and ANOVA feature selection, SMOTE for class balance, and an enhanced Random Forest.",
+    // [CONFIRM] whether to add "out of 400+ projects".
+    award: "Third place at the University of Westminster final year project showcase, 2025.",
+    journal: "Extended paper selected for the MSIT Journal special edition, under review.",
   },
   talksIntro: "Explaining technical work to the people who use it is part of the job.",
   talks: [
-    "IEEE ICAHS 2025, Tunisia: presented PCOS Care to an international audience.",
-    "University of Westminster Final Year Project Showcase, 2025: demonstrated PCOS Care to industry judges from Netcompany and SmartDCC.",
+    "IEEE ICAHS 2025, Tunisia: presented PCOS Care.",
+    "University of Westminster final year project showcase, 2025: demonstrated PCOS Care to industry judges from Netcompany and SmartDCC.",
   ],
 };
 
@@ -182,19 +200,27 @@ export const education: EducationItem[] = [
     title: "BSc (Hons) Computer Science, First Class",
     institution: "University of Westminster, United Kingdom",
     dateRange: "Sep 2022 to Jul 2025",
-    summary: "Specialised in Data Science. Started at IIT Sri Lanka and completed the degree at Westminster.",
+    summary: "Data Science specialism. Started at IIT, Sri Lanka.",
+  },
+  {
+    id: "education-scholarship",
+    title: "UOW/IIT School of Computing and Engineering scholarship",
+    institution: "University of Westminster and Informatics Institute of Technology",
+    dateRange: "2024/25",
+    summary: "",
   },
   {
     id: "education-cima",
-    title: "CIMA Certificate in Business Accounting",
-    institution: "Chartered Institute of Management Accountants, United Kingdom",
+    title: "Certificate in Business Accounting",
+    institution: "CIMA",
     dateRange: "Aug 2024",
-    summary: "Economics, management and financial accounting, business law and corporate governance.",
+    summary: "",
   },
   {
+    // [CONFIRM] year and grades.
     id: "education-school",
     title: "St. Bridget's Convent, Colombo",
-    institution: "A-Levels in Mathematics, Physics and Chemistry",
+    institution: "A-Levels: Chemistry, Maths, Physics",
     dateRange: "2008 to 2022",
     summary: "Head Prefect, 2020.",
   },
@@ -250,8 +276,8 @@ export const octave = {
       dateRange: "Jul 2026 to present",
       location: "Colombo, hybrid",
       details: [
-        "Own four AI and analytics use cases for an FMCG distributor network: margin incentives, replenishment, dispatch planning and distributor efficiency.",
-        "Design how each use case is evaluated, join field governance calls, and help prepare answers and slides for leadership and finance.",
+        "Own four AI and analytics use cases on the distributor side of an FMCG business: distributor margin incentives, a replenishment system that recommends redistribution volumes, a permanent dispatch plan that minimises lorry costs, and a distributor efficiency model that increases line items per bill.",
+        "Run each end to end: PMO, direct client contact, decks for senior leaders and finance, and coordinating the data science team. Tools: Excel, Databricks, Power BI.",
       ],
     },
     {
@@ -269,8 +295,8 @@ export const octave = {
       dateRange: "Oct 2025 to Apr 2026",
       location: "Colombo",
       details: [
-        "Segmented distributors by performance and potential and helped design KPI-based incentive structures for an FMCG distributor network.",
-        "Ran margin and sales-incentive scenario analysis and built Power BI dashboards for management to track targets and distributor performance.",
+        "Designed KPI-driven distributor incentive structures.",
+        "Ran margin and sales-incentive simulations to recover lost sales in flood-affected outlets, and built Power BI dashboards for management.",
       ],
     },
   ] as Role[],
@@ -310,6 +336,7 @@ export const layer1 = {
   details: [
     "Web and mobile applications in Flutter, React and Node.js, from UI design to backend integration and deployment.",
     "Turning an informal brief into a scoped product, then maintaining it after launch.",
+    "Interns work on real client projects.",
   ],
   builtFor: [
     "Gyms",
@@ -378,111 +405,74 @@ export const otherRoles: Role[] = [
 // PROJECTS
 // ---------------------------------------------------------------------
 
-export type Project = {
+export type BuildEntry = {
   id: string;
   title: string;
-  role: string;
-  description: string;
-  tech: string[];
+  year: string | null;
+  built: string;
+  tools: string[];
+  // [CONFIRM] one honest lesson per entry, in Rachel's words.
+  learned: string | null;
   link: string | null;
   image: string | null;
   imageAlt?: string;
-  featured: boolean;
 };
 
-export const projects: Project[] = [
+// [CONFIRM] dates, tools and lessons for each entry.
+export const buildLog: BuildEntry[] = [
   {
-    id: "project-pcos-care",
-    title: "PCOS Care",
-    role: "Lead developer and researcher",
-    description:
-      "Early PCOS risk screening that explains which factors drove each prediction. Built end to end in Python, Flask and Streamlit, deployed and user tested. Published at IEEE ICAHS 2025.",
-    tech: ["Python", "Machine learning", "Flask", "Streamlit"],
-    link: "https://pcos-care-web-app.onrender.com",
-    image: "/images/pcoscare.png",
-    imageAlt: "PCOS Care web app showing the risk screening form",
-    featured: true,
-  },
-  {
-    id: "project-study-assistant",
-    title: "Finance education study assistant",
-    role: "Full stack developer and AI engineer",
-    description:
-      "A study assistant for a professional finance qualification that answers only from the syllabus, using a custom retrieval pipeline on Gemini, with two study modes and subject locking.",
-    tech: ["React", "Node.js", "Gemini API", "LangChain", "Tailwind CSS"],
-    link: "https://cima-tutor-web.onrender.com",
-    image: "/images/ai-tutor.png",
-    imageAlt: "Study assistant chat interface with a syllabus subject selected",
-    featured: true,
-  },
-  {
-    id: "project-neurodiversity",
-    title: "GenAI chatbot for neurodiversity support",
-    role: "AI engineer, Microsoft EMBRACE hackathon finalist, 2024",
-    description:
-      "A chatbot prototype that guides people newly diagnosed with neurodiverse conditions, and their carers, through what comes next. Built with a small cross-functional team under hackathon time limits.",
-    tech: ["Generative AI", "Conversational design", "Prototyping"],
+    id: "build-neurodiversity",
+    title: "Neurodiversity support chatbot",
+    year: "2024",
+    built: "A chatbot prototype that guides people newly diagnosed with neurodiverse conditions, and their carers, through what comes next. Microsoft EMBRACE hackathon finalist.",
+    tools: ["Generative AI", "Conversational design", "Prototyping"],
+    learned: null,
     link: null,
     image: null,
-    featured: true,
   },
   {
-    id: "project-carbon-tracker",
+    id: "build-carbon-tracker",
     title: "Carbon Footprint Tracker",
-    role: "Data analyst and UI designer",
-    description:
-      "Turns everyday activities into an estimated carbon footprint using activity-based emission factors, with interactive dashboards and suggestions for cutting it.",
-    tech: ["Python", "Flutter", "Serverpod", "Data visualisation"],
+    year: null,
+    built: "Turns everyday activities into an estimated carbon footprint using activity-based emission factors, with dashboards and suggestions for cutting it.",
+    tools: ["Python", "Flutter", "Serverpod"],
+    learned: null,
     link: "https://rachelcooray.github.io/carbon-footprint-tracker/",
     image: "/images/carbonfootprint.png",
     imageAlt: "Carbon Footprint Tracker dashboard",
-    featured: true,
   },
   {
-    id: "project-cv-reviewer",
-    title: "CV reviewer assistant",
-    role: "Frontend developer and AI engineer",
-    description: "Recruiter-style CV feedback from Gemini, with client-side PDF processing.",
-    tech: ["React", "Gemini API"],
-    link: "https://cv-writer.onrender.com",
-    image: "/images/cv-writer.png",
-    imageAlt: "CV reviewer assistant interface",
-    featured: false,
-  },
-  {
-    id: "project-futsal",
+    id: "build-futsal",
     title: "Futsal team recommender",
-    role: "Mobile app developer",
-    description:
-      "A Flutter app that matches players to teams using collaborative and content-based filtering, with centralised stadium booking.",
-    tech: ["Flutter", "Node", "Flask", "Machine learning"],
+    year: null,
+    built: "A Flutter app that matches players to teams using collaborative and content-based filtering, with centralised stadium booking.",
+    tools: ["Flutter", "Node", "Flask", "Machine learning"],
+    learned: null,
     link: null,
     image: "/images/futsal.png",
     imageAlt: "Futsal team recommender app screens",
-    featured: false,
   },
   {
-    id: "project-csr-street-vendors",
-    title: "CSR street-vendor analytics",
-    role: "Field researcher and analyst",
-    description: "A field survey of street food vendors whose findings the CSR team adopted.",
-    tech: ["Data collection", "Data analytics", "Field research"],
-    link: null,
-    image: "/images/street-vendor.png",
-    imageAlt: "Street vendor survey analysis",
-    featured: false,
-  },
-  {
-    id: "project-fantasy-coin-collector",
+    id: "build-fantasy-coin-collector",
     title: "Fantasy Coin Collector",
-    role: "Game developer",
-    description:
-      "A 2D dungeon crawler built from scratch in HTML5 Canvas, with its own physics, procedural maps and sound.",
-    tech: ["HTML5 Canvas", "JavaScript", "Web Audio API"],
+    year: null,
+    built: "A 2D dungeon crawler built from scratch in HTML5 Canvas, with its own physics, procedural maps and sound.",
+    tools: ["HTML5 Canvas", "JavaScript", "Web Audio API"],
+    learned: null,
     link: "https://rachelcooray.github.io/FantasyCoinCollector/",
     image: "/images/coin-collector.png",
     imageAlt: "Fantasy Coin Collector game screen",
-    featured: false,
+  },
+  {
+    id: "build-csr-street-vendors",
+    title: "CSR street-vendor analytics",
+    year: "2022",
+    built: "A field survey of street food vendors whose findings the CSR team adopted.",
+    tools: ["Data collection", "Data analytics", "Field research"],
+    learned: null,
+    link: null,
+    image: "/images/street-vendor.png",
+    imageAlt: "Street vendor survey analysis",
   },
 ];
 
@@ -490,12 +480,12 @@ export const projects: Project[] = [
 // SKILLS
 // ---------------------------------------------------------------------
 
-export const skills = [
-  { category: "Analytics and AI", items: ["Machine learning", "Statistical testing", "Experiment and pilot design", "Retrieval-augmented generation", "LLM application design"] },
-  { category: "Languages and libraries", items: ["Python", "SQL", "Pandas and NumPy", "Scikit-learn", "PySpark", "JavaScript and TypeScript", "Dart"] },
-  { category: "Platforms and tools", items: ["Databricks", "Power BI", "Excel", "Google Cloud Platform", "Git and GitHub"] },
-  { category: "Web and mobile", items: ["React and Next.js", "Node.js", "Flutter", "Flask"] },
-  { category: "Working with the business", items: ["Problem statements and decision logs", "Pilot and control evaluation", "Presenting to leadership and finance", "Financial accounting"] },
+// [CONFIRM] which tools were used at work and which were explored.
+export const skills: { category: string; work: string[]; explored: string[] }[] = [
+  { category: "Languages", work: ["Python", "SQL", "JavaScript", "Dart"], explored: [] },
+  { category: "Data and AI", work: ["PySpark", "Databricks", "Power BI"], explored: ["scikit-learn", "pandas", "RAG pipelines"] },
+  { category: "Web and mobile", work: ["React", "Node.js", "Flutter"], explored: [] },
+  { category: "Cloud and tools", work: ["GCP", "Git and GitHub", "Excel"], explored: [] },
 ];
 
 // ---------------------------------------------------------------------
@@ -503,8 +493,7 @@ export const skills = [
 // ---------------------------------------------------------------------
 
 export const teaching = {
-  intro:
-    "The clearest way I know an idea is understood is being able to teach it. Whether that is adapting a lesson for a classroom of primary learners or walking a university student through a concept they missed in a lecture, teaching has shaped how I explain technical work now. I default to making the reasoning behind a result legible, not just the result itself.",
+  intro: "I explain technical work so the person using it can act on it.",
   roles: [
     {
       id: "teaching-class-teacher",
@@ -519,6 +508,13 @@ export const teaching = {
       institution: "Clear Links Support",
       dateRange: "Oct 2024 to Apr 2025",
       summary: "Note-taking and academic support for university students in lectures and tutorials.",
+    },
+    {
+      id: "teaching-layer1-interns",
+      title: "Mentoring interns",
+      institution: "Layer1 Studio",
+      dateRange: "Dec 2025 to present",
+      summary: "Interns work on real client projects.",
     },
   ],
 };
@@ -553,25 +549,10 @@ export const volunteer = {
       summary: "Kala Pola, organised with the George Keyt Foundation.",
     },
   ],
+  // [CONFIRM] whether to include this line.
   swimming:
     "At the 2026 JKH Intercompany Swimming Meet I won three individual golds and gold in every relay in the under-25 group, as OCTAVE took the overall women's championship.",
-  hobbies: ["Swimming", "Running", "Films and dramas", "History"],
-  memberships: ["Rotaract Club", "IEEE Club", "Sri Lankan Society UoW", "CIMA Student Member", "BCS Member"],
-};
-
-// ---------------------------------------------------------------------
-// PERSPECTIVE
-// ---------------------------------------------------------------------
-
-export const perspective = {
-  title: "On decisions, not just predictions",
-  photo: "/images/rachel-speaking.jpg",
-  photoAlt: "Rachel Cooray speaking at a lectern, holding a microphone and smiling",
-  paragraphs: [
-    "Most of the applied AI work I have done shares one constraint: a model's output only matters if the person reading it can act on it. A risk score for PCOS is only useful if a clinician can see which factors drove it. A margin incentive model is only useful if the incentive it recommends is one a distributor team can actually run. A study assistant built on a retrieval pipeline is only useful if it stays inside the syllabus it is meant to teach, rather than answering fluently but wrong.",
-    "That is the thread I keep pulling on: building analytics and AI systems that are transparent enough for the person on the other end to trust the decision, not just the number. In practice that has meant favouring interpretable feature selection over black-box performance gains, building dashboards around the specific decision someone needs to make rather than every metric available, and constraining generative systems to stay grounded in source material instead of improvising.",
-    "It is also why teaching and data work do not feel like separate halves of what I do. Both are exercises in making something complex legible to someone who has to use it.",
-  ],
+  memberships: ["Rotaract", "IEEE Club", "BCS", "CIMA Student"],
 };
 
 // ---------------------------------------------------------------------
@@ -591,25 +572,32 @@ export type Recognition = {
 
 export const achievements: Recognition[] = [
   {
-    id: "achievement-pcos-prize",
-    title: "Third place, Final Year Research Project",
+    id: "achievement-showcase",
+    title: "Third place, final year project showcase",
     organization: "University of Westminster, judged with Netcompany and SmartDCC",
     year: "2025",
-    summary: "For PCOS Care, out of more than 400 projects.",
+    summary: "For PCOS Care.",
   },
   {
     id: "achievement-embrace",
-    title: "Hackathon finalist, GenAI for neurodiversity",
-    organization: "Microsoft EMBRACE Employee Resource Group",
+    title: "Hackathon finalist, neurodiversity support chatbot",
+    organization: "Microsoft EMBRACE",
     year: "2024",
-    summary: "A chatbot prototype to guide and support people newly diagnosed with neurodiverse conditions.",
+    summary: "",
+  },
+  {
+    id: "achievement-scholarship",
+    title: "UOW/IIT School of Computing and Engineering scholarship",
+    organization: "University of Westminster and Informatics Institute of Technology",
+    year: "2024/25",
+    summary: "",
   },
   {
     id: "achievement-new-generation",
     title: "New Generation Awards",
-    organization: "Women in Management and the National Youth Services Council",
+    organization: "Women in Management and NYSC",
     year: "2020",
-    summary: "For youth leadership.",
+    summary: "",
   },
 ];
 
@@ -617,39 +605,29 @@ export const press: Recognition[] = [
   {
     id: "press-westminster-showcase",
     title: "Celebrating Innovation at the Computer Science and Engineering Final Year Project Showcase",
-    organization: "University of Westminster",
+    organization: "University of Westminster blog",
     year: "2025",
-    summary: "Rachel and fellow students presenting healthcare and machine learning systems to industry panels.",
+    summary: "",
     link: "https://blog.westminster.ac.uk/wearewestminster/celebrating-innovation-at-the-computer-science-and-engineering-final-year-project-showcase/",
     image: "/images/netcompany-group-pic.jpg",
     imageAlt: "Students and judges at the Westminster final year project showcase",
   },
   {
     id: "press-westminster-prize",
-    title: "Westminster Computer Science students receive prizes",
-    organization: "University of Westminster",
+    title: "Computer Science and Engineering Students Receive Prizes from Netcompany",
+    organization: "University of Westminster news",
     year: "2025",
-    summary: "Research prizes awarded by industry sponsors Netcompany and SmartDCC for the 2025 cohort.",
+    summary: "",
     link: "https://www.westminster.ac.uk/news/westminster-computer-science-and-engineering-students-receive-prizes-from-netcompany-at-annual-final-year-project-showcase",
     image: "/images/blog.png",
     imageAlt: "University of Westminster news article",
   },
   {
-    id: "press-jkh-swim",
-    title: "Team OCTAVE wins the overall women's championship",
-    organization: "John Keells Holdings",
-    year: "2026",
-    summary: "Three individual golds and gold in every relay in the under-25 group at the JKH Intercompany Swimming Meet.",
-    link: "https://www.linkedin.com/company/john-keells-holdings/posts/",
-    image: "/images/swimmingmeet.jpeg",
-    imageAlt: "Team OCTAVE at the John Keells intercompany swimming meet",
-  },
-  {
     id: "press-daily-ft",
-    title: "WIM and NYSC recognise youth",
+    title: "WIM, NYSC recognise youth with New Generation Awards",
     organization: "Daily FT",
     year: "2020",
-    summary: "National coverage of the New Generation Awards for emerging young Sri Lankan women leaders.",
+    summary: "",
     link: "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
     image: "/images/daily-ft.png",
     imageAlt: "Daily FT front page article on the New Generation Awards",
@@ -659,7 +637,7 @@ export const press: Recognition[] = [
     title: "LMD Youth Forum interview",
     organization: "LMD",
     year: "2020",
-    summary: "On student governance, school headship at St. Bridget's Convent, and community development.",
+    summary: "",
     link: "https://lmd.lk/youth-forum-32/",
     image: "/images/youth-forum.png",
     imageAlt: "LMD Youth Forum interview page",
@@ -672,8 +650,7 @@ export const press: Recognition[] = [
 
 export const contact = {
   headline: "Let's build something worth explaining.",
-  intro:
-    "I am always glad to talk about research collaborations, MSc opportunities, guest lectures, and AI or analytics problems worth solving.",
+  intro: "Happy to talk about AI and analytics problems, research collaboration and guest lectures.",
 };
 
 // ---------------------------------------------------------------------
@@ -685,35 +662,58 @@ export type CaseStudy = {
   title: string;
   subtitle: string;
   category: string;
-  context: string;
+  summary: string;
   problem: string;
+  why: string;
+  role: string;
   approach: string[];
-  keyDecisions: string[];
+  useCases?: { name: string; problem: string; approach: string }[];
+  tools: string[];
   outcome: string[];
+  limits?: string[];
+  links?: { label: string; href: string }[];
   learned: string;
 };
 
 export const caseStudies: CaseStudy[] = [
   {
     slug: "octave",
-    title: "Distributor incentives a sales team can run",
+    title: "Four use cases a distributor network can run",
     subtitle: "OCTAVE, John Keells Holdings",
     category: "Commercial analytics",
-    context:
-      "An FMCG distributor network in Sri Lanka where incentives rewarded delivery volume and gave management few levers on margin, replenishment or dispatch cost.",
+    summary: "Four AI and analytics use cases on the distributor side of an FMCG business, owned end to end.",
     problem:
-      "Some distributors were missing margin targets while carrying high delivery overhead, and the existing commission structure did not reward the behaviour the business wanted. Any new scheme had to be one a distributor team could calculate and follow in the field.",
-    approach: [
-      "Segmented distributors by performance and potential from order history, basket mix and local fulfilment constraints.",
-      "Designed KPI-based incentive tiers tied to margin contribution and basket depth, and tested them against historical scenarios before anything reached a distributor.",
-      "Built the replenishment, dispatch planning and distributor efficiency use cases alongside, so the four read as one programme rather than four spreadsheets.",
-      "Designed how each use case is checked: pilot and control groups where possible, before and after where not, with operational measures first and margin second.",
+      "An FMCG distributor network where incentives rewarded delivery volume and gave management few levers on margin, replenishment or dispatch cost.",
+    why: "A use case only counts if the business uses it. Any scheme had to be one a distributor team could calculate and follow in the field.",
+    role: "I own the four use cases end to end: PMO, direct client contact, decks for senior leaders and finance, and coordinating the data science team.",
+    useCases: [
+      {
+        name: "Distributor margin incentives",
+        problem: "Some distributors were missing margin targets while carrying high delivery overhead, and the commission structure did not reward the behaviour the business wanted.",
+        approach: "Segmented distributors by performance and potential, then designed KPI-based incentive tiers tied to margin contribution and basket depth, tested against historical scenarios before anything reached a distributor.",
+      },
+      {
+        name: "Replenishment recommendations",
+        problem: "Deciding how much stock to redistribute, and where.",
+        approach: "A replenishment system that recommends redistribution volumes, checked by how closely the recommendations are followed.",
+      },
+      {
+        name: "Permanent dispatch plan",
+        problem: "Lorry costs in getting product out to distributors.",
+        approach: "A permanent dispatch plan that minimises lorry costs within operational constraints.",
+      },
+      {
+        name: "Distributor efficiency",
+        problem: "Distributor productivity was hard to see.",
+        approach: "A distributor efficiency model that increases line items per bill.",
+      },
     ],
-    keyDecisions: [
+    approach: [
+      "Designed how each use case is checked: pilot and control groups where possible, before and after where not, with operational measures first and margin second.",
       "Transparent, rule-based formulas over opaque scorecards, so field agents can work out their own incentive.",
       "Baselines calibrated to local seasonality, so a good month does not pay out as a behaviour change.",
-      "Results without a control group are reported as an association, never as proven impact.",
     ],
+    tools: ["Excel", "Databricks", "Power BI"],
     outcome: [
       "Four use cases run as one programme, reviewed in regular governance calls with area, regional and sales managers.",
       "Power BI tracking so leadership and finance can follow target against achievement and distributor performance.",
@@ -727,48 +727,52 @@ export const caseStudies: CaseStudy[] = [
     title: "PCOS Care: early risk screening",
     subtitle: "Published at IEEE ICAHS 2025, University of Westminster",
     category: "Healthcare and machine learning",
-    context:
-      "Polycystic ovary syndrome is a common endocrine condition in women of reproductive age. Diagnosis is often delayed by overlapping symptoms and uneven access to specialist screening.",
+    summary: "An early risk-screening web app that shows which factors drove each prediction.",
     problem:
-      "Published risk models tend to produce opaque scores without clinical interpretability, and models that need full hormone panels do not help community-level triage where those tests are not available.",
+      "Published risk models tend to produce opaque scores, and models that need full hormone panels do not help community-level triage where those tests are not available.",
+    why: "Polycystic ovary syndrome is a common endocrine condition in women of reproductive age, and diagnosis is often delayed by overlapping symptoms and uneven access to specialist screening.",
+    role: "Lead developer and researcher, from data and modelling to the deployed app and the paper.",
     approach: [
-      "Worked from an anonymised public benchmark dataset of patient records from hospitals in Kerala, India.",
-      "Selected features with Chi-Square tests for categorical indicators and ANOVA F-tests for numerical ones, keeping medically grounded signals.",
-      "Addressed class imbalance with SMOTE and evaluated several classifiers under stratified cross-validation, favouring recall, since a missed case costs more than a false alarm.",
-      "Built a two-tier web app in Python, Flask and Streamlit: tier one screens lifestyle and physical indicators anyone can provide, tier two adds hormone test results.",
-      "Ran a structured usability study with real users.",
+      "Two levels of prediction: an everyday-signals screen anyone can answer, then a second level that adds hormone test results.",
+      "Features chosen with Chi-Square tests for categorical indicators and ANOVA F-tests for numerical ones, so the model rests on signals a clinician would recognise.",
+      "SMOTE for class balance and an enhanced Random Forest, evaluated with stratified cross-validation and favouring recall, since a missed case costs more than a false alarm.",
+      "Each prediction shows which factors drove it, so a clinician can inspect the reasoning.",
+      "A structured usability study with real users.",
     ],
-    keyDecisions: [
-      "Recall over raw accuracy, because missing an at-risk person in early triage carries the higher clinical risk.",
-      "Interpretable features over black-box architectures, so a clinician can inspect each contributing factor.",
-      "Presented as a risk screening aid, not a diagnostic tool.",
-    ],
+    tools: ["Python", "scikit-learn", "Flask", "Streamlit"],
     outcome: [
-      "Published in the IEEE ICAHS 2025 proceedings, DOI 10.1109/ICAHS66950.2025.11553077, and presented in Tunisia.",
-      "Third place of more than 400 final year research projects at the University of Westminster, 2025.",
-      "An extended framework paper is under review for the MSIT Journal special edition.",
+      "Published in the IEEE ICAHS 2025 proceedings and presented in Tunisia.",
+      "Third place at the University of Westminster final year project showcase, 2025.",
+      "Extended paper selected for the MSIT Journal special edition, under review.",
       "The app is deployed and open to try.",
+    ],
+    limits: [
+      "A screening aid, not a diagnostic tool.",
+      "Trained on one anonymised public benchmark dataset of patient records from hospitals in Kerala, India.",
+    ],
+    links: [
+      { label: "Try the app", href: "https://pcos-care-web-app.onrender.com" },
+      { label: "Read the paper", href: "https://doi.org/10.1109/ICAHS66950.2025.11553077" },
     ],
     learned: "In clinical machine learning, transparency is not a finishing touch. It is the condition for anyone adopting the tool.",
   },
   {
     slug: "layer1",
-    title: "A Layer1 Studio delivery",
+    title: "From a rough brief to a shipped product",
     subtitle: "Layer1 Studio",
     category: "Product engineering for small businesses",
-    context:
-      "Small businesses usually arrive with an informal brief, a few spreadsheets and a process held together by messages and paper.",
+    summary: "Web and mobile products for small businesses, from rough brief to shipped product.",
     problem:
-      "The job is to turn that into a product the owner can run without us: scoped tightly, shipped quickly, and maintained after launch.",
+      "Small businesses usually arrive with an informal brief, a few spreadsheets and a process held together by messages and paper.",
+    why: "The product has to be one the owner can run without us: scoped tightly, shipped quickly, and maintained after launch.",
+    role: "Co-founder and Developer: shaping the brief, building, shipping and maintaining, and working with interns on real client projects.",
     approach: [
       "Shape the brief into a short architecture: a responsive web platform and, where the business needs it, a companion mobile app.",
       "Build the operational pieces first, such as sign-ups, bookings, payments and reminders, before any polish.",
-      "Pair with interns on components and tests so the studio's work is reviewable, not one person's memory.",
-    ],
-    keyDecisions: [
       "A lightweight serverless stack and optimistic UI updates, so the product stays responsive on ordinary mobile networks.",
       "Automated reminders by WhatsApp and email ahead of renewals and bookings, since that is where small businesses lose customers.",
     ],
+    tools: ["Flutter", "React", "Node.js"],
     outcome: [
       "Products in use by gyms, food shops, e-commerce brands, agencies, an artist, an author and sports teams, with no client named here by agreement.",
       "A repeatable delivery model: brief, scope, build, launch, maintain.",
@@ -797,39 +801,35 @@ export function buildPassages(): Passage[] {
     p.push({ id, section, title, text, keywords });
 
   add("work", "intro", identity.name, `${identity.tagline} ${identity.summary}`, ["who", "about", "rachel", "what does she do", "role", "title"]);
-  add("work", "bio", "How she works", identity.bio, ["approach", "philosophy"]);
+  add("work", "currently", "Currently", identity.currently.join(" "), ["now", "currently", "today"]);
   selectedWork.forEach((w) => add("work", w.id, w.title, `${w.kicker}. ${w.body}`, ["work", "selected"]));
 
-  add("research", "research-paper", research.paper.title, `${research.paper.venue}. ${research.paper.description} ${research.paper.award} ${research.paper.journal}`, ["pcos", "paper", "ieee", "publication", "published", "research", "doi", "journal", "msit"]);
+  add("how", "how-i-work", howIWork.title, howIWork.paragraphs.join(" "), ["how", "measure", "impact", "evaluate", "evaluation", "pilot", "control", "association", "octave", "governance", "decision log"]);
+
+  add("research", "research-paper", research.paper.title, `${research.paper.venue}. ${research.paper.description} Method: ${research.paper.method} ${research.paper.award} ${research.paper.journal}`, ["pcos", "paper", "ieee", "publication", "published", "research", "doi", "journal", "msit"]);
   research.talks.forEach((t, i) => add("research", `talk-${i}`, "Talks", t, ["talk", "presented", "conference"]));
 
-  education.forEach((e) => add("education", e.id, e.title, `${e.institution}, ${e.dateRange}. ${e.summary}`, ["education", "degree", "university", "school", "studied", "first class", "cima", "a-levels"]));
+  buildLog.forEach((b) => add("buildlog", b.id, b.title, `${b.year ? b.year + ". " : ""}${b.built} Built with ${b.tools.join(", ")}.`, ["build", "built", "project", "app", "chatbot", "hackathon"]));
 
   add("experience", "octave-own", "OCTAVE: what she owns", octave.own, ["octave", "john keells", "fmcg", "distributor", "use case", "incentive", "replenishment", "dispatch", "job", "work", "current"]);
-  add("experience", "octave-measuring", octave.measuring.title, octave.measuring.body, ["measure", "impact", "evaluate", "evaluation", "pilot", "control", "experiment", "association"]);
-  octave.practice.forEach((x, i) => add("experience", `octave-practice-${i}`, x.title, x.body, ["octave", x.title.toLowerCase()]));
-  add("experience", "octave-tools", "OCTAVE tools", `Tools: ${octave.tools.join(", ")}.`, ["tools", "databricks", "power bi", "excel"]);
   [...octave.roles, ...octave.earlier].forEach((r) => add("experience", r.id, `${r.title}, ${r.company}`, `${r.dateRange}, ${r.location}. ${r.details.join(" ")}`, ["octave", "role", "intern", "promotion", "dates"]));
-  add("experience", layer1.id, `${layer1.title}, ${layer1.company}`, `${layer1.dateRange}, ${layer1.location}. ${layer1.description} Built for: ${layer1.builtFor.join(", ")}.`, ["layer1", "studio", "co-founder", "founder", "startup", "freelance", "clients"]);
+  add("experience", layer1.id, `${layer1.title}, ${layer1.company}`, `${layer1.dateRange}, ${layer1.location}. ${layer1.description} ${layer1.details.join(" ")} Clients include ${layer1.builtFor.join(", ").toLowerCase()}.`, ["layer1", "studio", "co-founder", "founder", "startup", "freelance", "clients", "built"]);
   add("experience", londonSuccessAcademy.id, `${londonSuccessAcademy.title}, ${londonSuccessAcademy.company}`, `${londonSuccessAcademy.dateRange}, ${londonSuccessAcademy.location}. ${londonSuccessAcademy.details.join(" ")}`, ["data engineering", "etl", "gcp", "pyspark", "london"]);
   otherRoles.forEach((r) => add("experience", r.id, `${r.title}, ${r.company}`, `${r.dateRange}, ${r.location}. ${r.details.join(" ")}`, ["retail", "customer", "uk", "part-time"]));
 
-  projects.forEach((pr) => add("projects", pr.id, pr.title, `${pr.role}. ${pr.description} Built with ${pr.tech.join(", ")}.`, ["project", "built", "app", "chatbot", "rag", "gemini", "hackathon"]));
+  education.forEach((e) => add("education", e.id, e.title, `${e.institution}, ${e.dateRange}.${e.summary ? " " + e.summary : ""}`, ["education", "degree", "university", "school", "studied", "first class", "cima", "a-levels", "scholarship"]));
 
-  skills.forEach((s) => add("skills", `skills-${s.category}`, s.category, s.items.join(", "), ["skills", "tools", "stack", "languages", "python", "sql"]));
+  skills.forEach((s) => add("skills", `skills-${s.category}`, s.category, `Used at work: ${s.work.join(", ")}.${s.explored.length ? ` Explored: ${s.explored.join(", ")}.` : ""}`, ["skills", "tools", "stack", "languages", "python", "sql"]));
 
-  add("teaching", "teaching-intro", "Why she teaches", teaching.intro, ["teaching", "teach", "lecture", "mentor"]);
-  teaching.roles.forEach((t) => add("teaching", t.id, `${t.title}, ${t.institution}`, `${t.dateRange}. ${t.summary}`, ["teaching", "teacher", "support worker"]));
+  add("teaching", "teaching-intro", "Teaching", teaching.intro, ["teaching", "teach", "lecture", "mentor", "explain"]);
+  teaching.roles.forEach((t) => add("teaching", t.id, `${t.title}, ${t.institution}`, `${t.dateRange}. ${t.summary}`, ["teaching", "teacher", "support worker", "mentoring", "interns"]));
+
+  achievements.forEach((a) => add("recognition", a.id, a.title, `${a.organization}, ${a.year}.${a.summary ? " " + a.summary : ""}`, ["award", "prize", "achievement", "won", "finalist", "recognition"]));
+  press.forEach((n) => add("recognition", n.id, n.title, `${n.organization}, ${n.year}.`, ["news", "press", "article", "interview", "featured"]));
 
   add("volunteer", "volunteer-summary", "Volunteering", volunteer.summary, ["volunteer", "foundation", "community"]);
   add("volunteer", "swimming", "Swimming", volunteer.swimming, ["swim", "swimming", "sport", "gold", "championship"]);
-  add("volunteer", "hobbies", "Outside work", volunteer.hobbies.join(", "), ["hobbies", "interests", "outside work"]);
   add("volunteer", "memberships", "Memberships", volunteer.memberships.join(", "), ["member", "membership", "club", "bcs", "ieee"]);
-
-  add("perspective", "perspective", perspective.title, perspective.paragraphs.join(" "), ["perspective", "essay", "thinks", "opinion", "view", "ideas", "transparency", "trust"]);
-
-  achievements.forEach((a) => add("achievements", a.id, a.title, `${a.organization}, ${a.year}. ${a.summary}`, ["award", "prize", "achievement", "won", "finalist"]));
-  press.forEach((n) => add("news", n.id, n.title, `${n.organization}, ${n.year}. ${n.summary}`, ["news", "press", "article", "interview", "featured"]));
 
   add("contact", "contact", "Contact", `${contact.intro} Email ${identity.email}. LinkedIn, GitHub and ORCID links are in the Contact section. Based in ${identity.location}.`, ["contact", "email", "reach", "linkedin", "github", "orcid", "hire", "location", "where", "based"]);
 

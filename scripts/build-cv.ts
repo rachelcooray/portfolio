@@ -21,7 +21,7 @@ import {
   teaching,
   education,
   research,
-  projects,
+  buildLog,
   skills,
   achievements,
 } from "../src/content/content";
@@ -44,7 +44,7 @@ const contact = [
 ];
 
 const summary =
-  "Analyst, Data and AI at OCTAVE, John Keells Holdings, applying AI and analytics to real business problems. I own four AI and analytics use cases for an FMCG distributor network and design how each one is evaluated in the field. Published researcher at IEEE ICAHS 2025, co-founder of Layer1 Studio, and First Class graduate in Computer Science from the University of Westminster.";
+  "I apply AI to real business problems. Analyst, Data and AI at OCTAVE, John Keells Holdings, where I own four AI and analytics use cases for an FMCG business's distributors and design how each one is checked in the field. First Class Computer Science graduate from the University of Westminster, published researcher at IEEE ICAHS 2025, and co-founder of Layer1 Studio.";
 
 const blocks: Block[] = [
   {
@@ -56,10 +56,9 @@ const blocks: Block[] = [
         when: "Jul 2026 to present",
         where: "Colombo, hybrid",
         bullets: [
-          "Own four AI and analytics use cases on the distributor side of an FMCG business: distributor margin incentives, a replenishment system that recommends redistribution volumes, a permanent dispatch plan that minimises lorry costs, and a distributor efficiency model that increases line items per bill.",
-          "Design how each use case is checked: pilot and control groups where possible, before and after where not. Start with operational measures such as billing activity, outlet reach and recommendation adherence, then margin. Report results without a control group as an association, not proven impact.",
-          "Join regular governance calls with area, regional and sales managers and bring field learning back into each use case. Help prepare answers to challenging questions and slides that lead with the finding for leadership and finance.",
-          "Keep reasoning on record through decision logs, process maps and problem statements. Reconcile numbers across dashboards and files and own the corrections. Tools: Excel, Databricks, Power BI.",
+          ...octave.roles[0].details,
+          "Design how each use case is checked: pilot and control groups where possible, before and after where not. Start with operational measures such as billing activity, outlet reach and how closely recommendations are followed, then margin. Report results without a control group as an association, not proven impact.",
+          "Join governance calls with area, regional and sales managers. Help prepare answers to finance and leadership challenges. Keep decision logs, process maps and problem statements, and reconcile numbers across dashboards and own the corrections.",
         ],
       },
       {
@@ -80,7 +79,7 @@ const blocks: Block[] = [
         org: layer1.company,
         when: layer1.dateRange,
         where: layer1.location,
-        bullets: [layer1.description, layer1.details[0]],
+        bullets: [layer1.description, layer1.details[0], `Clients include ${layer1.builtFor.join(", ").toLowerCase()}. ${layer1.details[2]}`],
       },
       {
         title: londonSuccessAcademy.title,
@@ -107,6 +106,7 @@ const blocks: Block[] = [
         when: research.paper.year,
         bullets: [
           `DOI ${research.paper.doi}. ${research.paper.authors}.`,
+          `${research.paper.description} Method: ${research.paper.method}`,
           research.paper.award,
           research.paper.journal,
           `Deployed app: pcos-care-web-app.onrender.com. ORCID ${identity.orcid}.`,
@@ -116,20 +116,18 @@ const blocks: Block[] = [
   },
   {
     heading: "Education",
-    items: education.map((e) => ({ title: e.title, org: e.institution, when: e.dateRange, text: e.summary })),
+    items: education.map((e) => ({ title: e.title, org: e.institution, when: e.dateRange, text: e.summary || undefined })),
   },
   {
-    heading: "Selected projects",
-    items: projects
-      .filter((p) => p.id !== "project-pcos-care")
-      .map((p) => ({ title: p.title, org: p.role, text: `${p.description} ${p.tech.join(", ")}.` })),
+    heading: "Build log",
+    items: buildLog.map((b) => ({ title: b.title, when: b.year ?? undefined, text: `${b.built} ${b.tools.join(", ")}.` })),
   },
   {
     heading: "Skills",
-    items: skills.map((s) => ({ title: s.category, text: s.items.join(", ") })),
+    items: skills.map((s) => ({ title: s.category, text: s.work.join(", ") + (s.explored.length ? `. Explored: ${s.explored.join(", ")}` : "") })),
   },
   {
-    heading: "Teaching and other roles",
+    heading: "Teaching, mentoring and other roles",
     items: [
       ...teaching.roles.map((t) => ({ title: t.title, org: t.institution, when: t.dateRange })),
       {
@@ -142,7 +140,7 @@ const blocks: Block[] = [
     ],
   },
   {
-    heading: "Achievements",
+    heading: "Recognition",
     items: achievements.map((a) => ({ title: a.title, org: a.organization, when: a.year })),
   },
 ];
@@ -191,7 +189,9 @@ ${blocks
 </body></html>`;
 
 const all = html + JSON.stringify(blocks) + summary;
-const banned = [/—/, /68\s?%/, /93\.75/, /40\s?%/, /scholarship/i, /fiction/i, /novel/i, /\blead(s|ing)? (four|the|ai|analytics|use)/i, /\bclients\b/i, /\b\d+\s+(clients?|projects)\b/i];
+// From the content spec, 8 Nov 2026. The scholarship she was given and the
+// list of Layer1 client types are allowed; applications and counts are not.
+const banned = [/—/, /68\s?%/, /93\.75/, /40\s?%/, /scholarship application/i, /fiction/i, /novel/i, /pen name/i, /FICTA/i, /CIMA study assistant/i, /CV assistant/i, /LKR/, /\blead(s|ing)? (four|the|ai|analytics|use)/i, /\b\d+\+?\s+(clients?|projects)\b/i];
 for (const b of banned) if (b.test(all)) throw new Error(`CV contains banned pattern ${b}`);
 
 writeFileSync(join(out, "cv.html"), html);
