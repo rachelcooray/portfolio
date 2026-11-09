@@ -56,9 +56,11 @@ const blocks: Block[] = [
         when: "Jul 2026 to present",
         where: "Colombo, hybrid",
         bullets: [
-          ...octave.roles[0].details,
-          "Design how each use case is checked: pilot and control groups where possible, before and after where not. Start with operational measures such as billing activity, outlet reach and how closely recommendations are followed, then margin. Report results without a control group as an association, not proven impact.",
-          "Join governance calls with area, regional and sales managers. Help prepare answers to finance and leadership challenges. Keep decision logs, process maps and problem statements, and reconcile numbers across dashboards and own the corrections.",
+          `Own delivery across four distributor-side use cases: ${octave.useCases.map((u) => `${u.name} (${u.code})`).join(", ")}. Also contributed to Production Planning and weather-informed target setting.`,
+          "Coordinate data science and engineering teams to turn business requirements into implementable solutions, managing project plans, sprints, RAID logs, dependencies and priorities.",
+          "Work directly with sales, finance, area and regional management, and present progress, findings and challenges to senior stakeholders.",
+          "Write problem statements, process maps, decision logs and requirements, and support validation of data, model outputs, dashboards and reporting.",
+          `Design measurement with pilot and control comparisons where possible and before and after analysis where appropriate, separating association from proven impact. Tools: ${octave.tools.join(", ")}.`,
         ],
       },
       {
@@ -79,7 +81,7 @@ const blocks: Block[] = [
         org: layer1.company,
         when: layer1.dateRange,
         where: layer1.location,
-        bullets: [layer1.description, layer1.details[0], `Clients include ${layer1.builtFor.join(", ").toLowerCase()}. ${layer1.details[2]}`],
+        bullets: [layer1.description, `${layer1.details.slice(0, 3).join(" ")}`, `Industries: ${layer1.builtFor.join(", ").toLowerCase()}. ${layer1.details[4]}`],
       },
       {
         title: londonSuccessAcademy.title,

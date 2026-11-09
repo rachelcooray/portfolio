@@ -30,7 +30,7 @@ I make sure analytics works in the field, not just in a model. For each use case
 ## 03 Research
 
 **PCOS Care: A Machine Learning-Based Web Application for Early Risk Prediction of Polycystic Ovary Syndrome**
-IEEE ICAHS 2025, Tunisia. An early screening web app with two levels of prediction: one from everyday signs that anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction. It is a screening aid, not a diagnostic tool. Method: Chi-Square and ANOVA feature selection, SMOTE for class balance, and an enhanced Random Forest. Third place at the University of Westminster final year project showcase, 2025. Extended paper selected for the MSIT Journal special edition, under review.
+IEEE ICAHS 2025, Hammamet, Tunisia. An early screening web app with two levels of prediction: one from everyday signs that anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction. It is a screening aid, not a diagnostic tool. Method: Chi-Square and ANOVA feature selection, SMOTE for class balance, and an enhanced Random Forest. Third place at the University of Westminster final year project showcase, 2025. Extended paper selected for the MSIT Journal special edition, under review.
 
 **Talks**
 IEEE ICAHS 2025, Tunisia: presented PCOS Care.
@@ -58,10 +58,10 @@ A 2D dungeon crawler built from scratch in HTML5 Canvas, with its own physics, p
 ## 05 Experience
 
 **OCTAVE: what she owns**
-I own four AI and analytics use cases on the distributor side of an FMCG business: distributor margin incentives, a replenishment system that recommends redistribution volumes, a permanent dispatch plan that minimises lorry costs, and a distributor efficiency model that increases line items per bill. My job is to make sure analytics works in the field, not just in a model: the analysis has to be sound and the business has to use it.
+I work across enterprise data and AI initiatives within the FMCG business, connecting data science, engineering and commercial stakeholders to deliver analytics-driven solutions. I own delivery across four distributor-side use cases: the Distributor Replenishment System, Ice Cream Distributor Margins, Beverages Distributor Margins and Permanent Dispatch Planning.
 
 **Analyst, Data and AI, OCTAVE, John Keells Holdings**
-Jul 2026 to present, Colombo, hybrid. Own four AI and analytics use cases on the distributor side of an FMCG business: distributor margin incentives, a replenishment system that recommends redistribution volumes, a permanent dispatch plan that minimises lorry costs, and a distributor efficiency model that increases line items per bill. Run each end to end: PMO, direct client contact, decks for senior leaders and finance, and coordinating the data science team. Tools: Excel, Databricks, Power BI.
+Jul 2026 to present, Colombo, hybrid. Owning delivery across four distributor-side AI and analytics use cases. Coordinating data science and engineering teams to translate business requirements into implementable solutions. Managing project plans, sprint activities, RAID logs, dependencies and delivery priorities. Working directly with business stakeholders, including sales, finance, area and regional management. Preparing presentations and communicating progress, findings and challenges to senior stakeholders. Developing problem statements, process maps, decision logs and requirements documentation. Supporting validation of data, model outputs, dashboards and business reporting. Designing measurement approaches using pilot and control comparisons where possible and before and after analysis where appropriate. Evaluating operational indicators and commercial outcomes while distinguishing association from proven impact.
 
 **Analytics Delivery Associate, OCTAVE, John Keells Holdings**
 Apr 2026 to Jul 2026, Colombo. 
@@ -76,7 +76,7 @@ Mar 2023 to May 2023, Colombo. Built Power BI dashboards for sales performance a
 Mar 2022 to Jun 2022, Remote. Data preparation and model support; a hotel customer analysis and a CSR study of street vendors.
 
 **Co-founder and Developer, Layer1 Studio**
-Dec 2025 to present, Part-time, remote. I co-founded Layer1 Studio and build web and mobile products for small businesses, from shaping a brief to shipping and maintaining it. Web and mobile applications in Flutter, React and Node.js, from UI design to backend integration and deployment. Turning an informal brief into a scoped product, then maintaining it after launch. Interns work on real client projects. Clients include gyms, e-commerce, food shops, marketing agencies, a workplace culture consultancy, an artist, an author, sports teams.
+Dec 2025 to present, Colombo, Sri Lanka and London, UK, part-time. I co-founded Layer1 Studio and build web and mobile products for small businesses, from shaping a brief to shipping and maintaining it. Work with clients to understand their needs and define project requirements. Develop websites and mobile applications. Contribute to interface design, application architecture and backend integration. Coordinate development and deployment, and support maintenance and iterative improvements. Mentor interns and involve them in real client projects. Contribute to business development and the growth of the studio. Clients include fitness, marketing, arts and publishing, e-commerce, retail, food, workplace culture, sports.
 
 **Data Engineering Intern, London Success Academy**
 Sep 2025 to Oct 2025, Remote, United Kingdom. Built ETL pipelines on Google Cloud Platform for clickstream and transaction data. Scaled processing with PySpark and Parquet partitioning. Produced revenue, daily active user and conversion funnel insights.
@@ -95,17 +95,14 @@ Nov 2024 to Jan 2025, Stratford. Customer service, stock and merchandising.
 
 ## 06 Education
 
-**BSc (Hons) Computer Science, First Class**
-University of Westminster, United Kingdom, Sep 2022 to Jul 2025. Data Science specialism. Started at IIT, Sri Lanka.
-
-**UOW/IIT School of Computing and Engineering scholarship**
-University of Westminster and Informatics Institute of Technology, 2024/25.
+**BSc (Hons) Computer Science, First Class Honours**
+University of Westminster, London, United Kingdom, Sep 2022 to Jul 2025. Data Science specialisation. Started at IIT, Sri Lanka. UOW/IIT School of Computing and Engineering Part-Fee Scholarship, £5,000, 2024/25.
 
 **Certificate in Business Accounting**
-CIMA, Aug 2024.
+CIMA, Aug 2024. BA1 to BA4 completed. Operational level in progress.
 
 **St. Bridget's Convent, Colombo**
-A-Levels: Chemistry, Maths, Physics, 2008 to 2022. Head Prefect, 2020.
+GCE A/L 2022 and GCE O/L 2018, 2008 to 2022. A/L: Chemistry A, English A, Physics B, Combined Mathematics B. O/L: nine A passes. Head Prefect, 2020.
 
 ## 07 Skills
 
@@ -126,11 +123,11 @@ Used at work: GCP, Git and GitHub, Excel.
 **Teaching**
 I explain technical work so the person using it can act on it.
 
-**Class Teacher, St. Mary's Church, Dehiwala**
-Aug 2022 to Aug 2024. Lessons for primary school learners, adapted to different learning needs.
+**Sunday School Class Teacher, St. Mary's Church, Dehiwala**
+Aug 2022 to Aug 2024. Taught children aged 4 to 8, from Pre-Grade to Grade 2. Prepared and delivered lessons and supported classroom activities.
 
 **Student Support Worker, Clear Links Support**
-Oct 2024 to Apr 2025. Note-taking and academic support for university students in lectures and tutorials.
+Oct 2024 to Apr 2025. In-lecture support for university students, including note-taking and academic assistance.
 
 **Mentoring interns, Layer1 Studio**
 Dec 2025 to present. Interns work on real client projects.
@@ -138,16 +135,22 @@ Dec 2025 to present. Interns work on real client projects.
 ## 09 Recognition and press
 
 **Third place, final year project showcase**
-University of Westminster, judged with Netcompany and SmartDCC, 2025. For PCOS Care.
+University of Westminster, judged with Netcompany and SmartDCC, 2025. Awarded for PCOS Care, a machine learning-based application for early PCOS risk screening.
 
-**Hackathon finalist, neurodiversity support chatbot**
-Microsoft EMBRACE, 2024.
+**Hackathon finalist, Generative AI for Neurodiversity**
+Microsoft EMBRACE Employee Resource Group, 2024. Contributed to a chatbot prototype designed to guide and support people newly diagnosed with neurodiverse conditions.
 
 **UOW/IIT School of Computing and Engineering scholarship**
 University of Westminster and Informatics Institute of Technology, 2024/25.
 
-**New Generation Awards**
-Women in Management and NYSC, 2020.
+**School Prefect of the Year, New Generation Awards**
+Women in Management and the National Youth Services Council, 2020. Recognised for youth leadership while serving as Head Prefect of St. Bridget's Convent.
+
+**PCOS Care research publication**
+IEEE, 2025.
+
+**Team OCTAVE wins the overall women's championship**
+John Keells Holdings, 2026.
 
 **Celebrating Innovation at the Computer Science and Engineering Final Year Project Showcase**
 University of Westminster blog, 2025.
@@ -170,7 +173,7 @@ With the John Keells Foundation, 2026: guest support at the launch of Artist Spo
 At the 2026 JKH Intercompany Swimming Meet I won three individual golds and gold in every relay in the under-25 group, as OCTAVE took the overall women's championship.
 
 **Memberships**
-Rotaract, IEEE Club, BCS, CIMA Student
+Rotaract Club, IEEE Club, Sri Lankan Society, University of Westminster, CIMA Student Member, BCS Member
 
 ## 12 Contact
 

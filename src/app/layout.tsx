@@ -1,7 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import LenisProvider from "@/components/LenisProvider";
-import "./globals.css";
+import LenisProvider from "@/components/layout/LenisProvider";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import ScrollChrome from "@/components/layout/ScrollChrome";
+import Reveal from "@/components/animations/Reveal";
+import "./site.css";
 
 // Self-hosted (SIL Open Font License), so builds never depend on a font CDN.
 const instrumentSerif = localFont({
@@ -29,11 +33,11 @@ const plexMono = localFont({
 });
 
 const description =
-  "Rachel Cooray applies AI to real business problems. Analyst, Data and AI at OCTAVE, John Keells Holdings, published researcher, and co-founder of Layer1 Studio.";
+  "Rachel Cooray works at the intersection of technology, intelligence and real-world problems. Analyst, Data and AI at OCTAVE, John Keells Holdings, published researcher and co-founder of Layer1.Studio.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rachelcooray.com"),
-  title: "Rachel Cooray | Applying AI to real business problems",
+  title: { default: "Rachel Cooray", template: "%s | Rachel Cooray" },
   description,
   openGraph: {
     type: "website",
@@ -53,7 +57,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F2EBDD",
+  themeColor: "#F4F1E8",
   colorScheme: "light",
 };
 
@@ -71,11 +75,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
-        <link rel="preload" as="image" href="/images/rachel-portrait.png" />
       </head>
       <body>
         <LenisProvider />
-        {children}
+        <a className="skip" href="#content">
+          Skip to content
+        </a>
+        <Navbar />
+        <ScrollChrome />
+        <main id="content">{children}</main>
+        <Footer />
+        <Reveal />
       </body>
     </html>
   );
