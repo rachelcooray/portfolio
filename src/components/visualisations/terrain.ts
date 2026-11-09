@@ -2,7 +2,7 @@
  * The Atlas terrain. Plain three.js, mounted only in "gl" mode.
  * Each region is a stack of contour plates: a dark filled plate per level
  * with a contour line on its rim, so the hill reads like a laser-cut
- * topographic model. The selected region's contours turn ivory.
+ * topographic model. The selected region's contours turn lime.
  */
 import * as THREE from "three";
 
@@ -16,9 +16,9 @@ export const TERRAIN_REGIONS: TerrainRegion[] = [
 ];
 
 const STEP = 0.26;
-const GLACIAL = new THREE.Color("#A9B69D");
-const CORAL = new THREE.Color("#F4F1E8");
-const PLATE = new THREE.Color("#1A3027");
+const GLACIAL = new THREE.Color("#BED7F4");
+const CORAL = new THREE.Color("#C7D42B");
+const PLATE = new THREE.Color("#1E4C8E");
 
 function ringPoints(cx: number, cz: number, rad: number, seed: number, n = 72): [number, number][] {
   const pts: [number, number][] = [];
@@ -45,7 +45,7 @@ export function mountTerrain(
   renderer.domElement.setAttribute("aria-hidden", "true");
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x20392f, 16, 34);
+  scene.fog = new THREE.Fog(0x2961b1, 16, 34);
   const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
   const world = new THREE.Group();
   scene.add(world);
@@ -54,7 +54,7 @@ export function mountTerrain(
   const track = <T extends { dispose: () => void }>(x: T) => (disposables.push(x), x);
 
   // Base map: a faint grid the terrain sits on.
-  const grid = new THREE.GridHelper(26, 26, 0x3a5246, 0x2c463a);
+  const grid = new THREE.GridHelper(26, 26, 0x4c7ac0, 0x3a6bb5);
   (grid.material as THREE.Material).transparent = true;
   (grid.material as THREE.Material).opacity = 0.45;
   grid.position.y = -0.01;
@@ -88,7 +88,7 @@ export function mountTerrain(
   });
 
   // Tiny architecture at the foot of the enterprise region: the FMCG world.
-  const edgeMat = track(new THREE.LineBasicMaterial({ color: "#A9B69D", transparent: true, opacity: 0.8 }));
+  const edgeMat = track(new THREE.LineBasicMaterial({ color: "#64A8E5", transparent: true, opacity: 0.8 }));
   const boxes: [number, number, number, number, number][] = [
     [5.4, -3.6, 0.5, 0.4, 0.5],
     [6.1, -3.4, 0.3, 0.7, 0.3],
@@ -107,7 +107,7 @@ export function mountTerrain(
     [regions[0].top, new THREE.Vector3(-1, 3.6, -3.4), regions[1].top, new THREE.Vector3(4.6, 2.4, 0), regions[3].top, regions[2].top].map((v) => v.clone()),
   );
   const pathGeo = track(new THREE.BufferGeometry().setFromPoints(curve.getPoints(160)));
-  const pathMat = track(new THREE.LineDashedMaterial({ color: new THREE.Color("#C9A9AC"), dashSize: 0.12, gapSize: 0.22, transparent: true, opacity: 0.85 }));
+  const pathMat = track(new THREE.LineDashedMaterial({ color: new THREE.Color("#D3C399"), dashSize: 0.12, gapSize: 0.22, transparent: true, opacity: 0.85 }));
   const path = new THREE.Line(pathGeo, pathMat);
   path.computeLineDistances();
   world.add(path);
@@ -115,7 +115,7 @@ export function mountTerrain(
   // Peak markers.
   const dotGeo = track(new THREE.SphereGeometry(0.07, 12, 12));
   const dots = regions.map((r) => {
-    const m = new THREE.Mesh(dotGeo, track(new THREE.MeshBasicMaterial({ color: "#E4DDCE" })));
+    const m = new THREE.Mesh(dotGeo, track(new THREE.MeshBasicMaterial({ color: "#EFE6D3" })));
     m.position.copy(r.top);
     world.add(m);
     return m;
@@ -131,7 +131,7 @@ export function mountTerrain(
   }
   const pGeo = track(new THREE.BufferGeometry());
   pGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-  const pMat = track(new THREE.PointsMaterial({ color: "#E4DDCE", size: 0.035, transparent: true, opacity: 0.55, depthWrite: false }));
+  const pMat = track(new THREE.PointsMaterial({ color: "#EFE6D3", size: 0.035, transparent: true, opacity: 0.55, depthWrite: false }));
   const points = new THREE.Points(pGeo, pMat);
   scene.add(points);
 
@@ -209,7 +209,7 @@ export function mountTerrain(
         const target = (ri === selected ? 0.5 + lv.f * 0.5 : on ? 0.45 + lv.f * 0.5 : 0.22 + lv.f * 0.5) * local;
         lv.mat.opacity += (target - lv.mat.opacity) * 0.1;
       });
-      (dots[ri].material as THREE.MeshBasicMaterial).color.lerp(ri === selected ? CORAL : new THREE.Color("#E4DDCE"), 0.1);
+      (dots[ri].material as THREE.MeshBasicMaterial).color.lerp(ri === selected ? CORAL : new THREE.Color("#EFE6D3"), 0.1);
       dots[ri].scale.setScalar(ri === selected ? 1.6 : 1);
     });
     pathMat.opacity = 0.85 * reveal;

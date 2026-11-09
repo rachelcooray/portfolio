@@ -6,22 +6,27 @@
  */
 
 :root {
-  --forest: #20392f;
-  --forest-2: #1a3027;
-  --moss: #687b60;
-  --moss-ink: #4f6147;
-  --sage: #a9b69d;
-  --ivory: #f4f1e8;
-  --oat: #e4ddce;
-  --burgundy: #754b50;
-  --charcoal: #252923;
-  --muted: #565b50;
-  --line: #d3cbb9;
-  --line-dark: #3a5246;
+  /* Naturalistic palette: lime, cobalt, sky, pale blue, sand and bark.
+     Old token names are kept so every component picks up the new colours. */
+  --forest: #2961b1; /* cobalt: headings, primary buttons, feature bands */
+  --forest-2: #1e4c8e; /* deep cobalt */
+  --moss: #64a8e5; /* sky: markers and lines */
+  --moss-ink: #7a6142; /* bark: small labels on light grounds */
+  --sage: #bed7f4; /* pale blue: text and lines on cobalt */
+  --ivory: #faf7ef; /* cream ground */
+  --oat: #efe6d3; /* light sand panels */
+  --burgundy: #7a6142; /* bark: warm emphasis text */
+  --charcoal: #2b2318; /* trunk: body text */
+  --muted: #5e5143;
+  --line: #ddd3bf;
+  --line-dark: #4c7ac0;
+  --lime: #c7d42b; /* highlights; on cobalt or as a fill with dark text */
+  --sand: #d3c399;
+  --sky-wash: #e6f0fb;
 
-  --serif: var(--font-instrument-serif), "Instrument Serif", Georgia, serif;
-  --sans: var(--font-manrope), Manrope, system-ui, sans-serif;
-  --mono: var(--font-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --serif: var(--font-display), Fraunces, Georgia, serif;
+  --sans: var(--font-body), "DM Sans", system-ui, sans-serif;
+  --mono: var(--font-mono), "DM Mono", ui-monospace, monospace;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --nav: 68px;
   color-scheme: light;
@@ -316,7 +321,7 @@ html.reveal-on [data-reveal].in {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(244, 241, 232, 0.86);
+  background: rgba(250, 247, 239, 0.86);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
@@ -428,7 +433,7 @@ html.reveal-on [data-reveal].in {
   text-decoration: underline;
 }
 .site-foot .muted {
-  color: #b9b3a3;
+  color: #cbbfa6;
 }
 .foot-grid {
   display: grid;
@@ -458,8 +463,8 @@ html.reveal-on [data-reveal].in {
   gap: 12px;
   margin-top: 48px;
   padding-block: 20px;
-  border-top: 1px solid #3a3e36;
-  color: #b9b3a3;
+  border-top: 1px solid #4a3e2f;
+  color: #cbbfa6;
 }
 
 /* Page heads */
@@ -559,7 +564,7 @@ html.reveal-on [data-reveal].in {
   aspect-ratio: 720 / 600;
   border-radius: 28px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 55% 40%, #2c4a3d, var(--forest) 70%);
+  background: radial-gradient(ellipse at 55% 40%, #3b78c8, var(--forest) 70%);
 }
 .terrain-svg {
   position: absolute;
@@ -597,7 +602,7 @@ html.reveal-on [data-reveal].in {
   width: min(300px, calc(100% - 36px));
   padding: 16px 18px;
   border-radius: 18px;
-  background: rgba(244, 241, 232, 0.94);
+  background: rgba(250, 247, 239, 0.94);
   color: var(--charcoal);
   display: flex;
   flex-direction: column;
@@ -679,7 +684,7 @@ html.reveal-on [data-reveal].in {
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #fbf9f3;
+  background: #fffdf7;
 }
 .feature-card .diagram {
   border-radius: 0;
@@ -713,8 +718,8 @@ html.reveal-on [data-reveal].in {
   padding: 26px;
   border-radius: 22px;
   border: 1px solid var(--line);
-  background: repeating-linear-gradient(0deg, transparent 0 23px, rgba(104, 123, 96, 0.12) 23px 24px),
-    repeating-linear-gradient(90deg, transparent 0 23px, rgba(104, 123, 96, 0.12) 23px 24px), var(--oat);
+  background: repeating-linear-gradient(0deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px), var(--oat);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -798,7 +803,7 @@ html.reveal-on [data-reveal].in {
 }
 .journey li:last-child::before {
   background: var(--oat);
-  box-shadow: 0 0 0 4px rgba(228, 221, 206, 0.25);
+  box-shadow: 0 0 0 4px rgba(199, 212, 43, 0.35);
 }
 .journey .year {
   display: block;
@@ -1195,7 +1200,7 @@ td.mono {
   align-items: center;
   padding: clamp(20px, 3vw, 32px);
   border-radius: 28px;
-  background: #fbf9f3;
+  background: #fffdf7;
   border: 1px solid var(--line);
 }
 .case-row:nth-child(even) .case-visual {
@@ -1652,7 +1657,7 @@ td.mono {
   padding: 16px 16px 24px;
   border-radius: 22px;
   border: 1px solid var(--line);
-  background: #fbf9f3;
+  background: #fffdf7;
 }
 .news-thumb img,
 .pub-card {
@@ -2087,7 +2092,7 @@ td.mono {
   gap: 10px;
   padding: 14px 12px;
   border-radius: 18px;
-  background: rgba(244, 241, 232, 0.82);
+  background: rgba(250, 247, 239, 0.82);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--line);
@@ -2217,7 +2222,7 @@ td.mono {
 }
 .bento-card.b5 {
   grid-column: span 3;
-  background: #d9dccf;
+  background: #e6f0fb;
 }
 .bento-card .mono {
   color: var(--moss-ink);
@@ -2438,7 +2443,7 @@ td.mono {
   padding: clamp(24px, 4vw, 48px);
   margin-bottom: clamp(64px, 8vw, 104px);
   border-radius: 32px;
-  background: #fbf9f3;
+  background: #fffdf7;
   border: 1px solid var(--line);
   max-width: calc(1280px - 2 * max(16px, 4vw));
 }
@@ -2728,7 +2733,7 @@ td.mono {
   padding: 0 16px;
   border-radius: 999px;
   border: 1px solid var(--line);
-  background: #fbf9f3;
+  background: #fffdf7;
   color: var(--muted);
 }
 .search input {
@@ -2754,7 +2759,7 @@ td.mono {
   border-radius: 24px;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #fbf9f3;
+  background: #fffdf7;
   transition: transform 0.3s var(--ease), border-color 0.3s;
 }
 .project-card:hover {
@@ -2798,7 +2803,7 @@ td.mono {
   display: flex;
   align-items: flex-end;
   padding: 22px;
-  background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(104, 123, 96, 0.14) 14px 15px), var(--forest);
+  background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(190, 215, 244, 0.16) 14px 15px), var(--forest);
   color: var(--ivory);
   font-family: var(--serif);
   font-size: 30px;
@@ -2929,7 +2934,7 @@ td.mono {
 .method-step {
   border-radius: 18px;
   border: 1px solid var(--line);
-  background: #fbf9f3;
+  background: #fffdf7;
   padding: 0 20px;
 }
 .method-step summary {
@@ -2971,7 +2976,7 @@ td.mono {
   gap: 14px;
   padding: clamp(24px, 3vw, 36px);
   border-radius: 28px;
-  background: #fbf9f3;
+  background: #fffdf7;
   border: 1px solid var(--line);
 }
 .edu-side {
@@ -3260,7 +3265,7 @@ td.mono {
   min-height: 70vh;
   display: flex;
   align-items: center;
-  background: radial-gradient(ellipse at 70% 40%, #2c4a3d, var(--forest) 70%);
+  background: radial-gradient(ellipse at 70% 40%, #3b78c8, var(--forest) 70%);
   color: var(--ivory);
 }
 .lost .wrap {
@@ -3385,7 +3390,7 @@ td.mono {
   flex-direction: column;
   justify-content: space-between;
   padding: 22px;
-  background: repeating-linear-gradient(90deg, transparent 0 23px, rgba(169, 182, 157, 0.12) 23px 24px), var(--forest);
+  background: repeating-linear-gradient(90deg, transparent 0 23px, rgba(190, 215, 244, 0.14) 23px 24px), var(--forest);
   color: var(--ivory);
 }
 .thumb-flow .mono {
@@ -3438,4 +3443,152 @@ td.mono {
 .company img {
   width: 64px;
   height: 64px;
+}
+
+
+/* ====================================================================
+ * Naturalistic palette accents (Nov 2026): lime is a highlight colour.
+ * ==================================================================== */
+.hero {
+  background: linear-gradient(180deg, var(--sky-wash), var(--ivory) 85%);
+}
+.logomark span,
+.accent-dot {
+  color: var(--forest);
+}
+.foot-name span {
+  color: var(--lime);
+}
+.active-indicator {
+  background: var(--lime);
+  box-shadow: 0 0 0 1px var(--forest);
+}
+.nav-list a:hover,
+.nav-list a[aria-current="page"] {
+  border-bottom-color: transparent;
+}
+.scroll-progress {
+  background: linear-gradient(90deg, var(--forest), var(--moss) 60%, var(--lime));
+  height: 3px;
+}
+.chapter-rail a[aria-current="true"] .dot {
+  background: var(--lime);
+  border-color: var(--forest);
+}
+.chapter-rail a.passed .dot {
+  background: var(--moss);
+  border-color: var(--moss);
+}
+.rail-count {
+  color: var(--forest);
+}
+.btn-ivory {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--charcoal) !important;
+}
+.btn-ivory:hover {
+  background: #d6e24a;
+  border-color: #d6e24a;
+}
+.btn:hover {
+  background: var(--forest-2);
+  border-color: var(--forest-2);
+}
+.band-forest h2 em,
+.closing h2,
+.bento-card.b1 h3,
+.cs-next .next-title,
+.quote p {
+  color: var(--lime);
+}
+.band-forest .eyebrow,
+.eyebrow.light,
+.sec-head.light .eyebrow,
+.journey p,
+.closing .lede,
+.swim .lede,
+.contact-grid .lede {
+  color: var(--sage);
+}
+.journey li::before {
+  background: var(--sage);
+}
+.journey li:last-child::before {
+  background: var(--lime);
+}
+.journey .year {
+  color: var(--ivory);
+}
+.site-foot {
+  background: var(--charcoal);
+}
+.foot-list .mono {
+  color: var(--lime);
+}
+.chain-node.on,
+.dmap-node.on {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--charcoal);
+}
+.chain-node.on .mono {
+  color: var(--forest-2);
+}
+.chain-panel {
+  background: var(--sky-wash);
+}
+.badge-category {
+  background: var(--sky-wash);
+  color: var(--forest-2);
+}
+.band-oat .badge-category {
+  background: var(--ivory);
+}
+.diagram {
+  background: repeating-linear-gradient(0deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px), var(--sky-wash);
+}
+.diagram li:not(:last-child)::after {
+  background: var(--lime);
+  color: var(--charcoal);
+}
+.thumb-flow li:last-child::before {
+  background: var(--lime);
+  border-color: var(--lime);
+}
+.page-hero-image.cutout::before {
+  background: var(--sky-wash);
+}
+.intro-photo img {
+  box-shadow: 12px 12px 0 var(--lime);
+}
+.medal::before {
+  background: var(--lime);
+}
+.medal.relay::before {
+  background: var(--sand);
+}
+.lg.owned {
+  background: var(--forest);
+}
+.value h3,
+.award-copy .mono,
+.r-timeline .mono {
+  color: var(--forest);
+}
+.r-timeline li::before {
+  background: var(--lime);
+  box-shadow: 0 0 0 1px var(--forest);
+}
+.check-list li.done::before {
+  background: var(--forest);
+}
+.prose p:nth-child(3) {
+  color: var(--forest);
+}
+h1,
+h2 {
+  font-weight: 400;
+  font-variation-settings: "opsz" 144;
 }

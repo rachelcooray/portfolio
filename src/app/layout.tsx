@@ -8,27 +8,28 @@ import Reveal from "@/components/animations/Reveal";
 import "./site.css";
 
 // Self-hosted (SIL Open Font License), so builds never depend on a font CDN.
-const instrumentSerif = localFont({
-  variable: "--font-instrument-serif",
+// Fraunces for headlines, DM Sans for reading and UI, DM Mono for labels.
+const fraunces = localFont({
+  variable: "--font-display",
   display: "swap",
   src: [
-    { path: "../fonts/instrument-serif-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/instrument-serif-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "../fonts/fraunces-300-600-normal.woff2", weight: "300 600", style: "normal" },
+    { path: "../fonts/fraunces-300-500-italic.woff2", weight: "300 500", style: "italic" },
   ],
 });
 
-const manrope = localFont({
-  variable: "--font-manrope",
+const dmSans = localFont({
+  variable: "--font-body",
   display: "swap",
-  src: [{ path: "../fonts/manrope-400-600-normal.woff2", weight: "400 600", style: "normal" }],
+  src: [{ path: "../fonts/dm-sans-400-600-normal.woff2", weight: "400 600", style: "normal" }],
 });
 
-const plexMono = localFont({
-  variable: "--font-plex-mono",
+const dmMono = localFont({
+  variable: "--font-mono",
   display: "swap",
   src: [
-    { path: "../fonts/plex-mono-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/plex-mono-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/dm-mono-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/dm-mono-500-normal.woff2", weight: "500", style: "normal" },
   ],
 });
 
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F4F1E8",
+  themeColor: "#FAF7EF",
   colorScheme: "light",
 };
 
@@ -71,7 +72,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${instrumentSerif.variable} ${manrope.variable} ${plexMono.variable}`}
+      className={`${fraunces.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />

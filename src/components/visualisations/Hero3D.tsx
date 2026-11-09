@@ -39,9 +39,9 @@ function Flat({ selected, onPick }: { selected: number; onPick: (i: number) => v
                 <path
                   key={l}
                   d={ring(g.cx, g.cy - l * 10, g.R * (1 - f * 0.92), g.seed + l * 0.18)}
-                  fill="#1A3027"
+                  fill="#1E4C8E"
                   fillOpacity={0.94}
-                  stroke={on ? "#F4F1E8" : "#A9B69D"}
+                  stroke={on ? "#C7D42B" : "#BED7F4"}
                   strokeOpacity={on ? 0.5 + f * 0.5 : 0.22 + f * 0.45}
                   strokeWidth={l === g.L - 1 ? 1.6 : 1}
                 />
