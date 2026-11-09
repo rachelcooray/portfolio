@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 import { TagList } from "@/components/ui/Badge";
 import { PageHero, SectionHeading } from "@/components/ui/Headings";
 import MultidisciplinaryMap from "@/components/about/MultidisciplinaryMap";
-import { identity, personalValues, site } from "@/content/content";
+import { personalValues, site } from "@/content/content";
 
 export const metadata: Metadata = { title: "About", description: "The person behind the work: how I think, where I'm heading and what connects my disciplines." };
 
@@ -17,7 +17,7 @@ export default function About() {
         title="Curiosity. Impact. Always learning."
         lead={a.paragraphs[0]}
         crumbs={[{ label: "About" }]}
-        image={{ src: identity.portrait, w: 679, h: 1366, alt: identity.portraitAlt, className: "cutout" }}
+        image={{ src: "/images/photos/rachel-headshot.webp", w: 576, h: 872, alt: "Rachel Cooray, smiling, in front of her research poster", className: "arch" }}
       >
         <div className="btn-row">
           <Button href="/experience">My journey</Button>

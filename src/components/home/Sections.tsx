@@ -4,7 +4,7 @@ import Button from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHeading } from "@/components/ui/Headings";
 import ArchitectureDiagram from "@/components/visualisations/ArchitectureDiagram";
-import Hero3D from "@/components/visualisations/Hero3D";
+import HeroVisual from "./HeroVisual";
 import { capabilities, coreAchievements, projectList, research, site, identity } from "@/content/content";
 
 export function HeroSection() {
@@ -28,7 +28,7 @@ export function HeroSection() {
             Scroll to learn about me, chapter by chapter ↓
           </a>
         </div>
-        <Hero3D />
+        <HeroVisual />
       </div>
     </section>
   );

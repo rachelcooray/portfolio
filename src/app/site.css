@@ -6,23 +6,29 @@
  */
 
 :root {
-  /* Naturalistic palette: lime, cobalt, sky, pale blue, sand and bark.
+  /* Naturalistic palette, green and brown led: deep olive and bark carry
+     the weight, lime highlights, sand panels, and sky only as a touch.
      Old token names are kept so every component picks up the new colours. */
-  --forest: #2961b1; /* cobalt: headings, primary buttons, feature bands */
-  --forest-2: #1e4c8e; /* deep cobalt */
-  --moss: #64a8e5; /* sky: markers and lines */
+  --forest: #46521a; /* deep olive: headings, primary buttons, feature bands */
+  --forest-2: #36400f; /* darker olive */
+  --moss: #8c9a3a; /* mid olive: markers and lines */
   --moss-ink: #7a6142; /* bark: small labels on light grounds */
-  --sage: #bed7f4; /* pale blue: text and lines on cobalt */
+  --sage: #dde3b0; /* pale lime: text and lines on olive or bark */
   --ivory: #faf7ef; /* cream ground */
   --oat: #efe6d3; /* light sand panels */
   --burgundy: #7a6142; /* bark: warm emphasis text */
   --charcoal: #2b2318; /* trunk: body text */
   --muted: #5e5143;
   --line: #ddd3bf;
-  --line-dark: #4c7ac0;
-  --lime: #c7d42b; /* highlights; on cobalt or as a fill with dark text */
+  --line-dark: #5e6b26;
+  --lime: #c7d42b; /* highlights; on olive or bark, or as a fill with dark text */
   --sand: #d3c399;
-  --sky-wash: #e6f0fb;
+  --bark-dark: #4a3a27; /* deep brown bands */
+  --sky: #64a8e5; /* a small touch of blue only */
+  --sky-wash: #eef2d6; /* pale lime wash */
+  --lavender: #b9a6de; /* a touch of lavender */
+  --lavender-wash: #efe9f8;
+  --lavender-ink: #5e4a8a; /* lavender text on light grounds */
 
   --serif: var(--font-display), Fraunces, Georgia, serif;
   --sans: var(--font-body), "DM Sans", system-ui, sans-serif;
@@ -564,7 +570,7 @@ html.reveal-on [data-reveal].in {
   aspect-ratio: 720 / 600;
   border-radius: 28px;
   overflow: hidden;
-  background: radial-gradient(ellipse at 55% 40%, #3b78c8, var(--forest) 70%);
+  background: radial-gradient(ellipse at 55% 40%, #5e6b26, var(--forest) 70%);
 }
 .terrain-svg {
   position: absolute;
@@ -718,8 +724,8 @@ html.reveal-on [data-reveal].in {
   padding: 26px;
   border-radius: 22px;
   border: 1px solid var(--line);
-  background: repeating-linear-gradient(0deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px),
-    repeating-linear-gradient(90deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px), var(--oat);
+  background: repeating-linear-gradient(0deg, transparent 0 23px, rgba(70, 82, 26, 0.1) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, rgba(70, 82, 26, 0.1) 23px 24px), var(--oat);
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -2222,7 +2228,7 @@ td.mono {
 }
 .bento-card.b5 {
   grid-column: span 3;
-  background: #e6f0fb;
+  background: var(--sand);
 }
 .bento-card .mono {
   color: var(--moss-ink);
@@ -2803,7 +2809,7 @@ td.mono {
   display: flex;
   align-items: flex-end;
   padding: 22px;
-  background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(190, 215, 244, 0.16) 14px 15px), var(--forest);
+  background: repeating-linear-gradient(45deg, transparent 0 14px, rgba(221, 227, 176, 0.16) 14px 15px), var(--forest);
   color: var(--ivory);
   font-family: var(--serif);
   font-size: 30px;
@@ -3265,7 +3271,7 @@ td.mono {
   min-height: 70vh;
   display: flex;
   align-items: center;
-  background: radial-gradient(ellipse at 70% 40%, #3b78c8, var(--forest) 70%);
+  background: radial-gradient(ellipse at 70% 40%, #5e6b26, var(--forest) 70%);
   color: var(--ivory);
 }
 .lost .wrap {
@@ -3390,7 +3396,7 @@ td.mono {
   flex-direction: column;
   justify-content: space-between;
   padding: 22px;
-  background: repeating-linear-gradient(90deg, transparent 0 23px, rgba(190, 215, 244, 0.14) 23px 24px), var(--forest);
+  background: repeating-linear-gradient(90deg, transparent 0 23px, rgba(221, 227, 176, 0.14) 23px 24px), var(--forest);
   color: var(--ivory);
 }
 .thumb-flow .mono {
@@ -3546,8 +3552,8 @@ td.mono {
   background: var(--ivory);
 }
 .diagram {
-  background: repeating-linear-gradient(0deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px),
-    repeating-linear-gradient(90deg, transparent 0 23px, rgba(41, 97, 177, 0.1) 23px 24px), var(--sky-wash);
+  background: repeating-linear-gradient(0deg, transparent 0 23px, rgba(70, 82, 26, 0.1) 23px 24px),
+    repeating-linear-gradient(90deg, transparent 0 23px, rgba(70, 82, 26, 0.1) 23px 24px), var(--sky-wash);
 }
 .diagram li:not(:last-child)::after {
   background: var(--lime);
@@ -3591,4 +3597,157 @@ h1,
 h2 {
   font-weight: 400;
   font-variation-settings: "opsz" 144;
+}
+
+
+/* Browns share the weight with greens: the statement and closing bands,
+   and the footer, are deep bark. */
+#statement.band-forest,
+.closing.band-forest,
+.lost {
+  background: var(--bark-dark);
+}
+.lost {
+  background: radial-gradient(ellipse at 70% 40%, #6b5538, var(--bark-dark) 70%);
+}
+.site-foot {
+  background: #2f2418;
+}
+.btn:hover {
+  background: var(--bark-dark);
+  border-color: var(--bark-dark);
+}
+.scroll-progress {
+  background: linear-gradient(90deg, var(--forest), var(--moss) 60%, var(--lime));
+}
+.chapter-rail a.passed .dot {
+  background: var(--moss);
+  border-color: var(--moss);
+}
+.badge-category {
+  color: var(--forest-2);
+}
+.paper-card {
+  background: var(--bark-dark);
+}
+.contact-card {
+  background: var(--forest);
+}
+
+
+/* Hero visual: portrait on a lavender arch (replaces the 3D terrain). */
+.hero-visual {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.hv-stage {
+  position: relative;
+  width: min(370px, 100%);
+  aspect-ratio: 440 / 560;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.hv-arch {
+  position: absolute;
+  inset: 8% 4% 0;
+  border-radius: 999px 999px 32px 32px;
+  background: linear-gradient(180deg, var(--lavender-wash), var(--lavender));
+}
+.hv-sun {
+  position: absolute;
+  top: 2%;
+  right: 4%;
+  width: 22%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--lime);
+}
+.hv-leaf {
+  position: absolute;
+  left: -2%;
+  bottom: 14%;
+  width: 26%;
+  aspect-ratio: 1;
+  border-radius: 0 100% 0 100%;
+  background: var(--forest);
+  transform: rotate(-12deg);
+}
+.hv-portrait {
+  position: relative;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+}
+.hv-areas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.hv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.3s, border-color 0.3s;
+}
+.hv-chip .mono {
+  color: var(--lavender-ink);
+  font-size: 11px;
+}
+.hv-chip:hover {
+  background: var(--lavender-wash);
+  border-color: var(--lavender);
+  color: var(--charcoal);
+}
+.page-hero-image.arch img {
+  border-radius: 999px 999px 28px 28px;
+  box-shadow: 14px 14px 0 var(--lavender);
+}
+
+/* A touch of lavender */
+:focus-visible {
+  outline-color: var(--lavender-ink);
+}
+.bento-card.b4 {
+  background: var(--lavender-wash);
+}
+.bento-card.b4 .mono,
+.rail-count,
+.explore-card .mono {
+  color: var(--lavender-ink);
+}
+.explore-card:hover {
+  background: var(--lavender-wash);
+  border-color: var(--lavender);
+}
+.chain-panel {
+  background: var(--lavender-wash);
+}
+.chain-panel .mono {
+  color: var(--lavender-ink);
+}
+.interest:nth-child(2n) {
+  background: var(--lavender-wash);
+}
+.medal.relay::before {
+  background: var(--lavender);
+}
+@media (max-width: 1080px) {
+  .hv-stage {
+    width: min(360px, 100%);
+  }
 }
