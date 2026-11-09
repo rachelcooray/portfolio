@@ -37,9 +37,9 @@ export default function ProjectExplorer() {
       <p className="mono muted" aria-live="polite">
         {list.length === projectList.length ? "Showing every project" : `Showing ${list.length} matching`}
       </p>
-      <div className="project-grid">
+      <div className="project-list">
         {list.map((p, i) => (
-          <ProjectCard key={p.slug} p={p} large={filter === "All" && !q && i < 2} />
+          <ProjectCard key={p.slug} p={p} n={i + 1} />
         ))}
       </div>
       {list.length === 0 && (

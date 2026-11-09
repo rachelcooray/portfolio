@@ -3751,3 +3751,160 @@ h2 {
     width: min(360px, 100%);
   }
 }
+
+/* ===== Clear sections, points one by one (9 Nov) ===== */
+
+/* Nine nav items: collapse to the menu earlier. */
+.nav-list { gap: 18px; }
+.nav-list a { font-size: 14px; white-space: nowrap; }
+@media (max-width: 1320px) {
+  nav[aria-label="Main"],
+  .nav-cv { display: none; }
+  .nav-toggle { display: inline-flex; }
+}
+
+/* Numbered points */
+.points {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  border-top: 1px solid var(--line);
+}
+.points li {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 17px;
+  line-height: 1.5;
+}
+.points li .mono {
+  color: var(--lavender-ink);
+  font-size: 12px;
+  padding-top: 5px;
+}
+.points.light { border-top-color: var(--line-dark); }
+.points.light li { border-bottom-color: var(--line-dark); color: var(--oat); }
+.points.light li .mono { color: var(--lavender); }
+
+/* One by one: each point arrives after the one before it. */
+html.reveal-on [data-reveal] .points li {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+html.reveal-on [data-reveal].in .points li { opacity: 1; transform: none; }
+.points li:nth-child(1) { transition-delay: 0.1s; }
+.points li:nth-child(2) { transition-delay: 0.25s; }
+.points li:nth-child(3) { transition-delay: 0.4s; }
+.points li:nth-child(4) { transition-delay: 0.55s; }
+.points li:nth-child(5) { transition-delay: 0.7s; }
+.points li:nth-child(6) { transition-delay: 0.85s; }
+.points li:nth-child(n + 7) { transition-delay: 1s; }
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-on [data-reveal] .points li { opacity: 1; transform: none; transition: none; }
+}
+
+/* Section directory */
+.directory {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+}
+.dir-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 22px;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+.dir-card .mono { color: var(--lavender-ink); font-size: 12px; }
+.dir-card strong { font-family: var(--serif); font-weight: 400; font-size: 26px; color: var(--forest); line-height: 1.1; }
+.dir-point { color: var(--muted); font-size: 15px; line-height: 1.45; flex: 1; }
+.dir-open { font-weight: 600; font-size: 14px; color: var(--burgundy); }
+.dir-card:hover,
+.dir-card:focus-visible { border-color: var(--forest); background: var(--lavender-wash); transform: translateY(-2px); }
+
+/* Section previews */
+.h-mid { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; color: var(--forest); margin: 6px 0 0; }
+.band-forest .h-mid { color: var(--ivory); }
+.preview { display: grid; gap: 48px; align-items: start; }
+.preview.has-image,
+.band-forest .preview { grid-template-columns: 1.2fr 1fr; }
+.preview-photo { margin: 0; }
+.preview-photo img { width: 100%; height: auto; max-height: 520px; object-fit: cover; border-radius: 180px 180px 16px 16px; display: block; }
+@media (max-width: 860px) {
+  .preview.has-image,
+  .band-forest .preview { grid-template-columns: 1fr; gap: 32px; }
+  .preview-photo img { max-height: 380px; }
+}
+
+/* Project index on the homepage */
+.project-index { list-style: none; padding: 0; border-top: 1px solid var(--line); }
+.project-index > li {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  gap: 18px;
+  align-items: start;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.pi-num { color: var(--lavender-ink); font-size: 12px; padding-top: 8px; }
+.pi-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 10px; }
+.pi-head h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; color: var(--forest); margin: 0; }
+.pi-open { white-space: nowrap; }
+@media (max-width: 760px) {
+  .project-index > li { grid-template-columns: 32px 1fr; }
+  .pi-open { grid-column: 2; justify-self: start; }
+}
+
+/* Journey, compact (on the dark band) */
+.journey.compact { margin: 0; }
+.journey.compact p { font-size: 15px; }
+
+/* Projects page: one row per project */
+.project-list { display: flex; flex-direction: column; gap: 18px; margin-top: 28px; }
+.project-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 340px) 1fr;
+  gap: 28px;
+  padding: 22px;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+.pr-thumb { border-radius: 12px; overflow: hidden; background: var(--oat); align-self: start; }
+.pr-thumb img { width: 100%; height: auto; display: block; aspect-ratio: 16 / 10; object-fit: cover; }
+.pr-thumb .thumb-flow,
+.pr-thumb .thumb-motif { aspect-ratio: 16 / 10; }
+.pr-body h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3vw, 34px); color: var(--forest); margin: 10px 0 12px; }
+.pr-body .bullets { margin-bottom: 18px; }
+@media (max-width: 760px) {
+  .project-row { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
+}
+
+/* Skills page */
+.skill-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.skill-group { padding: 24px; background: var(--ivory); border: 1px solid var(--line); border-radius: 16px; }
+.skill-group h2 { font-family: var(--serif); font-weight: 400; font-size: 28px; color: var(--forest); margin: 0 0 6px; }
+.where-used { color: var(--muted); font-size: 15px; margin: 0; }
+
+/* Volunteering page */
+.vol-cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.vol-card { padding: 24px; background: var(--ivory); border: 1px solid var(--line); border-radius: 16px; }
+.vol-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+.vol-head h2,
+.vol-head h3 { font-family: var(--serif); font-weight: 400; font-size: 26px; color: var(--forest); margin: 0; }
+.vol-head .mono { color: var(--lavender-ink); font-size: 12px; }
+.vol-card > h2 { font-family: var(--serif); font-weight: 400; font-size: 26px; color: var(--forest); margin: 0 0 4px; line-height: 1.15; }
+.pr-thumb .thumb-flow { aspect-ratio: auto; min-height: 100%; padding: 20px; }
+.pr-thumb .thumb-flow li { font-size: 18px; line-height: 1.25; }

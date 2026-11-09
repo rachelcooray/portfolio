@@ -35,17 +35,12 @@ export default function ExperienceTimeline() {
               <p className="muted">
                 {e.org} · {e.location}
               </p>
-              <p>{e.summary}</p>
-              {e.bullets.length > 0 && (
-                <details>
-                  <summary>More detail</summary>
-                  <ul className="bullets">
-                    {e.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                </details>
-              )}
+              <ul className="bullets">
+                <li>{e.summary}</li>
+                {e.bullets.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
               <TagList items={e.tags} label="Areas of work" />
             </div>
           </li>

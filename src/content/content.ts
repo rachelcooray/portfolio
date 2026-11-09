@@ -1383,3 +1383,114 @@ export const coreAchievements = [
     link: "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
   },
 ];
+
+// ---------------------------------------------------------------------
+// SECTION DIRECTORY: every section a visitor can go into, in order, with
+// the points shown on the homepage. Facts come from the sections above.
+// ---------------------------------------------------------------------
+
+export const sectionDirectory = [
+  {
+    id: "education",
+    href: "/education",
+    title: "Education",
+    cta: "Open education",
+    points: [
+      "BSc (Hons) Computer Science, First Class Honours, University of Westminster, 2022 to 2025",
+      "Data Science specialisation, started at IIT, Sri Lanka",
+      "UOW/IIT Part-Fee Scholarship, £5,000, 2024/25",
+      "CIMA Certificate in Business Accounting; Operational level in progress",
+    ],
+  },
+  {
+    id: "research-projects",
+    href: "/projects",
+    title: "Research & Projects",
+    cta: "Open research and projects",
+    points: [
+      "PCOS Care, published at IEEE ICAHS 2025, Tunisia",
+      "Four OCTAVE use cases, each with a case study",
+      "Layer1.Studio products for small businesses",
+      "Independent builds: apps, a chatbot, a game and field research",
+    ],
+  },
+  {
+    id: "experience",
+    href: "/experience",
+    title: "Experience",
+    cta: "Open experience",
+    points: [
+      "Analyst, Data and AI, OCTAVE, John Keells Holdings, Jul 2026 to present",
+      "Co-founder and Developer, Layer1.Studio, Dec 2025 to present",
+      "Data Engineering Intern, London Success Academy, 2025",
+      "Teaching, student support and customer-facing roles",
+    ],
+  },
+  {
+    id: "volunteering",
+    href: "/volunteering",
+    title: "Volunteering",
+    cta: "Open volunteering",
+    points: [
+      "John Keells Foundation: Artist Spotlight, La Bamba and Kala Pola, 2026",
+      "Event volunteer, This Is Michael, City of Dreams, Nov 2026",
+      "CSR field research with street food vendors, adopted by the CSR team",
+      "Rotaract, IEEE Club and BCS member",
+    ],
+  },
+  {
+    id: "achievements",
+    href: "/achievements",
+    title: "Achievements",
+    cta: "Open achievements",
+    points: [
+      "Third place, Westminster final year project showcase, 2025",
+      "Microsoft EMBRACE hackathon finalist, 2024",
+      "School Prefect of the Year, New Generation Awards, 2020",
+      "Three individual golds and every relay gold, JKH swim meet, 2026",
+    ],
+  },
+  {
+    id: "media",
+    href: "/media",
+    title: "In the media",
+    cta: "Open media",
+    points: [
+      "University of Westminster: showcase feature and prize news, 2025",
+      "IEEE: PCOS Care publication, 2025",
+      "John Keells Holdings: Team OCTAVE's swimming championship, 2026",
+      "Daily FT and the LMD Youth Forum, 2020",
+    ],
+  },
+  {
+    id: "skills",
+    href: "/skills",
+    title: "Skills",
+    cta: "Open skills",
+    points: [
+      "Data engineering: Python, SQL, PySpark, Databricks, Delta Lake",
+      "AI and data: machine learning, model evaluation, GenAI",
+      "Software: React, Flutter, Node.js",
+      "Delivery: requirements, PMO, stakeholder management",
+    ],
+  },
+  {
+    id: "beyond",
+    href: "/beyond-work",
+    title: "Beyond work",
+    cta: "Open beyond work",
+    points: [
+      "Competitive swimming",
+      "Head Prefect, St. Bridget's Convent, 2020",
+      "Running, films and dramas, history and music",
+    ],
+  },
+];
+
+export const atAGlance = [
+  "Analyst, Data and AI at OCTAVE, John Keells Holdings, Colombo",
+  "First Class Computer Science graduate, University of Westminster",
+  "Published researcher: PCOS Care, IEEE ICAHS 2025",
+  "Co-founder and Developer, Layer1.Studio",
+  "Interested in applied AI, explainability and responsible AI",
+];

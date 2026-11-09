@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Media", description: "Articles, univ
 export default function Media() {
   return (
     <>
-      <PageHero num="09" label="Media · Press and public features" title="In the news." lead="An archive of articles, university features and publications across my academic, professional, sporting and community journey." crumbs={[{ href: "/beyond-work", label: "Beyond Work" }, { label: "Media" }]} />
+      <PageHero num="06" label="In the media · Press and public features" title="In the media." lead="An archive of articles, university features and publications across my academic, professional, sporting and community journey." crumbs={[{ label: "In the media" }]} />
       <section className="wrap pb">
         <MediaArchive />
       </section>

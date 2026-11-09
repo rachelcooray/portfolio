@@ -34,7 +34,15 @@ export default function MediaArchive() {
               {n.organization} · {n.year}
             </p>
             <h2>{n.title}</h2>
-            {n.summary && <p>{n.summary}</p>}
+            <ul className="bullets">
+              <li>
+                <strong>Published by:</strong> {n.organization}
+              </li>
+              <li>
+                <strong>Year:</strong> {n.year}
+              </li>
+              {n.summary && <li>{n.summary}</li>}
+            </ul>
             {n.link ? (
               <a className="text-link" href={n.link} target="_blank" rel="noopener noreferrer">
                 Read article ↗<span className="sr-only"> (opens in a new tab)</span>

@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Achievements", description: "Awards 
 export default function Achievements() {
   return (
     <>
-      <PageHero num="07" label="Achievements · Awards and recognition" title="Recognised along the way." lead="Three moments of recognition, from school leadership to research, each with the evidence behind it." crumbs={[{ href: "/beyond-work", label: "Beyond Work" }, { label: "Achievements" }]} />
+      <PageHero num="05" label="Achievements · Awards and recognition" title="Recognised along the way." lead="Three moments of recognition, from school leadership to research, each with the evidence behind it." crumbs={[{ label: "Achievements" }]} />
       <section className="wrap awards-timeline">
         {coreAchievements.map((a, i) => (
           <article key={a.id} className={`award-row${a.image ? "" : " no-img"}`} data-reveal>
@@ -24,8 +24,15 @@ export default function Achievements() {
                 {String(i + 1).padStart(2, "0")} · {a.year}
               </p>
               <h2>{a.title}</h2>
-              <p className="muted">{a.org}</p>
-              <p>{a.text}</p>
+              <ul className="bullets">
+                <li>
+                  <strong>From:</strong> {a.org}
+                </li>
+                <li>
+                  <strong>Year:</strong> {a.year}
+                </li>
+                <li>{a.text}</li>
+              </ul>
               {a.link && (
                 <Button href={a.link} variant="text">
                   See the evidence ↗

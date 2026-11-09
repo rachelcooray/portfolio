@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: "Education", description: "University
 export default function Education() {
   return (
     <>
-      <PageHero num="06" label="Education · Degrees and qualifications" title="Learning as a foundation for building." lead={site.education.intro} crumbs={[{ href: "/about", label: "About" }, { label: "Education" }]} />
+      <PageHero num="01" label="Education · Degrees and qualifications" title="Learning as a foundation for building." lead={site.education.intro} crumbs={[{ label: "Education" }]} />
 
       <section className="wrap edu-major" data-reveal>
         <article className="degree-card">
