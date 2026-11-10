@@ -583,7 +583,7 @@ export const volunteer = {
       title: "Event Volunteer",
       organization: "City of Dreams",
       dateRange: "Nov 2026",
-      summary: "This Is Michael, Lenny Jay.",
+      summary: "Volunteered at This Is Michael, a Michael Jackson tribute concert starring Lenny Jay, held at Cinnamon Life at City of Dreams on 8 and 9 Nov 2026.",
     },
     {
       id: "volunteer-artist-spotlight",
