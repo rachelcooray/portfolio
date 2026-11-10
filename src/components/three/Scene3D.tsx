@@ -74,7 +74,7 @@ export default function Scene3D() {
       const SPAN = 26;
       const HALF = SPAN / 2;
       const rand = rng(20261110);
-      const count = small ? 26 : 54;
+      const count = small ? 18 : 40;
       type Item = { mesh: import("three").Mesh; u: number; y: number; z: number; base: import("three").Vector3; rs: [number, number, number]; bob: number; phase: number; delay: number };
       const items: Item[] = [];
       for (let i = 0; i < count; i++) {
@@ -82,9 +82,9 @@ export default function Scene3D() {
         const geo = geos[gi];
         const near = rand() < 0.42;
         const side = rand() < 0.5 ? -1 : 1;
-        // Vivid shapes keep to the outer margins. Anything that can pass
-        // behind the text sits far back in the mist, so it stays pale.
-        const u = near ? side * (0.88 + rand() * 0.34) : -1.15 + rand() * 2.3;
+        // Reading comes first: every shape keeps to the side margins, so
+        // nothing passes behind the text column. Far ones sit in the mist.
+        const u = near ? side * (0.92 + rand() * 0.3) : side * (0.84 + rand() * 0.42);
         const z = near ? -3 + rand() * 6 : -23 + rand() * 10;
         const size = near ? 0.34 + rand() * 0.6 : 0.8 + rand() * 1.3;
         const base = new THREE.Vector3(size, size, size);
@@ -149,6 +149,8 @@ export default function Scene3D() {
         const dt = Math.min(clock.getDelta(), 0.05);
         const t = clock.elapsedTime;
         const sy = window.scrollY;
+        // Full strength over the hero, then it steps back behind the content.
+        canvas.style.setProperty("--dim", Math.min(1, sy / (h * 0.7)).toFixed(3));
         spin += Math.min(Math.abs(sy - lastScroll), 120) * 0.0009;
         spin *= 0.92;
         lastScroll = sy;

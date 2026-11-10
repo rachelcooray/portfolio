@@ -3923,12 +3923,17 @@ body { background: transparent; }
   opacity: 0;
   transition: opacity 1.4s ease;
 }
-.scene3d.on { opacity: 1; }
+.scene3d.on { opacity: calc(1 - var(--dim, 0) * 0.5); transition: opacity 0.5s ease; }
 .hero { background: linear-gradient(180deg, rgba(238, 242, 214, 0.55), rgba(250, 247, 239, 0) 88%); }
-.band-oat { background: rgba(239, 230, 211, 0.8); }
+.band-oat { background: rgba(239, 230, 211, 0.94); }
+/* Light sections get an ivory veil so text never competes with the scene. */
+.band:not(.band-oat):not(.band-forest),
+main section.wrap,
+.page-hero,
+.contact-page { background-color: rgba(250, 247, 239, 0.9); }
 .band-forest { background: rgba(70, 82, 26, 0.93); }
 @media (max-width: 760px) {
-  .scene3d.on { opacity: 0.8; }
+  .scene3d.on { opacity: calc(0.8 - var(--dim, 0) * 0.45); }
 }
 
 /* Hero: the portrait stage is a small 3D set that turns with the pointer. */
