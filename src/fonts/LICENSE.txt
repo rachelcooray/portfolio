@@ -1,5 +1,3 @@
-Instrument Serif, Manrope and IBM Plex Mono, Latin subsets from Google Fonts.
-All three are licensed under the SIL Open Font License 1.1: https://openfontlicense.org
-
-Fraunces (Undercase Type), DM Sans and DM Mono (Colophon Foundry, Google):
-SIL Open Font License 1.1. Latin subsets from Google Fonts, self-hosted.
+EB Garamond (Georg Duffner, Octavio Pardo), IBM Plex Sans and IBM Plex Mono
+(IBM): SIL Open Font License 1.1, https://openfontlicense.org
+Latin subsets from Fontsource, self-hosted.

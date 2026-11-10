@@ -10,28 +10,29 @@ import Scene3D from "@/components/three/Scene3D";
 import "./site.css";
 
 // Self-hosted (SIL Open Font License), so builds never depend on a font CDN.
-// Fraunces for headlines, DM Sans for reading and UI, DM Mono for labels.
-const fraunces = localFont({
+// EB Garamond for headlines, IBM Plex Sans for reading and UI, IBM Plex Mono
+// for labels.
+const garamond = localFont({
   variable: "--font-display",
   display: "swap",
   src: [
-    { path: "../fonts/fraunces-300-600-normal.woff2", weight: "300 600", style: "normal" },
-    { path: "../fonts/fraunces-300-500-italic.woff2", weight: "300 500", style: "italic" },
+    { path: "../fonts/eb-garamond-400-800-normal.woff2", weight: "400 800", style: "normal" },
+    { path: "../fonts/eb-garamond-400-800-italic.woff2", weight: "400 800", style: "italic" },
   ],
 });
 
-const dmSans = localFont({
+const plexSans = localFont({
   variable: "--font-body",
   display: "swap",
-  src: [{ path: "../fonts/dm-sans-400-600-normal.woff2", weight: "400 600", style: "normal" }],
+  src: [{ path: "../fonts/ibm-plex-sans-100-700-normal.woff2", weight: "100 700", style: "normal" }],
 });
 
-const dmMono = localFont({
+const plexMono = localFont({
   variable: "--font-mono",
   display: "swap",
   src: [
-    { path: "../fonts/dm-mono-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "../fonts/dm-mono-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/ibm-plex-mono-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/ibm-plex-mono-500-normal.woff2", weight: "500", style: "normal" },
   ],
 });
 
@@ -74,7 +75,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${dmSans.variable} ${dmMono.variable}`}
+      className={`${garamond.variable} ${plexSans.variable} ${plexMono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />

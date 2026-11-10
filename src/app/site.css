@@ -30,9 +30,9 @@
   --lavender-wash: #efe9f8;
   --lavender-ink: #5e4a8a; /* lavender text on light grounds */
 
-  --serif: var(--font-display), Fraunces, Georgia, serif;
-  --sans: var(--font-body), "DM Sans", system-ui, sans-serif;
-  --mono: var(--font-mono), "DM Mono", ui-monospace, monospace;
+  --serif: var(--font-display), "EB Garamond", Garamond, Georgia, serif;
+  --sans: var(--font-body), "IBM Plex Sans", system-ui, sans-serif;
+  --mono: var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --nav: 68px;
   color-scheme: light;
