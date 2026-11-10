@@ -5,6 +5,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollChrome from "@/components/layout/ScrollChrome";
 import Reveal from "@/components/animations/Reveal";
+import Depth from "@/components/animations/Depth";
+import Scene3D from "@/components/three/Scene3D";
 import "./site.css";
 
 // Self-hosted (SIL Open Font License), so builds never depend on a font CDN.
@@ -78,6 +80,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
       </head>
       <body>
+        <Scene3D />
         <LenisProvider />
         <a className="skip" href="#content">
           Skip to content
@@ -87,6 +90,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="content">{children}</main>
         <Footer />
         <Reveal />
+        <Depth />
       </body>
     </html>
   );

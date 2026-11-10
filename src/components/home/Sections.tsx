@@ -31,8 +31,17 @@ export function HeroSection() {
       <div className="wrap hero-grid">
         <div className="hero-copy" data-reveal>
           <p className="eyebrow">{site.hero.eyebrow}</p>
-          <h1>
-            Hi, I&apos;m Rachel Cooray<span className="accent-dot">.</span>
+          <h1 className="rise">
+            {["Hi,", "I\u2019m", "Rachel"].map((w, i) => (
+              <span key={w}>
+                <span className="w" style={{ "--i": i } as React.CSSProperties}>
+                  {w}
+                </span>{" "}
+              </span>
+            ))}
+            <span className="w" style={{ "--i": 3 } as React.CSSProperties}>
+              Cooray<span className="accent-dot">.</span>
+            </span>
           </h1>
           <p className="hero-statement">{site.hero.title}</p>
           <p className="lede">{site.hero.lead}</p>

@@ -9,6 +9,9 @@ export default function HeroVisual() {
     <figure className="hero-visual" data-reveal>
       <div className="hv-stage">
         <span className="hv-arch" aria-hidden="true" />
+        <span className="hv-orbit" aria-hidden="true">
+          <i />
+        </span>
         <span className="hv-sun" aria-hidden="true" />
         <span className="hv-leaf" aria-hidden="true" />
         <Image className="hv-portrait" src={identity.portrait} width={679} height={1366} alt={identity.portraitAlt} priority />
