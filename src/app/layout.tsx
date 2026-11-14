@@ -7,6 +7,7 @@ import ScrollChrome from "@/components/layout/ScrollChrome";
 import Reveal from "@/components/animations/Reveal";
 import Depth from "@/components/animations/Depth";
 import Scene3D from "@/components/three/Scene3D";
+import Upgrade from "@/components/layout/Upgrade";
 import "./site.css";
 
 // Self-hosted (SIL Open Font License), so builds never depend on a font CDN.
@@ -70,6 +71,9 @@ export const viewport: Viewport = {
 // motion or no WebGL. Also decides whether the intro plays.
 const modeScript = `(function(){var d=document.documentElement;d.classList.add('js');try{var ls=null;try{ls=window.localStorage}catch(e){}var rm=matchMedia('(prefers-reduced-motion: reduce)').matches||(ls&&ls.getItem('rc-reduced-motion')==='1');var w=innerWidth,h=innerHeight;var n=navigator;var low=(n.deviceMemory&&n.deviceMemory<4)||(n.hardwareConcurrency&&n.hardwareConcurrency<=2);var gl=false;if(!rm&&w>=900&&h>=560&&!low){var c=document.createElement('canvas');var x=c.getContext('webgl2')||c.getContext('webgl');gl=!!x;if(x){var l=x.getExtension('WEBGL_lose_context');l&&l.loseContext()}}d.classList.add(gl?'gl':'lite');if(rm)d.classList.add('rm');var seen=ls&&ls.getItem('rc-intro-seen')==='1';d.classList.add(gl&&!seen?'intro-run':'intro-done');}catch(e){d.classList.add('lite','intro-done')}})();`;
 
+// true: every route shows the holding page. false: the full site.
+const MAINTENANCE = true;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -81,17 +85,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: modeScript }} />
       </head>
       <body>
-        <Scene3D />
-        <LenisProvider />
-        <a className="skip" href="#content">
-          Skip to content
-        </a>
-        <Navbar />
-        <ScrollChrome />
-        <main id="content">{children}</main>
-        <Footer />
-        <Reveal />
-        <Depth />
+        {MAINTENANCE ? (
+          <Upgrade />
+        ) : (
+          <>
+            <Scene3D />
+            <LenisProvider />
+            <a className="skip" href="#content">
+              Skip to content
+            </a>
+            <Navbar />
+            <ScrollChrome />
+            <main id="content">{children}</main>
+            <Footer />
+            <Reveal />
+            <Depth />
+          </>
+        )}
       </body>
     </html>
   );

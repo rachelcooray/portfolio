@@ -73,6 +73,7 @@ export const identity = {
   badgePhoto: "/images/rachel-badge.jpg",
   badgePhotoAlt: "Rachel Cooray, head and shoulders",
   email: "rachelcooray@gmail.com",
+  phone: "+94 77 177 0570",
   links: [
     { label: "Email", href: "mailto:rachelcooray@gmail.com" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/rachel-cooray-069034235/" },
