@@ -1,99 +1,97 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import { Badge } from "@/components/ui/Badge";
-import { PageHero, SectionHeading } from "@/components/ui/Headings";
-import { cima, site } from "@/content/content";
+import PageHead from "@/components/mag/PageHead";
+import { cima, education, schoolLife } from "@/content/content";
 
-export const metadata: Metadata = { title: "Education", description: "University of Westminster, CIMA and earlier qualifications." };
+const LOGOS: Record<string, { src: string; alt: string }> = {
+  "education-westminster": { src: "/images/logos/westminster.svg", alt: "University of Westminster" },
+  "education-cima": { src: "/images/logos/cima.webp", alt: "CIMA, the Chartered Institute of Management Accountants" },
+  "education-school": { src: "/images/logos/st-bridgets.webp", alt: "St. Bridget's Convent, Colombo, crest" },
+};
+
+export const metadata: Metadata = {
+  title: "Education",
+  description: "BSc (Hons) Computer Science with First Class Honours from the University of Westminster, CIMA, and St. Bridget's Convent.",
+};
 
 export default function Education() {
   return (
-    <>
-      <PageHero num="01" label="Education · Degrees and qualifications" title="Learning as a foundation for building." lead={site.education.intro} crumbs={[{ label: "Education" }]} />
-
-      <section className="wrap edu-major" data-reveal>
-        <article className="degree-card">
-          <p className="mono">Sep 2022 to Jul 2025 · London, United Kingdom</p>
-          <h2>University of Westminster</h2>
-          <p className="lede">BSc (Hons) Computer Science</p>
-          <div className="honours">
-            <span>First Class Honours</span>
-            <span>Data Science specialisation</span>
-          </div>
-          <ul className="bullets">
-            <li>Started at IIT, Sri Lanka, and completed the degree at Westminster.</li>
-            <li>Third place at the final year project showcase.</li>
-            <li>Published research at IEEE ICAHS 2025.</li>
-            <li>Foundations in computer science, software engineering, data science and machine learning.</li>
-          </ul>
-        </article>
-        <div className="edu-side">
+    <div className="wrap page">
+      <PageHead folio="Education · 20" title="A First Class foundation." dek="Computer Science in London, business accounting alongside it, and the school where it started." />
+      <div className="g g-grad">
+        <figure>
+          <img loading="lazy" decoding="async" src="/images/mag/graduation-roses-thames.webp" alt="Rachel in her graduation gown and cap holding red roses, by the Thames" width={893} height={1500} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
+          <figcaption>Graduation day by the Thames, London.</figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" decoding="async" src="/images/mag/graduation-southbank.webp" alt="Rachel in her graduation gown and cap under the colourful Southbank Centre canopy" width={900} height={1600} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
+          <figcaption>Under the canopy on the South Bank.</figcaption>
+        </figure>
+        <div className="g-col">
           <figure>
-            <Image src="/images/photos/showcase-group.jpg" width={800} height={450} alt="Students and industry judges at the Westminster final year project showcase" />
-            <figcaption className="mono">Final year project showcase, 2025</figcaption>
+            <img loading="lazy" decoding="async" src="/images/mag/graduation-stage.webp" alt="Rachel shaking hands on stage at the University of Westminster graduation ceremony" width={640} height={480} style={{ aspectRatio: "4 / 3" }} />
+            <figcaption>On stage at the ceremony, the handshake.</figcaption>
           </figure>
-          <article className="scholar">
-            <Badge tone="status">Scholarship</Badge>
-            <h3>UOW/IIT School of Computing and Engineering Part-Fee Scholarship</h3>
-            <p className="mono">£5,000 · 2024/25</p>
+          <figure>
+            <img loading="lazy" decoding="async" src="/images/mag/degree.jpg" alt="University of Westminster degree certificate: Bachelor of Science in Computer Science with First Class Honours, awarded to Rachel Naadia Cooray" width={700} height={595} style={{ objectFit: "contain", background: "#eef3f1", border: "1px solid var(--line)" }} />
+            <figcaption>The degree certificate.</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div className="cards">
+        {education.map((e, i) => (
+          <article key={e.id} className={i === 0 ? "card lead" : "card"}>
+            {LOGOS[e.id] ? <img className="edu-logo" src={LOGOS[e.id].src} alt={LOGOS[e.id].alt} loading="lazy" decoding="async" /> : null}
+            <span className="meta">{e.dateRange}</span>
+            <h2>{e.title}</h2>
+            <p className="small muted">{e.institution}</p>
+            <p className="small">{e.summary}</p>
+            {e.id === "education-cima" ? (
+              <ul>
+                {cima.completed.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+                {cima.inProgress.map((c) => (
+                  <li key={c}>{c}, in progress</li>
+                ))}
+              </ul>
+            ) : null}
           </article>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      <section className="band band-oat">
-        <div className="wrap edu-cima" data-reveal>
-          <div>
-            <SectionHeading kicker="Professional qualification" title="CIMA Certificate in Business Accounting." />
-            <p>A business and financial perspective alongside my technical background.</p>
-          </div>
-          <div className="progress-card">
-            <div className="progress-row">
-              <span>Certificate level</span>
-              <Badge tone="owned">Completed Aug 2024</Badge>
-            </div>
-            <ul className="check-list">
-              {cima.completed.map((c) => (
-                <li key={c} className="done">
-                  {c}
-                </li>
+      <section className="school" aria-labelledby="school-title">
+        <figure className="school-photo">
+          <img loading="lazy" decoding="async" src={schoolLife.photo.src} alt={schoolLife.photo.alt} width={900} height={1159} />
+          <figcaption>{schoolLife.photo.credit}</figcaption>
+        </figure>
+        <div className="school-copy">
+          <span className="kicker">At school · St. Bridget&apos;s Convent, Colombo</span>
+          <h2 className="sec-title" id="school-title">
+            Leading from the front, since 2012.
+          </h2>
+          <ol className="school-ladder">
+            {schoolLife.leadership.map((l) => (
+              <li key={l.year}>
+                <span className="school-year">{l.year}</span>
+                <span className="school-dot" aria-hidden="true" />
+                <span className="school-role">
+                  <b>{l.role}</b>
+                  <span className="muted small">{l.note}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
+          <p>{schoolLife.interact}</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <span className="kicker">Teams and crews</span>
+            <ul className="tags">
+              {schoolLife.teams.map((t) => (
+                <li key={t}>{t}</li>
               ))}
             </ul>
-            <div className="progress-row">
-              <span>Operational level</span>
-              <Badge tone="contributed">In progress</Badge>
-            </div>
-            <ul className="check-list">
-              {cima.inProgress.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
           </div>
         </div>
       </section>
-
-      <section className="wrap edu-record">
-        <SectionHeading kicker="Academic performance" title="Earlier qualifications." />
-        <div className="edu-record-grid" data-reveal>
-          <div className="table-wrap">
-            <table>
-              <tbody>
-                <tr>
-                  <th scope="row">GCE Advanced Level, 2022</th>
-                  <td>Chemistry A · English A · Physics B · Combined Mathematics B</td>
-                </tr>
-                <tr>
-                  <th scope="row">GCE Ordinary Level, 2018</th>
-                  <td>Nine A passes</td>
-                </tr>
-              </tbody>
-            </table>
-            <p className="muted small mt">St. Bridget&apos;s Convent, Colombo. Head Prefect, 2020.</p>
-          </div>
-          <figure>
-            <Image src="/images/photos/head-prefect.jpg" width={1080} height={1391} alt="Rachel as Head Prefect in the green St. Bridget's Convent blazer" />
-          </figure>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }

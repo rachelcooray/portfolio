@@ -66,9 +66,9 @@ export const identity = {
   summary:
     "Analyst, Data and AI at OCTAVE, John Keells Holdings. First Class Computer Science graduate, University of Westminster. Published researcher. Co-founder of Layer1 Studio.",
   // [CONFIRM] a third line: current personal build or research focus.
-  currently: ["Owning four AI and analytics use cases at OCTAVE.", "Building products with Layer1."],
+  currently: ["Owning six AI and analytics use cases at OCTAVE.", "Building products with Layer1."],
   bio: "I build analytics and AI systems that help people make decisions they can understand and act on. I work at the point where a model's output has to become a business decision, and I care most about the step in between: making the reasoning legible to the person who has to use it.",
-  portrait: "/images/rachel-portrait.png",
+  portrait: "/images/mag/rachel-portrait.webp",
   portraitAlt: "Rachel Cooray, standing, in a pale blue blouse, smiling at the camera",
   badgePhoto: "/images/rachel-badge.jpg",
   badgePhotoAlt: "Rachel Cooray, head and shoulders",
@@ -103,8 +103,8 @@ export const selectedWork: WorkCard[] = [
   {
     id: "work-octave",
     kicker: "OCTAVE, John Keells Holdings",
-    title: "Four use cases for an FMCG client's distributors",
-    body: "Margin incentives, replenishment recommendations, a permanent dispatch plan and distributor efficiency. The analysis has to be sound and the business has to use it.",
+    title: "Six use cases across the FMCG value chain",
+    body: "Production planning, dispatch, replenishment, distributor margins and targets, and weather. The analysis has to be sound and the business has to use it.",
     href: "/case-studies/octave",
     linkLabel: "Read the case study",
     side: "right",
@@ -251,7 +251,7 @@ export const octave = {
   company: "OCTAVE, John Keells Holdings",
   logo: "/images/logo-octave.jpeg",
   meta: "Colombo, Sri Lanka. Promoted from intern to associate to analyst within a year.",
-  own: "I work across enterprise data and AI initiatives within the FMCG business, connecting data science, engineering and commercial stakeholders to deliver analytics-driven solutions. I own delivery across four distributor-side use cases: the Distributor Replenishment System, Ice Cream Distributor Margins, Beverages Distributor Margins and Permanent Dispatch Planning.",
+  own: "I work across enterprise data and AI initiatives within the FMCG business, connecting data science, engineering and commercial stakeholders to deliver analytics-driven solutions. I own six use cases across the value chain, from the analysis and the solution design to the problem solving along the way: production planning, Permanent Dispatch Planning, the Distributor Replenishment System, Ice Cream Distributor Margins, Beverages Distributor Margins, and weather and sales.",
   useCases: [
     {
       code: "DRS",
@@ -317,7 +317,7 @@ export const octave = {
       dateRange: "Jul 2026 to present",
       location: "Colombo, hybrid",
       details: [
-        "Owning delivery across four distributor-side AI and analytics use cases.",
+        "Owning six AI and analytics use cases across the FMCG value chain.",
         "Coordinating data science and engineering teams to translate business requirements into implementable solutions.",
         "Managing project plans, sprint activities, RAID logs, dependencies and delivery priorities.",
         "Working directly with business stakeholders, including sales, finance, area and regional management.",
@@ -375,7 +375,7 @@ export const octave = {
 export const layer1 = {
   id: "role-layer1",
   company: "Layer1 Studio",
-  logo: "/images/layer1.png",
+  logo: "/images/mag/layer1.webp",
   title: "Co-founder and Developer",
   dateRange: "Dec 2025 to present",
   location: "Colombo, Sri Lanka and London, UK, part-time",
@@ -427,19 +427,20 @@ export const otherRoles: Role[] = [
   {
     id: "role-eg",
     title: "Customer Service Associate",
-    company: "EG On The Move",
+    company: "EG On The Move (Petrogas)",
     logo: "/images/logo-eg-on-the-move.png",
     dateRange: "Jan 2025 to Sep 2025",
     location: "Enfield",
-    details: ["Customer service and point of sale operations."],
+    details: ["Helped customers with purchases, with friendly and efficient service.", "Handled point of sale transactions accurately.", "Kept inventory organised and stock levels up to date.", "Resolved customer queries and issues."],
   },
   {
     id: "role-clear-links",
     title: "Support Worker",
     company: "Clear Links Support",
+    logo: "/images/logo-clear-links.png",
     dateRange: "Oct 2024 to Apr 2025",
     location: "London",
-    details: ["Note-taking and in-lecture support for university students."],
+    details: ["Supported university students with note-taking and academic work.", "Gave practical help in lectures and tutorials.", "Worked with a diverse range of students.", "Coordinated materials and schedules."],
   },
   {
     id: "role-tkmaxx",
@@ -448,7 +449,7 @@ export const otherRoles: Role[] = [
     logo: "/images/logo-tkmaxx.png",
     dateRange: "Nov 2024 to Jan 2025",
     location: "Stratford",
-    details: ["Customer service, stock and merchandising."],
+    details: ["Gave customers a positive shopping experience.", "Managed and replenished stock to keep products available.", "Set up merchandising and displays to store standards.", "Handled transactions and general store support."],
   },
 ];
 
@@ -472,6 +473,17 @@ export type BuildEntry = {
 // [CONFIRM] dates, tools and lessons for each entry.
 export const buildLog: BuildEntry[] = [
   {
+    id: "build-ask-agent",
+    title: "Ask me: a portfolio agent that knows my work",
+    year: "2026",
+    built:
+      "A chatbot on this site that answers questions about my work. It searches every passage I have published here, ranks them against the question, and quotes the best matches word for word with the page they came from. It never writes new text, so it cannot say anything I have not said, and when nothing matches it hands over my email.",
+    tools: ["TypeScript", "React", "Next.js", "Retrieval and ranking"],
+    learned: null,
+    link: "/ask",
+    image: null,
+  },
+  {
     id: "build-neurodiversity",
     title: "Neurodiversity support chatbot",
     year: "2024",
@@ -489,7 +501,7 @@ export const buildLog: BuildEntry[] = [
     tools: ["Python", "Flutter", "Serverpod"],
     learned: null,
     link: "https://rachelcooray.github.io/carbon-footprint-tracker/",
-    image: "/images/carbonfootprint.png",
+    image: "/images/mag/carbon-footprint.webp",
     imageAlt: "Carbon Footprint Tracker dashboard",
   },
   {
@@ -500,7 +512,7 @@ export const buildLog: BuildEntry[] = [
     tools: ["Flutter", "Node", "Flask", "Machine learning"],
     learned: null,
     link: null,
-    image: "/images/futsal.png",
+    image: "/images/mag/futsal.webp",
     imageAlt: "Futsal team recommender app screens",
   },
   {
@@ -511,7 +523,7 @@ export const buildLog: BuildEntry[] = [
     tools: ["HTML5 Canvas", "JavaScript", "Web Audio API"],
     learned: null,
     link: "https://rachelcooray.github.io/FantasyCoinCollector/",
-    image: "/images/coin-collector.png",
+    image: "/images/mag/coin-collector.webp",
     imageAlt: "Fantasy Coin Collector game screen",
   },
   {
@@ -522,7 +534,7 @@ export const buildLog: BuildEntry[] = [
     tools: ["Data collection", "Data analytics", "Field research"],
     learned: null,
     link: null,
-    image: "/images/street-vendor.png",
+    image: "/images/mag/street-vendor.webp",
     imageAlt: "Street vendor survey analysis",
   },
 ];
@@ -551,7 +563,7 @@ export const teaching = {
       title: "Sunday School Class Teacher",
       institution: "St. Mary's Church, Dehiwala",
       dateRange: "Aug 2022 to Aug 2024",
-      summary: "Taught children aged 4 to 8, from Pre-Grade to Grade 2. Prepared and delivered lessons and supported classroom activities.",
+      summary: "Taught children from pre-school to age 8. Adapted teaching to different learning needs, built a positive, inclusive classroom, and wrote lesson plans and learning materials.",
     },
     {
       id: "teaching-student-support",
@@ -580,6 +592,10 @@ export const volunteer = {
   items: [
     {
       id: "volunteer-this-is-michael",
+      image: "/images/mag/events/this-is-michael.webp",
+      imageAlt: "Poster for This Is Lenny Jay's Michael, the tribute concert",
+      credit: "Event poster, City of Dreams Sri Lanka",
+      creditUrl: "https://www.seylan.lk/seylan-cards-partners-with-cinnamon-city-of-dreams-to-unveil-lenny-jays-michael-relive-the-legend",
       event: "This Is Michael, Lenny Jay",
       title: "Event Volunteer",
       organization: "City of Dreams",
@@ -588,6 +604,10 @@ export const volunteer = {
     },
     {
       id: "volunteer-artist-spotlight",
+      image: "/images/mag/events/artist-spotlight.webp",
+      imageAlt: "Paintings hung at the Artist Spotlight exhibition",
+      credit: "Photo: Yamu",
+      creditUrl: "http://www.yamu.lk/highlights/john-keells-foundation-and-city-of-dreams-present-channa-ekanayakes-what-lives-between-at-the-artist-spotlight/",
       event: "Artist Spotlight, 8th edition",
       title: "Event Support Volunteer",
       organization: "John Keells Foundation",
@@ -596,6 +616,10 @@ export const volunteer = {
     },
     {
       id: "volunteer-la-bamba",
+      image: "/images/mag/events/la-bamba.webp",
+      imageAlt: "The cast and organisers at the La Bamba launch at Cinnamon Life",
+      credit: "Photo: Colombo Gazette",
+      creditUrl: "https://colombogazette.com/2026/02/06/cinnamon-life-brings-west-end-musical-la-bamba-to-colombo",
       event: "La Bamba, musical production",
       title: "Event Assistant",
       organization: "John Keells Foundation",
@@ -604,6 +628,10 @@ export const volunteer = {
     },
     {
       id: "volunteer-kala-pola",
+      image: "/images/mag/events/kala-pola.webp",
+      imageAlt: "A stall of colourful paintings at Kala Pola",
+      credit: "Photo: Kala Pola, George Keyt Foundation",
+      creditUrl: "https://kalapola.lk/kala-pola-2026-open-air-art-fair-media-release/",
       event: "Kala Pola",
       title: "Volunteer",
       organization: "John Keells Foundation",
@@ -679,7 +707,7 @@ export const press: Recognition[] = [
     organization: "John Keells Holdings",
     year: "2026",
     summary: "JKH Intercompany Swimming Meet.",
-    image: "/images/swimmingmeet.jpeg",
+    image: "/images/mag/swimming-meet.webp",
     imageAlt: "Team OCTAVE at the John Keells intercompany swimming meet",
   },
   {
@@ -699,7 +727,7 @@ export const press: Recognition[] = [
     year: "2025",
     summary: "",
     link: "https://www.westminster.ac.uk/news/westminster-computer-science-and-engineering-students-receive-prizes-from-netcompany-at-annual-final-year-project-showcase",
-    image: "/images/blog.png",
+    image: "/images/mag/blog.webp",
     imageAlt: "University of Westminster news article",
   },
   {
@@ -709,7 +737,7 @@ export const press: Recognition[] = [
     year: "2020",
     summary: "",
     link: "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
-    image: "/images/daily-ft.png",
+    image: "/images/mag/daily-ft.webp",
     imageAlt: "Daily FT front page article on the New Generation Awards",
   },
   {
@@ -719,7 +747,7 @@ export const press: Recognition[] = [
     year: "2020",
     summary: "",
     link: "https://lmd.lk/youth-forum-32/",
-    image: "/images/youth-forum.png",
+    image: "/images/mag/youth-forum.webp",
     imageAlt: "LMD Youth Forum interview page",
   },
 ];
@@ -1058,7 +1086,7 @@ export function buildPassages(): Passage[] {
 
   buildLog.forEach((b) => add("buildlog", b.id, b.title, `${b.year ? b.year + ". " : ""}${b.built} Built with ${b.tools.join(", ")}.`, ["build", "built", "project", "app", "chatbot", "hackathon"]));
 
-  add("experience", "octave-own", "OCTAVE: what she owns", octave.own, ["octave", "john keells", "fmcg", "distributor", "use case", "incentive", "replenishment", "dispatch", "job", "work", "current"]);
+  add("experience", "octave-own", "OCTAVE: what she owns", octave.own, ["octave", "own", "owns", "six", "john keells", "fmcg", "distributor", "use case", "incentive", "replenishment", "dispatch", "job", "work", "current"]);
   [...octave.roles, ...octave.earlier].forEach((r) => add("experience", r.id, `${r.title}, ${r.company}`, `${r.dateRange}, ${r.location}. ${r.details.join(" ")}`, ["octave", "role", "intern", "promotion", "dates"]));
   add("experience", layer1.id, `${layer1.title}, ${layer1.company}`, `${layer1.dateRange}, ${layer1.location}. ${layer1.description} ${layer1.details.join(" ")} Clients include ${layer1.builtFor.join(", ").toLowerCase()}.`, ["layer1", "studio", "co-founder", "founder", "startup", "freelance", "clients", "built"]);
   add("experience", londonSuccessAcademy.id, `${londonSuccessAcademy.title}, ${londonSuccessAcademy.company}`, `${londonSuccessAcademy.dateRange}, ${londonSuccessAcademy.location}. ${londonSuccessAcademy.details.join(" ")}`, ["data engineering", "etl", "gcp", "pyspark", "london"]);
@@ -1099,7 +1127,7 @@ export const disciplineMap = [
   { id: "technology", label: "Technology", line: "Technology enables solutions.", evidence: "Layer1.Studio products, PCOS Care, independent builds" },
   { id: "data", label: "Data", line: "Data creates understanding.", evidence: "Distributor analytics at OCTAVE, ETL at London Success Academy" },
   { id: "business", label: "Business", line: "Business identifies value.", evidence: "Margin use cases at OCTAVE, CIMA Certificate in Business Accounting" },
-  { id: "strategy", label: "Strategy", line: "Strategy turns ideas into implementation.", evidence: "Owning delivery of four use cases: plans, sprints, RAID logs" },
+  { id: "strategy", label: "Strategy", line: "Strategy turns ideas into implementation.", evidence: "Owning six use cases: plans, sprints, RAID logs" },
   { id: "people", label: "People", line: "People make adoption possible.", evidence: "Governance calls with field managers, teaching, mentoring interns" },
 ];
 
@@ -1129,7 +1157,7 @@ export const experienceEntries: ExperienceEntry[] = [
   {
     id: "exp-layer1",
     org: "Layer1.Studio",
-    logo: "/images/layer1.png",
+    logo: "/images/mag/layer1.webp",
     title: layer1.title,
     dateRange: layer1.dateRange,
     location: layer1.location,
@@ -1495,3 +1523,271 @@ export const atAGlance = [
   "Co-founder and Developer, Layer1.Studio",
   "Interested in applied AI, explainability and responsible AI",
 ];
+
+// ---------------------------------------------------------------------
+// MAGAZINE (Nov 2026 redesign). Every page of the magazine reads from here.
+// OCTAVE work is described without figures, names or results.
+// ---------------------------------------------------------------------
+
+export type MagUseCase = {
+  id: string;
+  code: string;
+  stage: "Factory" | "Dispatch" | "Distributor" | "Market";
+  name: string;
+  line: string;
+  part: string;
+};
+
+export const magazine = {
+  issue: "Issue 01",
+  issueDate: "November 2026",
+  strap: "Data · AI · Business · People",
+  pullQuote: "The most interesting problems rarely sit within one discipline.",
+  cover: {
+    story: { kicker: "Cover story", title: "Six use cases, one value chain.", dek: "How an analyst owns the work from the factory line to the shop shelf at OCTAVE, John Keells Holdings." },
+    research: { kicker: "Research", title: "PCOS Care, from final year project to IEEE ICAHS 2025." },
+    ask: { kicker: "New this issue", title: "Ask me anything. An agent that answers from my own work, and shows its source." },
+    alsoInside: "A First Class at Westminster · Gold in the pool · Head Prefect, 2020 · Volunteering with the John Keells Foundation",
+  },
+  useCasesIntro:
+    "As Analyst, Data and AI at OCTAVE, John Keells Holdings, I own six use cases across the value chain, from the analysis and the solution design to the problem solving along the way, working with data science, engineering and the commercial teams who use the results. Each one asks the same question in a different place: is the distributor being asked for the right thing, and rewarded for the right reason?",
+  chain: [
+    { stage: "Factory", icon: "factory", label: "Production planning" },
+    { stage: "Dispatch", icon: "truck", label: "Permanent Dispatch Planning" },
+    { stage: "Distributor warehouse", icon: "warehouse", label: "Replenishment · Ice cream margins and targets · Beverage margins" },
+    { stage: "Outlets", icon: "shop", label: "Weather and sales" },
+  ],
+  useCases: [
+    {
+      id: "production-planning",
+      code: "Production planning",
+      stage: "Factory",
+      name: "Production planning",
+      line: "A digital twin of the beverages factory. A model recommends the schedule for each production line so that no product runs out of stock, while keeping the stock that ties up working capital as low as it can be.",
+      part: "I own it: the analysis, shaping the solution with the data science team, and solving the problems that come up between the model and the factory floor.",
+    },
+    {
+      id: "pdp",
+      code: "PDP",
+      stage: "Dispatch",
+      name: "Permanent Dispatch Planning",
+      line: "Gives each distributor fixed delivery days and splits the week's order across them, so trucks run to a plan instead of to whoever calls first.",
+      part: "I measure how closely deliveries keep to each distributor's planned days, flag deliveries that fall off plan, and work out whether a miss was the order or the truck.",
+    },
+    {
+      id: "drs",
+      code: "DRS",
+      stage: "Distributor",
+      name: "Distributor Replenishment System",
+      line: "Recommends how much each ice cream distributor should order, product by product, for each delivery day. A weekly forecast sets the volume, and a daily refresh adjusts each order on the morning it is placed, using the latest stock and sales so distributors neither run short nor overfill their freezers.",
+      part: "I compare what the model recommends with what distributors actually order, track stock against freezer capacity, run a feedback pilot that asks distributors why they changed an order, and test proposed rule changes by simulating them on past orders before they go to the business.",
+    },
+    {
+      id: "icdm",
+      code: "ICDM",
+      stage: "Distributor",
+      name: "Ice Cream Distributor Margins",
+      line: "On top of their normal margin, ice cream distributors can earn monthly bonuses for hitting targets on sales, product mix, outlet coverage and range. This use case checks who was paid and whether it matched the rules, and whether the bonuses are actually changing behaviour. Because pay depends on beating a target, it also sets each distributor's monthly target with a model: past sales adjusted for seasonality, a fair share of the business unit's total, and a small stretch for distributors who usually beat target. When territories change, it re-maps history so no distributor is judged on sales that are no longer theirs.",
+      part: "I built the monitoring that flags patterns suggesting a bonus is being gamed rather than earned: landing just above a threshold month after month, stopping at a cap, or buying stock that never sells on to shops. I also own the target model: the analysis behind each rule, the fixes when the numbers didn't add up, and checking its targets against the business unit's before they go out.",
+    },
+    {
+      id: "bevdm",
+      code: "BevDM",
+      stage: "Distributor",
+      name: "Beverages Distributor Margins",
+      line: "Beverage distributors used to earn a mostly fixed margin, whether they pushed hard or not. Now part of it is paid only when they beat target, with an extra bonus tied to a second condition that can rotate to whichever measure needs lifting next. Targets are set by a model, so pay is earned rather than given away.",
+      part: "I track who qualifies each month, watch for payments that reward catching up rather than real growth, and weigh the extra volume against what the bonus costs. The tracking feeds the weekly governance calls with the business.",
+    },
+    {
+      id: "weather",
+      code: "Weather",
+      stage: "Market",
+      name: "Weather and sales",
+      line: "Ice cream and drinks sell far more on hot, dry days. This puts each distributor's sales beside the weather in their own area, expected against actual, so a hit or a miss can be read as performance or as weather. It separates luck from effort, spots demand that wasn't captured, and points to fairer, weather-aware targets next.",
+      part: "I own it: the analysis, turning weather and sales into a clear story for each distributor, and the problem solving that leads to the next phase.",
+    },
+  ] as MagUseCase[],
+  measureQuote: "Operational indicators first, then commercial outcomes, always separating association from proven impact.",
+  delivery: ["Problem statement", "Requirements", "Build with data science and engineering", "Validate", "Measure", "Govern with the business"],
+  confidentiality: "OCTAVE work is shown without confidential data, client information or results.",
+  backPage: "Curiosity is where it starts. Building is where it becomes real.",
+};
+
+export function buildMagazinePassages(): Passage[] {
+  return [
+    ...buildPassages(),
+    {
+      id: "school-life",
+      section: "education" as SectionId,
+      title: "At school, St. Bridget's Convent",
+      text: `${schoolLife.leadership.map((l) => `${l.role}, ${l.year}.`).join(" ")} ${schoolLife.interact} Teams: ${schoolLife.teams.join(", ")}.`,
+      keywords: ["school", "prefect", "head prefect", "leadership", "interact", "swim", "athletics", "tech crew", "st bridget"],
+    },
+    ...magazine.useCases.map((u) => ({
+      id: `mag-${u.id}`,
+      section: "experience" as SectionId,
+      title: `${u.name} (${u.stage})`,
+      text: `${u.line} My part: ${u.part}`,
+      keywords: [u.code.toLowerCase(), u.name.toLowerCase(), u.stage.toLowerCase()],
+    })),
+  ];
+}
+
+// The toolkit as a stack, foundations at the bottom. Only tools listed in
+// `skills` and `site.about.skills` above.
+export const toolkitStack = [
+  { q: "And getting it used?", a: "Requirements, plans and people. That is most of the job at OCTAVE.", layer: "Delivery", where: "Professional", tools: ["Agile", "PMO", "Requirements", "Stakeholder management", "Process mapping", "Presentations"] },
+  { q: "When does it become a product?", a: "When it ships: web and mobile apps through Layer1 Studio and my own builds.", layer: "Products", where: "Professional and projects", tools: ["React", "Node.js", "Flutter", "APIs", "Git and GitHub"] },
+  { q: "How do people actually see it?", a: "Dashboards and KPIs the business can act on, not just read.", layer: "Insight", where: "Professional", tools: ["Power BI", "Excel", "KPI development", "Commercial analysis"] },
+  { q: "And the models?", a: "Machine learning and statistics, tested hardest in research like PCOS Care.", layer: "AI and analysis", where: "Research and projects", tools: ["Machine learning", "Statistics", "scikit-learn", "pandas", "Model evaluation", "GenAI", "RAG pipelines"] },
+  { q: "How does the data get ready?", a: "Pipelines: Spark on Databricks at work, and ETL on Google Cloud before that.", layer: "Data engineering", where: "Professional", tools: ["PySpark", "Databricks", "Delta Lake", "ETL", "GCP"] },
+  { q: "What sits underneath everything?", a: "The languages. Everything else on this page is built on them.", layer: "Languages", where: "Everywhere", tools: ["Python", "SQL", "JavaScript", "Dart"] },
+];
+
+// One story per use case: problem, solution, how analytics helps, business
+// value and Rachel's part. Value is written as what each use case is designed
+// to change. No figures, names, results or internal data.
+export type UseCaseStory = {
+  problem: string;
+  solution: string;
+  analytics: string[];
+  value: string[];
+  role: string[];
+};
+
+export const useCaseStories: Record<string, UseCaseStory> = {
+  "production-planning": {
+    problem:
+      "A beverages factory has to decide which product each line makes, in what order and for how long. Make too little of a product and it runs out on the shelf. Make too much and cash sits in the warehouse as stock instead of working for the business.",
+    solution:
+      "A digital twin of the factory: a model of the lines that can be run forward in time. It recommends the schedule for each production line so every product stays in stock while the stock held, and the working capital tied up in it, stays as low as it can be.",
+    analytics: [
+      "Tests a schedule in the twin before it runs on the real lines.",
+      "Weighs keeping products available against the cost of holding stock, instead of treating them as separate goals.",
+      "Turns a planner's trade-off into a recommendation that can be checked and explained.",
+    ],
+    value: [
+      "Fewer products running out of stock.",
+      "Less working capital tied up in finished goods.",
+      "Schedules that can be reasoned about, not just inherited.",
+    ],
+    role: [
+      "I own the use case: the analysis, shaping the solution with the data science team, and solving the problems that come up between the model and the factory floor.",
+    ],
+  },
+  pdp: {
+    problem:
+      "When deliveries go out whenever a distributor calls, trucks run half empty on some days and overloaded on others, and distributors cannot plan their stock around a delivery they cannot predict.",
+    solution:
+      "Permanent Dispatch Planning gives each distributor fixed delivery days and splits the week's order across them, so trucks run to a plan instead of to whoever calls first.",
+    analytics: [
+      "Measures how closely each distributor's deliveries keep to their planned days.",
+      "Flags deliveries that fall off plan and works out whether the order or the truck caused the miss.",
+      "Feeds the delivery days into replenishment, so orders are sized for the days they will actually arrive.",
+    ],
+    value: [
+      "Lower lorry costs through planned, fuller trips.",
+      "Predictable deliveries that distributors can plan their stock around.",
+      "A shared plan the business and distributors can both hold each other to.",
+    ],
+    role: [
+      "I measure adherence to the plan, chase down off-plan deliveries, and bring what I find to the business so the plan and the trucks stay aligned.",
+    ],
+  },
+  drs: {
+    problem:
+      "Ice cream distributors decide for themselves how much to order. Ordering by feel means some products run short while freezers fill with others, and stock that sits too long ties up the distributor's cash and freezer space.",
+    solution:
+      "The Distributor Replenishment System recommends how much each distributor should order, product by product, for each delivery day. A weekly forecast sets the volume, and a daily refresh adjusts each order on the morning it is placed using the latest stock and sales.",
+    analytics: [
+      "Forecasts each distributor's demand and splits it across products and delivery days.",
+      "Checks the recommendation against current stock and freezer capacity before it goes out.",
+      "Compares what the model recommended with what was actually ordered, and asks distributors why when they differ.",
+      "Simulates proposed rule changes on past orders before they reach the business.",
+    ],
+    value: [
+      "The right products in the right freezer, with fewer stock-outs and less overstock.",
+      "Orders that follow sales instead of habit.",
+      "Rule changes tested on evidence before they are rolled out.",
+    ],
+    role: [
+      "I compare recommendations with actual orders, track stock against freezer capacity, and run the feedback pilot that asks distributors why they changed an order.",
+      "I test proposed rule changes by simulating them on past orders, and take the findings to the weekly reviews with the business.",
+    ],
+  },
+  icdm: {
+    problem:
+      "Ice cream distributors can earn monthly bonuses on top of their margin for hitting targets on sales, product mix, outlet coverage and range. A bonus only works if it is paid by the rules, rewards real effort rather than clever timing, and is measured against a target that is fair.",
+    solution:
+      "A monitoring view that checks who was paid against the rules and whether the bonuses are changing behaviour, alongside a model that sets each distributor's monthly target from past sales adjusted for seasonality, a fair share of the business unit's total and a small stretch.",
+    analytics: [
+      "Flags patterns that suggest a bonus is being gamed: landing just above a threshold month after month, stopping at a cap, or buying stock that never sells on to shops.",
+      "Adjusts targets for seasonality so a distributor is not judged against an easy or a hard month.",
+      "Re-maps sales history when territories change, so no distributor is judged on sales that are no longer theirs, and stops the run if any total moves.",
+    ],
+    value: [
+      "Incentive money that rewards genuine performance.",
+      "Targets distributors and the business can both accept as fair.",
+      "Early warning when a scheme is being worked around.",
+    ],
+    role: [
+      "I built the monitoring that spots gaming patterns.",
+      "I own the target model: the analysis behind each rule, the fixes when the numbers did not add up, and checking its targets against the business unit's before they go out.",
+    ],
+  },
+  bevdm: {
+    problem:
+      "Beverage distributors used to earn a mostly fixed margin. A distributor earned roughly the same whether it pushed hard or just kept ticking over, and targets were set by splitting a total from the top and adjusting by judgement.",
+    solution:
+      "Part of the margin is now paid only when a distributor beats its target, with an extra bonus tied to a second condition. Targets are set by a model, and the business reviews them before they go out, so pay is earned rather than given away.",
+    analytics: [
+      "Tracks which distributors qualify each month and why.",
+      "Weighs the extra volume against what the bonus costs.",
+      "Watches for payments that reward catching up after a dip rather than real growth, which shaped the proposal for guardrails.",
+    ],
+    value: [
+      "A margin that gives distributors a reason to push, and to push on what the business needs.",
+      "A second condition that can rotate to whichever measure needs lifting next.",
+      "Evidence for the business on whether the scheme is worth what it costs.",
+    ],
+    role: [
+      "I own the tracking: who can still earn the bonus this month, who did and whether it was earned. It feeds the weekly governance calls with the business.",
+    ],
+  },
+  weather: {
+    problem:
+      "Ice cream and drinks sell far more on hot, dry days. When a distributor hits or misses target, it is hard to tell whether they did a good job or the weather helped or hurt them, so the judgement is mostly gut feel.",
+    solution:
+      "A view that puts each distributor's sales beside the weather in their own area, and compares the weather expected for the month with what actually happened.",
+    analytics: [
+      "Weather better and target beaten: the weather may have done the work, so full incentives risk paying for luck.",
+      "Weather better but target missed: demand was there and was not captured, pointing to stock, coverage or execution.",
+      "Weather as expected and target missed: a distributor or operational issue, not the weather.",
+      "Very large misses are flagged as operational problems, not weather effects.",
+    ],
+    value: [
+      "Rewards that go to genuine performance.",
+      "Missed sales opportunities made visible.",
+      "A path to weather-aware targets that are fairer and more realistic.",
+    ],
+    role: [
+      "I own the use case: the analysis, turning weather and sales into a clear story for each distributor, and the problem solving that leads to the next phase.",
+    ],
+  },
+};
+
+// School: St. Bridget's Convent, Colombo. Leadership, newest first, then clubs.
+export const schoolLife = {
+  leadership: [
+    { year: "2020", role: "Head Prefect", note: "St. Bridget's Convent, Colombo. Recognised as School Prefect of the Year at the New Generation Awards." },
+    { year: "2019", role: "Assistant House Prefect", note: "St. Bridget's Convent, Colombo." },
+    { year: "2012", role: "Deputy Head Prefect", note: "Primary school, St. Bridget's Convent." },
+  ],
+  interact: "Held leadership roles in the Interact Club and took part in many of its volunteering activities.",
+  teams: ["Swim team", "Tech crew", "Athletics"],
+  photo: {
+    src: "/images/mag/head-prefect.webp",
+    alt: "Rachel as Head Prefect in the green St. Bridget's Convent blazer, wearing the Head Prefect badge",
+    credit: "Photo: Media Services photofile (Sanjaya de Silva), LMD",
+  },
+};

@@ -1,50 +1,68 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
-import Button from "@/components/ui/Button";
-import { PageHero, SectionHeading } from "@/components/ui/Headings";
-import { PointList } from "@/components/home/Sections";
-import { octave, site } from "@/content/content";
+import PageHead from "@/components/mag/PageHead";
+import SkillIcon from "@/components/mag/SkillIcon";
+import { site, skills, toolkitStack } from "@/content/content";
 
-export const metadata: Metadata = { title: "Skills", description: "Skills and tools, grouped by what they're for and where they were used." };
+export const metadata: Metadata = {
+  title: "Skills",
+  description: "The toolkit in conversation: languages, data engineering, AI and analysis, insight, products and delivery, and where each one is used.",
+};
+
+const explored = new Set(skills.flatMap((s) => s.explored.map((e) => e.toLowerCase())));
 
 export default function Skills() {
-  const groups = site.about.skills;
+  // Read from the foundations up, the way the work is built.
+  const layers = [...toolkitStack].reverse();
   return (
-    <>
-      <PageHero
-        num="07"
-        label="Skills · Tools for thinking and building"
-        title="What I can do, and where I've used it."
-        lead="Grouped by capability. Each group says where it was used, so nothing implies equal expertise."
-        crumbs={[{ label: "Skills" }]}
-      />
-      <section className="wrap pb">
-        <div className="skill-groups">
-          {groups.map((g, i) => (
-            <article key={g.capability} className="skill-group" data-reveal>
-              <p className="mono">{String(i + 1).padStart(2, "0")}</p>
-              <h2>{g.capability}</h2>
-              <p className="where-used">
-                <span className="mono">Where</span> {g.where}
-              </p>
-              <PointList points={g.tools.split(", ").map((t) => t.charAt(0).toUpperCase() + t.slice(1))} />
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="band band-oat">
-        <div className="wrap split-2">
-          <SectionHeading kicker="At work today" title="The OCTAVE stack." />
-          <div data-reveal>
-            <PointList points={octave.tools} />
-            <div className="btn-row mt">
-              <Button href="/experience">See the experience →</Button>
-              <Button href="/projects" variant="secondary">
-                See the projects
-              </Button>
+    <div className="wrap page">
+      <PageHead folio="Skills · 29" title="The toolkit, in conversation." dek="Six questions, from the foundations up. Each answer comes with the tools behind it and where they were used." />
+      <div className="convo">
+        {layers.map((l, i) => (
+          <section key={l.layer} className="convo-turn" style={{ ["--t" as string]: i }} aria-labelledby={`q-${i}`}>
+            <p className="bubble bubble-q" id={`q-${i}`}>
+              <span className="bubble-who">Q.</span>
+              {l.q}
+            </p>
+            <div className="bubble-a-row">
+              <img className="bubble-face" src="/images/mag/rachel-face.webp" alt="" width={44} height={44} loading="lazy" />
+              <div className="bubble bubble-a">
+                <span className="bubble-who">
+                  {String(i + 1).padStart(2, "0")} · {l.layer}
+                </span>
+                <p>{l.a}</p>
+                <ul className="leaders">
+                  {l.tools.map((t) => (
+                    <li key={t}>
+                      <SkillIcon name={t} />
+                      <span className="leaders-name">{t}</span>
+                      <span className="leaders-dots" aria-hidden="true" />
+                      <span className="leaders-where">{explored.has(t.toLowerCase()) ? "Explored" : l.where}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
-        </div>
+          </section>
+        ))}
+      </div>
+
+      <section style={{ display: "flex", flexDirection: "column", gap: 16 }} aria-labelledby="cap-title">
+        <h2 className="sec-title" id="cap-title">
+          Capabilities, and where they show up
+        </h2>
+        <ul className="leaders leaders-wide">
+          {site.about.skills.map((r) => (
+            <li key={r.capability}>
+              <span className="leaders-name">
+                <b>{r.capability}</b> <span className="muted">· {r.tools}</span>
+              </span>
+              <span className="leaders-dots" aria-hidden="true" />
+              <span className="leaders-where">{r.where}</span>
+            </li>
+          ))}
+        </ul>
       </section>
-    </>
+    </div>
   );
 }

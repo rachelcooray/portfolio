@@ -1,62 +1,40 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Button from "@/components/ui/Button";
-import { PageHero, SectionHeading } from "@/components/ui/Headings";
-import { coreAchievements } from "@/content/content";
+import PageHead from "@/components/mag/PageHead";
+import { achievements, volunteer } from "@/content/content";
 
-export const metadata: Metadata = { title: "Achievements", description: "Awards and recognition: Westminster showcase, Microsoft EMBRACE hackathon and the New Generation Awards." };
+export const metadata: Metadata = {
+  title: "Achievements",
+  description: "Prizes, hackathons, scholarships, school leadership and sport.",
+};
+
+const PICS: Record<number, { src: string; alt: string; contain?: boolean }> = {
+  0: { src: "/images/mag/pcos-showcase.webp", alt: "Rachel presenting PCOS Care to judges beside her research poster" },
+  1: { src: "/images/mag/embrace-certificate.webp", alt: "Microsoft certificate of excellence for the regional hackathon, AI for Neurodiverse Learners, EMBRACE", contain: true },
+  3: { src: "/images/mag/best-prefect.webp", alt: "Newspaper photo of Rachel receiving the Best School Prefect of the Year award" },
+};
 
 export default function Achievements() {
   return (
-    <>
-      <PageHero num="05" label="Achievements · Awards and recognition" title="Recognised along the way." lead="Three moments of recognition, from school leadership to research, each with the evidence behind it." crumbs={[{ label: "Achievements" }]} />
-      <section className="wrap awards-timeline">
-        {coreAchievements.map((a, i) => (
-          <article key={a.id} className={`award-row${a.image ? "" : " no-img"}`} data-reveal>
-            <div className="award-icon" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <circle cx="12" cy="9" r="6" />
-                <path d="M8.5 14l-1.5 7 5-3 5 3-1.5-7" />
-              </svg>
-            </div>
-            <div className="award-copy">
-              <p className="mono">
-                {String(i + 1).padStart(2, "0")} · {a.year}
-              </p>
-              <h2>{a.title}</h2>
-              <ul className="bullets">
-                <li>
-                  <strong>From:</strong> {a.org}
-                </li>
-                <li>
-                  <strong>Year:</strong> {a.year}
-                </li>
-                <li>{a.text}</li>
-              </ul>
-              {a.link && (
-                <Button href={a.link} variant="text">
-                  See the evidence ↗
-                </Button>
-              )}
-            </div>
-            {a.image && (
-              <figure className="award-evidence">
-                <Image src={a.image} width={a.w} height={a.h} alt={a.imageAlt} />
-              </figure>
-            )}
+    <div className="wrap page">
+      <PageHead folio="Achievements · 26" title="Recognition." dek="Prizes and recognition I have been given, and one good day in the pool." />
+      <div className="cards">
+        {achievements.map((a, i) => (
+          <article key={a.id} className={i === 0 ? "card lead" : "card"}>
+            {PICS[i] ? <img loading="lazy" decoding="async" src={PICS[i].src} alt={PICS[i].alt} width={1200} height={750} style={PICS[i].contain ? { objectFit: "contain", background: "#2a2a2a" } : undefined} /> : null}
+            <span className="meta">
+              {a.organization} · {a.year}
+            </span>
+            <h2>{a.title}</h2>
+            {a.summary ? <p className="small">{a.summary}</p> : null}
           </article>
         ))}
-      </section>
-      <section className="band band-oat">
-        <div className="wrap split-2">
-          <SectionHeading kicker="Also recognised" title="Scholarship and sport." />
-          <ul className="tick-list" data-reveal>
-            <li>UOW/IIT School of Computing and Engineering Part-Fee Scholarship, £5,000, 2024/25.</li>
-            <li>Three individual golds and gold in every relay, under-25, JKH Intercompany Swimming Meet 2026.</li>
-            <li>Published at IEEE ICAHS 2025.</li>
-          </ul>
-        </div>
-      </section>
-    </>
+        <article className="card">
+          <img loading="lazy" decoding="async" src="/images/mag/swimming-meet.webp" alt="Team OCTAVE at the John Keells intercompany swimming meet" width={399} height={501} />
+          <span className="meta">JKH Intercompany Swimming Meet · 2026</span>
+          <h2>Gold in the pool</h2>
+          <p className="small">{volunteer.swimming}</p>
+        </article>
+      </div>
+    </div>
   );
 }

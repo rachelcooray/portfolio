@@ -1,5 +1,4 @@
-// PageTransition: every route change re-mounts this wrapper, which fades
-// the new page in. Reduced motion turns the fade off in CSS.
+// Re-mounts on every navigation, so each page turns in like a magazine page.
 export default function Template({ children }: { children: React.ReactNode }) {
-  return <div className="page-fade">{children}</div>;
+  return <div className="turn">{children}</div>;
 }
