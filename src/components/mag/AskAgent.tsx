@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type FormEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { askFaqs, askMore, buildMagazinePassages, identity, type Passage } from "@/content/content";
 
 // Answers only by quoting passages from content.ts. It never writes new
@@ -117,12 +117,47 @@ function routeFor(h: Passage) {
   return ROUTE[h.section] ?? { href: "/", label: "the cover" };
 }
 
+type Turn = { id: number; q: string; answer: Answer | null; follow: string[] };
+
+const STORE = "rc-ask-thread";
+
+function loadThread(): Turn[] {
+  try {
+    const raw = sessionStorage.getItem(STORE);
+    return raw ? (JSON.parse(raw) as Turn[]) : [];
+  } catch {
+    return [];
+  }
+}
+
 export default function AskAgent() {
   const passages = useMemo(() => buildMagazinePassages(), []);
-  const [asked, setAsked] = useState<{ q: string; answer: Answer | null } | null>(null);
+  const [thread, setThread] = useState<Turn[]>([]);
+  const [typing, setTyping] = useState(false);
   const [draft, setDraft] = useState("");
+  const endRef = useRef<HTMLDivElement>(null);
+  const loaded = useRef(false);
 
-  const ask = (q: string) => {
+  // Restore this visit's conversation after the first paint, so the static
+  // page and the browser agree on the first render.
+  useEffect(() => {
+    const saved = loadThread();
+    const id = window.setTimeout(() => {
+      if (saved.length) setThread(saved);
+      loaded.current = true;
+    }, 0);
+    return () => window.clearTimeout(id);
+  }, []);
+
+  useEffect(() => {
+    if (!loaded.current) return;
+    try {
+      sessionStorage.setItem(STORE, JSON.stringify(thread.slice(-20)));
+    } catch {}
+    endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }, [thread, typing]);
+
+  const answerFor = (q: string): Answer | null => {
     const ql = ` ${q.toLowerCase().replace(/[^a-z0-9\s]/g, " ")} `;
     const exact = askFaqs.find((f) => f.q === q);
     const faq =
@@ -131,17 +166,24 @@ export default function AskAgent() {
         .map((f) => ({ f, n: f.keywords.filter((k) => ql.includes(` ${k} `) || ql.includes(` ${k}s `)).length }))
         .filter((x) => x.n > 0)
         .sort((x, y) => y.n - x.n)[0]?.f;
-    if (faq) {
-      setAsked({ q, answer: { text: faq.a, title: faq.q.replace("?", ""), href: faq.href, label: faq.label } });
-      return;
-    }
+    if (faq) return { text: faq.a, title: faq.q.replace("?", ""), href: faq.href, label: faq.label };
     const hit = search(passages, q)[0];
-    if (!hit) {
-      setAsked({ q, answer: null });
-      return;
-    }
+    if (!hit) return null;
     const r = routeFor(hit);
-    setAsked({ q, answer: { text: trim(hit.text), title: hit.title, href: r.href, label: r.label } });
+    return { text: trim(hit.text), title: hit.title, href: r.href, label: r.label };
+  };
+
+  const ask = (q: string) => {
+    if (typing) return;
+    const answer = answerFor(q);
+    const askedQs = new Set([...thread.map((t) => t.q), q]);
+    const follow = askFaqs.map((f) => f.q).filter((x) => !askedQs.has(x)).slice(0, 3);
+    setTyping(true);
+    const delay = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450;
+    window.setTimeout(() => {
+      setThread((t) => [...t, { id: Date.now(), q, answer, follow }]);
+      setTyping(false);
+    }, delay);
   };
 
   const submit = (e: FormEvent) => {
@@ -153,54 +195,85 @@ export default function AskAgent() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 18, minWidth: 0 }}>
+    <div className="agent">
+      <p className="agent-note">Automated assistant. It answers only from Rachel&apos;s published work, and nothing you type is stored or sent anywhere.</p>
       <div className="ask-chips" role="group" aria-label="Quick questions">
         {askFaqs.map((f) => (
-          <button key={f.q} type="button" className="chip" aria-pressed={asked?.q === f.q} onClick={() => ask(f.q)}>
+          <button key={f.q} type="button" className="chip" onClick={() => ask(f.q)} disabled={typing}>
             {f.q}
           </button>
         ))}
       </div>
-      <div className="ask-panel" aria-live="polite">
-        {asked ? (
-          <>
-            <div className="ask-q">{asked.q}</div>
+      <div className="ask-panel agent-thread" role="log" aria-live="polite" aria-label="Conversation">
+        <div className="ask-a ask-hello">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
+          <p>Hi, I&apos;m Rachel&apos;s agent. Tap a question, or ask your own.</p>
+        </div>
+        {thread.map((t) => (
+          <div key={t.id} className="agent-turn">
+            <div className="ask-q">{t.q}</div>
             <div className="ask-a">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
               <div className="ask-answers">
-                {asked.answer ? (
-                  <div className="ask-hit">
-                    <blockquote>{asked.answer.text}</blockquote>
-                    <div className="ask-src">
-                      <a href={asked.answer.href}>More on {asked.answer.label} →</a>
-                    </div>
+                <div className="ask-hit">
+                  {t.answer ? (
+                    <>
+                      <blockquote>{t.answer.text}</blockquote>
+                      <div className="ask-src">
+                        <a href={t.answer.href}>More on {t.answer.label} →</a>
+                      </div>
+                    </>
+                  ) : (
+                    <blockquote>I only cover Rachel and her work, and I couldn&apos;t find that. Try one of these, or ask Rachel directly.</blockquote>
+                  )}
+                </div>
+                {t.follow.length ? (
+                  <div className="agent-follow" role="group" aria-label="Suggested next questions">
+                    {t.follow.map((f) => (
+                      <button key={f} type="button" className="agent-follow-btn" onClick={() => ask(f)} disabled={typing}>
+                        {f}
+                      </button>
+                    ))}
                   </div>
-                ) : (
-                  <div className="ask-hit">
-                    <blockquote>
-                      I only cover Rachel and her work. For anything else, email <a href={`mailto:${identity.email}`}>{identity.email}</a>.
-                    </blockquote>
-                  </div>
-                )}
+                ) : null}
               </div>
             </div>
-          </>
-        ) : (
-          <div className="ask-a ask-hello">
+          </div>
+        ))}
+        {typing ? (
+          <div className="ask-a">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
-            <p>Hi, I&apos;m Rachel&apos;s agent. Tap a question, or ask your own.</p>
+            <span className="agent-typing" aria-label="Typing">
+              <i />
+              <i />
+              <i />
+            </span>
           </div>
-        )}
+        ) : null}
+        <div ref={endRef} />
       </div>
       <form className="ask-form" onSubmit={submit}>
         <label>
           Your question
-          <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Ask anything about Rachel" />
+          <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Ask anything about Rachel" maxLength={200} autoComplete="off" />
         </label>
-        <button type="submit">Ask</button>
+        <button type="submit" disabled={typing}>
+          Ask
+        </button>
       </form>
+      <div className="agent-actions">
+        <a className="agent-human" href={`mailto:${identity.email}?subject=${encodeURIComponent("Hello from your portfolio")}`}>
+          Contact Rachel
+        </a>
+        {thread.length ? (
+          <button type="button" className="agent-clear" onClick={() => setThread([])}>
+            Clear chat
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }

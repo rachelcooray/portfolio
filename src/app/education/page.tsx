@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function Education() {
   return (
     <div className="wrap page">
-      <PageHead folio="Education · 20" title="A First Class foundation." dek="Computer Science in London, business accounting alongside it, and the school where it started." />
+      <PageHead folio="Education · 20" title="A First Class Bachelor's degree." dek="Computer Science in London, business accounting alongside it, and the school where it started." />
       <div className="g g-grad">
         <figure>
           <img loading="lazy" decoding="async" src="/images/mag/graduation-roses-thames.webp" alt="Rachel in her graduation gown and cap holding red roses, by the Thames" width={893} height={1500} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />

@@ -472,3 +472,24 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
 .ask-panel { min-height: 0; }
 .ask-hello { align-items: center; }
 .ask-hello p { font-family: var(--serif); font-size: 21px; line-height: 1.35; }
+
+/* Agent: a running conversation with follow-ups and a way to reach Rachel */
+.agent { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.agent-note { font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em; color: #d3c399; }
+.agent-thread { max-height: min(560px, 62vh); overflow-y: auto; gap: 18px; }
+.agent-turn { display: flex; flex-direction: column; gap: 12px; }
+.agent-follow { display: flex; flex-wrap: wrap; gap: 6px; }
+.agent-follow-btn { min-height: 34px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--olive); font: inherit; font-size: 13px; cursor: pointer; }
+.agent-follow-btn:hover { background: var(--lime); border-color: var(--olive); color: var(--ink); }
+.agent-typing { display: inline-flex; gap: 5px; padding: 12px 14px; background: var(--sand); border-radius: 14px; }
+.agent-typing i { width: 7px; height: 7px; border-radius: 50%; background: var(--bark); animation: typing 1s infinite ease-in-out; }
+.agent-typing i:nth-child(2) { animation-delay: 0.15s; }
+.agent-typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes typing { 0%, 80%, 100% { opacity: 0.3; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-3px); } }
+.agent-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.agent-human { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; background: var(--lime); color: var(--ink); text-decoration: none; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--olive); }
+.agent-human:hover { background: #d6e23a; color: var(--ink); }
+.agent-clear { min-height: 40px; padding: 0 14px; border: 1px solid #7a6142; border-radius: 999px; background: transparent; color: #e6dcc8; font-family: var(--mono); font-size: 12px; cursor: pointer; }
+.chip:disabled, .agent-follow-btn:disabled { opacity: 0.6; cursor: default; }
+.ask-pop .agent-thread { max-height: min(380px, 50vh); }
+@media (prefers-reduced-motion: reduce) { .agent-typing i { animation: none; } }

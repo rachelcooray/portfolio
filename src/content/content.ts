@@ -477,11 +477,12 @@ export const buildLog: BuildEntry[] = [
     title: "Ask me: a portfolio agent that knows my work",
     year: "2026",
     built:
-      "A chatbot on this site that answers questions about my work. It searches every passage I have published here, ranks them against the question, and quotes the best matches word for word with the page they came from. It never writes new text, so it cannot say anything I have not said, and when nothing matches it hands over my email.",
+      "A chatbot on this site that answers recruiters' questions about my work. It matches each question to short answers and passages I have published here, quotes them with a link to the page they came from, keeps the conversation for the visit, suggests what to ask next, and hands over to me by email when it can't help. It never writes new text, so it cannot say anything I have not said.",
     tools: ["TypeScript", "React", "Next.js", "Retrieval and ranking"],
     learned: null,
     link: "/ask",
-    image: null,
+    image: "/images/mag/ask-agent.webp",
+    imageAlt: "The Ask me agent answering who Rachel is and what she does at OCTAVE, with suggested next questions",
   },
   {
     id: "build-neurodiversity",
@@ -1852,6 +1853,13 @@ export const askFaqs = [
 // Answers the Ask agent gives to common typed questions. Not shown as
 // buttons. Same rule: facts from this file only, written short.
 export const askMore = [
+  {
+    q: "School exams",
+    a: "Yes. GCE A/L in 2022 at St. Bridget's Convent, Colombo: Chemistry A, English A, Physics B and Combined Mathematics B. GCE O/L in 2018 with nine A passes.",
+    href: "/education",
+    label: "Education",
+    keywords: ["ol", "ols", "al", "als", "o l", "a l", "o level", "o levels", "a level", "a levels", "alevels", "olevels", "gce", "exam", "exams", "results", "grades", "school results"],
+  },
   {
     q: "Layer1 Studio",
     a: "Layer1 Studio is a web and mobile development venture Rachel co-founded in December 2025. She builds websites and apps for small businesses, from shaping the brief to shipping and maintaining them, and mentors interns on real client projects.",
