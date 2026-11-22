@@ -118,7 +118,17 @@ export default function Pictures() {
       </section>
 
       <section className="pics-sec">
-        <span className="kicker">06 · Find me online</span>
+        <span className="kicker">06 · On the shop floor</span>
+        <div className="g g-3">
+          <figure>
+            <img loading="lazy" decoding="async" src="/images/mag/tkmaxx.webp" alt="Rachel on the shop floor at TK Maxx, wearing a headset and lanyard, folding children's clothes" width={848} height={1264} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
+            <figcaption>Customer service at TK Maxx, Stratford.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="pics-sec">
+        <span className="kicker">07 · Find me online</span>
         <div className="online">
           <div>
             <p style={{ fontFamily: "var(--serif)", fontSize: 36, lineHeight: 1.1 }}>Follow the work as it happens.</p>
