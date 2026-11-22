@@ -1614,23 +1614,33 @@ export const magazine = {
 };
 
 export function buildMagazinePassages(): Passage[] {
-  return [
-    ...buildPassages(),
-    {
-      id: "school-life",
-      section: "education" as SectionId,
-      title: "At school, St. Bridget's Convent",
-      text: `${schoolLife.leadership.map((l) => `${l.role}, ${l.year}.`).join(" ")} ${schoolLife.interact} Teams: ${schoolLife.teams.join(", ")}.`,
-      keywords: ["school", "prefect", "head prefect", "leadership", "interact", "swim", "athletics", "tech crew", "st bridget"],
-    },
-    ...magazine.useCases.map((u) => ({
-      id: `mag-${u.id}`,
-      section: "experience" as SectionId,
-      title: `${u.name} (${u.stage})`,
-      text: `${u.line} My part: ${u.part}`,
-      keywords: [u.code.toLowerCase(), u.name.toLowerCase(), u.stage.toLowerCase()],
-    })),
-  ];
+  const p: Passage[] = [...buildPassages()];
+  const add = (section: SectionId, id: string, title: string, text: string, keywords: string[] = []) =>
+    p.push({ id, section, title, text, keywords });
+
+  add("work", "bio", "About Rachel", identity.bio, ["who", "about", "rachel", "background", "herself", "introduce"]);
+  add("work", "magazine-intro", "What connects the work", `${magazine.useCasesIntro} ${magazine.pullQuote}`, ["octave", "use cases", "value chain"]);
+
+  magazine.useCases.forEach((u) => {
+    const st = useCaseStories[u.id];
+    add("experience", `mag-${u.id}`, `${u.name} (${u.stage})`, `${u.line} My part: ${u.part}`, [u.code.toLowerCase(), u.name.toLowerCase(), u.stage.toLowerCase(), "use case", "octave"]);
+    if (st) {
+      add("experience", `story-${u.id}-problem`, `${u.name}: the problem and the solution`, `${st.problem} ${st.solution}`, [u.code.toLowerCase(), u.name.toLowerCase(), "problem", "solution", "why"]);
+      add("experience", `story-${u.id}-value`, `${u.name}: analytics and business value`, `${st.analytics.join(" ")} Business value: ${st.value.join(" ")}`, [u.code.toLowerCase(), u.name.toLowerCase(), "analytics", "value", "impact", "benefit"]);
+    }
+  });
+  add("how", "delivery", "How she delivers", `${magazine.delivery.join(", ")}. ${magazine.measureQuote}`, ["how", "deliver", "process", "lifecycle", "measure"]);
+
+  add("research", "research-detail", "PCOS Care: the research", `${research.paper.title}. ${research.paper.authors}. ${research.paper.venue}, ${research.paper.dates}. ${research.paper.description} Method: ${research.paper.method}`, ["pcos", "pcos care", "research", "paper", "ieee", "icahs", "machine learning", "app", "polycystic"]);
+  add("research", "research-award", "PCOS Care: recognition", `${research.paper.award} ${research.paper.journal}`, ["pcos", "award", "prize", "third", "showcase", "journal"]);
+
+  toolkitStack.forEach((l) => add("skills", `stack-${l.layer}`, `Skills: ${l.layer}`, `Tools: ${l.tools.join(", ")}. Used: ${l.where.toLowerCase()}.`, ["skills", "tools", "stack", "tech", "know", "knows", "use", "uses", "experienced", l.layer.toLowerCase(), ...l.tools.map((t) => t.toLowerCase())]));
+
+  volunteer.items.forEach((v) => add("volunteer", v.id, `${v.event} (${v.dateRange})`, `${v.title}, ${v.organization}. ${v.summary}`, ["volunteer", "volunteering", "event", v.organization.toLowerCase()]));
+  add("education", "modules", "Modules and papers", `Her BSc in Computer Science at Westminster had a Data Science specialisation; the full module list isn't published here yet. CIMA papers completed: ${cima.completed.join("; ")}. In progress: ${cima.inProgress.join("; ")}.`, ["modules", "module", "subjects", "subject", "courses", "course", "papers", "curriculum", "cima", "accounting"]);
+  add("education", "school-life", "At school, St. Bridget's Convent", `${schoolLife.leadership.map((l) => `${l.role}, ${l.year}.`).join(" ")} ${schoolLife.interact} Teams: ${schoolLife.teams.join(", ")}.`, ["school", "prefect", "head prefect", "leadership", "interact", "swim", "athletics", "tech crew", "st bridget"]);
+  add("contact", "contact-full", "Contact details", `Email ${identity.email}. Phone ${identity.phone}. Based in ${identity.location}. LinkedIn, GitHub and ORCID are linked at the foot of every page.`, ["contact", "email", "phone", "call", "reach", "hire", "linkedin", "number"]);
+  return p;
 }
 
 // The toolkit as a stack, foundations at the bottom. Only tools listed in
@@ -1791,3 +1801,104 @@ export const schoolLife = {
     credit: "Photo: Media Services photofile (Sanjaya de Silva), LMD",
   },
 };
+
+// The Ask agent's quick questions: short, recruiter-ready answers built only
+// from facts published elsewhere in this file.
+export const askFaqs = [
+  {
+    q: "Who is Rachel?",
+    a: "Rachel Cooray is an Analyst, Data and AI at OCTAVE, John Keells Holdings, in Colombo. She has a First Class BSc in Computer Science from the University of Westminster, published research at IEEE ICAHS 2025, and co-founded Layer1 Studio.",
+    href: "/",
+    label: "the cover",
+    keywords: ["who", "introduce", "herself", "overview"],
+  },
+  {
+    q: "What's her education?",
+    a: "BSc (Hons) Computer Science with First Class Honours from the University of Westminster, 2022 to 2025, with a Data Science specialisation. She also holds the CIMA Certificate in Business Accounting, and was Head Prefect at St. Bridget's Convent, Colombo.",
+    href: "/education",
+    label: "Education",
+    keywords: ["education", "edu", "degree", "university", "study", "studied", "qualification", "school", "background"],
+  },
+  {
+    q: "What's her experience?",
+    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, promoted from intern to associate to analyst within a year. She is also Co-founder and Developer at Layer1 Studio, and has data engineering experience from London Success Academy.",
+    href: "/experience",
+    label: "Experience",
+    keywords: ["experience", "exp", "work", "job", "career", "roles", "employment", "worked"],
+  },
+  {
+    q: "What's her research?",
+    a: "PCOS Care, a machine learning web app for early PCOS risk screening, published at IEEE ICAHS 2025 in Tunisia. It placed third at Westminster's final year project showcase, and an extended paper is under review for the MSIT Journal.",
+    href: "/research",
+    label: "Research",
+    keywords: ["research", "paper", "publication", "published", "ieee", "academic"],
+  },
+  {
+    q: "What's PCOS Care?",
+    a: "An early screening web app with two levels of prediction: one from everyday signs anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction, and is a screening aid, not a diagnostic tool.",
+    href: "/research",
+    label: "Research",
+    keywords: ["pcos", "pcos care", "polycystic", "app", "screening"],
+  },
+  {
+    q: "What does she do at OCTAVE?",
+    a: "She owns six AI and analytics use cases across the FMCG value chain, from production planning and dispatch to distributor replenishment, margins and weather. She takes each one from analysis and solution design through to the business using it.",
+    href: "/use-cases",
+    label: "Use cases",
+    keywords: ["octave", "john keells", "jkh", "use cases", "analyst", "fmcg"],
+  },
+];
+
+// Answers the Ask agent gives to common typed questions. Not shown as
+// buttons. Same rule: facts from this file only, written short.
+export const askMore = [
+  {
+    q: "Layer1 Studio",
+    a: "Layer1 Studio is a web and mobile development venture Rachel co-founded in December 2025. She builds websites and apps for small businesses, from shaping the brief to shipping and maintaining them, and mentors interns on real client projects.",
+    href: "/projects",
+    label: "Projects",
+    keywords: ["layer1", "layer", "studio", "venture", "startup", "founder", "founded", "freelance", "websites", "web dev", "web development", "side business", "company"],
+  },
+  {
+    q: "Current role",
+    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, since July 2026, after moving from intern to associate to analyst within a year. She owns six AI and analytics use cases across the FMCG value chain.",
+    href: "/experience",
+    label: "Experience",
+    keywords: ["current", "currently", "role", "title", "position", "now", "today", "employer", "works"],
+  },
+  {
+    q: "Skills",
+    a: "Python, SQL, PySpark, Databricks and Delta Lake at work; machine learning, statistics and model evaluation in research; Power BI for reporting; and React, Node.js and Flutter for products.",
+    href: "/skills",
+    label: "Skills",
+    keywords: ["skills", "skill", "tools", "technologies", "technical", "tech stack", "programming", "languages", "coding"],
+  },
+  {
+    q: "Awards",
+    a: "Third place at the University of Westminster final year project showcase 2025 for PCOS Care, a Microsoft EMBRACE hackathon final, a UOW/IIT scholarship, and School Prefect of the Year at the New Generation Awards 2020.",
+    href: "/achievements",
+    label: "Achievements",
+    keywords: ["award", "awards", "prize", "prizes", "won", "achievement", "achievements", "recognition", "honours"],
+  },
+  {
+    q: "Leadership",
+    a: "Leadership runs through her record: Head Prefect of St. Bridget's Convent and School Prefect of the Year in 2020. At work she owns six use cases from analysis to adoption, co-founded Layer1 Studio and mentors its interns.",
+    href: "/education",
+    label: "Education",
+    keywords: ["leader", "leadership", "lead", "manage", "management", "mentor", "prefect", "captain"],
+  },
+  {
+    q: "Location",
+    a: "She's based in Colombo, Sri Lanka, and studied and worked in London.",
+    href: "#contact",
+    label: "Contact",
+    keywords: ["based", "location", "located", "live", "lives", "country", "city", "relocate"],
+  },
+  {
+    q: "Why hire her",
+    a: "She connects data, AI and the business: she owns use cases from analysis through to adoption, has published machine learning research, and ships real products. Add a First Class degree, CIMA business training and a record of leadership since school.",
+    href: "/use-cases",
+    label: "Use cases",
+    keywords: ["hire", "hiring", "strength", "strengths", "good fit", "stand out", "recruit", "recommend", "why should"],
+  },
+];

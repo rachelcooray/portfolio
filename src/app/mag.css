@@ -469,3 +469,6 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
 .school-role { display: flex; flex-direction: column; gap: 2px; }
 .school-role b { font-family: var(--serif); font-size: 24px; font-weight: 500; line-height: 1.1; }
 @media (max-width: 860px) { .school { grid-template-columns: 1fr; } .school-photo { max-width: 420px; } }
+.ask-panel { min-height: 0; }
+.ask-hello { align-items: center; }
+.ask-hello p { font-family: var(--serif); font-size: 21px; line-height: 1.35; }

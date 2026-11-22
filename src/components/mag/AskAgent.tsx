@@ -1,20 +1,46 @@
 "use client";
 
 import { useMemo, useState, type FormEvent } from "react";
-import { buildMagazinePassages, identity, type Passage } from "@/content/content";
+import { askFaqs, askMore, buildMagazinePassages, identity, type Passage } from "@/content/content";
 
 // Answers only by quoting passages from content.ts. It never writes new
-// text, so it can never say something Rachel has not published.
+// text, so it can never say something Rachel has not published, and it
+// only knows about Rachel.
 
-const STOP = new Set("a an and are as at be but by can did do does for from has have her how i in is it its me my of on or she so that the their them they this to was what when where which who why will with you your about tell".split(" "));
+const STOP = new Set(
+  "a an and are as at be but by can could did do does for from has have her hers how i in is it its me my of on or she so that the their them they this to was what whats when where which who why will with you your about tell would like please give some any much".split(" "),
+);
 
-const SUGGESTED = [
-  "What does she own at OCTAVE?",
-  "What is PCOS Care?",
-  "Where did she study?",
-  "How does she measure impact?",
-  "How can I reach her?",
-];
+// Loose words people type, mapped to the words the content uses.
+const SYNONYMS: Record<string, string[]> = {
+  edu: ["education", "degree", "university", "study"],
+  education: ["degree", "university", "study", "school"],
+  study: ["education", "degree", "university"],
+  studied: ["education", "degree", "university"],
+  uni: ["university", "degree", "westminster"],
+  degree: ["education", "university"],
+  bg: ["background"],
+  exp: ["experience", "role", "work"],
+  experience: ["role", "work", "job"],
+  job: ["role", "work", "octave"],
+  work: ["role", "octave", "experience"],
+  career: ["role", "experience"],
+  research: ["pcos", "paper", "ieee"],
+  paper: ["research", "pcos", "ieee"],
+  publication: ["research", "paper", "ieee"],
+  skills: ["tools", "stack"],
+  tech: ["tools", "stack", "skills"],
+  stack: ["tools", "skills"],
+  contact: ["email", "phone"],
+  email: ["contact"],
+  phone: ["contact", "number"],
+  hire: ["contact", "email"],
+  awards: ["award", "prize", "achievement"],
+  prizes: ["award", "prize"],
+  volunteering: ["volunteer", "event"],
+  school: ["prefect", "convent"],
+  swimming: ["swim", "gold"],
+};
 
 const ROUTE: Partial<Record<Passage["section"], { href: string; label: string }>> = {
   work: { href: "/", label: "the cover" },
@@ -30,6 +56,8 @@ const ROUTE: Partial<Record<Passage["section"], { href: string; label: string }>
   contact: { href: "#contact", label: "Contact" },
 };
 
+const stem = (w: string) => w.replace(/(ing|ies|es|s)$/, "");
+
 function words(s: string) {
   return s
     .toLowerCase()
@@ -38,87 +66,138 @@ function words(s: string) {
     .filter((w) => w.length > 1 && !STOP.has(w));
 }
 
+function expand(qw: string[]) {
+  const out = new Set<string>();
+  for (const w of qw) {
+    out.add(w);
+    out.add(stem(w));
+    for (const s of SYNONYMS[w] ?? []) out.add(s);
+  }
+  return [...out];
+}
+
 function search(passages: Passage[], q: string) {
-  const qw = words(q);
-  const ql = q.toLowerCase();
-  if (!qw.length) return [];
-  return passages
+  const raw = words(q);
+  if (!raw.length) return [];
+  const qw = expand(raw);
+  const ql = ` ${q.toLowerCase()} `;
+  const scored = passages
     .map((p) => {
       let score = 0;
-      for (const k of p.keywords) if (ql.includes(k)) score += 4;
-      const tw = new Set(words(p.title));
-      const bw = new Set(words(p.text));
+      for (const k of p.keywords) if (k.length > 2 && (ql.includes(k) || qw.includes(k))) score += 4;
+      const tw = new Set(words(p.title).map(stem));
+      const bw = new Set(words(p.text).map(stem));
       for (const w of qw) {
-        if (tw.has(w)) score += 3;
-        if (bw.has(w)) score += 1;
+        const s = stem(w);
+        if (tw.has(s)) score += 3;
+        if (bw.has(s)) score += 1;
       }
       return { p, score };
     })
-    .filter((r) => r.score > 2)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 2)
-    .map((r) => r.p);
+    .filter((r) => r.score >= 4)
+    .sort((a, b) => b.score - a.score);
+  if (!scored.length) return [];
+  const top = scored[0].score;
+  return scored.filter((r) => r.score >= top * 0.6).slice(0, 3).map((r) => r.p);
+}
+
+type Answer = { text: string; title: string; href: string; label: string };
+
+// Three sentences at most, so answers stay short and to the point.
+function trim(t: string) {
+  const parts = t.match(/[^.!?]+[.!?]+/g) ?? [t];
+  return parts.slice(0, 3).join("").trim();
+}
+
+function routeFor(h: Passage) {
+  if (h.id.startsWith("mag-")) return { href: `/use-cases/${h.id.slice(4)}`, label: "the use case" };
+  if (h.id.startsWith("story-")) return { href: `/use-cases/${h.id.split("-").slice(1, -1).join("-")}`, label: "the use case" };
+  if (h.id.startsWith("stack-")) return { href: "/skills", label: "Skills" };
+  if (h.id === "school-life") return { href: "/education", label: "Education" };
+  return ROUTE[h.section] ?? { href: "/", label: "the cover" };
 }
 
 export default function AskAgent() {
   const passages = useMemo(() => buildMagazinePassages(), []);
-  const [asked, setAsked] = useState(SUGGESTED[0]);
+  const [asked, setAsked] = useState<{ q: string; answer: Answer | null } | null>(null);
   const [draft, setDraft] = useState("");
-  const hits = useMemo(() => search(passages, asked), [passages, asked]);
+
+  const ask = (q: string) => {
+    const ql = ` ${q.toLowerCase().replace(/[^a-z0-9\s]/g, " ")} `;
+    const exact = askFaqs.find((f) => f.q === q);
+    const faq =
+      exact ??
+      [...askFaqs, ...askMore]
+        .map((f) => ({ f, n: f.keywords.filter((k) => ql.includes(` ${k} `) || ql.includes(` ${k}s `)).length }))
+        .filter((x) => x.n > 0)
+        .sort((x, y) => y.n - x.n)[0]?.f;
+    if (faq) {
+      setAsked({ q, answer: { text: faq.a, title: faq.q.replace("?", ""), href: faq.href, label: faq.label } });
+      return;
+    }
+    const hit = search(passages, q)[0];
+    if (!hit) {
+      setAsked({ q, answer: null });
+      return;
+    }
+    const r = routeFor(hit);
+    setAsked({ q, answer: { text: trim(hit.text), title: hit.title, href: r.href, label: r.label } });
+  };
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
     const t = draft.trim();
     if (!t) return;
-    setAsked(t);
+    ask(t);
     setDraft("");
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 20, minWidth: 0 }}>
-      <div className="ask-chips" role="group" aria-label="Suggested questions">
-        {SUGGESTED.map((q) => (
-          <button key={q} type="button" className="chip" aria-pressed={asked === q} onClick={() => setAsked(q)}>
-            {q}
+    <div style={{ display: "flex", flexDirection: "column", gap: 18, minWidth: 0 }}>
+      <div className="ask-chips" role="group" aria-label="Quick questions">
+        {askFaqs.map((f) => (
+          <button key={f.q} type="button" className="chip" aria-pressed={asked?.q === f.q} onClick={() => ask(f.q)}>
+            {f.q}
           </button>
         ))}
       </div>
       <div className="ask-panel" aria-live="polite">
-        <div className="ask-q">{asked}</div>
-        <div className="ask-a">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
-          <div className="ask-answers">
-            {hits.length ? (
-              hits.map((h) => {
-                const r = h.id.startsWith("mag-") ? { href: `/use-cases#${h.id.slice(4)}`, label: "Use cases" } : (ROUTE[h.section] ?? { href: "/", label: "the cover" });
-                return (
-                  <div key={h.id} className="ask-hit">
-                    <blockquote>{h.text}</blockquote>
+        {asked ? (
+          <>
+            <div className="ask-q">{asked.q}</div>
+            <div className="ask-a">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
+              <div className="ask-answers">
+                {asked.answer ? (
+                  <div className="ask-hit">
+                    <blockquote>{asked.answer.text}</blockquote>
                     <div className="ask-src">
-                      <span>Source · {h.title}</span>
-                      <a href={r.href}>Open {r.label}</a>
+                      <a href={asked.answer.href}>More on {asked.answer.label} →</a>
                     </div>
                   </div>
-                );
-              })
-            ) : (
-              <div className="ask-hit">
-                <blockquote>
-                  That isn&apos;t in my published work yet. Email me at <a href={`mailto:${identity.email}`}>{identity.email}</a> and I&apos;ll answer myself.
-                </blockquote>
-                <div className="ask-src">
-                  <span>No matching page</span>
-                </div>
+                ) : (
+                  <div className="ask-hit">
+                    <blockquote>
+                      I only cover Rachel and her work. For anything else, email <a href={`mailto:${identity.email}`}>{identity.email}</a>.
+                    </blockquote>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+          </>
+        ) : (
+          <div className="ask-a ask-hello">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
+            <p>Hi, I&apos;m Rachel&apos;s agent. Tap a question, or ask your own.</p>
           </div>
-        </div>
+        )}
       </div>
       <form className="ask-form" onSubmit={submit}>
         <label>
           Your question
-          <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Try: what is the weather use case?" />
+          <input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Ask anything about Rachel" />
         </label>
         <button type="submit">Ask</button>
       </form>
