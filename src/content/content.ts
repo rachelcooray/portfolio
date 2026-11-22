@@ -219,7 +219,7 @@ export const education: EducationItem[] = [
     title: "St. Bridget's Convent, Colombo",
     institution: "GCE A/L 2022 and GCE O/L 2018",
     dateRange: "2008 to 2022",
-    summary: "A/L: Chemistry A, English A, Physics B, Combined Mathematics B. O/L: nine A passes. Head Prefect, 2020.",
+    summary: "GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English, Mathematics, Business Studies and ICT. Head Prefect, 2020.",
   },
 ];
 
@@ -408,8 +408,9 @@ export const londonSuccessAcademy: Role = {
   dateRange: "Sep 2025 to Oct 2025",
   location: "Remote, United Kingdom",
   details: [
+    "Developed scalable data pipelines that turned raw clickstream and transaction data into structured datasets for business intelligence and behavioural analytics.",
     "Built ETL pipelines on Google Cloud Platform for clickstream and transaction data.",
-    "Scaled processing with PySpark and Parquet partitioning.",
+    "Scaled processing with PySpark and optimised storage with Parquet partitioning.",
     "Produced revenue, daily active user and conversion funnel insights.",
   ],
 };
@@ -1794,8 +1795,13 @@ export const schoolLife = {
     { year: "2019", role: "Assistant House Prefect", note: "St. Bridget's Convent, Colombo." },
     { year: "2012", role: "Deputy Head Prefect", note: "Primary school, St. Bridget's Convent." },
   ],
-  interact: "Held leadership roles in the Interact Club and took part in many of its volunteering activities.",
-  teams: ["Swim team", "Tech crew", "Athletics"],
+  interact: "Held leadership roles in the Interact Club, including Project Secretary of the Interact Inter-school Marketing and Advertising Challenge in 2019, and volunteered on its community service projects.",
+  interactProjects: ["Make a Wish, 2017 and 2019", "Smile for Life, 2018", "Installation Committee, 2019", "Community Service, 2020"],
+  teams: ["Swim team, SLASA and SLASU meets, 2012 to 2019", "Tech crew", "Athletics"],
+  exams: [
+    { level: "GCE A/L", year: "2022", results: [["Chemistry", "A"], ["English", "A"], ["Physics", "B"], ["Combined Mathematics", "B"]] },
+    { level: "GCE O/L", year: "2018", results: [["English", "A"], ["Mathematics", "A"], ["Business Studies", "A"], ["ICT", "A"]], note: "Nine As in all; the other five subjects are not listed here." },
+  ],
   photo: {
     src: "/images/mag/head-prefect.webp",
     alt: "Rachel as Head Prefect in the green St. Bridget's Convent blazer, wearing the Head Prefect badge",
@@ -1855,7 +1861,7 @@ export const askFaqs = [
 export const askMore = [
   {
     q: "School exams",
-    a: "Yes. GCE A/L in 2022 at St. Bridget's Convent, Colombo: Chemistry A, English A, Physics B and Combined Mathematics B. GCE O/L in 2018 with nine A passes.",
+    a: "Yes, at St. Bridget's Convent, Colombo. GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English, Mathematics, Business Studies and ICT.",
     href: "/education",
     label: "Education",
     keywords: ["ol", "ols", "al", "als", "o l", "a l", "o level", "o levels", "a level", "a levels", "alevels", "olevels", "gce", "exam", "exams", "results", "grades", "school results"],

@@ -81,7 +81,31 @@ export default function Education() {
               </li>
             ))}
           </ol>
+          <div className="exams">
+            {schoolLife.exams.map((x) => (
+              <div key={x.level} className="exam">
+                <span className="kicker">
+                  {x.level} · {x.year}
+                </span>
+                <ul className="leaders">
+                  {x.results.map(([subj, grade]) => (
+                    <li key={subj}>
+                      <span className="leaders-name">{subj}</span>
+                      <span className="leaders-dots" aria-hidden="true" />
+                      <span className="exam-grade">{grade}</span>
+                    </li>
+                  ))}
+                </ul>
+                {"note" in x && x.note ? <p className="small muted">{x.note}</p> : null}
+              </div>
+            ))}
+          </div>
           <p>{schoolLife.interact}</p>
+          <ul className="tags" aria-label="Interact Club projects">
+            {schoolLife.interactProjects.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
+          </ul>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <span className="kicker">Teams and crews</span>
             <ul className="tags">
