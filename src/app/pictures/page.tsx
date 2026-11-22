@@ -124,6 +124,10 @@ export default function Pictures() {
             <img loading="lazy" decoding="async" src="/images/mag/tkmaxx.webp" alt="Rachel on the shop floor at TK Maxx, wearing a headset and lanyard, folding children's clothes" width={848} height={1264} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
             <figcaption>Customer service at TK Maxx, Stratford.</figcaption>
           </figure>
+          <figure>
+            <img loading="lazy" decoding="async" src="/images/mag/uniqlo.webp" alt="Rachel on the shop floor at UNIQLO, in a lilac jumper and red lanyard, folding clothes on a display table" width={900} height={1341} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
+            <figcaption>Customer service at UNIQLO, London.</figcaption>
+          </figure>
         </div>
       </section>
 
