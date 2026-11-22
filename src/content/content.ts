@@ -422,7 +422,7 @@ export const otherRoles: Role[] = [
     logo: "/images/uniqlo.png",
     dateRange: "Aug 2025 to Oct 2025",
     location: "London",
-    details: ["Customer service and visual merchandising."],
+    details: ["Known for strong customer service: friendly, patient and quick to help.", "Helped customers find the right products, sizes and fits.", "Kept displays and stock tidy to UNIQLO's visual merchandising standards.", "Worked as part of a fast-paced team to keep the shop floor running smoothly."],
   },
   {
     id: "role-eg",
