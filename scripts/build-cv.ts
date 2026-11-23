@@ -132,7 +132,7 @@ body { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 8.6pt;
 .page:last-child { page-break-after: auto; }
 .spine { background: #efe6d3; border-right: 0.6pt solid #2b2318; padding: 14mm 7mm 12mm 9mm; display: flex; flex-direction: column; gap: 5mm; }
 .main { padding: 14mm 12mm 14mm 10mm; display: flex; flex-direction: column; gap: 3.6mm; box-shadow: inset 6mm 0 6mm -6mm rgba(43,35,24,0.18); }
-.k { font-family: PlexMono, monospace; font-size: 6.8pt; letter-spacing: 0.12em; text-transform: uppercase; color: #7a6142; }
+.k { font-family: PlexMono, monospace; font-size: 6.8pt; letter-spacing: 0.12em; text-transform: uppercase; color: #6b5436; }
 .mast { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 27pt; font-weight: 600; line-height: 0.95; color: #46521a; letter-spacing: -0.6pt; }
 .title { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 10pt; font-weight: 500; line-height: 1.15; }
 .rule { border-top: 0.6pt solid #2b2318; padding-top: 2mm; }
@@ -143,9 +143,9 @@ body { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 8.6pt;
 .bot b { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 11pt; font-weight: 500; color: #46521a; display: block; }
 .side-h { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 10.5pt; color: #46521a; border-bottom: 0.6pt solid #2b2318; padding-bottom: 1mm; margin-bottom: 1.5mm; }
 .tools { display: flex; flex-direction: column; gap: 1.8mm; }
-.tools .layer { font-family: PlexMono, monospace; font-size: 6.6pt; letter-spacing: 0.1em; text-transform: uppercase; color: #7a6142; }
+.tools .layer { font-family: PlexMono, monospace; font-size: 6.6pt; letter-spacing: 0.1em; text-transform: uppercase; color: #6b5436; }
 .tags { display: flex; flex-wrap: wrap; gap: 1mm; margin-top: 0.6mm; }
-.tags span { font-size: 6.9pt; padding: 0.3mm 1.6mm; border: 0.5pt solid #cfc3a6; border-radius: 3mm; background: #faf7ef; }
+.tags span { font-size: 6.9pt; padding: 0.3mm 1.6mm; border: 0.5pt solid #cbbe9f; border-radius: 3mm; background: #faf7ef; }
 .list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1.6mm; font-size: 7.8pt; line-height: 1.35; }
 .list b { font-weight: 600; }
 .lead { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 9.8pt; line-height: 1.5; }
@@ -154,9 +154,9 @@ h2::after { content: ""; flex: 1; border-bottom: 0.6pt solid #2b2318; transform:
 .entry { break-inside: avoid; }
 .entry-row { display: flex; align-items: baseline; gap: 2mm; }
 .entry-title { font-weight: 600; font-size: 9pt; }
-.entry-row::after { content: ""; order: 1; flex: 1; border-bottom: 1pt dotted #7a6142; opacity: 0.6; transform: translateY(-0.8mm); }
-.entry-when { order: 2; font-family: PlexMono, monospace; font-size: 7pt; color: #7a6142; white-space: nowrap; }
-.entry-org { color: #5e5143; font-size: 8pt; }
+.entry-row::after { content: ""; order: 1; flex: 1; border-bottom: 1pt dotted #6b5436; opacity: 0.6; transform: translateY(-0.8mm); }
+.entry-when { order: 2; font-family: PlexMono, monospace; font-size: 7pt; color: #6b5436; white-space: nowrap; }
+.entry-org { color: #5a4e3a; font-size: 8pt; }
 .entry p { margin: 0.6mm 0 0; }
 ul { margin: 0.8mm 0 0; padding-left: 3.6mm; }
 li { margin-top: 0.5mm; }
@@ -168,16 +168,16 @@ li::marker { color: #46521a; }
 .stop .k { display: block; color: #46521a; }
 .stop span { display: block; font-size: 7.2pt; line-height: 1.3; margin-top: 0.4mm; }
 .uc { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2mm 4mm; margin-top: 1mm; }
-.uc div { font-size: 7.6pt; line-height: 1.3; border-top: 0.5pt solid #cfc3a6; padding-top: 0.8mm; }
+.uc div { font-size: 7.6pt; line-height: 1.3; border-top: 0.5pt solid #cbbe9f; padding-top: 0.8mm; }
 .uc b { font-weight: 600; color: #46521a; }
-.ladder { font-family: PlexMono, monospace; font-size: 7pt; color: #5e5143; }
-.folio { position: absolute; left: 75mm; right: 12mm; bottom: 7mm; display: flex; justify-content: space-between; font-family: PlexMono, monospace; font-size: 6.6pt; letter-spacing: 0.1em; text-transform: uppercase; color: #7a6142; border-top: 0.5pt solid #cfc3a6; padding-top: 1.5mm; }
+.ladder { font-family: PlexMono, monospace; font-size: 7pt; color: #5a4e3a; }
+.folio { position: absolute; left: 75mm; right: 12mm; bottom: 7mm; display: flex; justify-content: space-between; font-family: PlexMono, monospace; font-size: 6.6pt; letter-spacing: 0.1em; text-transform: uppercase; color: #6b5436; border-top: 0.5pt solid #cbbe9f; padding-top: 1.5mm; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 5mm; }
 .mini { font-size: 7.8pt; }
 .mini .entry-title { font-size: 8.4pt; }
 .exam { display: flex; flex-direction: column; gap: 0.4mm; font-size: 7.6pt; }
 .exam div { display: flex; gap: 1.5mm; }
-.exam div::after { content: ""; order: 1; flex: 1; border-bottom: 1pt dotted #7a6142; opacity: 0.6; transform: translateY(-0.9mm); }
+.exam div::after { content: ""; order: 1; flex: 1; border-bottom: 1pt dotted #6b5436; opacity: 0.6; transform: translateY(-0.9mm); }
 .exam em { order: 2; font-style: normal; font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 9.5pt; color: #46521a; }
 </style></head><body>
 
@@ -187,7 +187,7 @@ li::marker { color: #46521a; }
       <div class="k">Issue 01 · Curriculum vitae</div>
       <div class="mast">Rachel<br>Cooray</div>
     </div>
-    <div class="title rule">${esc(identity.role)}<br><span style="color:#5e5143">${esc(identity.employer)}</span></div>
+    <div class="title rule">${esc(identity.role)}<br><span style="color:#5a4e3a">${esc(identity.employer)}</span></div>
     <ul class="contact">${contact.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
     <div class="bot">${bot}<p><b>Scan me.</b>The full portfolio, and an agent that answers questions about my work.</p></div>
   </aside>
