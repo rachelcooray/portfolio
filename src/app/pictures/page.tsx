@@ -57,11 +57,11 @@ export default function Pictures() {
             <figcaption>Ready for the judges.</figcaption>
           </figure>
           <figure>
-            <img loading="lazy" decoding="async" src="/images/mag/pcos-showcase.webp" alt="Rachel presenting PCOS Care to judges and standing beside her research poster" width={1606} height={1198} style={{ aspectRatio: "3 / 4" }} />
+            <img loading="lazy" decoding="async" src="/images/mag/pcos-showcase.webp" alt="Rachel presenting PCOS Care to judges and standing beside her research poster" width={1606} height={1198} style={{ aspectRatio: "3 / 4", objectPosition: "0% 50%" }} />
             <figcaption>Presenting PCOS Care to the judges.</figcaption>
           </figure>
           <figure>
-            <img loading="lazy" decoding="async" src="/images/mag/pcos-app.webp" alt="The PCOS Care web app home page" width={2000} height={1250} style={{ aspectRatio: "3 / 4", objectPosition: "top left" }} />
+            <img loading="lazy" decoding="async" src="/images/mag/pcos-app.webp" alt="The PCOS Care web app home page" width={2000} height={1250} style={{ aspectRatio: "3 / 4", objectPosition: "50% 0%" }} />
             <figcaption>The PCOS Care web app.</figcaption>
           </figure>
         </div>
@@ -97,7 +97,7 @@ export default function Pictures() {
             <figcaption>School Prefect of the Year, New Generation Awards, 2020.</figcaption>
           </figure>
           <figure>
-            <img loading="lazy" decoding="async" src="/images/mag/swimming-meet.webp" alt="Team OCTAVE at the John Keells intercompany swimming meet" width={399} height={501} style={{ aspectRatio: "4 / 3" }} />
+            <img loading="lazy" decoding="async" src="/images/mag/swimming-meet.webp" alt="Team OCTAVE at the John Keells intercompany swimming meet" width={399} height={501} style={{ aspectRatio: "4 / 3", objectPosition: "50% 62%" }} />
             <figcaption>Team OCTAVE at the JKH swim meet, 2026.</figcaption>
           </figure>
         </div>

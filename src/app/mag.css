@@ -369,7 +369,7 @@ figure img { width: 100%; object-fit: cover; }
 .stack-tools li:hover .skill-icon { transform: scale(1.15); transition: transform 0.15s; }
 
 /* Portrait sources inside landscape cards: show the whole image, never crop a head or a phone screen */
-.card img.fit, .card img[src*="futsal"], .card img[src*="youth-forum"], .card img[src*="swimming-meet"], .card img[src*="head-prefect"] { object-fit: contain; background: var(--sand); }
+.card img.fit { object-fit: contain; background: var(--sand); }
 
 .ask-av { object-fit: cover; border: 2px solid var(--olive); }
 .back-who { display: flex; align-items: center; gap: 14px; }
@@ -436,7 +436,7 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
 @media (prefers-reduced-motion: reduce) { .step { animation: none; opacity: 1; transform: none; } .locator li.is-here .locator-dot { animation: none; } }
 
 .event-fig img { aspect-ratio: 3 / 2; object-fit: cover; border: 1px solid var(--line); }
-.event-fig img[src*="this-is-michael"] { object-fit: contain; background: #0f1d2b; }
+
 .event-fig figcaption { font-size: 12px; }
 .event-fig figcaption a { color: var(--muted); }
 .card img.edu-logo { width: auto; height: 64px; max-width: 220px; aspect-ratio: auto; object-fit: contain; border: 0; align-self: flex-start; }
@@ -693,3 +693,14 @@ a.toc-item:hover .leader { border-color: var(--olive); }
   .cloud-p { display: inline; font-family: var(--mono); font-size: 0.45em; vertical-align: super; margin-right: 2px; }
   .spine, .ask-fab-wrap { display: none !important; }
 }
+
+/* Crops: frame what matters instead of letterboxing the whole picture */
+.card img[src*="futsal"] { object-fit: cover; object-position: 50% 12%; }
+.card img[src*="youth-forum"], .card img[src*="head-prefect"] { object-fit: cover; object-position: 50% 18%; }
+.card img[src*="swimming-meet"] { object-fit: cover; object-position: 50% 62%; }
+.event-fig img[src*="this-is-michael"] { object-fit: cover; object-position: 50% 22%; }
+
+/* Experience: a clear rule between companies */
+.exp > section { border-top: 2px solid var(--ink); padding-top: clamp(28px, 3vw, 40px); }
+.exp .role { border-top: 3px solid var(--olive); }
+.exp .roles { gap: 24px; }
