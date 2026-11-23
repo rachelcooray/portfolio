@@ -22,7 +22,7 @@ export default function Ask() {
               <li className="kicker">House rules</li>
               <li>Quotes my own words, never invents.</li>
               <li>No confidential data or client names.</li>
-              <li>Hands you my email when a question needs me.</li>
+              <li>Passes your request to me when a question needs me.</li>
             </ul>
           </div>
           <AskAgent />

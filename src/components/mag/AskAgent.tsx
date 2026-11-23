@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { askFaqs, askMore, buildMagazinePassages, identity, type Passage } from "@/content/content";
+import { EMAIL_RE, sendToRachel } from "@/lib/send";
 
 // Answers only by quoting passages from content.ts. It never writes new
 // text, so it can never say something Rachel has not published, and it
@@ -117,7 +118,86 @@ function routeFor(h: Passage) {
   return ROUTE[h.section] ?? { href: "/", label: "the cover" };
 }
 
-type Turn = { id: number; q: string; answer: Answer | null; follow: string[] };
+type Turn = { id: number; q: string; answer: Answer | null; follow: string[]; handoff?: boolean };
+
+// Requests only Rachel can answer: work, quotes, hiring, collaboration. The
+// agent never promises anything; it offers to pass the request on.
+const REQUEST =
+  /\b(can|could|would|will) (she|you|rachel)\b.*\b(make|build|design|create|develop|help|do|work|quote|speak|talk|mentor|join)\b|\bfor (me|us|my|our)\b|\b(hire|hiring|quote|pricing|price|cost|rates?|freelance|commission|collaborat\w*|partner\w*|availab\w*|job offer|opportunit\w*|get in touch|contact (her|rachel)|reach (her|rachel)|book (her|rachel)|meet (her|rachel)|call with)\b/i;
+
+const HANDOFF_TEXT = "That one is for Rachel herself. Leave your email and what you need, and I'll pass it straight to her.";
+
+// A short form inside the chat. What is typed here is sent to Rachel through
+// the form service and is not kept by this site.
+function Handoff({ request }: { request: string }) {
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [msg, setMsg] = useState("");
+  const opened = useRef(0);
+  useEffect(() => {
+    opened.current = Date.now();
+  }, []);
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const email = String(f.get("email") || "").trim();
+    const body = String(f.get("request") || "").trim();
+    if (!EMAIL_RE.test(email)) {
+      setState("error");
+      setMsg("Error: please enter a full email address.");
+      return;
+    }
+    if (!body) {
+      setState("error");
+      setMsg("Error: please say what you need.");
+      return;
+    }
+    // Bots: a filled honeypot or an instant submit.
+    if (String(f.get("company") || "") || Date.now() - opened.current < 3000) {
+      setState("sent");
+      setMsg("Sent. Rachel will reply by email.");
+      return;
+    }
+    setState("sending");
+    setMsg("");
+    try {
+      await sendToRachel({ name: email, email, topic: "Request from the Ask agent", message: body });
+      setState("sent");
+      setMsg("Sent. Rachel will reply by email.");
+    } catch {
+      setState("error");
+      setMsg(`Error: the message did not send. You can email Rachel at ${identity.email}.`);
+    }
+  };
+
+  if (state === "sent") return <p className="handoff-done" role="status">{msg}</p>;
+  return (
+    <form className="handoff" onSubmit={onSubmit} noValidate>
+      <label>
+        Your email
+        <input name="email" type="email" autoComplete="email" required />
+      </label>
+      <label>
+        What you need
+        <textarea name="request" rows={3} defaultValue={request} maxLength={2000} required />
+      </label>
+      <div className="cform-trap" aria-hidden="true">
+        <label>
+          Company
+          <input name="company" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+      <div className="handoff-row">
+        <button type="submit" disabled={state === "sending"} aria-busy={state === "sending"}>
+          {state === "sending" ? "Sending…" : "Send to Rachel"}
+        </button>
+        <p className={state === "error" ? "handoff-msg is-error" : "handoff-msg"} role="status" aria-live="polite">
+          {msg}
+        </p>
+      </div>
+    </form>
+  );
+}
 
 const STORE = "rc-ask-thread";
 
@@ -135,6 +215,7 @@ export default function AskAgent() {
   const [thread, setThread] = useState<Turn[]>([]);
   const [typing, setTyping] = useState(false);
   const [draft, setDraft] = useState("");
+  const [openForm, setOpenForm] = useState<number | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
   const loaded = useRef(false);
 
@@ -175,13 +256,14 @@ export default function AskAgent() {
 
   const ask = (q: string) => {
     if (typing) return;
-    const answer = answerFor(q);
+    const handoff = REQUEST.test(q);
+    const answer = handoff ? null : answerFor(q);
     const askedQs = new Set([...thread.map((t) => t.q), q]);
     const follow = askFaqs.map((f) => f.q).filter((x) => !askedQs.has(x)).slice(0, 3);
     setTyping(true);
     const delay = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450;
     window.setTimeout(() => {
-      setThread((t) => [...t, { id: Date.now(), q, answer, follow }]);
+      setThread((t) => [...t, { id: Date.now(), q, answer, follow, handoff }]);
       setTyping(false);
     }, delay);
   };
@@ -196,7 +278,7 @@ export default function AskAgent() {
 
   return (
     <div className="agent">
-      <p className="agent-note">Automated assistant. It answers only from Rachel&apos;s published work, and nothing you type is stored or sent anywhere.</p>
+      <p className="agent-note">Automated assistant. It answers only from Rachel&apos;s published work, and nothing you type is stored. A message reaches Rachel only if you choose to send one.</p>
       <div className="ask-chips" role="group" aria-label="Quick questions">
         {askFaqs.map((f) => (
           <button key={f.q} type="button" className="chip" onClick={() => ask(f.q)} disabled={typing}>
@@ -218,7 +300,12 @@ export default function AskAgent() {
               <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
               <div className="ask-answers">
                 <div className="ask-hit">
-                  {t.answer ? (
+                  {t.handoff ? (
+                    <>
+                      <blockquote>{HANDOFF_TEXT}</blockquote>
+                      <Handoff request={t.q} />
+                    </>
+                  ) : t.answer ? (
                     <>
                       <blockquote>{t.answer.text}</blockquote>
                       <div className="ask-src">
@@ -226,7 +313,16 @@ export default function AskAgent() {
                       </div>
                     </>
                   ) : (
-                    <blockquote>I only cover Rachel and her work, and I couldn&apos;t find that. Try one of these, or ask Rachel directly.</blockquote>
+                    <>
+                      <blockquote>I only cover Rachel and her work, and I couldn&apos;t find that. Try one of these, or leave Rachel a message.</blockquote>
+                      {openForm === t.id ? (
+                        <Handoff request={t.q} />
+                      ) : (
+                        <button type="button" className="agent-follow-btn handoff-open" onClick={() => setOpenForm(t.id)}>
+                          Leave Rachel a message
+                        </button>
+                      )}
+                    </>
                   )}
                 </div>
                 {t.follow.length ? (

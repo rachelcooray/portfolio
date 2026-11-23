@@ -704,3 +704,16 @@ a.toc-item:hover .leader { border-color: var(--olive); }
 .exp > section { border-top: 2px solid var(--ink); padding-top: clamp(28px, 3vw, 40px); }
 .exp .role { border-top: 3px solid var(--olive); }
 .exp .roles { gap: 24px; }
+
+/* Ask agent hand-off: email and request, sent to Rachel */
+.handoff { display: flex; flex-direction: column; gap: 10px; padding: 14px; background: var(--sand); border-top: 3px solid var(--olive); }
+.handoff label { display: flex; flex-direction: column; gap: 4px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bark); }
+.handoff input, .handoff textarea { font: inherit; font-family: var(--sans); font-size: 16px; letter-spacing: 0; text-transform: none; color: var(--ink); background: var(--paper); border: 1px solid var(--olive); border-radius: 4px; padding: 8px 10px; width: 100%; }
+.handoff textarea { resize: vertical; min-height: 70px; }
+.handoff-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.handoff button { min-height: 40px; padding: 0 18px; border: 1px solid var(--ink); border-radius: 999px; background: var(--lime); color: var(--ink); font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; }
+.handoff button:disabled { opacity: 0.7; cursor: progress; }
+.handoff-msg { font-size: 14px; color: var(--ink); }
+.handoff-msg.is-error { color: var(--error); }
+.handoff-done { font-size: 15px; color: var(--success); font-weight: 500; }
+.handoff-open { align-self: flex-start; }
