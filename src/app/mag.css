@@ -260,7 +260,7 @@ figure img { width: 100%; object-fit: cover; }
 .g-col { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
 .g-poster { grid-template-columns: 7fr 5fr; }
 .g-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.g-stage { grid-template-columns: 2fr 3fr; align-items: end; }
+.g-stage { grid-template-columns: 2fr 3fr 3fr; align-items: end; }
 @media (max-width: 860px) { .g-grad, .g-poster, .g-3, .g-stage { grid-template-columns: 1fr; } }
 .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 20px; align-items: start; }
 .role { display: flex; flex-direction: column; gap: 10px; background: var(--sand); padding: 20px; }
@@ -571,3 +571,11 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
   .w5 { font-size: clamp(26px, 8vw, 40px); }
   .w4 { font-size: clamp(21px, 6vw, 30px); }
 }
+
+/* Speaking feature on In the news */
+.talk { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px 40px; align-items: start; border-top: 4px solid var(--olive); padding-top: 20px; }
+.talk-fig img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--line); }
+.talk-copy { display: flex; flex-direction: column; gap: 10px; }
+.talk-points { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
+.talk-points li::marker { color: var(--olive); }
+@media (max-width: 860px) { .talk { grid-template-columns: 1fr; } }

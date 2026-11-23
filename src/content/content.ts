@@ -1654,6 +1654,7 @@ export function buildMagazinePassages(): Passage[] {
   volunteer.items.forEach((v) => add("volunteer", v.id, `${v.event} (${v.dateRange})`, `${v.title}, ${v.organization}. ${v.summary}`, ["volunteer", "volunteering", "event", v.organization.toLowerCase()]));
   add("education", "modules", "Modules and papers", `Her BSc in Computer Science at Westminster had a Data Science specialisation; the full module list isn't published here yet. CIMA papers completed: ${cima.completed.join("; ")}. In progress: ${cima.inProgress.join("; ")}.`, ["modules", "module", "subjects", "subject", "courses", "course", "papers", "curriculum", "cima", "accounting"]);
   add("education", "school-life", "At school, St. Bridget's Convent", `${schoolLife.leadership.map((l) => `${l.role}, ${l.year}.`).join(" ")} ${schoolLife.interact} Teams: ${schoolLife.teams.join(", ")}.`, ["school", "prefect", "head prefect", "leadership", "interact", "swim", "athletics", "tech crew", "st bridget"]);
+  talks.forEach((t) => add("recognition", t.id, `${t.event}: ${t.title}`, `${t.date}. ${t.org}. ${t.role} ${t.insights.join(" ")}`, ["talk", "speaker", "panel", "un", "united nations", "csw", "girl", "girls", "covid", "spoke", "speaking", "presented"]));
   add("contact", "contact-full", "Contact details", `Email ${identity.email}. Phone ${identity.phone}. Based in ${identity.location}. LinkedIn, GitHub and ORCID are linked at the foot of every page.`, ["contact", "email", "phone", "call", "reach", "hire", "linkedin", "number"]);
   return p;
 }
@@ -1991,4 +1992,26 @@ export const aiCompetencies = [
   { title: "Retrieval and agents", body: "The Ask me agent on this site retrieves and ranks published passages, and never invents an answer." },
   { title: "Generative AI prototyping", body: "A chatbot prototype for people newly diagnosed with neurodiverse conditions, Microsoft EMBRACE hackathon finalist." },
   { title: "Responsible AI", body: "Screening aids, not diagnoses; quoted sources, not generated claims; confidential data kept out." },
+];
+
+// Speaking. Insights are drawn from Rachel's own speech notes for the panel.
+export const talks = [
+  {
+    id: "talk-csw65",
+    title: "Impact of COVID-19 on Girls",
+    event: "CSW65 panel event, led by and for girls",
+    org: "Good Shepherd Asia Pacific, during the 65th session of the UN Commission on the Status of Women",
+    date: "March 2021",
+    role: "Panellist representing Sri Lanka, alongside girls from Myanmar, Indonesia, the Philippines and India.",
+    link: "https://www.youtube.com/watch?v=0nycsR3NRJ0&t=5171s",
+    image: "/images/mag/csw65.webp",
+    imageAlt: "Rachel speaking on the CSW65 girls' panel over Zoom, labelled Rachel Cooray, Sri Lanka",
+    insights: [
+      "Online lessons kept learning going, but losing everyday contact with classmates was the hardest part.",
+      "Access was uneven: power cuts and dropped connections meant missed lessons, and not every girl had the support at home that I had.",
+      "The pandemic hit some families far harder, with lost jobs forcing school changes and a rise in domestic violence at home.",
+      "Some children missed lessons because their parents did not trust online learning, so change has to include families too.",
+    ],
+    quote: "I am hopeful for a better tomorrow, a tomorrow that is free of sickness, free of loneliness.",
+  },
 ];

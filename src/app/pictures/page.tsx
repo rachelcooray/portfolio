@@ -75,6 +75,10 @@ export default function Pictures() {
             <figcaption>Addressing the school board, 2022.</figcaption>
           </figure>
           <figure>
+            <img loading="lazy" decoding="async" src="/images/mag/csw65.webp" alt="Rachel speaking on the CSW65 girls' panel over Zoom" width={1280} height={720} style={{ aspectRatio: "16 / 9" }} />
+            <figcaption>Speaking on the CSW65 girls&apos; panel for Sri Lanka, March 2021.</figcaption>
+          </figure>
+          <figure>
             <img loading="lazy" decoding="async" src="/images/photos/showcase-group.jpg" alt="Students and industry judges at the Westminster final year project showcase" width={800} height={450} style={{ aspectRatio: "16 / 9" }} />
             <figcaption>Students and industry judges at the Westminster final year project showcase.</figcaption>
           </figure>
