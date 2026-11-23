@@ -219,7 +219,7 @@ export const education: EducationItem[] = [
     title: "St. Bridget's Convent, Colombo",
     institution: "GCE A/L 2022 and GCE O/L 2018",
     dateRange: "2008 to 2022",
-    summary: "GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English, Mathematics, Business Studies and ICT. Head Prefect, 2020.",
+    summary: "GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, in English Language, Mathematics, Science, Business and Accounting Studies, ICT, Sinhala, History, Western Music and Roman Catholicism. Head Prefect, 2020.",
   },
 ];
 
@@ -1819,12 +1819,12 @@ export const schoolLife = {
     { year: "2012", role: "Deputy Head Prefect", note: "Primary school, St. Bridget's Convent." },
   ],
   interact: "Held leadership roles in the Interact Club, including Project Secretary of the Interact Inter-school Marketing and Advertising Challenge in 2019, and volunteered on its community service projects.",
-  interactProjects: ["Make a Wish, 2017 and 2019", "Smile for Life, 2018", "Interaction Committee, 2019/20", "Community Service, 2020"],
-  interaction: "Served on the Interaction Committee in 2019/20. Interaction is the biggest school sports festival in Sri Lanka.",
+  interactProjects: ["Make a Wish, 2017 and 2019", "Smile for Life, 2018", "Interaction Sports Committee, 2019/20", "Community Service, 2020"],
+  interaction: "Served on the Sports Committee of Interaction 2020 for Interact District 3220. Interaction is the biggest school sports festival in Sri Lanka, with track and field, beach sports, e-sports and road races.",
   teams: ["Swim team, SLASA and SLASU meets, 2012 to 2019", "Tech crew", "Athletics"],
   exams: [
     { level: "GCE A/L", year: "2022", results: [["Chemistry", "A"], ["English", "A"], ["Physics", "B"], ["Combined Mathematics", "B"]] },
-    { level: "GCE O/L", year: "2018", results: [["English", "A"], ["Mathematics", "A"], ["Business Studies", "A"], ["ICT", "A"]], note: "Nine As in all; the other five subjects are not listed here." },
+    { level: "GCE O/L", year: "2018", results: [["English Language", "A"], ["Mathematics", "A"], ["Science", "A"], ["Business and Accounting Studies", "A"], ["ICT", "A"], ["Sinhala", "A"], ["History", "A"], ["Western Music", "A"], ["Roman Catholicism", "A"]], note: "Nine As." },
   ],
   photo: {
     src: "/images/mag/head-prefect.webp",
@@ -1885,7 +1885,7 @@ export const askFaqs = [
 export const askMore = [
   {
     q: "School exams",
-    a: "Yes, at St. Bridget's Convent, Colombo. GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English, Mathematics, Business Studies and ICT.",
+    a: "Yes, at St. Bridget's Convent, Colombo. GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, in English Language, Mathematics, Science, Business and Accounting Studies, ICT, Sinhala, History, Western Music and Roman Catholicism.",
     href: "/education",
     label: "Education",
     keywords: ["ol", "ols", "al", "als", "o l", "a l", "o level", "o levels", "a level", "a levels", "alevels", "olevels", "gce", "exam", "exams", "results", "grades", "school results"],
