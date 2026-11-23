@@ -1938,3 +1938,57 @@ export const askMore = [
     keywords: ["hire", "hiring", "strength", "strengths", "good fit", "stand out", "recruit", "recommend", "why should"],
   },
 ];
+
+// The Skills word cloud. Weight 5 = used at work at OCTAVE now, 4 = core
+// method or language, 3 = research and builds, 2 = projects, 1 = explored.
+// Ranked by evidence on this site, not by self-rating.
+export const skillCloud: { name: string; weight: 1 | 2 | 3 | 4 | 5; group: "think" | "data" | "ai" | "insight" | "product" | "delivery" }[] = [
+  { name: "Python", weight: 5, group: "data" },
+  { name: "SQL", weight: 5, group: "data" },
+  { name: "PySpark", weight: 5, group: "data" },
+  { name: "Databricks", weight: 5, group: "data" },
+  { name: "Problem solving", weight: 5, group: "think" },
+  { name: "Stakeholder management", weight: 5, group: "delivery" },
+  { name: "Power BI", weight: 4, group: "insight" },
+  { name: "Excel", weight: 4, group: "insight" },
+  { name: "Delta Lake", weight: 4, group: "data" },
+  { name: "Requirements", weight: 4, group: "delivery" },
+  { name: "Problem statements", weight: 4, group: "think" },
+  { name: "Process mapping", weight: 4, group: "think" },
+  { name: "Measurement design", weight: 4, group: "think" },
+  { name: "Machine learning", weight: 4, group: "ai" },
+  { name: "Model evaluation", weight: 3, group: "ai" },
+  { name: "Decision logs", weight: 3, group: "think" },
+  { name: "Presentations", weight: 3, group: "delivery" },
+  { name: "Agile", weight: 3, group: "delivery" },
+  { name: "Statistics", weight: 3, group: "ai" },
+  { name: "ETL", weight: 3, group: "data" },
+  { name: "GCP", weight: 3, group: "data" },
+  { name: "KPI development", weight: 3, group: "insight" },
+  { name: "GenAI", weight: 3, group: "ai" },
+  { name: "React", weight: 3, group: "product" },
+  { name: "Flutter", weight: 3, group: "product" },
+  { name: "Retrieval and ranking", weight: 2, group: "ai" },
+  { name: "Explainable predictions", weight: 2, group: "ai" },
+  { name: "Node.js", weight: 2, group: "product" },
+  { name: "TypeScript", weight: 2, group: "product" },
+  { name: "Next.js", weight: 2, group: "product" },
+  { name: "JavaScript", weight: 2, group: "product" },
+  { name: "Dart", weight: 2, group: "product" },
+  { name: "Git and GitHub", weight: 2, group: "product" },
+  { name: "PMO", weight: 2, group: "delivery" },
+  { name: "scikit-learn", weight: 1, group: "ai" },
+  { name: "pandas", weight: 1, group: "ai" },
+  { name: "RAG pipelines", weight: 1, group: "ai" },
+];
+
+// AI competencies, each backed by work published on this site.
+export const aiCompetencies = [
+  { title: "Building and evaluating models", body: "PCOS Care: Chi-Square and ANOVA feature selection, SMOTE for class balance, and an enhanced Random Forest, published at IEEE ICAHS 2025." },
+  { title: "Explainable predictions", body: "PCOS Care shows which factors drove each prediction, so a person can understand the result, not just read it." },
+  { title: "Applied AI in a business", body: "At OCTAVE I own six AI and analytics use cases, from the analysis and solution design to the business using them." },
+  { title: "Measuring whether AI works", body: "Pilot and control comparisons where possible, separating association from proven impact." },
+  { title: "Retrieval and agents", body: "The Ask me agent on this site retrieves and ranks published passages, and never invents an answer." },
+  { title: "Generative AI prototyping", body: "A chatbot prototype for people newly diagnosed with neurodiverse conditions, Microsoft EMBRACE hackathon finalist." },
+  { title: "Responsible AI", body: "Screening aids, not diagnoses; quoted sources, not generated claims; confidential data kept out." },
+];

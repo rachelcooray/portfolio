@@ -2,7 +2,9 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
 import SkillIcon from "@/components/mag/SkillIcon";
-import { site, skills, thinkingLayer, toolkitStack } from "@/content/content";
+import SkillCloud from "@/components/mag/SkillCloud";
+import Robot from "@/components/mag/Robot";
+import { aiCompetencies, site, skills, thinkingLayer, toolkitStack } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "Skills",
@@ -17,6 +19,31 @@ export default function Skills() {
   return (
     <div className="wrap page">
       <PageHead folio="Skills · 29" title="Tools and capabilities, and where each was applied." dek="How I think first, then the tools, from the foundations up. Each answer comes with what is behind it and where it was used." />
+      <section className="cloud-wrap" aria-labelledby="cloud-title">
+        <h2 className="sr-only" id="cloud-title">
+          Skills at a glance
+        </h2>
+        <SkillCloud />
+        <Robot say="Bigger words are the ones Rachel uses most. Ask me about any of them." />
+      </section>
+
+      <section className="aic" aria-labelledby="aic-title">
+        <h2 className="sec-title" id="aic-title">
+          AI competencies
+        </h2>
+        <ol className="aic-list">
+          {aiCompetencies.map((c, i) => (
+            <li key={c.title} style={{ ["--i" as string]: i }}>
+              <span className="aic-n">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
       <div className="convo">
         {layers.map((l, i) => (
           <section key={l.layer} className="convo-turn" style={{ ["--t" as string]: i }} aria-labelledby={`q-${i}`}>
