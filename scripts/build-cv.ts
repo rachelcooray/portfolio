@@ -134,6 +134,10 @@ const entry = (it: Item) =>
 // The left pane from the earlier CV: name, title, contact and the robot with
 // the QR on page 1; the toolkit, recognition and the robot again on page 2.
 const tools = [thinkingLayer, ...[...toolkitStack].reverse()];
+// Short, scannable lines for the magazine CV. The ATS CV keeps the full text.
+const INTRO = ["Analyst, Data and AI at OCTAVE, John Keells Holdings.", "Own six AI and analytics use cases across the FMCG value chain.", "First Class BSc Computer Science, University of Westminster.", "Published at IEEE ICAHS 2025. Co-founder, Layer1 Studio."];
+const OCTAVE_SHORT = ["Own each use case from analysis and solution design to adoption.", "Coordinate data science and engineering teams, sprints and priorities.", "Present findings to sales, finance and senior management.", "Measure impact with pilot and control comparisons.", "Promoted from intern to associate to analyst."];
+const BEYOND_SHORT = ["Head Prefect and School Prefect of the Year, 2020.", "Volunteer: John Keells Foundation, City of Dreams, Project Uplift.", "Customer service at UNIQLO, TK Maxx and EG On The Move.", "Student support at Clear Links; Sunday school teacher."];
 const folio = (left: string, n: string) => `<div class="folio"><span>${left}</span><span>${n} / 02</span></div>`;
 
 const mag = `<!doctype html>
@@ -166,6 +170,7 @@ body { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 8.5pt;
 .top em { order: 2; font-family: Garamond, Georgia, serif; font-style: italic; font-size: 10pt; letter-spacing: 0; text-transform: none; }
 .hero { display: grid; grid-template-columns: 1fr 34mm; gap: 5mm; align-items: stretch; }
 .lead { font-size: 9.2pt; line-height: 1.5; margin: 0; }
+.intro { margin: 0; padding-left: 4mm; font-size: 9.6pt; line-height: 1.45; display: flex; flex-direction: column; gap: 1mm; }
 .photo { background: #efe6d3; border-bottom: 2.4pt solid #46521a; overflow: hidden; min-height: 40mm; }
 .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
 .quote { font-family: Garamond, Georgia, serif; font-style: italic; font-size: 13pt; line-height: 1.22; color: #46521a; border-left: 3pt solid #c7d42b; padding: 0.6mm 0 0.6mm 4mm; margin: 2.4mm 0 0; }
@@ -208,7 +213,7 @@ li::marker { color: #46521a; }
     <div class="top">Data, AI, business and people<em>rachelcooray.com</em></div>
     <div class="hero">
       <div>
-        <p class="lead">${esc(summary)}</p>
+        <ul class="intro">${INTRO.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
         <p class="quote">${esc(identity.tagline)}</p>
       </div>
       <div class="photo"><img src="${portrait}" alt=""></div>
@@ -217,14 +222,13 @@ li::marker { color: #46521a; }
     <div class="entry">
       <div class="entry-row"><span class="entry-title">${esc(analyst.title)}</span><span class="entry-when">${esc(analyst.dateRange)}</span></div>
       <div class="entry-org">${esc(analyst.company)} · ${esc(analyst.location)}</div>
-      <p>Own six AI and analytics use cases across the FMCG value chain, from analysis and solution design to the business using them. ${esc(octave.meta.replace("Colombo, Sri Lanka. ", ""))}</p>
       <div class="chain">${stages
         .map((st) => `<div class="stop"><div class="dot"></div><span class="k">${stageLabel[st]}</span><span>${useCases.filter((u) => u.stage === st).map((u) => esc(u.name)).join("<br>")}</span></div>`)
         .join("")}</div>
-      <ul>${roleBullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
+      <ul>${OCTAVE_SHORT.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
     </div>
-    ${entry(exp[3])}
-    ${entry(exp[4])}
+    ${entry({ title: layer1.title, org: layer1.company, when: layer1.dateRange, bullets: ["Co-founded a web and mobile studio for small businesses.", "Take each build from brief to launch and upkeep.", "Mentor interns on real client projects."] })}
+    ${entry({ title: londonSuccessAcademy.title, org: londonSuccessAcademy.company, when: londonSuccessAcademy.dateRange, bullets: ["Built ETL pipelines on Google Cloud for clickstream and transactions.", "Scaled processing with PySpark and Parquet."] })}
   </main>
   ${folio("Rachel Cooray · CV", "01")}
 </section>
@@ -243,22 +247,18 @@ li::marker { color: #46521a; }
   </aside>
   <main class="main">
     <div class="top">Continued<em>rachelcooray.com</em></div>
-    <div class="tiles">
-      <div class="tile">First Class BSc Computer Science<small>Westminster</small></div>
-      <div class="tile data">Published at IEEE ICAHS 2025<small>PCOS Care</small></div>
-      <div class="tile">Owns six AI and analytics use cases<small>OCTAVE</small></div>
-      <div class="tile think">Co-founder, Layer1 Studio<small>Web and mobile</small></div>
-    </div>
     <h2>Education</h2>
-    ${entry({ title: education[0].title, org: education[0].institution, when: education[0].dateRange, text: "Data Science specialisation. Started at IIT, Sri Lanka, as Batch Representative in Years 1 and 2. UOW/IIT School of Computing and Engineering scholarship, 2024/25." })}
-    ${entry({ title: education[1].title, org: "CIMA", when: education[1].dateRange, text: "Operational level in progress." })}
-    ${entry({ title: "School", org: "St. Bridget's Convent, Colombo", when: "2008 to 2022", text: `Head Prefect, 2020, and School Prefect of the Year. GCE A/L 2022: ${schoolLife.exams[0].results.map(([sub, g]) => `${sub} ${g}`).join(", ")}. GCE O/L 2018: nine As.` })}
+    ${entry({ title: education[0].title, org: "University of Westminster", when: "2022 to 2025", bullets: ["Data Science specialisation.", "UOW/IIT scholarship, 2024/25.", "Batch Representative at IIT, Years 1 and 2."] })}
+    ${entry({ title: "CIMA Certificate in Business Accounting", when: "2024", bullets: ["Operational level in progress."] })}
+    ${entry({ title: "St. Bridget's Convent, Colombo", when: "to 2022", bullets: ["Head Prefect, 2020.", `GCE A/L: ${schoolLife.exams[0].results.map(([sub, g]) => `${sub} ${g}`).join(", ")}.`, "GCE O/L: nine As."] })}
     <h2>Research</h2>
-    ${entry({ ...blocks[1].items[0], bullets: [`${research.paper.authors}. DOI ${research.paper.doi}.`, research.paper.description, research.paper.award, research.paper.journal] })}
+    ${entry({ title: "PCOS Care", org: "IEEE ICAHS 2025, Hammamet, Tunisia", when: "2025", bullets: ["Machine learning web app for early PCOS risk screening, with explainable predictions.", "Third place, Westminster final year project showcase, 2025.", "Extended paper under review, MSIT Journal.", `DOI ${research.paper.doi}`] })}
     <h2>Selected projects</h2>
-    ${blocks[3].items.map((it) => entry({ ...it, bullets: it.text ? [it.text] : undefined, text: undefined })).join("")}
+    ${entry({ title: "Ask me: a portfolio agent", when: "2026", bullets: ["Answers recruiters' questions from my published work."] })}
+    ${entry({ title: "Neurodiversity support chatbot", when: "2024", bullets: ["Prototype for people newly diagnosed with neurodiverse conditions and their carers."] })}
+    ${entry({ title: "CSR street-vendor analytics", when: "2022", bullets: ["Field survey of street food vendors, adopted by the CSR team."] })}
     <h2>Beyond the role</h2>
-    <ul>${BEYOND.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
+    <ul>${BEYOND_SHORT.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
   </main>
   ${folio("rachelcooray.com", "02")}
 </section>
