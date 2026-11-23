@@ -24,6 +24,11 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          # Contact form service. Set ONE as a repository variable
+          # (Settings > Secrets and variables > Actions > Variables).
+          NEXT_PUBLIC_FORMSPREE_ENDPOINT: ${{ vars.FORMSPREE_ENDPOINT }}
+          NEXT_PUBLIC_WEB3FORMS_KEY: ${{ vars.WEB3FORMS_KEY }}
 
       - name: Create CNAME
         run: echo "rachelcooray.com" > ./out/CNAME

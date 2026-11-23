@@ -1,4 +1,5 @@
 import { identity, magazine } from "@/content/content";
+import ContactForm from "@/components/mag/ContactForm";
 
 export default function BackPage() {
   const tel = identity.phone.replace(/\s/g, "");
@@ -6,16 +7,19 @@ export default function BackPage() {
     <footer className="back" id="contact">
       <div className="wrap">
         <div className="back-row">
-          <div>
+          <div className="back-main">
             <span className="back-who">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/mag/rachel-face.webp" alt="Rachel Cooray" width={64} height={64} loading="lazy" />
-              <span className="kicker">Contact · Get in touch</span>
+              <span className="kicker">Contact</span>
             </span>
-            <p className="back-line">{magazine.backPage}</p>
+            <h2 className="back-line">Get in touch.</h2>
+            <p className="back-sub">I welcome conversations about AI and analytics, research collaboration and guest lectures.</p>
+            <ContactForm fallbackEmail={identity.email} />
           </div>
           <div className="back-links">
-            <a href={`mailto:${identity.email}`}>{identity.email}</a>
+            <p className="back-quote">{magazine.backPage}</p>
+            <span>{identity.email}</span>
             <a href={`tel:${tel}`}>{identity.phone}</a>
             {identity.links
               .filter((l) => l.label !== "Email")
@@ -28,7 +32,9 @@ export default function BackPage() {
           </div>
         </div>
         <div className="back-meta">
-          <span>{magazine.footerLine} © {identity.copyright}</span>
+          <span>
+            {magazine.footerLine} © {identity.copyright}
+          </span>
           <span>
             {magazine.issue} · {magazine.issueDate}
           </span>
