@@ -133,23 +133,23 @@ body { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 8.6pt;
 .spine { background: #efe6d3; border-right: 0.6pt solid #2b2318; padding: 14mm 7mm 12mm 9mm; display: flex; flex-direction: column; gap: 5mm; }
 .main { padding: 14mm 12mm 14mm 10mm; display: flex; flex-direction: column; gap: 3.6mm; box-shadow: inset 6mm 0 6mm -6mm rgba(43,35,24,0.18); }
 .k { font-family: PlexMono, monospace; font-size: 6.8pt; letter-spacing: 0.12em; text-transform: uppercase; color: #7a6142; }
-.mast { font-family: Garamond, Georgia, serif; font-size: 34pt; line-height: 0.86; color: #46521a; letter-spacing: -0.5pt; }
-.title { font-family: Garamond, Georgia, serif; font-size: 12pt; line-height: 1.15; }
+.mast { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 27pt; font-weight: 600; line-height: 0.95; color: #46521a; letter-spacing: -0.6pt; }
+.title { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 10pt; font-weight: 500; line-height: 1.15; }
 .rule { border-top: 0.6pt solid #2b2318; padding-top: 2mm; }
 .contact { list-style: none; margin: 0; padding: 0; font-family: PlexMono, monospace; font-size: 7pt; line-height: 1.7; word-break: break-word; }
 .bot { display: flex; flex-direction: column; align-items: center; gap: 1.5mm; background: #faf7ef; border: 0.6pt solid #46521a; border-radius: 4mm; padding: 3mm 2mm 2.5mm; }
 .bot svg { width: 40mm; height: auto; }
 .bot p { margin: 0; text-align: center; font-size: 7.4pt; line-height: 1.3; }
-.bot b { font-family: Garamond, Georgia, serif; font-size: 11pt; font-weight: 500; color: #46521a; display: block; }
-.side-h { font-family: Garamond, Georgia, serif; font-size: 13pt; color: #46521a; border-bottom: 0.6pt solid #2b2318; padding-bottom: 1mm; margin-bottom: 1.5mm; }
+.bot b { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 11pt; font-weight: 500; color: #46521a; display: block; }
+.side-h { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 10.5pt; color: #46521a; border-bottom: 0.6pt solid #2b2318; padding-bottom: 1mm; margin-bottom: 1.5mm; }
 .tools { display: flex; flex-direction: column; gap: 1.8mm; }
 .tools .layer { font-family: PlexMono, monospace; font-size: 6.6pt; letter-spacing: 0.1em; text-transform: uppercase; color: #7a6142; }
 .tags { display: flex; flex-wrap: wrap; gap: 1mm; margin-top: 0.6mm; }
 .tags span { font-size: 6.9pt; padding: 0.3mm 1.6mm; border: 0.5pt solid #cfc3a6; border-radius: 3mm; background: #faf7ef; }
 .list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 1.6mm; font-size: 7.8pt; line-height: 1.35; }
 .list b { font-weight: 600; }
-.lead { font-family: Garamond, Georgia, serif; font-size: 11.6pt; line-height: 1.32; }
-h2 { margin: 1.5mm 0 0; font-family: Garamond, Georgia, serif; font-weight: 500; font-size: 17pt; line-height: 1; color: #46521a; display: flex; align-items: baseline; gap: 3mm; }
+.lead { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 9.8pt; line-height: 1.5; }
+h2 { margin: 1.5mm 0 0; font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-weight: 600; font-size: 12.5pt; letter-spacing: 0.2pt; line-height: 1; color: #46521a; display: flex; align-items: baseline; gap: 3mm; }
 h2::after { content: ""; flex: 1; border-bottom: 0.6pt solid #2b2318; transform: translateY(-1mm); }
 .entry { break-inside: avoid; }
 .entry-row { display: flex; align-items: baseline; gap: 2mm; }
@@ -166,7 +166,7 @@ li::marker { color: #46521a; }
 .stop { position: relative; text-align: center; }
 .dot { width: 6.2mm; height: 6.2mm; border-radius: 50%; background: #46521a; margin: 0 auto 1mm; border: 1pt solid #c7d42b; }
 .stop .k { display: block; color: #46521a; }
-.stop span { display: block; font-size: 6.9pt; line-height: 1.25; }
+.stop span { display: block; font-size: 7.2pt; line-height: 1.3; margin-top: 0.4mm; }
 .uc { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2mm 4mm; margin-top: 1mm; }
 .uc div { font-size: 7.6pt; line-height: 1.3; border-top: 0.5pt solid #cfc3a6; padding-top: 0.8mm; }
 .uc b { font-weight: 600; color: #46521a; }
@@ -178,7 +178,7 @@ li::marker { color: #46521a; }
 .exam { display: flex; flex-direction: column; gap: 0.4mm; font-size: 7.6pt; }
 .exam div { display: flex; gap: 1.5mm; }
 .exam div::after { content: ""; order: 1; flex: 1; border-bottom: 1pt dotted #7a6142; opacity: 0.6; transform: translateY(-0.9mm); }
-.exam em { order: 2; font-style: normal; font-family: Garamond, Georgia, serif; font-size: 9.5pt; color: #46521a; }
+.exam em { order: 2; font-style: normal; font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 9.5pt; color: #46521a; }
 </style></head><body>
 
 <section class="page">
@@ -190,12 +190,6 @@ li::marker { color: #46521a; }
     <div class="title rule">${esc(identity.role)}<br><span style="color:#5e5143">${esc(identity.employer)}</span></div>
     <ul class="contact">${contact.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
     <div class="bot">${bot}<p><b>Scan me.</b>The full portfolio, and an agent that answers questions about my work.</p></div>
-    <div>
-      <div class="side-h">The toolkit</div>
-      <div class="tools">${[thinkingLayer, ...[...toolkitStack].reverse()]
-        .map((l) => `<div><div class="layer">${esc(l.layer)}</div><div class="tags">${l.tools.map((t) => `<span>${esc(t)}</span>`).join("")}</div></div>`)
-        .join("")}</div>
-    </div>
   </aside>
   <main class="main">
     <div class="k">Rachel Cooray · Data, AI, business, people</div>
@@ -203,16 +197,19 @@ li::marker { color: #46521a; }
     <h2>Experience</h2>
     <div class="entry">
       <div class="entry-row"><span class="entry-title">${esc(analyst.title)}</span><span class="entry-when">${esc(analyst.dateRange)}</span></div>
-      <div class="entry-org">${esc(analyst.company)} · ${esc(analyst.location)} · ${esc(octave.meta.replace("Colombo, Sri Lanka. ", ""))}</div>
+      <div class="entry-org">${esc(analyst.company)} · ${esc(analyst.location)}</div>
+      <p style="margin:0.8mm 0 0">Own six AI and analytics use cases across the FMCG value chain, from analysis and solution design to the business using them. ${esc(octave.meta.replace("Colombo, Sri Lanka. ", ""))}</p>
       <div class="chain">${stages
-        .map((st) => `<div class="stop"><div class="dot"></div><span class="k">${stageLabel[st]}</span><span>${useCases.filter((u) => u.stage === st).map((u) => esc(u.code)).join(" · ")}</span></div>`)
+        .map((st) => `<div class="stop"><div class="dot"></div><span class="k">${stageLabel[st]}</span><span>${useCases.filter((u) => u.stage === st).map((u) => esc(u.name)).join("<br>")}</span></div>`)
         .join("")}</div>
-      <div class="uc">${useCases.map((u) => `<div><b>${esc(u.name)}.</b> ${esc(u.line)}</div>`).join("")}</div>
       <ul>${roleBullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
-      <p class="ladder" style="margin:1mm 0 0">At OCTAVE: ${[...octave.roles, ...octave.earlier].map((r) => `${esc(r.title)} (${esc(r.dateRange)})`).join(" · ")}</p>
     </div>
     ${entry(exp[3])}
     ${entry(exp[4])}
+    <h2>Education</h2>
+    ${entry({ title: education[0].title, org: education[0].institution, when: education[0].dateRange, text: "Data Science specialisation. UOW/IIT School of Computing and Engineering scholarship, 2024/25." })}
+    ${entry({ title: education[1].title, org: "CIMA", when: education[1].dateRange, text: "Operational level in progress." })}
+    ${entry({ title: "GCE Advanced Level", org: "St. Bridget's Convent, Colombo", when: "2022", text: schoolLife.exams[0].results.map(([sub, g]) => `${sub} ${g}`).join(", ") + ". GCE Ordinary Level, 2018: nine As." })}
   </main>
   <div class="folio"><span>Rachel Cooray · CV</span><span>01 / 02</span></div>
 </section>
@@ -220,12 +217,10 @@ li::marker { color: #46521a; }
 <section class="page">
   <aside class="spine">
     <div>
-      <div class="side-h">Education</div>
-      <ul class="list">
-        <li><b>${esc(education[0].title)}</b><br>${esc(education[0].institution)}, ${esc(education[0].dateRange)}<br><span style="color:#5e5143">Data Science specialisation. UOW/IIT scholarship, 2024/25.</span></li>
-        <li><b>${esc(education[1].title)}</b><br>${esc(education[1].institution)}, ${esc(education[1].dateRange)}<br><span style="color:#5e5143">Operational level in progress.</span></li>
-        <li><b>GCE A/L, 2022</b><br>St. Bridget's Convent, Colombo<br><span style="color:#5e5143">${schoolLife.exams[0].results.map(([sub, g]) => `${esc(sub)} ${esc(g)}`).join(", ")}</span></li>
-      </ul>
+      <div class="side-h">The toolkit</div>
+      <div class="tools">${[thinkingLayer, ...[...toolkitStack].reverse()]
+        .map((l) => `<div><div class="layer">${esc(l.layer)}</div><div class="tags">${l.tools.map((t) => `<span>${esc(t)}</span>`).join("")}</div></div>`)
+        .join("")}</div>
     </div>
     <div>
       <div class="side-h">Recognition</div>
