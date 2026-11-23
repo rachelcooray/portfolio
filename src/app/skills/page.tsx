@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
 import SkillIcon from "@/components/mag/SkillIcon";
-import { site, skills, toolkitStack } from "@/content/content";
+import { site, skills, thinkingLayer, toolkitStack } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "Skills",
@@ -13,10 +13,10 @@ const explored = new Set(skills.flatMap((s) => s.explored.map((e) => e.toLowerCa
 
 export default function Skills() {
   // Read from the foundations up, the way the work is built.
-  const layers = [...toolkitStack].reverse();
+  const layers = [thinkingLayer, ...[...toolkitStack].reverse()];
   return (
     <div className="wrap page">
-      <PageHead folio="Skills · 29" title="Tools and capabilities, and where each was applied." dek="Six questions, from the foundations up. Each answer comes with the tools behind it and where they were used." />
+      <PageHead folio="Skills · 29" title="Tools and capabilities, and where each was applied." dek="How I think first, then the tools, from the foundations up. Each answer comes with what is behind it and where it was used." />
       <div className="convo">
         {layers.map((l, i) => (
           <section key={l.layer} className="convo-turn" style={{ ["--t" as string]: i }} aria-labelledby={`q-${i}`}>

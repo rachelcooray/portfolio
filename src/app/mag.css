@@ -79,7 +79,7 @@ p { margin: 0; }
 
 /* Section page heads */
 .page-head { display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; }
-.page-head h1 { flex: 2 1 480px; min-width: 0; font-size: clamp(52px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.02em; color: var(--olive); }
+.page-head h1 { flex: 2 1 480px; min-width: 0; font-size: clamp(40px, 5.6vw, 84px); line-height: 0.95; letter-spacing: -0.02em; color: var(--olive); }
 .page-head p { flex: 1 1 300px; min-width: 0; font-size: 18px; color: var(--muted); }
 
 /* Cards: projects, press, roles */

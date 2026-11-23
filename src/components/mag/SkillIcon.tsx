@@ -16,6 +16,11 @@ const BRAND: Record<string, { hex: string; path: string }> = {
 };
 
 const GENERIC: Record<string, string> = {
+  "Problem framing": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 3v3M12 18v3M3 12h3M18 12h3\"/>",
+  "Problem statements": "<path d=\"M6 3h9l4 4v14H6z\"/><path d=\"M15 3v4h4M9 11h7M9 15h7M9 19h4\"/>",
+  "Decision logs": "<path d=\"M5 4h14v16H5z\"/><path d=\"m8 9 2 2 4-4M8 15h8\"/>",
+  "Measurement design": "<path d=\"M4 20V4M4 20h16\"/><path d=\"m7 15 4-4 3 3 5-6\"/>",
+  "Thinking across disciplines": "<circle cx=\"8\" cy=\"9\" r=\"4\"/><circle cx=\"16\" cy=\"9\" r=\"4\"/><circle cx=\"12\" cy=\"15\" r=\"4\"/>",
   "SQL": "<ellipse cx=\"12\" cy=\"6\" rx=\"7\" ry=\"3\"/><path d=\"M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6\"/><path d=\"M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3\"/>",
   "Delta Lake": "<path d=\"M12 3 3 20h18z\"/><path d=\"M7 15c2-1.2 3.5-1.2 5 0s3 1.2 5 0\"/>",
   "ETL": "<path d=\"M4 7h12l-3-3\"/><path d=\"M20 17H8l3 3\"/><circle cx=\"19\" cy=\"7\" r=\"1.5\"/><circle cx=\"5\" cy=\"17\" r=\"1.5\"/>",

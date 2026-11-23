@@ -28,6 +28,7 @@ import {
   magazine,
   schoolLife,
   toolkitStack,
+  thinkingLayer,
   cima,
 } from "../src/content/content";
 
@@ -101,7 +102,7 @@ const blocks: Block[] = [
   },
   { heading: "Education", items: education.map((e) => ({ title: e.title, org: e.institution, when: e.dateRange, text: e.summary })) },
   { heading: "Selected projects", items: buildLog.filter((x) => SELECTED.includes(x.id)).map((x) => ({ title: x.title, when: x.year ?? undefined, text: `${firstSentence(x.built)} ${x.tools.join(", ")}.` })) },
-  { heading: "Skills", items: toolkitStack.map((l) => ({ title: l.layer, text: l.tools.join(", ") })) },
+  { heading: "Skills", items: [thinkingLayer, ...[...toolkitStack].reverse()].map((l) => ({ title: l.layer, text: l.tools.join(", ") })) },
   { heading: "Beyond the role", items: [{ title: "Leadership, volunteering and customer service", text: BEYOND }] },
   { heading: "Recognition", items: achievements.map((a) => ({ title: a.title, org: a.organization, when: a.year })) },
 ];
@@ -191,8 +192,7 @@ li::marker { color: #46521a; }
     <div class="bot">${bot}<p><b>Scan me.</b>The full portfolio, and an agent that answers questions about my work.</p></div>
     <div>
       <div class="side-h">The toolkit</div>
-      <div class="tools">${[...toolkitStack]
-        .reverse()
+      <div class="tools">${[thinkingLayer, ...[...toolkitStack].reverse()]
         .map((l) => `<div><div class="layer">${esc(l.layer)}</div><div class="tags">${l.tools.map((t) => `<span>${esc(t)}</span>`).join("")}</div></div>`)
         .join("")}</div>
     </div>

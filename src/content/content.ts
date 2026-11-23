@@ -1648,6 +1648,7 @@ export function buildMagazinePassages(): Passage[] {
   add("research", "research-detail", "PCOS Care: the research", `${research.paper.title}. ${research.paper.authors}. ${research.paper.venue}, ${research.paper.dates}. ${research.paper.description} Method: ${research.paper.method}`, ["pcos", "pcos care", "research", "paper", "ieee", "icahs", "machine learning", "app", "polycystic"]);
   add("research", "research-award", "PCOS Care: recognition", `${research.paper.award} ${research.paper.journal}`, ["pcos", "award", "prize", "third", "showcase", "journal"]);
 
+  add("skills", "stack-thinking", "Skills: thinking and problem solving", `${thinkingLayer.a} Methods: ${thinkingLayer.tools.join(", ")}.`, ["thinking", "problem solving", "problem", "approach", "how does she work", "framing", "requirements"]);
   toolkitStack.forEach((l) => add("skills", `stack-${l.layer}`, `Skills: ${l.layer}`, `Tools: ${l.tools.join(", ")}. Used: ${l.where.toLowerCase()}.`, ["skills", "tools", "stack", "tech", "know", "knows", "use", "uses", "experienced", l.layer.toLowerCase(), ...l.tools.map((t) => t.toLowerCase())]));
 
   volunteer.items.forEach((v) => add("volunteer", v.id, `${v.event} (${v.dateRange})`, `${v.title}, ${v.organization}. ${v.summary}`, ["volunteer", "volunteering", "event", v.organization.toLowerCase()]));
@@ -1656,6 +1657,15 @@ export function buildMagazinePassages(): Passage[] {
   add("contact", "contact-full", "Contact details", `Email ${identity.email}. Phone ${identity.phone}. Based in ${identity.location}. LinkedIn, GitHub and ORCID are linked at the foot of every page.`, ["contact", "email", "phone", "call", "reach", "hire", "linkedin", "number"]);
   return p;
 }
+
+// How the work starts, before any tool. Shown first on the Skills page.
+export const thinkingLayer = {
+  q: "Where does the work start?",
+  a: "With the problem, not the tool. I start with the people affected and the decision they need to make, then choose the data and the technology.",
+  layer: "Thinking and problem solving",
+  where: "Every project",
+  tools: ["Problem framing", "Problem statements", "Process mapping", "Requirements", "Decision logs", "Measurement design", "Thinking across disciplines"],
+};
 
 // The toolkit as a stack, foundations at the bottom. Only tools listed in
 // `skills` and `site.about.skills` above.
