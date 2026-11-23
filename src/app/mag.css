@@ -84,8 +84,8 @@ p { margin: 0; }
 }
 
 /* Page turn on every navigation */
-.turn { animation: page-turn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; transform-origin: left center; }
-@keyframes page-turn { from { opacity: 0; transform: perspective(1800px) rotateY(-16deg) translateX(40px); } to { opacity: 1; transform: none; } }
+.turn { animation: page-turn 0.32s cubic-bezier(0.2, 0.7, 0.2, 1) both; transform-origin: left center; }
+@keyframes page-turn { from { opacity: 0; transform: perspective(1800px) rotateY(-8deg) translateX(20px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .turn { animation: none; } }
 
 /* Section page heads */
@@ -416,7 +416,7 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
 .ps-arrow { align-self: center; color: var(--olive); }
 .steps-sec, .value-sec { display: flex; flex-direction: column; gap: 22px; }
 .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 18px; counter-reset: s; position: relative; }
-.step { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 22px 20px 20px; background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--olive); opacity: 0; transform: translateY(16px); animation: stack-rise 0.5s ease-out forwards; animation-delay: calc(0.15s + var(--k) * 0.12s); }
+.step { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 22px 20px 20px; background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--olive); opacity: 0; transform: translateY(16px); animation: stack-rise 0.35s ease-out forwards; animation-delay: calc(var(--k) * 0.05s); }
 .step-n { width: 40px; height: 40px; border-radius: 50%; background: var(--lime); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 22px; border: 1px solid var(--olive); }
 .step p { font-size: 16px; line-height: 1.5; }
 .value-tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 18px; }

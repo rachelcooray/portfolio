@@ -25,7 +25,7 @@ export default function UseCases() {
               {String(i + 1).padStart(2, "0")} · {u.code} · {u.stage} · Owned
             </span>
             <h2>
-              <Link href={`/use-cases/${u.id}`} className="case-link">
+              <Link prefetch href={`/use-cases/${u.id}`} className="case-link">
                 {u.headline}
               </Link>
             </h2>
@@ -34,7 +34,7 @@ export default function UseCases() {
             <p className="part">
               <b>My part.</b> {u.part}
             </p>
-            <Link href={`/use-cases/${u.id}`} className="case-more">
+            <Link prefetch href={`/use-cases/${u.id}`} className="case-more">
               Problem, solution, value and my part<span aria-hidden="true"> →</span>
               <span className="sr-only">: {u.name}</span>
             </Link>

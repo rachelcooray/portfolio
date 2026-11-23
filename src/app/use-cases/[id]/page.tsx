@@ -131,7 +131,7 @@ export default async function UseCase({ params }: { params: Promise<{ id: string
       <p className="small muted">{magazine.confidentiality}</p>
       <nav className="story-nav" aria-label="Other use cases">
         {prev ? (
-          <Link href={`/use-cases/${prev.id}`}>
+          <Link prefetch href={`/use-cases/${prev.id}`}>
             <span className="kicker">Previous</span>
             <span>{prev.name}</span>
           </Link>
@@ -139,7 +139,7 @@ export default async function UseCase({ params }: { params: Promise<{ id: string
           <span />
         )}
         {next ? (
-          <Link href={`/use-cases/${next.id}`} style={{ textAlign: "right" }}>
+          <Link prefetch href={`/use-cases/${next.id}`} style={{ textAlign: "right" }}>
             <span className="kicker">Next</span>
             <span>{next.name}</span>
           </Link>
