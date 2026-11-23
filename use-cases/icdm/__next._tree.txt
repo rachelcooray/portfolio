@@ -5,4 +5,4 @@
 :HL["/_next/static/media/ibm_plex_mono_500_normal-s.p.11q3guvgd1r20.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/ibm_plex_sans_100_700_normal-s.p.15jby9eboz7vb.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/images/mag/rachel-face.webp","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"use-cases","param":null,"prefetchHints":4192,"slots":{"children":{"name":"id","param":{"type":"d","key":"icdm","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"FxXuTmH2R9C9kQu9J1yPb"}
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"use-cases","param":null,"prefetchHints":4192,"slots":{"children":{"name":"id","param":{"type":"d","key":"icdm","siblings":[]},"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}}}},"staleTime":300,"buildId":"4WjahdtHGDZwvC2tMEJch"}
