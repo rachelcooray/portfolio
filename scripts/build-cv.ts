@@ -112,6 +112,7 @@ const blocks: Block[] = [
 // ---------------------------------------------------------------- shared
 const font = (f: string) => `file://${join(root, "src/fonts", f)}`;
 const qr = readFileSync(join(here, "assets/qr-site.svg"), "utf8");
+const bot = readFileSync(join(here, "assets/cv-bot.svg"), "utf8");
 const qrData = `data:image/png;base64,${readFileSync(join(here, "assets/qr-site.png")).toString("base64")}`;
 const portrait = `file://${join(root, "public/images/mag/rachel-portrait.webp")}`;
 const stages = ["Factory", "Dispatch", "Distributor", "Market"] as const;
@@ -139,7 +140,7 @@ const footer = `
   <footer class="foot">
     <div class="foot-k">Let's connect</div>
     <div class="foot-c"><span>${esc(identity.email)}</span><span>${esc(identity.phone)}</span><span>linkedin.com/in/rachel-cooray-069034235</span></div>
-    <div class="foot-qr"><div class="qr">${qr}</div><span>Scan for the portfolio<br><b>rachelcooray.com</b></span></div>
+    <div class="foot-qr"><b>rachelcooray.com</b></div>
   </footer>`;
 
 // Light-ground versions of the site's word cloud colours, all AA on cream.
@@ -211,6 +212,10 @@ li::marker { color: #46521a; }
 .qr { width: 17mm; height: 17mm; background: #faf7ef; padding: 1.2mm; }
 .qr svg { width: 100%; height: 100%; display: block; }
 .small { font-size: 7.8pt; }
+.bot { margin-top: auto; display: grid; grid-template-columns: 24mm 1fr; align-items: center; gap: 3.4mm; background: #efe6d3; border-top: 2pt solid #46521a; padding: 3mm 3.4mm; }
+.bot svg { width: 24mm; height: auto; display: block; }
+.bot p { margin: 0; font-size: 7.8pt; line-height: 1.35; }
+.bot b { display: block; font-family: Garamond, Georgia, serif; font-weight: 500; font-size: 15pt; line-height: 1.05; color: #46521a; margin-bottom: 1mm; }
 </style></head><body>
 
 <section class="page">
@@ -246,6 +251,7 @@ li::marker { color: #46521a; }
         ${entry({ title: education[0].title, org: education[0].institution, when: education[0].dateRange, text: "Data Science specialisation. Started at IIT, Sri Lanka, as Batch Representative in Years 1 and 2. UOW/IIT School of Computing and Engineering scholarship, 2024/25." })}
         ${entry({ title: education[1].title, org: "CIMA", when: education[1].dateRange, text: "Operational level in progress." })}
         ${entry({ title: "School", org: "St. Bridget's Convent, Colombo", when: "2008 to 2022", text: `Head Prefect, 2020, and School Prefect of the Year. GCE A/L 2022: ${schoolLife.exams[0].results.map(([sub, g]) => `${sub} ${g}`).join(", ")}. GCE O/L 2018: nine As.` })}
+        <div class="bot">${bot}<p><b>Scan me.</b>The full portfolio, and an agent that answers questions about my work.</p></div>
       </div>
     </div>
   </main>
@@ -269,6 +275,7 @@ li::marker { color: #46521a; }
         </div>
         <h2>Selected projects</h2>
         ${blocks[3].items.map(entry).join("")}
+        <div class="bot">${bot}<p><b>Ask my agent.</b>Questions about my work, answered from my portfolio at rachelcooray.com.</p></div>
       </div>
       <div class="col">
         <h2>Highlights</h2>
