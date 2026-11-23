@@ -118,7 +118,40 @@ function routeFor(h: Passage) {
   return ROUTE[h.section] ?? { href: "/", label: "the cover" };
 }
 
-type Turn = { id: number; q: string; answer: Answer | null; follow: string[]; handoff?: boolean };
+type Turn = { id: number; q: string; answer: Answer | null; follow: string[]; handoff?: boolean; recruiter?: boolean };
+
+// Recruiters: never answer salary, notice, visa or start date. Point them to
+// Rachel with every way to reach her.
+const RECRUITER =
+  /\b(recruit\w*|hiring|hire|vacanc\w*|opening|position|interview\w*|salary|compensation|notice period|start date|visa|relocat\w*|sponsor\w*|candidate|headhunt\w*|talent|job offer|open to (work|roles|opportunities)|looking for (a )?(job|role|work))\b/i;
+
+const LINKEDIN = identity.links.find((l) => l.label === "LinkedIn")?.href ?? "";
+const RECRUITER_TEXT =
+  "Thank you for your interest. The best next step is to speak to Rachel directly. She is an Analyst, Data and AI at OCTAVE, John Keells Holdings, with a First Class BSc in Computer Science and research published at IEEE ICAHS 2025.";
+
+function Details() {
+  return (
+    <ul className="agent-details" aria-label="Rachel's contact details">
+      <li>
+        <span>Email</span> <a href={`mailto:${identity.email}`}>{identity.email}</a>
+      </li>
+      <li>
+        <span>Phone</span> <a href={`tel:${identity.phone.replace(/\s/g, "")}`}>{identity.phone}</a>
+      </li>
+      {LINKEDIN ? (
+        <li>
+          <span>LinkedIn</span> <a href={LINKEDIN}>Rachel Cooray</a>
+        </li>
+      ) : null}
+      <li>
+        <span>CV</span> <a href="/rachelcooray-cv.pdf">Download the CV (PDF)</a>
+      </li>
+      <li>
+        <span>Based in</span> {identity.location}
+      </li>
+    </ul>
+  );
+}
 
 // Requests only Rachel can answer: work, quotes, hiring, collaboration. The
 // agent never promises anything; it offers to pass the request on.
@@ -129,7 +162,7 @@ const HANDOFF_TEXT = "That one is for Rachel herself. Leave your email and what 
 
 // A short form inside the chat. What is typed here is sent to Rachel through
 // the form service and is not kept by this site.
-function Handoff({ request }: { request: string }) {
+function Handoff({ request, topic = "Request from the Ask agent", hint = "" }: { request: string; topic?: string; hint?: string }) {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [msg, setMsg] = useState("");
   const opened = useRef(0);
@@ -161,7 +194,7 @@ function Handoff({ request }: { request: string }) {
     setState("sending");
     setMsg("");
     try {
-      await sendToRachel({ name: email, email, topic: "Request from the Ask agent", message: body });
+      await sendToRachel({ name: email, email, topic, message: body });
       setState("sent");
       setMsg("Sent. Rachel will reply by email.");
     } catch {
@@ -179,7 +212,7 @@ function Handoff({ request }: { request: string }) {
       </label>
       <label>
         What you need
-        <textarea name="request" rows={3} defaultValue={request} maxLength={2000} required />
+        <textarea name="request" rows={3} defaultValue={request} placeholder={hint} maxLength={2000} required />
       </label>
       <div className="cform-trap" aria-hidden="true">
         <label>
@@ -256,14 +289,15 @@ export default function AskAgent() {
 
   const ask = (q: string) => {
     if (typing) return;
-    const handoff = REQUEST.test(q);
-    const answer = handoff ? null : answerFor(q);
+    const recruiter = RECRUITER.test(q);
+    const handoff = !recruiter && REQUEST.test(q);
+    const answer = recruiter || handoff ? null : answerFor(q);
     const askedQs = new Set([...thread.map((t) => t.q), q]);
     const follow = askFaqs.map((f) => f.q).filter((x) => !askedQs.has(x)).slice(0, 3);
     setTyping(true);
     const delay = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450;
     window.setTimeout(() => {
-      setThread((t) => [...t, { id: Date.now(), q, answer, follow, handoff }]);
+      setThread((t) => [...t, { id: Date.now(), q, answer, follow, handoff, recruiter }]);
       setTyping(false);
     }, delay);
   };
@@ -280,6 +314,9 @@ export default function AskAgent() {
     <div className="agent">
       <p className="agent-note">Automated assistant. It answers only from Rachel&apos;s published work, and nothing you type is stored. A message reaches Rachel only if you choose to send one.</p>
       <div className="ask-chips" role="group" aria-label="Quick questions">
+        <button type="button" className="chip chip-hire" onClick={() => ask("I'm a recruiter")} disabled={typing}>
+          Hiring? Speak to Rachel
+        </button>
         {askFaqs.map((f) => (
           <button key={f.q} type="button" className="chip" onClick={() => ask(f.q)} disabled={typing}>
             {f.q}
@@ -300,7 +337,14 @@ export default function AskAgent() {
               <img className="ask-av" src="/images/mag/rachel-face.webp" alt="" width={36} height={36} />
               <div className="ask-answers">
                 <div className="ask-hit">
-                  {t.handoff ? (
+                  {t.recruiter ? (
+                    <>
+                      <blockquote>{RECRUITER_TEXT}</blockquote>
+                      <Details />
+                      <p className="agent-or">Or leave your details and the role, and she will get back to you.</p>
+                      <Handoff request="" topic="Recruiter enquiry" hint="Your name, company and the role" />
+                    </>
+                  ) : t.handoff ? (
                     <>
                       <blockquote>{HANDOFF_TEXT}</blockquote>
                       <Handoff request={t.q} />

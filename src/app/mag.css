@@ -717,3 +717,10 @@ a.toc-item:hover .leader { border-color: var(--olive); }
 .handoff-msg.is-error { color: var(--error); }
 .handoff-done { font-size: 15px; color: var(--success); font-weight: 500; }
 .handoff-open { align-self: flex-start; }
+
+/* Recruiters: every way to reach Rachel */
+.agent-details { list-style: none; margin: 0; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; background: var(--sand); border-left: 3px solid var(--olive); font-size: 15px; }
+.agent-details span { display: inline-block; min-width: 76px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bark); }
+.agent-details a { color: var(--olive); overflow-wrap: anywhere; }
+.agent-or { font-size: 14px; color: var(--muted); }
+.chip.chip-hire { background: var(--lime); border-color: var(--lime); color: var(--ink); font-weight: 600; }
