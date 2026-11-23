@@ -724,3 +724,10 @@ a.toc-item:hover .leader { border-color: var(--olive); }
 .agent-details a { color: var(--olive); overflow-wrap: anywhere; }
 .agent-or { font-size: 14px; color: var(--muted); }
 .chip.chip-hire { background: var(--lime); border-color: var(--lime); color: var(--ink); font-weight: 600; }
+
+/* School: the board of prefects and the investiture */
+.school-pics { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.school-pics img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.school-pics .school-pic-wide img { object-position: 50% 70%; }
+.school-pics figure:last-child img { object-position: 40% 35%; }
+@media (max-width: 760px) { .school-pics { grid-template-columns: 1fr; } }

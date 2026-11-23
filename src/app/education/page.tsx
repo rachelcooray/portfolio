@@ -117,6 +117,17 @@ export default function Education() {
           </div>
         </div>
       </section>
+
+      <section className="school-pics" aria-label="Prefects at St. Bridget's Convent">
+        <figure className="school-pic-wide">
+          <img loading="lazy" decoding="async" src="/images/mag/board-of-prefects.webp" alt="The Board of Prefects of St. Bridget's Convent in green blazers, in front of the school buildings" width={1800} height={999} />
+          <figcaption>The Board of Prefects, St. Bridget&apos;s Convent, Colombo.</figcaption>
+        </figure>
+        <figure>
+          <img loading="lazy" decoding="async" src="/images/mag/prefects-investiture.webp" alt="Sisters pinning badges on prefects at the investiture on the school grounds, beside the school flags" width={768} height={1024} />
+          <figcaption>Getting appointed: badges pinned at the prefects&apos; investiture.</figcaption>
+        </figure>
+      </section>
     </div>
   );
 }
