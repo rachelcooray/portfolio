@@ -14,10 +14,10 @@ from docx.shared import Mm, Pt, RGBColor
 ROOT = Path(__file__).resolve().parent.parent
 data = json.loads((ROOT / "cv-build" / "cv.json").read_text())
 
-INK = RGBColor(0x1E, 0x0B, 0x12)
-CHERRY = RGBColor(0x4A, 0x10, 0x24)
-ACCENT = RGBColor(0x2C, 0x4A, 0x6B)
-MUTED = RGBColor(0x5C, 0x5A, 0x55)
+INK = RGBColor(0x2B, 0x23, 0x18)
+CHERRY = RGBColor(0x46, 0x52, 0x1A)
+ACCENT = RGBColor(0x46, 0x52, 0x1A)
+MUTED = RGBColor(0x5A, 0x4E, 0x3A)
 
 doc = Document()
 sec = doc.sections[0]
@@ -73,14 +73,14 @@ run(p, data["role"], size=10.5, bold=True, color=ACCENT)
 p = para(3)
 run(p, "  |  ".join(data["contact"]), size=8.2, color=MUTED)
 p = para(6)
-rule(p, "4A1024")
+rule(p, "46521A")
 p = para(4)
 run(p, data["summary"], size=9.4)
 
 for block in data["blocks"]:
     h = para(9)
     run(h, block["heading"].upper(), size=8, bold=True, color=ACCENT)
-    rule(h, "D9D3C6", 4)
+    rule(h, "CBBE9F", 4)
     skills = block["heading"] == "Skills"
     for it in block["items"]:
         p = para(2 if skills else 4)
@@ -105,6 +105,11 @@ for block in data["blocks"]:
             bp.paragraph_format.left_indent = Mm(4)
             bp.paragraph_format.space_before = Pt(1)
             run(bp, b)
+
+# The QR code to the site, in the footer of every page.
+foot = sec.footer.paragraphs[0]
+run(foot, "").add_picture(str(ROOT / "scripts" / "assets" / "qr-site.png"), width=Mm(13))
+run(foot, "   Portfolio and an agent that answers questions about my work: https://rachelcooray.com", size=8, color=MUTED)
 
 core = doc.core_properties
 core.author = data["name"]

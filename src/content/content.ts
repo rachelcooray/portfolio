@@ -80,6 +80,7 @@ export const identity = {
     { label: "GitHub", href: "https://github.com/rachelcooray" },
     { label: "ORCID", href: "https://orcid.org/0009-0009-3192-2669" },
     { label: "CV", href: "/rachelcooray-cv.pdf" },
+    { label: "CV, plain text for ATS", href: "/rachelcooray-cv-ats.pdf" },
   ],
   orcid: "0009-0009-3192-2669",
   copyright: "2026 Rachel Cooray",
