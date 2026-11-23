@@ -13,7 +13,7 @@ export default function Robot({ say }: { say: string }) {
           <circle cx="114" cy="60" r="6.5" fill="#2b2318" />
         </g>
         <path d="M90 72 q10 7 20 0" fill="none" stroke="#2b2318" strokeWidth="3" strokeLinecap="round" />
-        <rect x="62" y="104" width="76" height="86" rx="18" fill="#7a6142" stroke="#46521a" strokeWidth="2" />
+        <rect x="62" y="104" width="76" height="86" rx="18" fill="#6b5436" stroke="#46521a" strokeWidth="2" />
         <circle cx="100" cy="140" r="12" fill="#c7d42b" stroke="#46521a" strokeWidth="2" />
         <path d="M62 128 q-22 8 -20 34" fill="none" stroke="#46521a" strokeWidth="8" strokeLinecap="round" />
         <circle cx="42" cy="164" r="10" fill="#c7d42b" stroke="#46521a" strokeWidth="2.5" />

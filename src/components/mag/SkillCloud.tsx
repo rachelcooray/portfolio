@@ -1,14 +1,18 @@
 import { skillCloud } from "@/content/content";
 
-// Bright tones on the deep olive panel, all drawn from the site palette.
+// Category colours on the olive-deep panel. Each passes WCAG AA (4.5:1) there.
 const COLOURS: Record<string, string> = {
-  think: "#d9ccf5",
-  data: "#c7d42b",
-  ai: "#8cc4f2",
-  insight: "#f2cf8a",
-  product: "#faf7ef",
-  delivery: "#f4a983",
+  think: "#c6b6ea",
+  data: "#8fbfee",
+  ai: "#c7d42b",
+  insight: "#e0c58f",
+  product: "#e39b76",
+  delivery: "#f3eee0",
 };
+
+// Several colours print as similar greys, so in print each word carries a
+// two letter prefix that the legend repeats.
+const PREFIX: Record<string, string> = { think: "TH", data: "DA", ai: "AI", insight: "IN", product: "PR", delivery: "DE" };
 
 // Biggest words in the middle, smaller ones fanning out to both sides, the
 // way a word cloud reads. Each word floats gently on its own rhythm.
@@ -30,6 +34,7 @@ export default function SkillCloud() {
             className={`cloud-w w${w.weight}`}
             style={{ color: COLOURS[w.group], ["--d" as string]: `${(i % 7) * 0.35}s`, ["--i" as string]: i }}
           >
+            <span className="cloud-p" aria-hidden="true">{PREFIX[w.group]}</span>
             {w.name}
           </li>
         ))}
@@ -39,6 +44,7 @@ export default function SkillCloud() {
         {Object.entries({ think: "Thinking", data: "Data", ai: "AI", insight: "Insight", product: "Products", delivery: "Delivery" }).map(([k, v]) => (
           <span key={k} className="cloud-k">
             <i style={{ background: COLOURS[k] }} />
+            <span className="cloud-p" aria-hidden="true">{PREFIX[k]}</span>
             {v}
           </span>
         ))}

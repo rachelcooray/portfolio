@@ -44,9 +44,9 @@ const BOTTLE = (
 const CONE = (
   <svg viewBox="0 0 16 30" width="16" height="30">
     <circle cx="8" cy="8" r="6.5" fill="#f4dfc9" stroke="#46521a" strokeWidth="1" />
-    <circle cx="5.5" cy="6" r="1" fill="#7a6142" />
+    <circle cx="5.5" cy="6" r="1" fill="#6b5436" />
     <path d="M2 12.5h12L8 29.5z" fill="#c9a26b" stroke="#46521a" strokeWidth="1" strokeLinejoin="round" />
-    <path d="M4.5 15.5l6 4M11.5 15.5l-6 4M6 21l3.5 3" stroke="#7a6142" strokeWidth="0.8" fill="none" />
+    <path d="M4.5 15.5l6 4M11.5 15.5l-6 4M6 21l3.5 3" stroke="#6b5436" strokeWidth="0.8" fill="none" />
   </svg>
 );
 
