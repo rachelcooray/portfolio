@@ -219,7 +219,7 @@ export const education: EducationItem[] = [
     title: "St. Bridget's Convent, Colombo",
     institution: "GCE A/L 2022 and GCE O/L 2018",
     dateRange: "2008 to 2022",
-    summary: "GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, in English Language, Mathematics, Science, Business and Accounting Studies, ICT, Sinhala, History, Western Music and Roman Catholicism. Head Prefect, 2020.",
+    summary: "GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English Language, Mathematics, Science, Business and Accounting Studies and ICT. Head Prefect, 2020.",
   },
 ];
 
@@ -1836,7 +1836,7 @@ export const schoolLife = {
   teams: ["Swim team, SLASA and SLASU meets, 2012 to 2019", "Tech crew", "Athletics"],
   exams: [
     { level: "GCE A/L", year: "2022", results: [["Chemistry", "A"], ["English", "A"], ["Physics", "B"], ["Combined Mathematics", "B"]] },
-    { level: "GCE O/L", year: "2018", results: [["English Language", "A"], ["Mathematics", "A"], ["Science", "A"], ["Business and Accounting Studies", "A"], ["ICT", "A"], ["Sinhala", "A"], ["History", "A"], ["Western Music", "A"], ["Roman Catholicism", "A"]], note: "Nine As." },
+    { level: "GCE O/L", year: "2018", results: [["English Language", "A"], ["Mathematics", "A"], ["Science", "A"], ["Business and Accounting Studies", "A"], ["ICT", "A"]], note: "Nine As in all." },
   ],
   photo: {
     src: "/images/mag/head-prefect.webp",
@@ -1897,7 +1897,7 @@ export const askFaqs = [
 export const askMore = [
   {
     q: "School exams",
-    a: "Yes, at St. Bridget's Convent, Colombo. GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, in English Language, Mathematics, Science, Business and Accounting Studies, ICT, Sinhala, History, Western Music and Roman Catholicism.",
+    a: "Yes, at St. Bridget's Convent, Colombo. GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English Language, Mathematics, Science, Business and Accounting Studies and ICT.",
     href: "/education",
     label: "Education",
     keywords: ["ol", "ols", "al", "als", "o l", "a l", "o level", "o levels", "a level", "a levels", "alevels", "olevels", "gce", "exam", "exams", "results", "grades", "school results"],
