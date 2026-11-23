@@ -106,6 +106,7 @@ export default function Education() {
               <li key={t}>{t}</li>
             ))}
           </ul>
+          <p>{schoolLife.interaction}</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             <span className="kicker">Teams and crews</span>
             <ul className="tags">

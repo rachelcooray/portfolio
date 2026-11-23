@@ -250,7 +250,7 @@ export type Role = {
 export const octave = {
   company: "OCTAVE, John Keells Holdings",
   logo: "/images/logo-octave.jpeg",
-  meta: "Colombo, Sri Lanka. Promoted from intern to associate to analyst within a year.",
+  meta: "Colombo, Sri Lanka. Promoted from intern to associate to analyst.",
   own: "I work across enterprise data and AI initiatives within the FMCG business, connecting data science, engineering and commercial stakeholders to deliver analytics-driven solutions. I own six use cases across the value chain, from the analysis and the solution design to the problem solving along the way: production planning, Permanent Dispatch Planning, the Distributor Replenishment System, Ice Cream Distributor Margins, Beverages Distributor Margins, and weather and sales.",
   useCases: [
     {
@@ -1653,7 +1653,7 @@ export function buildMagazinePassages(): Passage[] {
 
   volunteer.items.forEach((v) => add("volunteer", v.id, `${v.event} (${v.dateRange})`, `${v.title}, ${v.organization}. ${v.summary}`, ["volunteer", "volunteering", "event", v.organization.toLowerCase()]));
   add("education", "modules", "Modules and papers", `Her BSc in Computer Science at Westminster had a Data Science specialisation; the full module list isn't published here yet. CIMA papers completed: ${cima.completed.join("; ")}. In progress: ${cima.inProgress.join("; ")}.`, ["modules", "module", "subjects", "subject", "courses", "course", "papers", "curriculum", "cima", "accounting"]);
-  add("education", "school-life", "At school, St. Bridget's Convent", `${schoolLife.leadership.map((l) => `${l.role}, ${l.year}.`).join(" ")} ${schoolLife.interact} Teams: ${schoolLife.teams.join(", ")}.`, ["school", "prefect", "head prefect", "leadership", "interact", "swim", "athletics", "tech crew", "st bridget"]);
+  add("education", "school-life", "At school, St. Bridget's Convent", `${schoolLife.leadership.map((l) => `${l.role}, ${l.year}.`).join(" ")} ${schoolLife.interact} Interact projects: ${schoolLife.interactProjects.join("; ")}. ${schoolLife.interaction} Teams: ${schoolLife.teams.join(", ")}.`, ["school", "prefect", "head prefect", "leadership", "interact", "interaction", "sports festival", "swim", "athletics", "tech crew", "st bridget"]);
   talks.forEach((t) => add("recognition", t.id, `${t.event}: ${t.title}`, `${t.date}. ${t.org}. ${t.role} ${t.insights.join(" ")}`, ["talk", "speaker", "panel", "un", "united nations", "csw", "girl", "girls", "covid", "spoke", "speaking", "presented"]));
   add("contact", "contact-full", "Contact details", `Email ${identity.email}. Phone ${identity.phone}. Based in ${identity.location}. LinkedIn, GitHub and ORCID are linked at the foot of every page.`, ["contact", "email", "phone", "call", "reach", "hire", "linkedin", "number"]);
   return p;
@@ -1819,7 +1819,8 @@ export const schoolLife = {
     { year: "2012", role: "Deputy Head Prefect", note: "Primary school, St. Bridget's Convent." },
   ],
   interact: "Held leadership roles in the Interact Club, including Project Secretary of the Interact Inter-school Marketing and Advertising Challenge in 2019, and volunteered on its community service projects.",
-  interactProjects: ["Make a Wish, 2017 and 2019", "Smile for Life, 2018", "Installation Committee, 2019", "Community Service, 2020"],
+  interactProjects: ["Make a Wish, 2017 and 2019", "Smile for Life, 2018", "Interaction Committee, 2019/20", "Community Service, 2020"],
+  interaction: "Served on the Interaction Committee in 2019/20. Interaction is the biggest school sports festival in Sri Lanka.",
   teams: ["Swim team, SLASA and SLASU meets, 2012 to 2019", "Tech crew", "Athletics"],
   exams: [
     { level: "GCE A/L", year: "2022", results: [["Chemistry", "A"], ["English", "A"], ["Physics", "B"], ["Combined Mathematics", "B"]] },
@@ -1851,7 +1852,7 @@ export const askFaqs = [
   },
   {
     q: "What's her experience?",
-    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, promoted from intern to associate to analyst within a year. She is also Co-founder and Developer at Layer1 Studio, and has data engineering experience from London Success Academy.",
+    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, promoted from intern to associate to analyst. She is also Co-founder and Developer at Layer1 Studio, and has data engineering experience from London Success Academy.",
     href: "/experience",
     label: "Experience",
     keywords: ["experience", "exp", "work", "job", "career", "roles", "employment", "worked"],
@@ -1898,7 +1899,7 @@ export const askMore = [
   },
   {
     q: "Current role",
-    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, since July 2026, after moving from intern to associate to analyst within a year. She owns six AI and analytics use cases across the FMCG value chain.",
+    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, since July 2026, after moving from intern to associate to analyst. She owns six AI and analytics use cases across the FMCG value chain.",
     href: "/experience",
     label: "Experience",
     keywords: ["current", "currently", "role", "title", "position", "now", "today", "employer", "works"],
