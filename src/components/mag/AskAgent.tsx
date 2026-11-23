@@ -156,7 +156,7 @@ function Details() {
 // Requests only Rachel can answer: work, quotes, hiring, collaboration. The
 // agent never promises anything; it offers to pass the request on.
 const REQUEST =
-  /\b(can|could|would|will) (she|you|rachel)\b.*\b(make|build|design|create|develop|help|do|work|quote|speak|talk|mentor|join)\b|\bfor (me|us|my|our)\b|\b(hire|hiring|quote|pricing|price|cost|rates?|freelance|commission|collaborat\w*|partner\w*|availab\w*|job offer|opportunit\w*|get in touch|contact (her|rachel)|reach (her|rachel)|book (her|rachel)|meet (her|rachel)|call with)\b/i;
+  /\b(can|could|would|will) (she|you|rachel)\b.*\b(make|build|design|create|develop|help|do|work|quote|speak|talk|mentor|join)\b|\bfor (me|us|my|our)\b|\b(take|takes|taking|accept|accepts|accepting) on\b|\bnew (projects?|clients?|work)\b|\bwork with (her|rachel)\b|\b(build|make|design) (me|us)\b|\b(hire|hiring|quote|pricing|price|cost|rates?|freelance|commission|collaborat\w*|partner\w*|availab\w*|job offer|opportunit\w*|get in touch|contact (her|rachel)|reach (her|rachel)|book (her|rachel)|meet (her|rachel)|call with)\b/i;
 
 const HANDOFF_TEXT = "That one is for Rachel herself. Leave your email and what you need, and I'll pass it straight to her.";
 
@@ -271,7 +271,7 @@ export default function AskAgent() {
     endRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
   }, [thread, typing]);
 
-  const answerFor = (q: string): Answer | null => {
+  const answerFor = (q: string, faqOnly = false): Answer | null => {
     const ql = ` ${q.toLowerCase().replace(/[^a-z0-9\s]/g, " ")} `;
     const exact = askFaqs.find((f) => f.q === q);
     const faq =
@@ -281,6 +281,7 @@ export default function AskAgent() {
         .filter((x) => x.n > 0)
         .sort((x, y) => y.n - x.n)[0]?.f;
     if (faq) return { text: faq.a, title: faq.q.replace("?", ""), href: faq.href, label: faq.label };
+    if (faqOnly) return null;
     const hit = search(passages, q)[0];
     if (!hit) return null;
     const r = routeFor(hit);
@@ -291,7 +292,8 @@ export default function AskAgent() {
     if (typing) return;
     const recruiter = RECRUITER.test(q);
     const handoff = !recruiter && REQUEST.test(q);
-    const answer = recruiter || handoff ? null : answerFor(q);
+    // A request still gets the published facts first, when there are some.
+    const answer = recruiter ? null : answerFor(q, handoff);
     const askedQs = new Set([...thread.map((t) => t.q), q]);
     const follow = askFaqs.map((f) => f.q).filter((x) => !askedQs.has(x)).slice(0, 3);
     setTyping(true);
@@ -346,6 +348,7 @@ export default function AskAgent() {
                     </>
                   ) : t.handoff ? (
                     <>
+                      {t.answer ? <blockquote>{t.answer.text}</blockquote> : null}
                       <blockquote>{HANDOFF_TEXT}</blockquote>
                       <Handoff request={t.q} />
                     </>

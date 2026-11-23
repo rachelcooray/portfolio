@@ -1900,6 +1900,13 @@ export const askMore = [
     keywords: ["ol", "ols", "al", "als", "o l", "a l", "o level", "o levels", "a level", "a levels", "alevels", "olevels", "gce", "exam", "exams", "results", "grades", "school results"],
   },
   {
+    q: "How does this agent work?",
+    a: "It does not use a language model. It searches Rachel's published pages and quotes them, so it never invents anything, and nothing you type is stored. When a question needs Rachel herself, it passes your request to her.",
+    href: "/ask",
+    label: "Ask",
+    keywords: ["ai model", "what model", "which model", "language model", "llm", "gpt", "chatgpt", "claude", "openai", "how does this work", "how do you work", "are you a bot", "are you ai", "are you real", "who built you", "what are you"],
+  },
+  {
     q: "Layer1 Studio",
     a: "Layer1 Studio is a web and mobile development venture Rachel co-founded in December 2025. She builds websites and apps for small businesses, from shaping the brief to shipping and maintaining them, and mentors interns on real client projects.",
     href: "/projects",
