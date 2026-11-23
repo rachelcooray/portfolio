@@ -28,7 +28,7 @@ export default function BackPage() {
           </div>
         </div>
         <div className="back-meta">
-          <span>© {identity.copyright}</span>
+          <span>{magazine.footerLine} © {identity.copyright}</span>
           <span>
             {magazine.issue} · {magazine.issueDate}
           </span>

@@ -4,7 +4,7 @@ import { identity } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "In pictures",
-  description: "Graduation, the PCOS Care research, on stage, awards and things built.",
+  description: "A visual record of my work and milestones.",
 };
 
 const linkedin = identity.links.find((l) => l.label === "LinkedIn")?.href ?? "https://www.linkedin.com/";
@@ -13,7 +13,7 @@ export default function Pictures() {
   return (
     <div className="wrap page">
       <Folio right="In pictures · 30" />
-      <h1 className="pics-title">In pictures.</h1>
+      <h1 className="pics-title">A visual record of my work and milestones.</h1>
 
       <section className="pics-sec first">
         <span className="kicker">01 · Graduation</span>

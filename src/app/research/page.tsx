@@ -4,7 +4,7 @@ import { research } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "PCOS Care",
-  description: "PCOS Care, a machine learning web app for early PCOS risk screening, published at IEEE ICAHS 2025.",
+  description: "PCOS Care: explainable early-risk screening.",
 };
 
 export default function Research() {
@@ -15,7 +15,9 @@ export default function Research() {
       <div className="research">
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
           <span className="kicker">Applied machine learning · {p.venue}</span>
-          <h1>PCOS Care</h1>
+          <h1>
+            PCOS Care: <em>explainable early-risk screening.</em>
+          </h1>
           <p className="dek">A final year project that became a published paper.</p>
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/pcos-showcase.webp" alt="Rachel presenting PCOS Care to judges and standing beside her research poster" width={1606} height={1198} style={{ aspectRatio: "4 / 3" }} />

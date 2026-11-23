@@ -20,7 +20,7 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
   const u = magazine.useCases.find((x) => x.id === id);
-  return u ? { title: u.name, description: useCaseStories[id]?.problem.slice(0, 155) } : {};
+  return u ? { title: u.name, description: `${u.name}: ${u.headline}` } : {};
 }
 
 export default async function UseCase({ params }: { params: Promise<{ id: string }> }) {
@@ -38,10 +38,10 @@ export default async function UseCase({ params }: { params: Promise<{ id: string
         <Link href="/use-cases">Use cases</Link> <span className="muted">/ {u.name}</span>
       </nav>
       <div className="page-head">
-        <h1>{u.name}</h1>
+        <h1 className="uc-head">{u.headline}</h1>
         <p>
           <span className="kicker">
-            {u.stage} · {u.code} · Owned
+            {u.name} · {u.stage} · Owned
           </span>
           <br />
           {u.line}

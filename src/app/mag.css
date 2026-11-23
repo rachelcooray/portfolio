@@ -498,3 +498,11 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
 .exam { display: flex; flex-direction: column; gap: 6px; }
 .exam-grade { font-family: var(--serif); font-size: 22px; line-height: 1; color: var(--olive); min-width: 1.2em; text-align: right; }
 @media (max-width: 600px) { .exams { grid-template-columns: 1fr; } }
+
+/* Headlines (Nov 2026 wording) */
+.cover-head { display: flex; flex-direction: column; gap: 6px; }
+.cover-headline { font-family: var(--serif); font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1; color: var(--ink); }
+.case-name { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--olive); }
+.uc-head { font-size: clamp(40px, 5.2vw, 76px) !important; }
+.research h1 em { font-style: italic; display: block; font-size: 0.45em; line-height: 1.1; color: var(--ink); margin-top: 10px; }
+.pics-title { font-size: clamp(48px, 6.5vw, 100px) !important; }

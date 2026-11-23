@@ -5,13 +5,13 @@ import { buildLog, layer1, research } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description: "PCOS Care, Layer1 Studio products and independent builds by Rachel Cooray.",
+  description: "Research software, client products and independent builds.",
 };
 
 export default function Projects() {
   return (
     <div className="wrap page">
-      <PageHead folio="Projects · 14" title="Things I built." dek="Research software, client products and builds I made to learn something new." />
+      <PageHead folio="Projects · 14" title="Research software, client products and independent builds." />
       <div className="cards">
         <article className="card lead">
           <img loading="lazy" decoding="async" src="/images/mag/pcos-app.webp" alt="The PCOS Care web app home page" width={2000} height={1250} style={{ objectPosition: "top" }} />

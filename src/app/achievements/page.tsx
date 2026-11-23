@@ -4,7 +4,7 @@ import { achievements, volunteer } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "Achievements",
-  description: "Prizes, hackathons, scholarships, school leadership and sport.",
+  description: "Awards and recognition.",
 };
 
 const PICS: Record<number, { src: string; alt: string; contain?: boolean }> = {
@@ -16,7 +16,7 @@ const PICS: Record<number, { src: string; alt: string; contain?: boolean }> = {
 export default function Achievements() {
   return (
     <div className="wrap page">
-      <PageHead folio="Achievements · 26" title="Recognition." dek="Prizes and recognition I have been given, and one good day in the pool." />
+      <PageHead folio="Achievements · 26" title="Awards and recognition." dek="Prizes and recognition I have been given, and one good day in the pool." />
       <div className="cards">
         {achievements.map((a, i) => (
           <article key={a.id} className={i === 0 ? "card lead" : "card"}>

@@ -32,7 +32,7 @@ const plexMono = localFont({
 });
 
 const description =
-  "Rachel Cooray, Analyst, Data and AI at OCTAVE, John Keells Holdings. Six AI and analytics use cases across the FMCG value chain, published research at IEEE ICAHS 2025, and a First Class in Computer Science from the University of Westminster.";
+  "Rachel Cooray, Analyst, Data and AI at OCTAVE, John Keells Holdings. Published researcher at IEEE ICAHS 2025. First Class Computer Science graduate, University of Westminster.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rachelcooray.com"),

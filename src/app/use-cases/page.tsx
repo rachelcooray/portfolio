@@ -5,8 +5,8 @@ import ValueChain from "@/components/mag/ValueChain";
 import { magazine } from "@/content/content";
 
 export const metadata: Metadata = {
-  title: "Six use cases, one value chain",
-  description: "The AI and analytics use cases Rachel Cooray owns at OCTAVE, John Keells Holdings, from the factory line to the shop shelf.",
+  title: "From the factory production line to the outlet shelves",
+  description: "The AI and analytics use cases I own at OCTAVE, and my part in each.",
 };
 
 export default function UseCases() {
@@ -14,8 +14,8 @@ export default function UseCases() {
     <div className="wrap page">
       <Folio right="Cover story · 04" />
       <div className="feature-head">
-        <h1>From the factory gate to the shop shelf.</h1>
-        <p>{magazine.useCasesIntro}</p>
+        <h1>{magazine.useCasesHeadline}</h1>
+        <p>{magazine.useCasesDeck}</p>
       </div>
       <ValueChain />
       <div className="cases">
@@ -26,9 +26,10 @@ export default function UseCases() {
             </span>
             <h2>
               <Link href={`/use-cases/${u.id}`} className="case-link">
-                {u.name}
+                {u.headline}
               </Link>
             </h2>
+            <p className="case-name">{u.name}</p>
             <p>{u.line}</p>
             <p className="part">
               <b>My part.</b> {u.part}

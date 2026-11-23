@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import AskAgent from "@/components/mag/AskAgent";
 
 export const metadata: Metadata = {
-  title: "Ask me anything",
-  description: "Ask about Rachel Cooray's work. Every answer is quoted from her published work, with its source.",
+  title: "Ask about my work",
+  description: "Ask about my work. Answers are quoted from published material, with sources.",
 };
 
 export default function Ask() {
@@ -16,8 +16,8 @@ export default function Ask() {
         </div>
         <div className="ask-grid">
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-            <h1>Ask me anything.</h1>
-            <p className="ask-intro">An agent that knows my work. It answers only from what is published in this magazine, and shows where it took the answer from. If it doesn&apos;t know, it says so.</p>
+            <h1>Ask about my work.</h1>
+            <p className="ask-intro">Answers are quoted from published material, with sources.</p>
             <ul className="ask-rules">
               <li className="kicker">House rules</li>
               <li>Quotes my own words, never invents.</li>

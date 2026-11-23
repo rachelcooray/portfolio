@@ -6,7 +6,7 @@ import { useEffect } from "react";
 // contents page, and the site comes into view. Plays once per visit, only on
 // the cover, never with reduced motion (the head script in layout.tsx decides).
 const LINES = [
-  ["Six use cases, one value chain", "04"],
+  ["From the factory production line to the outlet shelves", "04"],
   ["PCOS Care", "12"],
   ["Projects", "14"],
   ["Experience", "16"],
@@ -55,7 +55,7 @@ export default function Opening() {
         <div className="book-cover">
           <span className="book-mast">Rachel Cooray</span>
           <span className="book-issue">Issue 01 · November 2026</span>
-          <span className="book-story">Six use cases, one value chain.</span>
+          <span className="book-story">From the factory production line to the outlet shelves.</span>
         </div>
       </div>
       <button id="opening-skip" type="button" className="opening-skip" tabIndex={-1}>

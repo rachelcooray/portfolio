@@ -6,7 +6,7 @@ import { site, skills, toolkitStack } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "Skills",
-  description: "The toolkit in conversation: languages, data engineering, AI and analysis, insight, products and delivery, and where each one is used.",
+  description: "Tools and capabilities, and where each was applied.",
 };
 
 const explored = new Set(skills.flatMap((s) => s.explored.map((e) => e.toLowerCase())));
@@ -16,7 +16,7 @@ export default function Skills() {
   const layers = [...toolkitStack].reverse();
   return (
     <div className="wrap page">
-      <PageHead folio="Skills · 29" title="The toolkit, in conversation." dek="Six questions, from the foundations up. Each answer comes with the tools behind it and where they were used." />
+      <PageHead folio="Skills · 29" title="Tools and capabilities, and where each was applied." dek="Six questions, from the foundations up. Each answer comes with the tools behind it and where they were used." />
       <div className="convo">
         {layers.map((l, i) => (
           <section key={l.layer} className="convo-turn" style={{ ["--t" as string]: i }} aria-labelledby={`q-${i}`}>

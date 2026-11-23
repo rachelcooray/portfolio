@@ -3,7 +3,7 @@ import Folio from "@/components/mag/Folio";
 import { identity, magazine } from "@/content/content";
 
 const TOC = [
-  { n: "04", href: "/use-cases", t: "Six use cases, one value chain", d: "The analyst work at OCTAVE, John Keells Holdings. The heart of the issue." },
+  { n: "04", href: "/use-cases", t: "From the factory production line to the outlet shelves", d: "The analyst work at OCTAVE, John Keells Holdings. The heart of the issue." },
   { n: "12", href: "/research", t: "PCOS Care", d: "Machine learning as a screening-support tool, published at IEEE ICAHS 2025." },
   { n: "14", href: "/projects", t: "Projects", d: "PCOS Care, Layer1 Studio and independent builds." },
   { n: "16", href: "/experience", t: "Experience", d: "OCTAVE, Layer1 Studio, London Success Academy, retail, support and teaching." },
@@ -29,6 +29,10 @@ export default function Cover() {
             Cooray
           </h1>
           <p className="cover-strap">{magazine.strap}</p>
+          <div className="cover-head">
+            <p className="cover-headline">{magazine.coverHeadline}</p>
+            <p className="muted">{magazine.coverDeck}</p>
+          </div>
           <Link className="cover-line lead" href="/use-cases">
             <span className="kicker">{c.story.kicker}</span>
             <span className="big">{c.story.title}</span>

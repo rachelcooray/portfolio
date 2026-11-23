@@ -4,13 +4,13 @@ import { press } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "In the news",
-  description: "Coverage from the University of Westminster, IEEE, John Keells Holdings, the Daily FT and the LMD Youth Forum.",
+  description: "Coverage of my work and teams.",
 };
 
 export default function News() {
   return (
     <div className="wrap page">
-      <PageHead folio="In the news · 28" title="In the news." dek="Where my work and my teams have been written about." />
+      <PageHead folio="In the news · 28" title="Coverage of my work and teams." dek="Where my work and my teams have been written about." />
       <div className="cards">
         {press.map((n) => (
           <article key={n.id} className="card">

@@ -10,13 +10,13 @@ const LOGOS: Record<string, { src: string; alt: string }> = {
 
 export const metadata: Metadata = {
   title: "Education",
-  description: "BSc (Hons) Computer Science with First Class Honours from the University of Westminster, CIMA, and St. Bridget's Convent.",
+  description: "First Class Honours in Computer Science, with business training in accounting.",
 };
 
 export default function Education() {
   return (
     <div className="wrap page">
-      <PageHead folio="Education · 20" title="A First Class Bachelor's degree." dek="Computer Science in London, business accounting alongside it, and the school where it started." />
+      <PageHead folio="Education · 20" title="First Class Honours in Computer Science, with business training in accounting." dek="Computer Science in London, business accounting alongside it, and the school where it started." />
       <div className="g g-grad">
         <figure>
           <img loading="lazy" decoding="async" src="/images/mag/graduation-roses-thames.webp" alt="Rachel in her graduation gown and cap holding red roses, by the Thames" width={893} height={1500} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />

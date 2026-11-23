@@ -5,7 +5,7 @@ import { layer1, londonSuccessAcademy, octave, otherRoles, teaching } from "@/co
 
 export const metadata: Metadata = {
   title: "Experience",
-  description: "OCTAVE at John Keells Holdings, Layer1 Studio, London Success Academy, and the retail, support and teaching roles behind them.",
+  description: "From intern to analyst in under a year.",
 };
 
 const list = { margin: 0, paddingLeft: 18, display: "flex", flexDirection: "column" as const, gap: 6 };
@@ -15,7 +15,7 @@ export default function Experience() {
   const ladder = [...octave.roles, ...octave.earlier];
   return (
     <div className="wrap page">
-      <PageHead folio="Experience · 16" title="From ideas to impact." dek="Analytics, AI, product and people. The roles that shaped the work, newest first." />
+      <PageHead folio="Experience · 16" title="From intern to analyst in under a year." dek="Analytics, AI, product and people. The roles that shaped the work, newest first." />
 
       <section className="split" aria-labelledby="exp-octave">
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
