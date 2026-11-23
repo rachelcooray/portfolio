@@ -36,18 +36,18 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
 
     if (!name || !email || !topic || !body) {
       setState("error");
-      setMessage("Please fill in every field.");
+      setMessage("Error: please fill in every field.");
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setState("error");
-      setMessage("That email address doesn't look right.");
+      setMessage("Error: that email address doesn't look right.");
       return;
     }
     // Bots: a filled honeypot, or a submit within seconds of arriving.
     if (String(f.get("company") || "") || !opened.current || Date.now() - opened.current < MIN_MS) {
       setState("sent");
-      setMessage("Thank you. Your message has been sent.");
+      setMessage("Sent. Thank you for your message.");
       form.reset();
       return;
     }
@@ -74,11 +74,11 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
       }
       if (!ok) throw new Error("send failed");
       setState("sent");
-      setMessage("Thank you. Your message has been sent.");
+      setMessage("Sent. Thank you for your message.");
       form.reset();
     } catch {
       setState("error");
-      setMessage("Something went wrong. You can email me directly at the address below.");
+      setMessage("Error: the message did not send. You can email me directly at the address below.");
     }
   };
 
@@ -120,7 +120,7 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
         <button type="submit" disabled={state === "sending"} aria-busy={state === "sending"}>
           {state === "sending" ? "Sending…" : "Send message"}
         </button>
-        <p id="cform-status" className={state === "error" ? "cform-msg is-error" : "cform-msg"} role="status" aria-live="polite">
+        <p id="cform-status" className={state === "error" ? "cform-msg is-error" : state === "sent" ? "cform-msg is-sent" : "cform-msg"} role="status" aria-live="polite">
           {message}
         </p>
       </div>
