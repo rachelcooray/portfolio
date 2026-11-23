@@ -11,6 +11,12 @@
   --line: #ddd3bf;
   --lime: #c7d42b;
   --pale: #dde3b0;
+  /* Rachel's palette is green and brown led, with a touch of sky blue and lavender. */
+  --sky: #64a8e5;
+  --sky-ink: #2f6fa8;
+  --lavender: #b9a6de;
+  --lavender-ink: #5e4a8a;
+  --lavender-wash: #efe9f8;
   --serif: var(--font-display), "EB Garamond", Garamond, Georgia, serif;
   --sans: var(--font-body), "IBM Plex Sans", system-ui, sans-serif;
   --mono: var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
@@ -609,3 +615,36 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
 .cloud-key i { box-shadow: 0 0 0 1px rgba(250, 247, 239, 0.4); }
 .robot-say { color: var(--ink); }
 .cloud-wrap .robot-svg { background: radial-gradient(circle at 50% 55%, rgba(250, 247, 239, 0.32) 0%, rgba(250, 247, 239, 0.08) 55%, transparent 72%); border-radius: 50%; padding: 6px; }
+
+/* The touches of sky blue and lavender */
+.kicker { color: var(--lavender-ink); }
+.back .kicker, .ask .kicker, .band .kicker, .story-mine .kicker { color: var(--lavender); }
+.spine-link[aria-current="page"] { background: var(--lavender-wash); }
+.spine-issue { color: var(--lavender-ink); }
+.aic-list li { border-left-color: var(--sky); }
+.aic-n { color: var(--sky-ink); }
+.case .tag, .story-n, .stack-n { color: var(--lavender-ink); }
+.chain-node { box-shadow: 0 0 0 3px var(--lavender-wash); }
+.cover-tag span + span { color: var(--lavender); }
+.ps-solution { border-top-color: var(--sky); }
+.step-n { background: var(--lavender-wash); border-color: var(--lavender-ink); color: var(--lavender-ink); }
+.value-tile svg { color: var(--sky-ink); }
+.bubble-q .bubble-who { color: var(--lavender-ink); }
+.chips li:hover { background: var(--lavender-wash); border-color: var(--lavender-ink); }
+a.toc-item:hover .leader { border-color: var(--lavender-ink); }
+
+/* Palette in use: olive and bark carry the structure; sky blue marks AI and
+   data; lavender is a quiet accent for labels. Plain hairlines, no gradients. */
+::selection { background: var(--lavender); color: var(--ink); }
+a:hover { color: var(--sky-ink); }
+.spine-n, .toc-item .n, .card .meta, .entry-when { color: var(--lavender-ink); }
+.case-name { color: var(--sky-ink); }
+.card.lead { border-top-color: var(--olive); }
+.talk { border-top-color: var(--sky); }
+.school-dot { background: var(--lavender); border-color: var(--lavender-ink); }
+.locator li.is-here .locator-dot { background: var(--lavender); border-color: var(--lavender-ink); box-shadow: 0 0 0 6px rgba(185, 166, 222, 0.35); }
+.agent-follow-btn:hover, .chip:hover { background: var(--lavender); border-color: var(--lavender); color: var(--ink); }
+.back-links a:hover { color: var(--lavender); }
+.cform input:focus-visible, .cform select:focus-visible, .cform textarea:focus-visible { outline-color: var(--lavender); }
+.spine-cv { border-color: var(--lavender-ink); color: var(--lavender-ink); }
+.spine-cv:hover { background: var(--lavender-ink); color: var(--paper); }

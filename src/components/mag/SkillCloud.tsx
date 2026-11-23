@@ -2,11 +2,11 @@ import { skillCloud } from "@/content/content";
 
 // Bright tones on the deep olive panel, all drawn from the site palette.
 const COLOURS: Record<string, string> = {
-  think: "#faf7ef",
+  think: "#d9ccf5",
   data: "#c7d42b",
-  ai: "#9cc8f0",
+  ai: "#8cc4f2",
   insight: "#f2cf8a",
-  product: "#dde3b0",
+  product: "#faf7ef",
   delivery: "#f4a983",
 };
 
