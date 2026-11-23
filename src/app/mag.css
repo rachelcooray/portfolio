@@ -579,3 +579,33 @@ html.intro .opening { display: flex; position: fixed; inset: 0; z-index: 100; al
 .talk-points { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; }
 .talk-points li::marker { color: var(--olive); }
 @media (max-width: 860px) { .talk { grid-template-columns: 1fr; } }
+
+/* Skills interview, tighter: chips instead of leader rows, two per row on wide screens */
+.convo { max-width: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 32px; align-items: start; }
+.convo-turn { gap: 10px; }
+.bubble-q { font-size: clamp(19px, 1.7vw, 23px); padding: 10px 16px; max-width: 100%; }
+.bubble-a-row { justify-content: flex-start; }
+.bubble-face { display: none; }
+.bubble-a { width: 100%; padding: 16px 18px; }
+.bubble-a > p { font-size: 16px; line-height: 1.5; }
+.bubble-who { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
+.bubble-where { color: var(--bark); letter-spacing: 0.08em; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px 5px 9px; background: var(--paper); border: 1px solid #cfc3a6; border-radius: 999px; font-size: 14px; line-height: 1.2; transition: background 0.15s, border-color 0.15s, transform 0.15s; }
+.chips li:hover { background: var(--lime); border-color: var(--olive); transform: translateY(-1px); }
+.chips li.is-explored { border-style: dashed; color: var(--muted); }
+.convo-turn:first-child { grid-column: 1 / -1; }
+@media (max-width: 1100px) { .convo { grid-template-columns: 1fr; } }
+
+/* Word cloud, in colour: deep olive panel, bright words, glowing leaders */
+.cloud-wrap { background: radial-gradient(ellipse at 40% 45%, #5e6b26 0%, #46521a 45%, #2f3809 100%); border: 0; color: var(--paper); box-shadow: 0 18px 40px rgba(43, 35, 24, 0.18); }
+.cloud-words { gap: 6px 18px; }
+.cloud-w { font-family: var(--sans); font-weight: 500; letter-spacing: -0.01em; }
+.w5 { font-weight: 700; text-shadow: 0 0 18px rgba(199, 212, 43, 0.35); }
+.w4 { font-weight: 600; }
+.w1 { font-family: var(--mono); opacity: 0.75; }
+.cloud-w:hover { color: var(--ink) !important; background: var(--lime); border-radius: 6px; text-shadow: none; }
+.cloud-key { color: var(--pale); }
+.cloud-key i { box-shadow: 0 0 0 1px rgba(250, 247, 239, 0.4); }
+.robot-say { color: var(--ink); }
+.cloud-wrap .robot-svg { background: radial-gradient(circle at 50% 55%, rgba(250, 247, 239, 0.32) 0%, rgba(250, 247, 239, 0.08) 55%, transparent 72%); border-radius: 50%; padding: 6px; }

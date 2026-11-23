@@ -1,12 +1,13 @@
 import { skillCloud } from "@/content/content";
 
+// Bright tones on the deep olive panel, all drawn from the site palette.
 const COLOURS: Record<string, string> = {
-  think: "#2b2318",
-  data: "#46521a",
-  ai: "#2c4a6b",
-  insight: "#7a6142",
-  product: "#5e6b26",
-  delivery: "#8a4b2a",
+  think: "#faf7ef",
+  data: "#c7d42b",
+  ai: "#9cc8f0",
+  insight: "#f2cf8a",
+  product: "#dde3b0",
+  delivery: "#f4a983",
 };
 
 // Biggest words in the middle, smaller ones fanning out to both sides, the
@@ -26,7 +27,7 @@ export default function SkillCloud() {
         {words.map((w, i) => (
           <li
             key={w.name}
-            className={`cloud-w w${w.weight}${w.weight <= 2 && i % 3 === 0 ? " tilt" : ""}`}
+            className={`cloud-w w${w.weight}`}
             style={{ color: COLOURS[w.group], ["--d" as string]: `${(i % 7) * 0.35}s`, ["--i" as string]: i }}
           >
             {w.name}

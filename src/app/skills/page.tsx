@@ -56,15 +56,15 @@ export default function Skills() {
               <div className="bubble bubble-a">
                 <span className="bubble-who">
                   {String(i + 1).padStart(2, "0")} · {l.layer}
+                  <span className="bubble-where">{l.where}</span>
                 </span>
                 <p>{l.a}</p>
-                <ul className="leaders">
+                <ul className="chips">
                   {l.tools.map((t) => (
-                    <li key={t}>
+                    <li key={t} className={explored.has(t.toLowerCase()) ? "is-explored" : undefined}>
                       <SkillIcon name={t} />
-                      <span className="leaders-name">{t}</span>
-                      <span className="leaders-dots" aria-hidden="true" />
-                      <span className="leaders-where">{explored.has(t.toLowerCase()) ? "Explored" : l.where}</span>
+                      {t}
+                      {explored.has(t.toLowerCase()) ? <span className="sr-only"> (explored)</span> : null}
                     </li>
                   ))}
                 </ul>
