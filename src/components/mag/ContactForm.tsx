@@ -2,13 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
-// Sends through a free form service, so the inbox address is not in the
-// page source. Set ONE of these at build time:
-//   NEXT_PUBLIC_FORMSPREE_ENDPOINT  e.g. https://formspree.io/f/abcdwxyz
-//   NEXT_PUBLIC_WEB3FORMS_KEY       the Web3Forms access key
-// Nothing typed here is stored by this site. No tracking, no analytics.
-const FORMSPREE = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
-const WEB3FORMS = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
+import { EMAIL_RE, sendToRachel } from "@/lib/send";
 
 const TOPICS = ["Professional opportunity", "Research collaboration", "A project or idea", "Speaking or guest lecture", "Just saying hello"];
 const MIN_MS = 3000;
@@ -39,7 +33,7 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
       setMessage("Error: please fill in every field.");
       return;
     }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!EMAIL_RE.test(email)) {
       setState("error");
       setMessage("Error: that email address doesn't look right.");
       return;
@@ -55,24 +49,7 @@ export default function ContactForm({ fallbackEmail }: { fallbackEmail: string }
     setState("sending");
     setMessage("");
     try {
-      if (!WEB3FORMS && !FORMSPREE) throw new Error("no form service configured");
-      let ok = false;
-      if (WEB3FORMS) {
-        const r = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ access_key: WEB3FORMS, subject: `Portfolio: ${topic}`, from_name: name, name, email, topic, message: body }),
-        });
-        ok = r.ok;
-      } else if (FORMSPREE) {
-        const r = await fetch(FORMSPREE, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({ name, email, topic, message: body, _subject: `Portfolio: ${topic}` }),
-        });
-        ok = r.ok;
-      }
-      if (!ok) throw new Error("send failed");
+      await sendToRachel({ name, email, topic, message: body });
       setState("sent");
       setMessage("Sent. Thank you for your message.");
       form.reset();
