@@ -63,6 +63,12 @@ const roleBullets = [
   "Design measurement with pilot and control comparisons where possible, separating association from proven impact.",
 ];
 
+// What a recruiter needs: the role, the use cases, research, the degree,
+// skills, three projects and top recognition. Everything else is one line.
+const SELECTED = ["build-ask-agent", "build-neurodiversity", "build-csr-street-vendors"];
+const BEYOND =
+  "Head Prefect of St. Bridget's Convent and School Prefect of the Year, 2020. Volunteer with the John Keells Foundation and City of Dreams, 2026. Customer service at UNIQLO, TK Maxx and EG On The Move, student support at Clear Links and Sunday school teaching, alongside study.";
+
 // ---------------------------------------------------------------- blocks (shared with the Word CV)
 const blocks: Block[] = [
   {
@@ -94,20 +100,9 @@ const blocks: Block[] = [
     ],
   },
   { heading: "Education", items: education.map((e) => ({ title: e.title, org: e.institution, when: e.dateRange, text: e.summary })) },
-  { heading: "Projects", items: buildLog.map((b) => ({ title: b.title, when: b.year ?? undefined, text: `${firstSentence(b.built)} ${b.tools.join(", ")}.` })) },
+  { heading: "Selected projects", items: buildLog.filter((x) => SELECTED.includes(x.id)).map((x) => ({ title: x.title, when: x.year ?? undefined, text: `${firstSentence(x.built)} ${x.tools.join(", ")}.` })) },
   { heading: "Skills", items: toolkitStack.map((l) => ({ title: l.layer, text: l.tools.join(", ") })) },
-  {
-    heading: "Leadership",
-    items: [
-      ...schoolLife.leadership.map((l) => ({ title: l.role, org: "St. Bridget's Convent, Colombo", when: l.year })),
-      { title: "Interact Club", text: schoolLife.interact },
-    ],
-  },
-  { heading: "Volunteering", items: volunteer.items.map((v) => ({ title: v.event, org: v.organization, when: v.dateRange, text: v.summary })) },
-  {
-    heading: "Customer service and teaching",
-    items: [...otherRoles.map((r) => ({ title: r.title, org: r.company, when: r.dateRange })), ...teaching.roles.filter((t) => t.id !== "teaching-student-support").map((t) => ({ title: t.title, org: t.institution, when: t.dateRange }))],
-  },
+  { heading: "Beyond the role", items: [{ title: "Leadership, volunteering and customer service", text: BEYOND }] },
   { heading: "Recognition", items: achievements.map((a) => ({ title: a.title, org: a.organization, when: a.year })) },
 ];
 
@@ -226,39 +221,26 @@ li::marker { color: #46521a; }
   <aside class="spine">
     <div>
       <div class="side-h">Education</div>
-      <ul class="list">${education.map((e) => `<li><b>${esc(e.title)}</b><br>${esc(e.institution)}, ${esc(e.dateRange)}</li>`).join("")}</ul>
-    </div>
-    <div>
-      <div class="side-h">School results</div>
-      ${schoolLife.exams
-        .map((x) => `<div class="exam" style="margin-bottom:2mm"><span class="k">${esc(x.level)} · ${esc(x.year)}</span>${x.results.map(([s, g]) => `<div><span>${esc(s)}</span><em>${esc(g)}</em></div>`).join("")}${"note" in x && x.note ? `<span style="font-size:6.8pt;color:#5e5143">Nine As in all.</span>` : ""}</div>`)
-        .join("")}
+      <ul class="list">
+        <li><b>${esc(education[0].title)}</b><br>${esc(education[0].institution)}, ${esc(education[0].dateRange)}<br><span style="color:#5e5143">Data Science specialisation. UOW/IIT scholarship, 2024/25.</span></li>
+        <li><b>${esc(education[1].title)}</b><br>${esc(education[1].institution)}, ${esc(education[1].dateRange)}<br><span style="color:#5e5143">Operational level in progress.</span></li>
+        <li><b>GCE A/L, 2022</b><br>St. Bridget's Convent, Colombo<br><span style="color:#5e5143">${schoolLife.exams[0].results.map(([sub, g]) => `${esc(sub)} ${esc(g)}`).join(", ")}</span></li>
+      </ul>
     </div>
     <div>
       <div class="side-h">Recognition</div>
-      <ul class="list">${achievements.map((a) => `<li><b>${esc(a.title)}</b>, ${esc(a.year)}</li>`).join("")}<li><b>Three individual golds and every relay gold</b>, JKH swim meet, 2026</li></ul>
+      <ul class="list">${achievements.map((a) => `<li><b>${esc(a.title)}</b>, ${esc(a.year)}</li>`).join("")}</ul>
     </div>
-    <div>
-      <div class="side-h">Memberships</div>
-      <div class="tags">${volunteer.memberships.map((m) => `<span>${esc(m)}</span>`).join("")}</div>
-    </div>
-    <div>
-      <div class="side-h">Outside work</div>
-      <p style="margin:0;font-size:7.8pt">${esc(volunteer.hobbies.join(", "))}.</p>
-    </div>
+    <div class="bot" style="margin-top:auto">${bot}<p><b>Ask my agent.</b>Questions about my work, answered from my portfolio.</p></div>
   </aside>
   <main class="main">
     <div class="k">Continued</div>
     <h2>Research</h2>
-    ${entry(blocks[1].items[0])}
-    <h2>Projects</h2>
-    <div class="grid2 mini">${blocks[3].items.map(entry).join("")}</div>
-    <h2>Leadership and school</h2>
-    <div class="entry mini"><p style="margin:0">${schoolLife.leadership.map((l) => `<b>${esc(l.role)}</b>, ${esc(l.year)}`).join(" · ")}. ${esc(schoolLife.interact)} Teams: ${esc(schoolLife.teams.join("; "))}.</p></div>
-    <h2>Volunteering</h2>
-    <div class="grid2 mini">${volunteer.items.map((v) => entry({ title: v.event, org: v.organization, when: v.dateRange })).join("")}</div>
-    <h2>Customer service and teaching</h2>
-    <div class="grid2 mini">${blocks[7].items.map((it) => entry(it)).join("")}</div>
+    ${entry({ ...blocks[1].items[0], bullets: [`${research.paper.authors}. DOI ${research.paper.doi}.`, research.paper.description, research.paper.award, research.paper.journal] })}
+    <h2>Selected projects</h2>
+    ${blocks[3].items.map(entry).join("")}
+    <h2>Beyond the role</h2>
+    <p class="lead" style="margin:0;font-size:10.5pt">${esc(BEYOND)}</p>
   </main>
   <div class="folio"><span>rachelcooray.com</span><span>02 / 02</span></div>
 </section>
