@@ -61,8 +61,8 @@ export const identity = {
   location: "Colombo, Sri Lanka",
   domain: "rachelcooray.com",
   // The one sentence the first screen has to say.
-  hello: "Hi, I'm Rachel. I apply AI to real business problems.",
-  tagline: "I apply AI to real business problems.",
+  hello: "Hi, I'm Rachel. I turn business problems into AI and analytics tools people use, then see them through adoption and maintenance.",
+  tagline: "I turn business problems into AI and analytics tools people use, then see them through adoption and maintenance.",
   summary:
     "Analyst, Data and AI at OCTAVE, John Keells Holdings. First Class Computer Science graduate, University of Westminster. Published researcher. Co-founder of Layer1 Studio.",
   // [CONFIRM] a third line: current personal build or research focus.
@@ -80,7 +80,6 @@ export const identity = {
     { label: "GitHub", href: "https://github.com/rachelcooray" },
     { label: "ORCID", href: "https://orcid.org/0009-0009-3192-2669" },
     { label: "CV", href: "/rachelcooray-cv.pdf" },
-    { label: "CV, plain text for ATS", href: "/rachelcooray-cv-ats.pdf" },
   ],
   orcid: "0009-0009-3192-2669",
   copyright: "2026 Rachel Cooray",

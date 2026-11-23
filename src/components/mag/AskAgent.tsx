@@ -144,7 +144,7 @@ function Details() {
         </li>
       ) : null}
       <li>
-        <span>CV</span> <a href="/rachelcooray-cv.pdf">Magazine CV (PDF)</a> · <a href="/rachelcooray-cv-ats.pdf">ATS CV (PDF)</a> · <a href="/rachelcooray-cv.docx">Word</a>
+        <span>CV</span> <a href="/rachelcooray-cv.pdf">Download the CV (PDF)</a>
       </li>
       <li>
         <span>Based in</span> {identity.location}

@@ -239,7 +239,7 @@ li::marker { color: #46521a; }
           <ul>${roleBullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
         </div>
         ${entry({ ...exp[3], bullets: exp[3].bullets?.slice(0, 2) })}
-        ${entry({ ...exp[4], bullets: exp[4].bullets?.slice(0, 2) })}
+        ${entry({ ...exp[4], bullets: exp[4].bullets?.slice(0, 1) })}
       </div>
       <div class="col">
         <h2>Education</h2>
