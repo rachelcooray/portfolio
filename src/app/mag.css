@@ -731,3 +731,5 @@ a.toc-item:hover .leader { border-color: var(--olive); }
 .school-pics .school-pic-wide img { object-position: 50% 70%; }
 .school-pics figure:last-child img { object-position: 40% 35%; }
 @media (max-width: 760px) { .school-pics { grid-template-columns: 1fr; } }
+.g-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px; }
+.card img[src*="icahs-certificate"] { object-fit: contain; background: #fff; }

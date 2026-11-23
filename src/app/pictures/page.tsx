@@ -65,6 +65,16 @@ export default function Pictures() {
             <figcaption>The PCOS Care web app.</figcaption>
           </figure>
         </div>
+        <div className="g g-2">
+          <figure>
+            <img loading="lazy" decoding="async" src="/images/mag/icahs-title-slide.webp" alt="Opening slide: PCOS Care, a machine learning-based web application for early risk prediction of polycystic ovary syndrome, IEEE ICAHS 2025, Session 3, 5 December 2025" width={1600} height={900} style={{ aspectRatio: "16 / 9", objectFit: "contain", background: "#fff", border: "1px solid var(--line)" }} />
+            <figcaption>The opening slide, presented at IEEE ICAHS 2025 in Hammamet, Tunisia, 5 December 2025.</figcaption>
+          </figure>
+          <figure>
+            <img loading="lazy" decoding="async" src="/images/mag/icahs-certificate.webp" alt="IEEE ICAHS 2025 participation certificate presented to Rachel Cooray for the PCOS Care paper" width={1400} height={991} style={{ aspectRatio: "16 / 9", objectFit: "contain", background: "#fff", border: "1px solid var(--line)" }} />
+            <figcaption>The certificate for presenting the paper.</figcaption>
+          </figure>
+        </div>
       </section>
 
       <section className="pics-sec">

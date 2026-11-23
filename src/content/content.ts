@@ -711,6 +711,8 @@ export const press: Recognition[] = [
     year: "2025",
     summary: "The published paper in the IEEE ICAHS 2025 proceedings.",
     link: "https://doi.org/10.1109/ICAHS66950.2025.11553077",
+    image: "/images/mag/icahs-certificate.webp",
+    imageAlt: "IEEE ICAHS 2025 participation certificate presented to Rachel Cooray for presenting the PCOS Care paper, Hammamet, Tunisia",
   },
   {
     id: "press-jkh-swim",
@@ -718,6 +720,7 @@ export const press: Recognition[] = [
     organization: "John Keells Holdings",
     year: "2026",
     summary: "JKH Intercompany Swimming Meet.",
+    link: "https://www.linkedin.com/posts/jkh-intercompanyswimming-swimmingmeet-ugcPost-7503426930759593986-LQqx/",
     image: "/images/mag/swimming-meet.webp",
     imageAlt: "Team OCTAVE at the John Keells intercompany swimming meet",
   },
