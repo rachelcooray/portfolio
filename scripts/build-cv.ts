@@ -117,7 +117,7 @@ const font = (f: string) => `file://${join(root, "src/fonts", f)}`;
 const qr = readFileSync(join(here, "assets/qr-site.svg"), "utf8");
 const bot = readFileSync(join(here, "assets/cv-bot.svg"), "utf8");
 const qrData = `data:image/png;base64,${readFileSync(join(here, "assets/qr-site.png")).toString("base64")}`;
-const portrait = `file://${join(root, "public/images/mag/rachel-portrait.webp")}`;
+const portrait = `file://${join(here, "assets/cv-portrait.jpg")}`;
 const stages = ["Factory", "Dispatch", "Distributor", "Market"] as const;
 const stageLabel: Record<string, string> = { Factory: "Factory", Dispatch: "Dispatch", Distributor: "Distributor", Market: "Outlets" };
 const exp = blocks[0].items;
@@ -167,7 +167,7 @@ body { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 8.5pt;
 .hero { display: grid; grid-template-columns: 1fr 34mm; gap: 5mm; align-items: stretch; }
 .lead { font-size: 9.2pt; line-height: 1.5; margin: 0; }
 .photo { background: #efe6d3; border-bottom: 2.4pt solid #46521a; overflow: hidden; min-height: 40mm; }
-.photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0%; display: block; }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
 .quote { font-family: Garamond, Georgia, serif; font-style: italic; font-size: 13pt; line-height: 1.22; color: #46521a; border-left: 3pt solid #c7d42b; padding: 0.6mm 0 0.6mm 4mm; margin: 2.4mm 0 0; }
 h2 { margin: 1.6mm 0 0; font-family: Garamond, Georgia, serif; font-weight: 500; font-size: 17pt; line-height: 1; color: #2b2318; display: flex; align-items: baseline; gap: 3mm; }
 h2::after { content: ""; flex: 1; border-bottom: 0.6pt solid #2b2318; transform: translateY(-1.2mm); }
