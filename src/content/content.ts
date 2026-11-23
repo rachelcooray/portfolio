@@ -204,7 +204,7 @@ export const education: EducationItem[] = [
     title: "BSc (Hons) Computer Science, First Class Honours",
     institution: "University of Westminster, London, United Kingdom",
     dateRange: "Sep 2022 to Jul 2025",
-    summary: "Data Science specialisation. Started at IIT, Sri Lanka. UOW/IIT School of Computing and Engineering Part-Fee Scholarship, £5,000, 2024/25.",
+    summary: "Data Science specialisation. Started at IIT, Sri Lanka; Batch Representative in Years 1 and 2. UOW/IIT School of Computing and Engineering Part-Fee Scholarship, £5,000, 2024/25.",
   },
   {
     id: "education-cima",
@@ -615,6 +615,15 @@ export const volunteer = {
       organization: "John Keells Foundation",
       dateRange: "Sep 2026",
       summary: "Registration and guest check-in at the launch of Artist Spotlight, 8th edition, with City of Dreams.",
+    },
+    {
+      id: "volunteer-project-uplift",
+      event: "Project Uplift: Enabling every step forward",
+      title: "Volunteer",
+      organization: "OCTAVE, John Keells Holdings",
+      dateRange: "Mar to May 2026",
+      summary:
+        "An OCTAVE CSR initiative with the Colombo Friend-in-Need Society, in three phases: board games, singalong and arts sessions with residents; digital literacy sessions for school leavers and university students; and a closing day in May 2026 with donations of prosthetic limbs and laptops.",
     },
     {
       id: "volunteer-la-bamba",
