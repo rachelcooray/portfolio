@@ -69,8 +69,12 @@ const roleBullets = [
 // What a recruiter needs: the role, the use cases, research, the degree,
 // skills, three projects and top recognition. Everything else is one line.
 const SELECTED = ["build-ask-agent", "build-neurodiversity", "build-csr-street-vendors"];
-const BEYOND =
-  "Head Prefect of St. Bridget's Convent and School Prefect of the Year, 2020. Volunteer with the John Keells Foundation and City of Dreams, 2026. Customer service at UNIQLO, TK Maxx and EG On The Move, student support at Clear Links and Sunday school teaching, alongside study.";
+const BEYOND = [
+  "Head Prefect of St. Bridget's Convent and School Prefect of the Year, 2020.",
+  "Volunteer with the John Keells Foundation, City of Dreams and OCTAVE's Project Uplift, 2026.",
+  "Customer service at UNIQLO, TK Maxx and EG On The Move, alongside study.",
+  "Student support at Clear Links and Sunday school teaching.",
+];
 
 // ---------------------------------------------------------------- blocks (shared with the Word CV)
 const blocks: Block[] = [
@@ -105,7 +109,7 @@ const blocks: Block[] = [
   { heading: "Education", items: education.map((e) => ({ title: e.title, org: e.institution, when: e.dateRange, text: e.summary })) },
   { heading: "Selected projects", items: buildLog.filter((x) => SELECTED.includes(x.id)).map((x) => ({ title: x.title, when: x.year ?? undefined, text: `${firstSentence(x.built)} ${x.tools.join(", ")}.` })) },
   { heading: "Skills", items: [thinkingLayer, ...[...toolkitStack].reverse()].map((l) => ({ title: l.layer, text: l.tools.join(", ") })) },
-  { heading: "Beyond the role", items: [{ title: "Leadership, volunteering and customer service", text: BEYOND }] },
+  { heading: "Beyond the role", items: [{ title: "Leadership, volunteering and customer service", bullets: BEYOND }] },
   { heading: "Recognition", items: achievements.map((a) => ({ title: a.title, org: a.organization, when: a.year })) },
 ];
 
@@ -288,7 +292,7 @@ li::marker { color: #46521a; }
         <h2>Recognition</h2>
         <ul class="small">${achievements.map((a) => `<li><b>${esc(a.title)}</b>, ${esc(a.organization)}, ${esc(a.year)}</li>`).join("")}</ul>
         <h2>Beyond the role</h2>
-        <p class="small" style="margin:0">${esc(BEYOND)}</p>
+        <ul class="small">${BEYOND.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
       </div>
     </div>
   </main>
