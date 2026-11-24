@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
-import { cima, education, schoolLife } from "@/content/content";
+import { cima, education, schoolLife, degreeModules } from "@/content/content";
 import Linked from "@/components/mag/Linked";
 
 const LOGOS: Record<string, { src: string; alt: string }> = {
@@ -29,8 +29,8 @@ export default function Education() {
         </figure>
         <div className="g-col">
           <figure>
-            <img loading="lazy" decoding="async" src="/images/mag/graduation-stage.webp" alt="Rachel shaking hands on stage at the University of Westminster graduation ceremony" width={640} height={480} style={{ aspectRatio: "4 / 3" }} />
-            <figcaption>On stage at the ceremony, the handshake.</figcaption>
+            <img loading="lazy" decoding="async" src="/images/mag/graduation-stage.webp" alt="Rachel shaking hands with Sir Peter Bonfield, Chancellor of the University of Westminster, on stage at her graduation" width={640} height={480} style={{ aspectRatio: "4 / 3" }} />
+            <figcaption>On stage at graduation, shaking hands with Sir Peter Bonfield, Chancellor of the University of Westminster.</figcaption>
           </figure>
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/degree.jpg" alt="University of Westminster degree certificate: Bachelor of Science in Computer Science with First Class Honours, awarded to Rachel Naadia Cooray" width={700} height={595} style={{ objectFit: "contain", background: "#eef3f1", border: "1px solid var(--line)" }} />
@@ -59,6 +59,24 @@ export default function Education() {
           </article>
         ))}
       </div>
+
+      <section className="modules" aria-labelledby="modules-title">
+        <h2 className="sec-title" id="modules-title">
+          Modules studied
+        </h2>
+        <div className="modules-grid">
+          {degreeModules.map((y) => (
+            <div key={y.year} className="modules-year">
+              <h3>{y.year}</h3>
+              <ul>
+                {y.modules.map((m) => (
+                  <li key={m}>{m}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="school" aria-labelledby="school-title">
         <figure className="school-photo">

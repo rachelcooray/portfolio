@@ -198,13 +198,31 @@ export type EducationItem = {
   summary: string;
 };
 
+// Modules studied, from the University of Westminster transcript and the IIT
+// results. Years 1 and 2 were taught at IIT, Sri Lanka, and credited to the
+// Westminster degree; the final year was at Westminster, London.
+export const degreeModules = [
+  {
+    year: "Year 1, IIT, 2022/23",
+    modules: ["Software Development I", "Software Development II", "Mathematics for Computing", "Computer Systems Fundamentals", "Web Design and Development", "Trends in Computer Science"],
+  },
+  {
+    year: "Year 2, IIT, 2023/24",
+    modules: ["Machine Learning and Data Mining", "Database Systems", "Object Oriented Programming", "Algorithms: Theory, Design and Implementation", "Client-Server Architectures", "Software Development Group Project"],
+  },
+  {
+    year: "Final year, Westminster, 2024/25",
+    modules: ["Applied AI", "Operational Research and Optimisation", "Cyber Security", "Usability Testing and Evaluation", "Computer Science Final Project"],
+  },
+];
+
 export const education: EducationItem[] = [
   {
     id: "education-westminster",
     title: "BSc (Hons) Computer Science, First Class Honours",
     institution: "University of Westminster, London, United Kingdom",
     dateRange: "Sep 2022 to Jul 2025",
-    summary: "Data Science specialisation. Started at IIT, Sri Lanka; Batch Representative in Years 1 and 2. UOW/IIT School of Computing and Engineering Part-Fee Scholarship, £5,000, 2024/25.",
+    summary: "Data Science specialisation. Started at IIT, Sri Lanka; Batch Representative in Years 1 and 2. Scholarship recipient: UOW/IIT School of Computing and Engineering Scholarship, 2024/25.",
   },
   {
     id: "education-cima",
@@ -726,10 +744,10 @@ export const achievements: Recognition[] = [
   },
   {
     id: "achievement-scholarship",
-    title: "UOW/IIT School of Computing and Engineering scholarship",
+    title: "UOW/IIT School of Computing and Engineering Scholarship",
     organization: "University of Westminster and Informatics Institute of Technology",
     year: "2024/25",
-    summary: "",
+    summary: "Scholarship recipient for the final year of the BSc (Hons) Computer Science at the University of Westminster.",
   },
   {
     id: "achievement-new-generation",
@@ -1490,7 +1508,7 @@ export const sectionDirectory = [
     points: [
       "BSc (Hons) Computer Science, First Class Honours, University of Westminster, 2022 to 2025",
       "Data Science specialisation, started at IIT, Sri Lanka",
-      "UOW/IIT Part-Fee Scholarship, £5,000, 2024/25",
+      "Scholarship recipient: UOW/IIT School of Computing and Engineering Scholarship, 2024/25",
       "CIMA Certificate in Business Accounting; Operational level in progress",
     ],
   },
@@ -1713,7 +1731,7 @@ export function buildMagazinePassages(): Passage[] {
   toolkitStack.forEach((l) => add("skills", `stack-${l.layer}`, `Skills: ${l.layer}`, `Tools: ${l.tools.join(", ")}. Used: ${l.where.toLowerCase()}.`, ["skills", "tools", "stack", "tech", "know", "knows", "use", "uses", "experienced", l.layer.toLowerCase(), ...l.tools.map((t) => t.toLowerCase())]));
 
   volunteer.items.forEach((v) => add("volunteer", v.id, `${v.event} (${v.dateRange})`, `${v.title}, ${v.organization}. ${v.summary}`, ["volunteer", "volunteering", "event", v.organization.toLowerCase()]));
-  add("education", "modules", "Modules and papers", `Her BSc in Computer Science at Westminster had a Data Science specialisation; the full module list isn't published here yet. CIMA papers completed: ${cima.completed.join("; ")}. In progress: ${cima.inProgress.join("; ")}.`, ["modules", "module", "subjects", "subject", "courses", "course", "papers", "curriculum", "cima", "accounting"]);
+  add("education", "modules", "Modules and papers", `Her BSc in Computer Science at Westminster had a Data Science specialisation. ${degreeModules.map((y) => `${y.year}: ${y.modules.join(", ")}.`).join(" ")} CIMA papers completed: ${cima.completed.join("; ")}. In progress: ${cima.inProgress.join("; ")}.`, ["modules", "module", "subjects", "subject", "courses", "course", "papers", "curriculum", "cima", "accounting"]);
   add("education", "school-life", "At school, St. Bridget's Convent", `${schoolLife.leadership.map((l) => `${l.role}, ${l.year}.`).join(" ")} ${schoolLife.interact} Interact projects: ${schoolLife.interactProjects.join("; ")}. ${schoolLife.interaction} Teams: ${schoolLife.teams.join(", ")}.`, ["school", "prefect", "head prefect", "leadership", "interact", "interaction", "sports festival", "swim", "athletics", "tech crew", "st bridget"]);
   talks.forEach((t) => add("recognition", t.id, `${t.event}: ${t.title}`, `${t.date}. ${t.org}. ${t.role} ${t.insights.join(" ")}`, ["talk", "speaker", "panel", "un", "united nations", "csw", "girl", "girls", "covid", "spoke", "speaking", "presented"]));
   add("contact", "contact-full", "Contact details", `Email ${identity.email}. Phone ${identity.phone}. Based in ${identity.location}. LinkedIn, GitHub and ORCID are linked at the foot of every page.`, ["contact", "email", "phone", "call", "reach", "hire", "linkedin", "number"]);

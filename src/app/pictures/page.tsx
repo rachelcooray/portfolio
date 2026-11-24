@@ -28,8 +28,8 @@ export default function Pictures() {
           </figure>
           <div className="g-col">
             <figure>
-              <img loading="lazy" decoding="async" src="/images/mag/graduation-stage.webp" alt="Rachel shaking hands on stage at the University of Westminster graduation ceremony" width={640} height={480} style={{ aspectRatio: "4 / 3" }} />
-              <figcaption>On stage at the ceremony, the handshake.</figcaption>
+              <img loading="lazy" decoding="async" src="/images/mag/graduation-stage.webp" alt="Rachel shaking hands with Sir Peter Bonfield, Chancellor of the University of Westminster, on stage at her graduation" width={640} height={480} style={{ aspectRatio: "4 / 3" }} />
+              <figcaption>On stage at graduation, shaking hands with Sir Peter Bonfield, Chancellor of the University of Westminster.</figcaption>
             </figure>
             <figure>
               <img loading="lazy" decoding="async" src="/images/mag/degree.jpg" alt="University of Westminster degree certificate: Bachelor of Science in Computer Science with First Class Honours, awarded to Rachel Naadia Cooray" width={700} height={595} style={{ objectFit: "contain", background: "#eef3f1", border: "1px solid var(--line)" }} />

@@ -873,3 +873,12 @@ button.robot { all: unset; display: flex; flex-direction: column; align-items: f
 button.robot:hover .robot-say { border-color: var(--olive); background: var(--paper); }
 button.robot:focus-visible { outline: 2px solid var(--olive-2); outline-offset: 4px; }
 button.robot .robot-say { display: block; }
+
+/* Education: modules studied, by year */
+.modules { display: flex; flex-direction: column; gap: 18px; }
+.modules .sec-title { padding-bottom: 12px; border-bottom: 2px solid var(--ink); }
+.modules-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 40px; }
+.modules-year h3 { font-family: var(--serif); font-weight: 500; font-size: 20px; padding: 14px 0 10px; border-bottom: 1px solid var(--line); }
+.modules-year ul { list-style: none; margin: 0; padding: 0; }
+.modules-year li { padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.4; }
+@media (max-width: 860px) { .modules-grid { grid-template-columns: 1fr; gap: 24px; } }
