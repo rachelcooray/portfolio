@@ -24,7 +24,7 @@ export default function Skills() {
           <h2 className="sec-title" id="cloud-title">
             What I use most
           </h2>
-          <Robot say="Ask me about any of these." />
+          <Robot say="Tap me, or any skill, to ask about it." />
         </div>
         <SkillCloud />
       </section>

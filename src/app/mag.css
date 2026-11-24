@@ -864,3 +864,12 @@ button, input, select, textarea { font-family: inherit; }
 .agent-details { border-left: 0; border-top: 2px solid var(--olive); }
 .spine-link[aria-current="page"] { border-left-color: transparent; }
 .value-tile svg { display: none; }
+
+/* Clickable skills and robot: they ask the agent */
+.cloud-w button { all: unset; cursor: pointer; color: inherit; font: inherit; }
+.cloud-w button:focus-visible { outline: 2px solid var(--olive-2); outline-offset: 3px; border-radius: 2px; }
+.skills-page .cloud-w button:hover { color: var(--olive-2); text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 6px; }
+button.robot { all: unset; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; cursor: pointer; }
+button.robot:hover .robot-say { border-color: var(--olive); background: var(--paper); }
+button.robot:focus-visible { outline: 2px solid var(--olive-2); outline-offset: 4px; }
+button.robot .robot-say { display: block; }

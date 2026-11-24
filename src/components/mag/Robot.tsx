@@ -1,8 +1,11 @@
+"use client";
+
 // The friendly robot from the CV, waving, with a speech bubble.
-export default function Robot({ say }: { say: string }) {
+// Tap it to open the Ask agent with a question.
+export default function Robot({ say, ask = "What are her top skills?" }: { say: string; ask?: string }) {
   return (
-    <div className="robot">
-      <p className="robot-say">{say}</p>
+    <button type="button" className="robot" onClick={() => window.dispatchEvent(new CustomEvent("rc-ask", { detail: { q: ask } }))} aria-label={`${say} Opens the Ask agent.`}>
+      <span className="robot-say">{say}</span>
       <svg className="robot-svg" viewBox="0 0 200 230" aria-hidden="true">
         <line x1="100" y1="10" x2="100" y2="30" stroke="#46521a" strokeWidth="4" strokeLinecap="round" />
         <circle className="robot-bulb" cx="100" cy="9" r="7" fill="#c7d42b" stroke="#46521a" strokeWidth="2.5" />
@@ -26,6 +29,6 @@ export default function Robot({ say }: { say: string }) {
         <rect x="68" y="210" width="30" height="12" rx="6" fill="#2b2318" />
         <rect x="102" y="210" width="30" height="12" rx="6" fill="#2b2318" />
       </svg>
-    </div>
+    </button>
   );
 }

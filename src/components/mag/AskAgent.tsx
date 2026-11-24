@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { askFaqs, buildMagazinePassages, identity } from "@/content/content";
-import { REPLIES, respond, type Answer, type Kind } from "@/lib/agent";
+import { REPLIES, followUps, respond, type Answer, type Kind } from "@/lib/agent";
 import { EMAIL_RE, sendToRachel } from "@/lib/send";
 
 // The answering logic lives in src/lib/agent.ts and is tested by
@@ -119,7 +119,7 @@ function loadThread(): Turn[] {
   }
 }
 
-export default function AskAgent() {
+export default function AskAgent({ seed = null }: { seed?: { q: string; n: number } | null } = {}) {
   const passages = useMemo(() => buildMagazinePassages(), []);
   const [thread, setThread] = useState<Turn[]>([]);
   const [typing, setTyping] = useState(false);
@@ -153,7 +153,7 @@ export default function AskAgent() {
     const r = respond(q, passages);
     if (r.kind === "empty") return;
     const askedQs = new Set([...thread.map((t) => t.q), q]);
-    const follow = askFaqs.map((f) => f.q).filter((x) => !askedQs.has(x)).slice(0, 3);
+    const follow = followUps(r.answer?.href, askedQs, askFaqs.map((f) => f.q));
     setTyping(true);
     const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450;
     window.setTimeout(() => {
@@ -161,6 +161,16 @@ export default function AskAgent() {
       setTyping(false);
     }, delay);
   };
+
+  // A question sent from the page (a skill in the cloud, the robot).
+  const lastSeed = useRef(0);
+  useEffect(() => {
+    if (!seed || seed.n === lastSeed.current) return;
+    lastSeed.current = seed.n;
+    const id = window.setTimeout(() => ask(seed.q), 120);
+    return () => window.clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seed]);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();

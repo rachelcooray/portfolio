@@ -152,6 +152,17 @@ const cases: Case[] = [
   ["what are the client names", "private"],
   ["how much revenue did the use cases make", "private"],
 
+  // Skills from the cloud
+  ["Where has Rachel used Python?", "answer", "/skills"],
+  ["Where has Rachel used Power BI?", "answer", "/skills"],
+  ["Where has Rachel used Stakeholder management?", "answer", "/skills"],
+  ["does she know react", "answer", "/skills"],
+  ["Databricks", "answer", "/skills"],
+  ["best skills", "answer", "/skills"],
+  ["What are her AI competencies?", "answer", "/skills"],
+  ["what are her top skills", "answer", "/skills"],
+  ["Where has Rachel used TypeScript?", "answer", "/skills"],
+  ["Where has Rachel used Retrieval and ranking?", "answer", "/skills"],
   // Second, unseen batch
   ["Can you tell me a bit about Rachel's background?", "answer"],
   ["what's she studying now", "answer"],

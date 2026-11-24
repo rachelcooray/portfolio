@@ -2,7 +2,7 @@
 // (scripts/test-agent.ts). It never writes new text: every answer is a
 // published FAQ answer or a quoted passage from content.ts, or one of the
 // fixed replies below. It only knows about Rachel.
-import { askFaqs, askMore, type Passage } from "@/content/content";
+import { aiCompetencies, askFaqs, askMore, site, skillCloud, thinkingLayer, toolkitStack, type Passage } from "@/content/content";
 
 export type Answer = { text: string; title: string; href: string; label: string };
 export type Kind = "empty" | "smalltalk" | "private" | "contact" | "recruiter" | "handoff" | "answer" | "none";
@@ -253,6 +253,58 @@ export function answerFor(q: string, passages: Passage[], faqOnly = false): Answ
   return { text: trim(hit.text), title: hit.title, href: r.href, label: r.label };
 }
 
+// ---------------------------------------------------------------- skills
+// A question about one named tool gets the toolkit row it belongs to, in the
+// words already published on the Skills page.
+const LAYERS = [thinkingLayer, ...toolkitStack];
+const TOOL_NAMES = [...new Set([...LAYERS.flatMap((l) => l.tools), ...skillCloud.map((w) => w.name)])].sort((a, b) => b.length - a.length);
+
+export function skillAnswer(q: string): Answer | null {
+  const ql = ` ${q.toLowerCase()} `;
+  const name = TOOL_NAMES.find((t) => new RegExp(`[^a-z0-9]${t.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}[^a-z0-9]`).test(ql));
+  if (!name) return null;
+  const GROUP_LAYER: Record<string, string> = { think: "Thinking and problem solving", data: "Data engineering", ai: "AI and analysis", insight: "Insight", product: "Products", delivery: "Delivery" };
+  const group = skillCloud.find((w) => w.name.toLowerCase() === name.toLowerCase())?.group;
+  const layer = LAYERS.find((l) => l.tools.some((t) => t.toLowerCase() === name.toLowerCase())) ?? LAYERS.find((l) => group && l.layer === GROUP_LAYER[group]);
+  const cap = site.about.skills.find((r) => r.tools.toLowerCase().includes(name.toLowerCase()));
+  if (!layer && !cap) return null;
+  const parts = [
+    layer ? `${name} is part of Rachel's ${layer.layer.toLowerCase()} toolkit. ${layer.a}` : `${name} is part of Rachel's ${cap!.capability.toLowerCase()} work.`,
+    cap ? `Where it shows up: ${cap.where.toLowerCase()}.` : layer ? `Where it shows up: ${layer.where.toLowerCase()}.` : "",
+  ];
+  return { text: parts.join(" ").trim(), title: name, href: "/skills", label: "Skills" };
+}
+
+// "Best skills", "top skills", "strongest": the ones she uses most, by the
+// same ranking as the cloud on the Skills page.
+export function topSkills(): Answer {
+  const top = skillCloud.filter((w) => w.weight === 5).map((w) => w.name);
+  const next = skillCloud.filter((w) => w.weight === 4).map((w) => w.name).slice(0, 4);
+  const list = (xs: string[]) => (xs.length > 1 ? `${xs.slice(0, -1).join(", ")} and ${xs[xs.length - 1]}` : xs[0]);
+  return {
+    text: `The skills Rachel uses most are ${list(top)}. Close behind: ${list(next)}. She starts with the problem and the people, then picks the tools.`,
+    title: "Top skills",
+    href: "/skills",
+    label: "Skills",
+  };
+}
+
+// Follow-up questions that fit what was just asked.
+const FOLLOW: Record<string, string[]> = {
+  "/skills": ["Where has Rachel used Python?", "What are her AI competencies?", "What's her research?"],
+  "/education": ["What were her A/L results?", "Was she a prefect?", "What's her research?"],
+  "/experience": ["What does she do at OCTAVE?", "Tell me about Layer1 Studio", "What are her skills?"],
+  "/research": ["What's PCOS Care?", "Did the research win anything?", "What are her skills?"],
+  "/use-cases": ["What is production planning?", "What is the weather use case?", "What are her skills?"],
+  "/projects": ["What's the Ask me agent?", "Does she take on new projects?", "What are her skills?"],
+  "/achievements": ["What's her research?", "Was she a prefect?", "What's her experience?"],
+  "/volunteering": ["What is Project Uplift?", "Tell me about the CSW65 talk", "What's her experience?"],
+};
+export function followUps(href: string | undefined, asked: Set<string>, fallback: string[]) {
+  const pool = [...(href ? FOLLOW[href.split("#")[0].replace(/\/use-cases\/.+/, "/use-cases")] ?? [] : []), ...fallback];
+  return [...new Set(pool)].filter((x) => !asked.has(x)).slice(0, 3);
+}
+
 // ---------------------------------------------------------------- the one entry point
 export function respond(input: string, passages: Passage[]): Reply {
   const q = input.replace(/\s+/g, " ").trim().slice(0, 300);
@@ -281,6 +333,16 @@ export function respond(input: string, passages: Passage[]): Reply {
   }
   if (CONTACT.test(q) && !/\b(contact centre|contact center)\b/i.test(q)) return { kind: "contact", text: REPLIES.contact, answer: null };
 
+  if (/\bai (competenc\w*|skills|capabilit\w*|experience)\b/i.test(q)) {
+    const t = aiCompetencies.map((c) => c.title.toLowerCase());
+    return { kind: "answer", answer: { text: `Her AI competencies: ${t.slice(0, -1).join(", ")} and ${t[t.length - 1]}.`, title: "AI competencies", href: "/skills", label: "Skills" } };
+  }
+  if (/\b(best|top|strongest|main|key|core|most used|strengths?)\b.*\bskills?\b|\bskills?\b.*\b(best|top|strongest|most)\b/i.test(q)) return { kind: "answer", answer: topSkills() };
+  // "Where has she used Python?", "does she know React": the toolkit row.
+  if (/\b(use|used|uses|using|know|knows|experience (with|in)|skilled|good at|work with|worked with)\b/i.test(q) || q.split(" ").length <= 3) {
+    const sk = skillAnswer(q);
+    if (sk) return { kind: "answer", answer: sk };
+  }
   const direct = answerFor(q, passages);
   if (direct) return { kind: "answer", answer: direct };
   const fixed = correct(q, passages);

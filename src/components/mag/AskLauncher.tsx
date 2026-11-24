@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import AskAgent from "@/components/mag/AskAgent";
 
+export const ASK_EVENT = "rc-ask";
+
 // Floating call to action on every page except /ask. A bubble pops up after a
 // moment; the button opens the agent in a panel.
 export default function AskLauncher() {
@@ -12,6 +14,19 @@ export default function AskLauncher() {
   const [bubble, setBubble] = useState(false);
   const fab = useRef<HTMLButtonElement>(null);
   const pop = useRef<HTMLDivElement>(null);
+  const [seed, setSeed] = useState<{ q: string; n: number } | null>(null);
+
+  // Any part of the page can ask the agent something: the pop-up opens and
+  // the question is asked for the visitor.
+  useEffect(() => {
+    const onAsk = (e: Event) => {
+      const q = (e as CustomEvent<{ q?: string }>).detail?.q;
+      setOpen(true);
+      if (q) setSeed({ q, n: Date.now() });
+    };
+    window.addEventListener(ASK_EVENT, onAsk);
+    return () => window.removeEventListener(ASK_EVENT, onAsk);
+  }, []);
 
   useEffect(() => {
     let seen = false;
@@ -68,7 +83,7 @@ export default function AskLauncher() {
             </button>
           </div>
           <div className="ask-pop-body">
-            <AskAgent />
+            <AskAgent seed={seed} />
           </div>
         </div>
       ) : null}
