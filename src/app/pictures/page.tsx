@@ -132,21 +132,7 @@ export default function Pictures() {
       </section>
 
       <section className="pics-sec">
-        <span className="kicker">06 · On the shop floor</span>
-        <div className="g g-3">
-          <figure>
-            <img loading="lazy" decoding="async" src="/images/mag/tkmaxx.webp" alt="Rachel on the shop floor at TK Maxx, wearing a headset and lanyard, folding children's clothes" width={848} height={1264} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
-            <figcaption>Customer service at TK Maxx, Stratford.</figcaption>
-          </figure>
-          <figure>
-            <img loading="lazy" decoding="async" src="/images/mag/uniqlo.webp" alt="Rachel on the shop floor at UNIQLO, in a lilac jumper and red lanyard, folding clothes on a display table" width={900} height={1341} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
-            <figcaption>Customer service at UNIQLO, London.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section className="pics-sec">
-        <span className="kicker">07 · Find me online</span>
+        <span className="kicker">06 · Find me online</span>
         <div className="online">
           <div>
             <p style={{ fontFamily: "var(--serif)", fontSize: 36, lineHeight: 1.1 }}>Follow the work as it happens.</p>

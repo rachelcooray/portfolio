@@ -245,6 +245,8 @@ export type Role = {
   location: string;
   details: string[];
   logo?: string;
+  photo?: string;
+  photoAlt?: string;
 };
 
 export const octave = {
@@ -415,6 +417,9 @@ export const londonSuccessAcademy: Role = {
   ],
 };
 
+// What the customer service and support roles taught.
+export const peopleSkills = ["Customer care", "Active listening", "Patience under pressure", "Clear communication", "Resolving problems", "Teamwork", "Adapting to each person"];
+
 export const otherRoles: Role[] = [
   {
     id: "role-uniqlo",
@@ -423,7 +428,9 @@ export const otherRoles: Role[] = [
     logo: "/images/uniqlo.png",
     dateRange: "Aug 2025 to Oct 2025",
     location: "London",
-    details: ["Known for strong customer service: friendly, patient and quick to help.", "Helped customers find the right products, sizes and fits.", "Kept displays and stock tidy to UNIQLO's visual merchandising standards.", "Worked as part of a fast-paced team to keep the shop floor running smoothly."],
+    photo: "/images/mag/uniqlo.webp",
+    photoAlt: "Rachel at UNIQLO, folding clothes on a display table",
+    details: ["Customer care: friendly, patient and quick to help on a busy London shop floor.", "Matched customers to the right products, sizes and fits.", "Kept displays to UNIQLO's visual merchandising standards.", "Strong team player in a fast-paced store."],
   },
   {
     id: "role-eg",
@@ -432,7 +439,7 @@ export const otherRoles: Role[] = [
     logo: "/images/logo-eg-on-the-move.png",
     dateRange: "Jan 2025 to Sep 2025",
     location: "Enfield",
-    details: ["Helped customers with purchases, with friendly and efficient service.", "Handled point of sale transactions accurately.", "Kept inventory organised and stock levels up to date.", "Resolved customer queries and issues."],
+    details: ["Warm, efficient service for a steady stream of customers.", "Resolved customer queries and issues calmly.", "Accurate point of sale transactions.", "Kept inventory organised and stock up to date."],
   },
   {
     id: "role-clear-links",
@@ -441,7 +448,7 @@ export const otherRoles: Role[] = [
     logo: "/images/logo-clear-links.png",
     dateRange: "Oct 2024 to Apr 2025",
     location: "London",
-    details: ["Supported university students with note-taking and academic work.", "Gave practical help in lectures and tutorials.", "Worked with a diverse range of students.", "Coordinated materials and schedules."],
+    details: ["Supported university students with notes and academic work.", "Adapted support to a diverse range of students and needs.", "Gave practical help in lectures and tutorials.", "Organised materials and schedules."],
   },
   {
     id: "role-tkmaxx",
@@ -450,7 +457,9 @@ export const otherRoles: Role[] = [
     logo: "/images/logo-tkmaxx.png",
     dateRange: "Nov 2024 to Jan 2025",
     location: "Stratford",
-    details: ["Gave customers a positive shopping experience.", "Managed and replenished stock to keep products available.", "Set up merchandising and displays to store standards.", "Handled transactions and general store support."],
+    photo: "/images/mag/tkmaxx.webp",
+    photoAlt: "Rachel at TK Maxx, wearing a headset, folding children's clothes",
+    details: ["Created a positive, welcoming shopping experience.", "Kept shelves stocked and products easy to find.", "Set up displays to store standards.", "Handled transactions and supported the team across the store."],
   },
 ];
 

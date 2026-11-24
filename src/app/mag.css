@@ -751,3 +751,8 @@ a.toc-item:hover .leader { border-color: var(--olive); }
 .talk-about { font-size: 16px; line-height: 1.6; border-left: 3px solid var(--olive); padding-left: 14px; }
 .talk-title { max-width: 360px; }
 .talk-title img { border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }
+
+/* Customer service roles: a small photo beside the logo, and the people skills */
+.role-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.role-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; object-position: 50% 25%; border: 2px solid var(--paper); box-shadow: 0 0 0 1px var(--line); }
+.people-skills { margin: 0 0 4px; }

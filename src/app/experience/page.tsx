@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHead from "@/components/mag/PageHead";
-import { layer1, londonSuccessAcademy, octave, otherRoles, teaching } from "@/content/content";
+import { layer1, londonSuccessAcademy, octave, otherRoles, peopleSkills, teaching } from "@/content/content";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -100,10 +100,18 @@ export default function Experience() {
         <h2 className="sec-title" id="exp-people">
           Where I learned to work with people
         </h2>
+        <ul className="chips people-skills" aria-label="People skills">
+          {peopleSkills.map((k) => (
+            <li key={k}>{k}</li>
+          ))}
+        </ul>
         <div className="roles">
           {otherRoles.map((r) => (
             <div key={r.id} className="role">
-              {r.logo ? <img className="logo" src={r.logo} alt={r.company} /> : <span className="word">{r.company}</span>}
+              <div className="role-head">
+                {r.logo ? <img className="logo" src={r.logo} alt={r.company} /> : <span className="word">{r.company}</span>}
+                {r.photo ? <img className="role-photo" src={r.photo} alt={r.photoAlt ?? ""} width={56} height={56} loading="lazy" decoding="async" /> : null}
+              </div>
               <h3 style={{ fontFamily: "var(--sans)", fontSize: 16, fontWeight: 600 }}>
                 {r.title}, {r.company}
               </h3>
