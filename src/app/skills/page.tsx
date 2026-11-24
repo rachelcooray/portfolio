@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
 import SkillIcon from "@/components/mag/SkillIcon";
@@ -17,67 +16,76 @@ export default function Skills() {
   // Read from the foundations up, the way the work is built.
   const layers = [thinkingLayer, ...[...toolkitStack].reverse()];
   return (
-    <div className="wrap page">
-      <PageHead folio="Skills · 29" title="Tools and capabilities, and where each was applied." dek="How I think first, then the tools, from the foundations up. Each answer comes with what is behind it and where it was used." />
-      <section className="cloud-wrap" aria-labelledby="cloud-title">
-        <h2 className="sr-only" id="cloud-title">
-          Skills at a glance
-        </h2>
+    <div className="wrap page skills-page">
+      <PageHead folio="Skills · 29" title="Tools and capabilities, and where each was applied." dek="How I think first, then the tools, from the foundations up, with where each one was used." />
+
+      <section className="sk-glance" aria-labelledby="cloud-title">
+        <div className="sk-glance-copy">
+          <span className="kicker">At a glance</span>
+          <h2 className="sec-title" id="cloud-title">
+            What I use most
+          </h2>
+          <Robot say="Ask me about any of these." />
+        </div>
         <SkillCloud />
-        <Robot say="Bigger words are the ones Rachel uses most. Ask me about any of them." />
       </section>
 
-      <section className="aic" aria-labelledby="aic-title">
-        <h2 className="sec-title" id="aic-title">
-          AI competencies
-        </h2>
-        <ol className="aic-list">
-          {aiCompetencies.map((c, i) => (
-            <li key={c.title} style={{ ["--i" as string]: i }}>
-              <span className="aic-n">{String(i + 1).padStart(2, "0")}</span>
-              <div>
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
+      <section className="sk-section" aria-labelledby="stack-title">
+        <div className="sk-head">
+          <span className="kicker">The toolkit</span>
+          <h2 className="sec-title" id="stack-title">
+            Thinking first, then the tools
+          </h2>
+        </div>
+        <ol className="sk-layers">
+          {layers.map((l, i) => (
+            <li key={l.layer} className="sk-layer">
+              <div className="sk-layer-name">
+                <span className="sk-n">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{l.layer}</h3>
+                <p className="sk-q">{l.q}</p>
+                <p className="sk-a">{l.a}</p>
               </div>
+              <ul className="sk-tools">
+                {l.tools.map((t) => (
+                  <li key={t} className={explored.has(t.toLowerCase()) ? "is-explored" : undefined}>
+                    <SkillIcon name={t} />
+                    {t}
+                    {explored.has(t.toLowerCase()) ? <span className="sr-only"> (explored)</span> : null}
+                  </li>
+                ))}
+              </ul>
+              <span className="sk-where">{l.where}</span>
             </li>
           ))}
         </ol>
       </section>
 
-      <div className="convo">
-        {layers.map((l, i) => (
-          <section key={l.layer} className="convo-turn" style={{ ["--t" as string]: i }} aria-labelledby={`q-${i}`}>
-            <p className="bubble bubble-q" id={`q-${i}`}>
-              <span className="bubble-who">Q.</span>
-              {l.q}
-            </p>
-            <div className="bubble-a-row">
-              <img className="bubble-face" src="/images/mag/rachel-face.webp" alt="" width={44} height={44} loading="lazy" />
-              <div className="bubble bubble-a">
-                <span className="bubble-who">
-                  {String(i + 1).padStart(2, "0")} · {l.layer}
-                  <span className="bubble-where">{l.where}</span>
-                </span>
-                <p>{l.a}</p>
-                <ul className="chips">
-                  {l.tools.map((t) => (
-                    <li key={t} className={explored.has(t.toLowerCase()) ? "is-explored" : undefined}>
-                      <SkillIcon name={t} />
-                      {t}
-                      {explored.has(t.toLowerCase()) ? <span className="sr-only"> (explored)</span> : null}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </section>
-        ))}
-      </div>
+      <section className="sk-section" aria-labelledby="aic-title">
+        <div className="sk-head">
+          <span className="kicker">Applied AI</span>
+          <h2 className="sec-title" id="aic-title">
+            AI competencies
+          </h2>
+        </div>
+        <ol className="sk-ai">
+          {aiCompetencies.map((c, i) => (
+            <li key={c.title}>
+              <span className="sk-n">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{c.title}</h3>
+              <p>{c.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-      <section style={{ display: "flex", flexDirection: "column", gap: 16 }} aria-labelledby="cap-title">
-        <h2 className="sec-title" id="cap-title">
-          Capabilities, and where they show up
-        </h2>
+      <section className="sk-section" aria-labelledby="cap-title">
+        <div className="sk-head">
+          <span className="kicker">The evidence</span>
+          <h2 className="sec-title" id="cap-title">
+            Capabilities, and where they show up
+          </h2>
+        </div>
         <ul className="leaders leaders-wide">
           {site.about.skills.map((r) => (
             <li key={r.capability}>
