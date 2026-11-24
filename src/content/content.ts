@@ -66,7 +66,7 @@ export const identity = {
   summary:
     "Analyst, Data and AI at OCTAVE, John Keells Holdings. First Class Computer Science graduate, University of Westminster. Published researcher. Co-founder of Layer1 Studio.",
   // [CONFIRM] a third line: current personal build or research focus.
-  currently: ["Owning six AI and analytics use cases at OCTAVE.", "Building products with Layer1."],
+  currently: ["Owning 6 AI and analytics use cases at OCTAVE.", "Building products with Layer1."],
   bio: "I build analytics and AI systems that help people make decisions they can understand and act on. I work at the point where a model's output has to become a business decision, and I care most about the step in between: making the reasoning legible to the person who has to use it.",
   portrait: "/images/mag/rachel-portrait.webp",
   portraitAlt: "Rachel Cooray, standing, in a pale blue blouse, smiling at the camera",
@@ -103,7 +103,7 @@ export const selectedWork: WorkCard[] = [
   {
     id: "work-octave",
     kicker: "OCTAVE, John Keells Holdings",
-    title: "Six use cases across the FMCG value chain",
+    title: "6 use cases across the FMCG value chain",
     body: "Production planning, dispatch, replenishment, distributor margins and targets, and weather. The analysis has to be sound and the business has to use it.",
     href: "/case-studies/octave",
     linkLabel: "Read the case study",
@@ -172,7 +172,7 @@ export const research = {
     doiUrl: "https://doi.org/10.1109/ICAHS66950.2025.11553077",
     appUrl: "https://pcos-care-web-app.onrender.com",
     description:
-      "An early screening web app with two levels of prediction: one from everyday signs that anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction. It is a screening aid, not a diagnostic tool.",
+      "An early screening web app with 2 levels of prediction: one from everyday signs that anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction. It is a screening aid, not a diagnostic tool.",
     method:
       "Chi-Square and ANOVA feature selection, SMOTE for class balance, and an enhanced Random Forest.",
     // [CONFIRM] whether to add "out of 400+ projects".
@@ -219,7 +219,7 @@ export const education: EducationItem[] = [
     title: "St. Bridget's Convent, Colombo",
     institution: "GCE A/L 2022 and GCE O/L 2018",
     dateRange: "2008 to 2022",
-    summary: "GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English Language, Mathematics, Science, Business and Accounting Studies and ICT. Head Prefect, 2020.",
+    summary: "GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: 9 As, including English Language, Mathematics, Science, Business and Accounting Studies and ICT. Head Prefect, 2020.",
   },
 ];
 
@@ -251,7 +251,7 @@ export const octave = {
   company: "OCTAVE, John Keells Holdings",
   logo: "/images/logo-octave.jpeg",
   meta: "Colombo, Sri Lanka. Promoted from intern to associate to analyst.",
-  own: "I work across enterprise data and AI initiatives within the FMCG business, connecting data science, engineering and commercial stakeholders to deliver analytics-driven solutions. I own six use cases across the value chain, from the analysis and the solution design to the problem solving along the way: production planning, Permanent Dispatch Planning, the Distributor Replenishment System, Ice Cream Distributor Margins, Beverages Distributor Margins, and weather and sales.",
+  own: "I work across enterprise data and AI initiatives within the FMCG business, connecting data science, engineering and commercial stakeholders to deliver analytics-driven solutions. I own 6 use cases across the value chain, from the analysis and the solution design to the problem solving along the way: production planning, Permanent Dispatch Planning, the Distributor Replenishment System, Ice Cream Distributor Margins, Beverages Distributor Margins, and weather and sales.",
   useCases: [
     {
       code: "DRS",
@@ -317,7 +317,7 @@ export const octave = {
       dateRange: "Jul 2026 to present",
       location: "Colombo, hybrid",
       details: [
-        "Owning six AI and analytics use cases across the FMCG value chain.",
+        "Owning 6 AI and analytics use cases across the FMCG value chain.",
         "Coordinating data science and engineering teams to translate business requirements into implementable solutions.",
         "Managing project plans, sprint activities, RAID logs, dependencies and delivery priorities.",
         "Working directly with business stakeholders, including sales, finance, area and regional management.",
@@ -623,7 +623,7 @@ export const volunteer = {
       organization: "OCTAVE, John Keells Holdings",
       dateRange: "Mar to May 2026",
       summary:
-        "An OCTAVE CSR initiative with the Colombo Friend-in-Need Society, in three phases: board games, singalong and arts sessions with residents; digital literacy sessions for school leavers and university students; and a closing day in May 2026 with donations of prosthetic limbs and laptops.",
+        "An OCTAVE CSR initiative with the Colombo Friend-in-Need Society, in 3 phases: board games, singalong and arts sessions with residents; digital literacy sessions for school leavers and university students; and a closing day in May 2026 with donations of prosthetic limbs and laptops.",
     },
     {
       id: "volunteer-la-bamba",
@@ -652,7 +652,7 @@ export const volunteer = {
   ],
   // [CONFIRM] whether to include this line.
   swimming:
-    "At the 2026 JKH Intercompany Swimming Meet I won three individual golds and gold in every relay in the under-25 group, as OCTAVE took the overall women's championship.",
+    "At the 2026 JKH Intercompany Swimming Meet I won 3 individual golds and gold in every relay in the under-25 group, as OCTAVE took the overall women's championship.",
   memberships: ["Rotaract Club", "IEEE Club", "Sri Lankan Society, University of Westminster", "CIMA Student Member", "BCS Member"],
   hobbies: ["Swimming", "Running", "Films and dramas", "History", "Music"],
 };
@@ -900,7 +900,7 @@ export const workCases: WorkCase[] = [
     challenge: "PCOS is a complex condition with varied symptoms. Identifying potential risk is hard, especially with limited access to structured screening.",
     context: "Many risk models produce opaque scores, and models that need full hormone panels do not help where those tests are not available.",
     approach: [
-      "Two pathways: an initial assessment from everyday signs and symptoms, and an enhanced assessment that adds hormone test results.",
+      "2 pathways: an initial assessment from everyday signs and symptoms, and an enhanced assessment that adds hormone test results.",
       "Chi-Square and ANOVA feature selection, SMOTE for class balance and an enhanced Random Forest.",
       "Each result shows the factors that contributed to it.",
     ],
@@ -910,7 +910,7 @@ export const workCases: WorkCase[] = [
       "Designed and built the web application and integrated the model outputs.",
       "Communicated the research through an academic paper and conference publication.",
     ],
-    solution: "A deployed web application with two screening pathways that explains each prediction. A screening-support tool, not a diagnostic system or a replacement for medical advice.",
+    solution: "A deployed web application with 2 screening pathways that explains each prediction. A screening-support tool, not a diagnostic system or a replacement for medical advice.",
     evaluation: ["Stratified cross-validation, favouring recall, since a missed case costs more than a false alarm.", "A structured usability study with real users."],
     outcomes: [
       "Published at IEEE ICAHS 2025.",
@@ -1141,7 +1141,7 @@ export const disciplineMap = [
   { id: "technology", label: "Technology", line: "Technology enables solutions.", evidence: "Layer1.Studio products, PCOS Care, independent builds" },
   { id: "data", label: "Data", line: "Data creates understanding.", evidence: "Distributor analytics at OCTAVE, ETL at London Success Academy" },
   { id: "business", label: "Business", line: "Business identifies value.", evidence: "Margin use cases at OCTAVE, CIMA Certificate in Business Accounting" },
-  { id: "strategy", label: "Strategy", line: "Strategy turns ideas into implementation.", evidence: "Owning six use cases: plans, sprints, RAID logs" },
+  { id: "strategy", label: "Strategy", line: "Strategy turns ideas into implementation.", evidence: "Owning 6 use cases: plans, sprints, RAID logs" },
   { id: "people", label: "People", line: "People make adoption possible.", evidence: "Governance calls with field managers, teaching, mentoring interns" },
 ];
 
@@ -1452,7 +1452,7 @@ export const sectionDirectory = [
     cta: "Open research and projects",
     points: [
       "PCOS Care, published at IEEE ICAHS 2025, Tunisia",
-      "Four OCTAVE use cases, each with a case study",
+      "4 OCTAVE use cases, each with a case study",
       "Layer1.Studio products for small businesses",
       "Independent builds: apps, a chatbot, a game and field research",
     ],
@@ -1490,7 +1490,7 @@ export const sectionDirectory = [
       "Third place, Westminster final year project showcase, 2025",
       "Microsoft EMBRACE hackathon finalist, 2024",
       "School Prefect of the Year, New Generation Awards, 2020",
-      "Three individual golds and every relay gold, JKH swim meet, 2026",
+      "3 individual golds and every relay gold, JKH swim meet, 2026",
     ],
   },
   {
@@ -1564,13 +1564,13 @@ export const magazine = {
   footerLine: "Rachel Cooray. Analyst, Data and AI. Colombo, Sri Lanka.",
   pullQuote: "The most interesting problems rarely sit within one discipline.",
   cover: {
-    story: { kicker: "Cover story", title: "Data and AI, put to work across the FMCG value chain.", dek: "The six AI and analytics use cases I own at OCTAVE, John Keells Holdings, from the factory to the outlet shelf." },
+    story: { kicker: "Cover story", title: "Data and AI, put to work across the FMCG value chain.", dek: "The 6 AI and analytics use cases I own at OCTAVE, John Keells Holdings, from the factory to the outlet shelf." },
     research: { kicker: "Research", title: "PCOS Care, from final year project to IEEE ICAHS 2025." },
     ask: { kicker: "New this issue", title: "Ask me anything. An agent that answers from my own work, and shows its source." },
     alsoInside: "A First Class at Westminster · Gold in the pool · Head Prefect, 2020 · Volunteering with the John Keells Foundation",
   },
   useCasesIntro:
-    "As Analyst, Data and AI at OCTAVE, John Keells Holdings, I own six use cases across the value chain, from the analysis and the solution design to the problem solving along the way, working with data science, engineering and the commercial teams who use the results. Each one asks the same question in a different place: is the distributor being asked for the right thing, and rewarded for the right reason?",
+    "As Analyst, Data and AI at OCTAVE, John Keells Holdings, I own 6 use cases across the value chain, from the analysis and the solution design to the problem solving along the way, working with data science, engineering and the commercial teams who use the results. Each one asks the same question in a different place: is the distributor being asked for the right thing, and rewarded for the right reason?",
   chain: [
     { stage: "Factory", icon: "factory", label: "Production planning" },
     { stage: "Dispatch", icon: "truck", label: "Permanent Dispatch Planning" },
@@ -1836,7 +1836,7 @@ export const schoolLife = {
   teams: ["Swim team, SLASA and SLASU meets, 2012 to 2019", "Tech crew", "Athletics"],
   exams: [
     { level: "GCE A/L", year: "2022", results: [["Chemistry", "A"], ["English", "A"], ["Physics", "B"], ["Combined Mathematics", "B"]] },
-    { level: "GCE O/L", year: "2018", results: [["English Language", "A"], ["Mathematics", "A"], ["Science", "A"], ["Business and Accounting Studies", "A"], ["ICT", "A"]], note: "Nine As in all." },
+    { level: "GCE O/L", year: "2018", results: [["English Language", "A"], ["Mathematics", "A"], ["Science", "A"], ["Business and Accounting Studies", "A"], ["ICT", "A"]], note: "9 As in all." },
   ],
   photo: {
     src: "/images/mag/head-prefect.webp",
@@ -1878,14 +1878,14 @@ export const askFaqs = [
   },
   {
     q: "What's PCOS Care?",
-    a: "An early screening web app with two levels of prediction: one from everyday signs anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction, and is a screening aid, not a diagnostic tool.",
+    a: "An early screening web app with 2 levels of prediction: one from everyday signs anyone can answer, and one that adds hormone test results. It shows which factors drove each prediction, and is a screening aid, not a diagnostic tool.",
     href: "/research",
     label: "Research",
     keywords: ["pcos", "pcos care", "polycystic", "app", "screening"],
   },
   {
     q: "What does she do at OCTAVE?",
-    a: "She owns six AI and analytics use cases across the FMCG value chain, from production planning and dispatch to distributor replenishment, margins and weather. She takes each one from analysis and solution design through to the business using it.",
+    a: "She owns 6 AI and analytics use cases across the FMCG value chain, from production planning and dispatch to distributor replenishment, margins and weather. She takes each one from analysis and solution design through to the business using it.",
     href: "/use-cases",
     label: "Use cases",
     keywords: ["octave", "john keells", "jkh", "use cases", "analyst", "fmcg"],
@@ -1897,7 +1897,7 @@ export const askFaqs = [
 export const askMore = [
   {
     q: "School exams",
-    a: "Yes, at St. Bridget's Convent, Colombo. GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: nine As, including English Language, Mathematics, Science, Business and Accounting Studies and ICT.",
+    a: "Yes, at St. Bridget's Convent, Colombo. GCE A/L 2022: Chemistry A, English A, Physics B, Combined Mathematics B. GCE O/L 2018: 9 As, including English Language, Mathematics, Science, Business and Accounting Studies and ICT.",
     href: "/education",
     label: "Education",
     keywords: ["ol", "ols", "al", "als", "o l", "a l", "o level", "o levels", "a level", "a levels", "alevels", "olevels", "gce", "exam", "exams", "results", "grades", "school results"],
@@ -1918,7 +1918,7 @@ export const askMore = [
   },
   {
     q: "Current role",
-    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, since July 2026, after moving from intern to associate to analyst. She owns six AI and analytics use cases across the FMCG value chain.",
+    a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, since July 2026, after moving from intern to associate to analyst. She owns 6 AI and analytics use cases across the FMCG value chain.",
     href: "/experience",
     label: "Experience",
     keywords: ["current", "currently", "role", "title", "position", "now", "today", "employer", "works"],
@@ -1939,7 +1939,7 @@ export const askMore = [
   },
   {
     q: "Leadership",
-    a: "Leadership runs through her record: Head Prefect of St. Bridget's Convent and School Prefect of the Year in 2020. At work she owns six use cases from analysis to adoption, co-founded Layer1 Studio and mentors its interns.",
+    a: "Leadership runs through her record: Head Prefect of St. Bridget's Convent and School Prefect of the Year in 2020. At work she owns 6 use cases from analysis to adoption, co-founded Layer1 Studio and mentors its interns.",
     href: "/education",
     label: "Education",
     keywords: ["leader", "leadership", "lead", "manage", "management", "mentor", "prefect", "captain"],
@@ -2007,7 +2007,7 @@ export const skillCloud: { name: string; weight: 1 | 2 | 3 | 4 | 5; group: "thin
 export const aiCompetencies = [
   { title: "Building and evaluating models", body: "PCOS Care: Chi-Square and ANOVA feature selection, SMOTE for class balance, and an enhanced Random Forest, published at IEEE ICAHS 2025." },
   { title: "Explainable predictions", body: "PCOS Care shows which factors drove each prediction, so a person can understand the result, not just read it." },
-  { title: "Applied AI in a business", body: "At OCTAVE I own six AI and analytics use cases, from the analysis and solution design to the business using them." },
+  { title: "Applied AI in a business", body: "At OCTAVE I own 6 AI and analytics use cases, from the analysis and solution design to the business using them." },
   { title: "Measuring whether AI works", body: "Pilot and control comparisons where possible, separating association from proven impact." },
   { title: "Retrieval and agents", body: "The Ask me agent on this site retrieves and ranks published passages, and never invents an answer." },
   { title: "Generative AI prototyping", body: "A chatbot prototype for people newly diagnosed with neurodiverse conditions, Microsoft EMBRACE hackathon finalist." },

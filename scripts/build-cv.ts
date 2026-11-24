@@ -55,7 +55,7 @@ const contact = [
 ];
 
 const summary =
-  "Analyst, Data and AI at OCTAVE, John Keells Holdings, where I own six AI and analytics use cases across the FMCG value chain, from the analysis and solution design to the business using them. First Class Computer Science graduate from the University of Westminster, published researcher at IEEE ICAHS 2025, and co-founder of Layer1 Studio.";
+  "Analyst, Data and AI at OCTAVE, John Keells Holdings, where I own 6 AI and analytics use cases across the FMCG value chain, from the analysis and solution design to the business using them. First Class Computer Science graduate from the University of Westminster, published researcher at IEEE ICAHS 2025, and co-founder of Layer1 Studio.";
 
 const analyst = octave.roles[0];
 const useCases = magazine.useCases.map((u) => ({ code: u.code, stage: u.stage, name: u.name, line: firstSentence(u.line) }));
@@ -85,7 +85,7 @@ const blocks: Block[] = [
         org: analyst.company,
         when: analyst.dateRange,
         where: analyst.location,
-        bullets: [`Own six use cases across the value chain: ${useCases.map((u) => u.name).join(", ")}.`, ...roleBullets, `Tools: ${octave.tools.join(", ")}.`],
+        bullets: [`Own 6 use cases across the value chain: ${useCases.map((u) => u.name).join(", ")}.`, ...roleBullets, `Tools: ${octave.tools.join(", ")}.`],
       },
       { title: "Analytics Delivery Associate", org: octave.company, when: octave.roles[1].dateRange },
       { title: octave.roles[2].title, org: octave.company, when: octave.roles[2].dateRange },
@@ -135,7 +135,7 @@ const entry = (it: Item) =>
 // the QR on page 1; the toolkit, recognition and the robot again on page 2.
 const tools = [thinkingLayer, ...[...toolkitStack].reverse()];
 // Short, scannable lines for the magazine CV. The ATS CV keeps the full text.
-const INTRO = ["Analyst, Data and AI at OCTAVE, John Keells Holdings.", "Own six AI and analytics use cases across the FMCG value chain.", "First Class BSc Computer Science, University of Westminster.", "Published at IEEE ICAHS 2025. Co-founder, Layer1 Studio."];
+const INTRO = ["Analyst, Data and AI at OCTAVE, John Keells Holdings.", "Own 6 AI and analytics use cases across the FMCG value chain.", "First Class BSc Computer Science, University of Westminster.", "Published at IEEE ICAHS 2025. Co-founder, Layer1 Studio."];
 const OCTAVE_SHORT = ["Own each use case from analysis and solution design to adoption.", "Coordinate data science and engineering teams, sprints and priorities.", "Present findings to sales, finance and senior management.", "Measure impact with pilot and control comparisons.", "Promoted from intern to associate to analyst."];
 const BEYOND_SHORT = ["Head Prefect and School Prefect of the Year, 2020.", "Volunteer: John Keells Foundation, City of Dreams, Project Uplift.", "Customer service at UNIQLO, TK Maxx and EG On The Move.", "Student support at Clear Links; Sunday school teacher."];
 const folio = (left: string, n: string) => `<div class="folio"><span>${left}</span><span>${n} / 02</span></div>`;
@@ -250,7 +250,7 @@ li::marker { color: #46521a; }
     <h2>Education</h2>
     ${entry({ title: education[0].title, org: "University of Westminster", when: "2022 to 2025", bullets: ["Data Science specialisation.", "UOW/IIT scholarship, 2024/25.", "Batch Representative at IIT, Years 1 and 2."] })}
     ${entry({ title: "CIMA Certificate in Business Accounting", when: "2024", bullets: ["Operational level in progress."] })}
-    ${entry({ title: "St. Bridget's Convent, Colombo", when: "to 2022", bullets: ["Head Prefect, 2020.", `GCE A/L: ${schoolLife.exams[0].results.map(([sub, g]) => `${sub} ${g}`).join(", ")}.`, "GCE O/L: nine As."] })}
+    ${entry({ title: "St. Bridget's Convent, Colombo", when: "to 2022", bullets: ["Head Prefect, 2020.", `GCE A/L: ${schoolLife.exams[0].results.map(([sub, g]) => `${sub} ${g}`).join(", ")}.`, "GCE O/L: 9 As."] })}
     <h2>Research</h2>
     ${entry({ title: "PCOS Care", org: "IEEE ICAHS 2025, Hammamet, Tunisia", when: "2025", bullets: ["Machine learning web app for early PCOS risk screening, with explainable predictions.", "Third place, Westminster final year project showcase, 2025.", "Extended paper under review, MSIT Journal.", `DOI ${research.paper.doi}`] })}
     <h2>Selected projects</h2>

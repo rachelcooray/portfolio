@@ -28,7 +28,7 @@ export default function Experience() {
           </p>
           <p className="muted small">{octave.meta}</p>
           <Link className="btn" href="/use-cases" style={{ alignSelf: "flex-start" }}>
-            The six use cases
+            The 6 use cases
           </Link>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
