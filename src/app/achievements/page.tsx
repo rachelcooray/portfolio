@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
 import { achievements, volunteer } from "@/content/content";
+import Linked from "@/components/mag/Linked";
 
 export const metadata: Metadata = {
   title: "Achievements",
@@ -22,7 +23,7 @@ export default function Achievements() {
           <article key={a.id} className={i === 0 ? "card lead" : "card"}>
             {PICS[i] ? <img loading="lazy" decoding="async" src={PICS[i].src} alt={PICS[i].alt} width={1200} height={750} style={PICS[i].contain ? { objectFit: "contain", background: "#2a2a2a" } : PICS[i].src.includes("embrace") ? { objectPosition: "50% 45%" } : undefined} /> : null}
             <span className="meta">
-              {a.organization} · {a.year}
+              <Linked text={a.organization} /> · {a.year}
             </span>
             <h2>{a.title}</h2>
             {a.summary ? <p className="small">{a.summary}</p> : null}

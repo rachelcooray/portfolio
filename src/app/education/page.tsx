@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
 import { cima, education, schoolLife } from "@/content/content";
+import Linked from "@/components/mag/Linked";
 
 const LOGOS: Record<string, { src: string; alt: string }> = {
   "education-westminster": { src: "/images/logos/westminster.svg", alt: "University of Westminster" },
@@ -43,7 +44,7 @@ export default function Education() {
             {LOGOS[e.id] ? <img className="edu-logo" src={LOGOS[e.id].src} alt={LOGOS[e.id].alt} loading="lazy" decoding="async" /> : null}
             <span className="meta">{e.dateRange}</span>
             <h2>{e.title}</h2>
-            <p className="small muted">{e.institution}</p>
+            <p className="small muted"><Linked text={e.institution} /></p>
             <p className="small">{e.summary}</p>
             {e.id === "education-cima" ? (
               <ul>

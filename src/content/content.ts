@@ -417,6 +417,29 @@ export const londonSuccessAcademy: Role = {
   ],
 };
 
+// Each organisation's own site, checked by hand. Names are matched exactly
+// wherever they appear on the site, and become links.
+export const orgLinks = [
+  { name: "OCTAVE, John Keells Holdings", url: "https://www.octave.lk" },
+  { name: "John Keells Holdings", url: "https://www.keells.com" },
+  { name: "University of Westminster", url: "https://www.westminster.ac.uk" },
+  { name: "Informatics Institute of Technology", url: "https://www.iit.ac.lk" },
+  { name: "CIMA", url: "https://www.cimaglobal.com" },
+  { name: "UNIQLO", url: "https://www.uniqlo.com/uk/en/" },
+  { name: "TK Maxx", url: "https://www.tkmaxx.com/uk/en/" },
+  { name: "EG On The Move (Petrogas)", url: "https://www.eg.group" },
+  { name: "London Success Academy", url: "https://www.londonsuccessacademy.com" },
+  { name: "John Keells Foundation", url: "https://www.johnkeellsfoundation.com" },
+  { name: "City of Dreams", url: "https://www.cityofdreamssrilanka.com" },
+  { name: "Netcompany", url: "https://www.netcompany.com" },
+  { name: "SmartDCC", url: "https://www.smartdcc.co.uk" },
+  { name: "National Youth Services Council", url: "https://www.nysc.lk" },
+  { name: "Good Shepherd Asia Pacific", url: "https://gsif.it" },
+  { name: "UN Commission on the Status of Women", url: "https://www.unwomen.org/en/csw/csw65-2021" },
+  { name: "United Nations Commission on the Status of Women", url: "https://www.unwomen.org/en/csw/csw65-2021" },
+  { name: "IEEE ICAHS 2025", url: "https://doi.org/10.1109/ICAHS66950.2025.11553077" },
+];
+
 // What the customer service and support roles taught.
 export const peopleSkills = ["Customer care", "Active listening", "Patience under pressure", "Clear communication", "Resolving problems", "Teamwork", "Adapting to each person"];
 

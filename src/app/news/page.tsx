@@ -1,19 +1,32 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
 import { press, talks } from "@/content/content";
+import Linked from "@/components/mag/Linked";
 
 export const metadata: Metadata = {
   title: "In the news",
   description: "Coverage of my work and teams.",
 };
 
-// Newest first. The CSW65 talk sits as a feature between the recent stories
-// and the 2020 ones, where it falls in time.
-const byYear = [...press].sort((a, b) => Number(b.year) - Number(a.year));
-const recent = byYear.filter((n) => Number(n.year) >= 2022);
-const earlier = byYear.filter((n) => Number(n.year) < 2022);
+// Every story gets the same card, newest first, alternating left and right
+// like a magazine spread. The CSW65 talk is one of them, in its year.
+const talk = talks[0];
+const talkStory = {
+  id: talk.id,
+  title: `${talk.title}, a CSW65 panel`,
+  organization: "Good Shepherd Asia Pacific",
+  year: "2021",
+  summary: "",
+  link: talk.link,
+  image: talk.titleImage,
+  imageAlt: talk.titleImageAlt,
+  dek: "A panel led by and for girls, held alongside CSW65, the 65th session of the United Nations Commission on the Status of Women. I spoke for Sri Lanka on the impact of COVID-19 on girls.",
+  quote: talk.quote,
+  quoteBy: "What I said",
+};
+const all = [...press, talkStory].sort((a, b) => Number(b.year) - Number(a.year));
 
-function Stories({ items }: { items: typeof press }) {
+function Stories({ items }: { items: (typeof press)[number][] }) {
   return (
     <div className="stories">
       {items.map((n) => (
@@ -21,10 +34,10 @@ function Stories({ items }: { items: typeof press }) {
           {n.image ? <img loading="lazy" decoding="async" src={n.image} alt={n.imageAlt ?? n.title} width={1200} height={750} /> : null}
           <div className="story-copy">
             <span className="kicker">
-              {n.organization} · {n.year}
+              <Linked text={n.organization} /> · {n.year}
             </span>
             <h2>{n.title}</h2>
-            {n.dek ? <p className="story-dek">{n.dek}</p> : null}
+            {n.dek ? <p className="story-dek"><Linked text={n.dek} /></p> : null}
             {n.quote ? (
               <blockquote className="story-quote">
                 <p>&ldquo;{n.quote}&rdquo;</p>
@@ -47,42 +60,7 @@ export default function News() {
   return (
     <div className="wrap page">
       <PageHead folio="In the news · 28" title="Coverage of my work and teams." dek="Where my work and my teams have been written about." />
-      <Stories items={recent} />
-      {talks.map((t) => (
-        <section key={t.id} className="talk talk-feature" aria-labelledby={t.id}>
-          <figure className="talk-fig">
-            <img src={t.image} alt={t.imageAlt} width={1280} height={720} loading="lazy" decoding="async" />
-            <figcaption>
-              <a href={t.link}>Watch on YouTube, from 1:26:11 →</a>
-            </figcaption>
-          </figure>
-          <div className="talk-copy">
-            <span className="kicker">
-              Feature · Speaking · {t.date}
-            </span>
-            <h2 id={t.id} className="sec-title">
-              {t.title}
-            </h2>
-            <p className="small muted">
-              {t.event}. {t.org}.
-            </p>
-            <p className="talk-about">{t.about}</p>
-            <figure className="talk-title">
-              <img src={t.titleImage} alt={t.titleImageAlt} width={480} height={360} loading="lazy" decoding="async" />
-              <figcaption>The event&apos;s title slide, 20 March 2021.</figcaption>
-            </figure>
-            <p>{t.role}</p>
-            <span className="kicker">What I said</span>
-            <ul className="talk-points">
-              {t.insights.map((i) => (
-                <li key={i}>{i}</li>
-              ))}
-            </ul>
-            <blockquote className="pull">{t.quote}</blockquote>
-          </div>
-        </section>
-      ))}
-      <Stories items={earlier} />
+      <Stories items={all} />
     </div>
   );
 }

@@ -777,3 +777,5 @@ a.toc-item:hover .leader { border-color: var(--olive); }
   .talk-feature { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) { .story-card { grid-template-columns: 1fr; } .story-card img { width: 100%; height: auto; aspect-ratio: 16 / 10; } }
+.org-link { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.org-link:hover { color: var(--olive-2); text-decoration-color: var(--olive); }

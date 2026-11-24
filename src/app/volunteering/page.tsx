@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHead from "@/components/mag/PageHead";
 import { buildLog, volunteer } from "@/content/content";
+import Linked from "@/components/mag/Linked";
 
 export const metadata: Metadata = {
   title: "Volunteering",
@@ -26,7 +27,7 @@ export default function Volunteering() {
             <span className="meta">{v.dateRange}</span>
             <h2>{v.event}</h2>
             <p className="small muted">
-              {v.title}, {v.organization}
+              {v.title}, <Linked text={v.organization} />
             </p>
             <p className="small">{v.summary}</p>
           </article>

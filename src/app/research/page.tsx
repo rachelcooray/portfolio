@@ -59,6 +59,9 @@ export default function Research() {
             <a className="btn btn-line" href={p.appUrl}>
               Try the app
             </a>
+            <a className="btn btn-line" href="https://github.com/rachelcooray/PCOS-Care">
+              See the code
+            </a>
           </div>
         </div>
       </div>

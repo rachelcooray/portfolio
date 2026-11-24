@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHead from "@/components/mag/PageHead";
 import { layer1, londonSuccessAcademy, octave, otherRoles, peopleSkills, teaching } from "@/content/content";
+import Linked from "@/components/mag/Linked";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -19,12 +20,12 @@ export default function Experience() {
 
       <section className="split" aria-labelledby="exp-octave">
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <img loading="lazy" decoding="async" src={octave.logo} alt="OCTAVE" width={738} height={345} style={{ width: 200 }} />
+          <a href="https://www.octave.lk" aria-label="OCTAVE website"><img loading="lazy" decoding="async" src={octave.logo} alt="OCTAVE" width={738} height={345} style={{ width: 200 }} /></a>
           <h2 className="sec-title" id="exp-octave">
             {current.title}
           </h2>
           <p className="kicker">
-            {current.company} · {current.dateRange}
+            <Linked text={current.company} /> · {current.dateRange}
           </p>
           <p className="muted small">{octave.meta}</p>
           <Link className="btn" href="/use-cases" style={{ alignSelf: "flex-start" }}>
@@ -86,7 +87,7 @@ export default function Experience() {
             {londonSuccessAcademy.title}
           </h2>
           <p className="kicker">
-            {londonSuccessAcademy.company} · {londonSuccessAcademy.dateRange}
+            <Linked text={londonSuccessAcademy.company} /> · {londonSuccessAcademy.dateRange}
           </p>
         </div>
         <ul style={list}>
@@ -113,7 +114,7 @@ export default function Experience() {
                 {r.photo ? <img className="role-photo" src={r.photo} alt={r.photoAlt ?? ""} width={56} height={56} loading="lazy" decoding="async" /> : null}
               </div>
               <h3 style={{ fontFamily: "var(--sans)", fontSize: 16, fontWeight: 600 }}>
-                {r.title}, {r.company}
+                {r.title}, <Linked text={r.company} />
               </h3>
               <span className="small muted">
                 {r.location}, {r.dateRange}.
