@@ -17,11 +17,10 @@ export default function Skills() {
   const layers = [thinkingLayer, ...[...toolkitStack].reverse()];
   return (
     <div className="wrap page skills-page">
-      <PageHead folio="Skills · 29" title="Tools and capabilities, and where each was applied." dek="How I think first, then the tools, from the foundations up, with where each one was used." />
+      <PageHead folio="Skills, p. 29" title="Tools and capabilities, and where each was applied." dek="How I think first, then the tools, from the foundations up, with where each one was used." />
 
       <section className="sk-glance" aria-labelledby="cloud-title">
         <div className="sk-glance-copy">
-          <span className="kicker">At a glance</span>
           <h2 className="sec-title" id="cloud-title">
             What I use most
           </h2>
@@ -32,7 +31,6 @@ export default function Skills() {
 
       <section className="sk-section" aria-labelledby="stack-title">
         <div className="sk-head">
-          <span className="kicker">The toolkit</span>
           <h2 className="sec-title" id="stack-title">
             Thinking first, then the tools
           </h2>
@@ -41,7 +39,6 @@ export default function Skills() {
           {layers.map((l, i) => (
             <li key={l.layer} className="sk-layer">
               <div className="sk-layer-name">
-                <span className="sk-n">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{l.layer}</h3>
                 <p className="sk-q">{l.q}</p>
                 <p className="sk-a">{l.a}</p>
@@ -63,7 +60,6 @@ export default function Skills() {
 
       <section className="sk-section" aria-labelledby="aic-title">
         <div className="sk-head">
-          <span className="kicker">Applied AI</span>
           <h2 className="sec-title" id="aic-title">
             AI competencies
           </h2>
@@ -71,7 +67,6 @@ export default function Skills() {
         <ol className="sk-ai">
           {aiCompetencies.map((c, i) => (
             <li key={c.title}>
-              <span className="sk-n">{String(i + 1).padStart(2, "0")}</span>
               <h3>{c.title}</h3>
               <p>{c.body}</p>
             </li>
@@ -81,7 +76,6 @@ export default function Skills() {
 
       <section className="sk-section" aria-labelledby="cap-title">
         <div className="sk-head">
-          <span className="kicker">The evidence</span>
           <h2 className="sec-title" id="cap-title">
             Capabilities, and where they show up
           </h2>
@@ -90,7 +84,7 @@ export default function Skills() {
           {site.about.skills.map((r) => (
             <li key={r.capability}>
               <span className="leaders-name">
-                <b>{r.capability}</b> <span className="muted">· {r.tools}</span>
+                <b>{r.capability}:</b> <span className="muted">{r.tools}</span>
               </span>
               <span className="leaders-dots" aria-hidden="true" />
               <span className="leaders-where">{r.where}</span>

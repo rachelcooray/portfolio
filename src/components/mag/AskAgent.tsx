@@ -221,7 +221,7 @@ export default function AskAgent() {
                     <>
                       <blockquote>{t.answer.text}</blockquote>
                       <div className="ask-src">
-                        <a href={t.answer.href}>More on {t.answer.label} →</a>
+                        <a href={t.answer.href}>More on {t.answer.label}</a>
                       </div>
                     </>
                   ) : (

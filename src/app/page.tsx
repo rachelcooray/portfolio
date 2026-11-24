@@ -23,7 +23,7 @@ export default function Cover() {
     <div className="wrap page">
       <section className="cover" aria-label="Cover">
         <div className="cover-copy">
-          <Folio right={`${magazine.issue} · ${magazine.issueDate}`} />
+          <Folio right={`${magazine.issue}, ${magazine.issueDate}`} />
           <h1 className="cover-title">
             Rachel
             <br />
@@ -90,7 +90,7 @@ export default function Cover() {
               <span className="leader" aria-hidden="true" />
               <span className="n">32</span>
             </span>
-            <span className="d">Get in touch.</span>
+            <span className="d">Send a message, or find my contact details.</span>
           </a>
         </div>
       </section>

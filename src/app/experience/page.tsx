@@ -16,7 +16,7 @@ export default function Experience() {
   const ladder = [...octave.roles, ...octave.earlier];
   return (
     <div className="wrap page exp">
-      <PageHead folio="Experience · 16" title="From intern to analyst." dek="Analytics, AI, product and people. The roles that shaped the work, newest first." />
+      <PageHead folio="Experience, p. 16" title="From intern to analyst." dek="Analytics, AI, product and people. The roles that shaped the work, newest first." />
 
       <section className="split" aria-labelledby="exp-octave">
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -25,7 +25,7 @@ export default function Experience() {
             {current.title}
           </h2>
           <p className="kicker">
-            <Linked text={current.company} /> · {current.dateRange}
+            <Linked text={current.company} />, {current.dateRange}
           </p>
           <p className="muted small">{octave.meta}</p>
           <Link className="btn" href="/use-cases" style={{ alignSelf: "flex-start" }}>
@@ -68,7 +68,7 @@ export default function Experience() {
             {layer1.title}
           </h2>
           <p className="kicker">
-            {layer1.company} · {layer1.dateRange}
+            {layer1.company}, {layer1.dateRange}
           </p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -87,7 +87,7 @@ export default function Experience() {
             {londonSuccessAcademy.title}
           </h2>
           <p className="kicker">
-            <Linked text={londonSuccessAcademy.company} /> · {londonSuccessAcademy.dateRange}
+            <Linked text={londonSuccessAcademy.company} />, {londonSuccessAcademy.dateRange}
           </p>
         </div>
         <ul style={list}>

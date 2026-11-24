@@ -13,7 +13,7 @@ export default function BackPage() {
               <img src="/images/mag/rachel-face.webp" alt="Rachel Cooray" width={64} height={64} loading="lazy" />
               <span className="kicker">Contact</span>
             </span>
-            <h2 className="back-line">Get in touch.</h2>
+            <h2 className="back-line">Write to me about a role, a project or research.</h2>
             <p className="back-sub">I welcome conversations about AI and analytics, research collaboration and guest lectures.</p>
             <ContactForm fallbackEmail={identity.email} />
           </div>
@@ -36,7 +36,7 @@ export default function BackPage() {
             {magazine.footerLine} © {identity.copyright}
           </span>
           <span>
-            {magazine.issue} · {magazine.issueDate}
+            {magazine.issue}, {magazine.issueDate}
           </span>
         </div>
       </div>

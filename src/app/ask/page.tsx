@@ -11,8 +11,8 @@ export default function Ask() {
     <div className="ask">
       <div className="wrap">
         <div className="folio">
-          <span>Rachel Cooray · Issue 01</span>
-          <span>Ask · 18</span>
+          <span>Rachel Cooray, Issue 01</span>
+          <span>Ask, 18</span>
         </div>
         <div className="ask-grid">
           <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

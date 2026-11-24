@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function UseCases() {
   return (
     <div className="wrap page">
-      <Folio right="Cover story · 04" />
+      <Folio right="Cover story, 04" />
       <div className="feature-head">
         <h1>{magazine.useCasesHeadline}</h1>
         <p>{magazine.useCasesDeck}</p>
@@ -22,7 +22,7 @@ export default function UseCases() {
         {magazine.useCases.map((u, i) => (
           <article key={u.id} id={u.id} className="case">
             <span className="tag">
-              {String(i + 1).padStart(2, "0")} · {u.code} · {u.stage} · Owned
+              {String(i + 1).padStart(2, "0")}, {u.code}, {u.stage}, Owned
             </span>
             <h2>
               <Link prefetch href={`/use-cases/${u.id}`} className="case-link">
@@ -35,7 +35,7 @@ export default function UseCases() {
               <b>My part.</b> {u.part}
             </p>
             <Link prefetch href={`/use-cases/${u.id}`} className="case-more">
-              Problem, solution, value and my part<span aria-hidden="true"> →</span>
+              Problem, solution, value and my part
               <span className="sr-only">: {u.name}</span>
             </Link>
           </article>
@@ -45,7 +45,7 @@ export default function UseCases() {
         <p className="q">{magazine.measureQuote}</p>
         <div className="side">
           <span className="kicker">How I deliver</span>
-          <span>{magazine.delivery.join(" · ")}</span>
+          <span>{magazine.delivery.join(", ")}</span>
         </div>
       </div>
       <p className="small muted">{magazine.confidentiality}</p>

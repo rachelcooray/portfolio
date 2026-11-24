@@ -76,13 +76,13 @@ export default function Opening() {
         </span>
         <span className="book-cover">
           <span className="book-mast">Rachel Cooray</span>
-          <span className="book-issue">Issue 01 · November 2026</span>
+          <span className="book-issue">Issue 01, November 2026</span>
           <span className="book-story">{magazine.cover.story.title}</span>
         </span>
       </button>
       <div className="opening-actions">
         <button ref={openBtn} type="button" className="opening-open" onClick={openMagazine}>
-          Open the magazine <span aria-hidden="true">→</span>
+          Open the magazine
         </button>
         <button type="button" className="opening-skip" onClick={finish}>
           Skip to the site

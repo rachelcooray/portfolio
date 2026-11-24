@@ -12,11 +12,11 @@ const linkedin = identity.links.find((l) => l.label === "LinkedIn")?.href ?? "ht
 export default function Pictures() {
   return (
     <div className="wrap page">
-      <Folio right="In pictures · 30" />
+      <Folio right="In pictures, 30" />
       <h1 className="pics-title">A visual record of my work and milestones.</h1>
 
       <section className="pics-sec first">
-        <span className="kicker">01 · Graduation</span>
+        <span className="kicker">Graduation</span>
         <div className="g g-grad">
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/graduation-roses-thames.webp" alt="Rachel in her graduation gown and cap holding red roses, by the Thames" width={893} height={1500} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
@@ -40,7 +40,7 @@ export default function Pictures() {
       </section>
 
       <section className="pics-sec">
-        <span className="kicker">02 · The research</span>
+        <span className="kicker">The research</span>
         <div className="g g-poster">
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/pcos-poster.webp" alt="The PCOS Care research poster: overview, aims and objectives, method, implementation, features and design, architecture and machine learning highlights" width={1400} height={1367} style={{ objectFit: "contain", background: "#f4f4f6", border: "1px solid var(--line)" }} />
@@ -54,7 +54,7 @@ export default function Pictures() {
         <div className="g g-3">
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/poster-standing.webp" alt="Rachel standing in front of her PCOS Care poster at the showcase" width={1350} height={1800} style={{ aspectRatio: "3 / 4", objectPosition: "center 40%" }} />
-            <figcaption>Ready for the judges.</figcaption>
+            <figcaption>Beside the poster, waiting for the judges.</figcaption>
           </figure>
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/pcos-showcase.webp" alt="Rachel presenting PCOS Care to judges and standing beside her research poster" width={1606} height={1198} style={{ aspectRatio: "3 / 4", objectPosition: "0% 50%" }} />
@@ -78,7 +78,7 @@ export default function Pictures() {
       </section>
 
       <section className="pics-sec">
-        <span className="kicker">03 · On stage and in the room</span>
+        <span className="kicker">On stage and in the room</span>
         <div className="g g-stage">
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/rachel-speaking.webp" alt="Rachel speaking at a lectern, holding a microphone and smiling" width={1200} height={1500} style={{ aspectRatio: "4 / 5" }} />
@@ -96,7 +96,7 @@ export default function Pictures() {
       </section>
 
       <section className="pics-sec">
-        <span className="kicker">04 · Awards and certificates</span>
+        <span className="kicker">Awards and certificates</span>
         <div className="g g-3">
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/embrace-certificate.webp" alt="Microsoft certificate of excellence awarded to Rachel Naadia Cooray for the Microsoft regional hackathon, AI for Neurodiverse Learners, EMBRACE" width={1465} height={1080} style={{ aspectRatio: "4 / 3", objectFit: "contain", background: "#2a2a2a" }} />
@@ -114,7 +114,7 @@ export default function Pictures() {
       </section>
 
       <section className="pics-sec">
-        <span className="kicker">05 · Things I built</span>
+        <span className="kicker">Things I built</span>
         <div className="g g-3">
           <figure>
             <img loading="lazy" decoding="async" src="/images/mag/carbon-footprint.webp" alt="Carbon Footprint Tracker dashboard" width={1200} height={900} style={{ aspectRatio: "4 / 3", objectPosition: "top" }} />
@@ -132,7 +132,7 @@ export default function Pictures() {
       </section>
 
       <section className="pics-sec">
-        <span className="kicker">06 · Find me online</span>
+        <span className="kicker">Find me online</span>
         <div className="online">
           <div>
             <p style={{ fontFamily: "var(--serif)", fontSize: 36, lineHeight: 1.1 }}>Follow the work as it happens.</p>

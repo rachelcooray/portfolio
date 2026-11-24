@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function Education() {
   return (
     <div className="wrap page">
-      <PageHead folio="Education · 20" title="First Class Honours in Computer Science, with business training in accounting." dek="Computer Science in London, business accounting alongside it, and the school where it started." />
+      <PageHead folio="Education, p. 20" title="First Class Honours in Computer Science, with business training in accounting." dek="Computer Science in London, business accounting alongside it, and the school where it started." />
       <div className="g g-grad">
         <figure>
           <img loading="lazy" decoding="async" src="/images/mag/graduation-roses-thames.webp" alt="Rachel in her graduation gown and cap holding red roses, by the Thames" width={893} height={1500} style={{ aspectRatio: "3 / 4", objectPosition: "center 30%" }} />
@@ -66,7 +66,7 @@ export default function Education() {
           <figcaption>{schoolLife.photo.credit}</figcaption>
         </figure>
         <div className="school-copy">
-          <span className="kicker">At school · St. Bridget&apos;s Convent, Colombo</span>
+          <span className="kicker">At school, St. Bridget&apos;s Convent, Colombo</span>
           <h2 className="sec-title" id="school-title">
             Leading from the front, since 2012.
           </h2>
@@ -86,7 +86,7 @@ export default function Education() {
             {schoolLife.exams.map((x) => (
               <div key={x.level} className="exam">
                 <span className="kicker">
-                  {x.level} · {x.year}
+                  {x.level}, {x.year}
                 </span>
                 <ul className="leaders">
                   {x.results.map(([subj, grade]) => (

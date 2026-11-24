@@ -41,7 +41,7 @@ export default async function UseCase({ params }: { params: Promise<{ id: string
         <h1 className="uc-head">{u.headline}</h1>
         <p>
           <span className="kicker">
-            {u.name} · {u.stage} · Owned
+            {u.name}, {u.stage}, Owned
           </span>
           <br />
           {u.line}

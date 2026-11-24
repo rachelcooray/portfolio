@@ -34,7 +34,7 @@ function Stories({ items }: { items: (typeof press)[number][] }) {
           {n.image ? <img loading="lazy" decoding="async" src={n.image} alt={n.imageAlt ?? n.title} width={1200} height={750} /> : null}
           <div className="story-copy">
             <span className="kicker">
-              <Linked text={n.organization} /> · {n.year}
+              <Linked text={n.organization} />, {n.year}
             </span>
             <h2>{n.title}</h2>
             {n.dek ? <p className="story-dek"><Linked text={n.dek} /></p> : null}
@@ -46,7 +46,7 @@ function Stories({ items }: { items: (typeof press)[number][] }) {
             ) : null}
             {n.link ? (
               <a className="story-link" href={n.link}>
-                Read the story<span className="sr-only">: {n.title}</span> →
+                Read the story<span className="sr-only">: {n.title}</span>
               </a>
             ) : null}
           </div>
@@ -59,7 +59,7 @@ function Stories({ items }: { items: (typeof press)[number][] }) {
 export default function News() {
   return (
     <div className="wrap page">
-      <PageHead folio="In the news · 28" title="Coverage of my work and teams." dek="Where my work and my teams have been written about." />
+      <PageHead folio="In the news, p. 28" title="Coverage of my work and teams." dek="Where my work and my teams have been written about." />
       <Stories items={all} />
     </div>
   );

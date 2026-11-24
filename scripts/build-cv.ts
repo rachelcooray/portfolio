@@ -129,7 +129,7 @@ const fonts = `
 
 // ---------------------------------------------------------------- the magazine CV (for people)
 const entry = (it: Item) =>
-  `<div class="entry"><div class="entry-row"><span class="entry-title">${esc(it.title)}</span>${it.when ? `<span class="entry-when">${esc(it.when)}</span>` : ""}</div>${it.org ? `<div class="entry-org">${esc(it.org)}${it.where ? ` · ${esc(it.where)}` : ""}</div>` : ""}${it.text ? `<p>${esc(it.text)}</p>` : ""}${it.bullets?.length ? `<ul>${it.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}</div>`;
+  `<div class="entry"><div class="entry-row"><span class="entry-title">${esc(it.title)}</span>${it.when ? `<span class="entry-when">${esc(it.when)}</span>` : ""}</div>${it.org ? `<div class="entry-org">${esc(it.org)}${it.where ? `, ${esc(it.where)}` : ""}</div>` : ""}${it.text ? `<p>${esc(it.text)}</p>` : ""}${it.bullets?.length ? `<ul>${it.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>` : ""}</div>`;
 
 // The left pane from the earlier CV: name, title, contact and the robot with
 // the QR on page 1; the toolkit, recognition and the robot again on page 2.
@@ -173,7 +173,7 @@ body { font-family: Plex, "Helvetica Neue", Arial, sans-serif; font-size: 8.5pt;
 .intro { margin: 0; padding-left: 4mm; font-size: 9.6pt; line-height: 1.45; display: flex; flex-direction: column; gap: 1mm; }
 .photo { background: #efe6d3; border-bottom: 2.4pt solid #46521a; overflow: hidden; min-height: 40mm; }
 .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
-.quote { font-family: Garamond, Georgia, serif; font-style: italic; font-size: 13pt; line-height: 1.22; color: #46521a; border-left: 3pt solid #c7d42b; padding: 0.6mm 0 0.6mm 4mm; margin: 2.4mm 0 0; }
+.quote { font-family: Garamond, Georgia, serif; font-style: italic; font-size: 13pt; line-height: 1.22; color: #46521a; border-top: 0.6pt solid #2b2318; padding: 2mm 0 0; margin: 2.4mm 0 0; }
 h2 { margin: 1.6mm 0 0; font-family: Garamond, Georgia, serif; font-weight: 500; font-size: 17pt; line-height: 1; color: #2b2318; display: flex; align-items: baseline; gap: 3mm; }
 h2::after { content: ""; flex: 1; border-bottom: 0.6pt solid #2b2318; transform: translateY(-1.2mm); }
 .entry { break-inside: avoid; }
@@ -207,7 +207,7 @@ li::marker { color: #46521a; }
     </div>
     <div class="title">${esc(identity.role)}<br>${esc(identity.employer)}</div>
     <ul class="contact">${contact.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
-    <div class="bot">${bot}<p><b>Scan me.</b>The full portfolio, and an agent that answers questions about my work.</p></div>
+    <div class="bot">${bot}<p><b>Scan for the full portfolio</b>It includes an agent that answers questions about my work.</p></div>
   </aside>
   <main class="main">
     <div class="top">Data, AI, business and people<em>rachelcooray.com</em></div>
@@ -221,7 +221,7 @@ li::marker { color: #46521a; }
     <h2>Experience</h2>
     <div class="entry">
       <div class="entry-row"><span class="entry-title">${esc(analyst.title)}</span><span class="entry-when">${esc(analyst.dateRange)}</span></div>
-      <div class="entry-org">${esc(analyst.company)} · ${esc(analyst.location)}</div>
+      <div class="entry-org">${esc(analyst.company)}, ${esc(analyst.location)}</div>
       <div class="chain">${stages
         .map((st) => `<div class="stop"><div class="dot"></div><span class="k">${stageLabel[st]}</span><span>${useCases.filter((u) => u.stage === st).map((u) => esc(u.name)).join("<br>")}</span></div>`)
         .join("")}</div>
@@ -230,7 +230,7 @@ li::marker { color: #46521a; }
     ${entry({ title: layer1.title, org: layer1.company, when: layer1.dateRange, bullets: ["Co-founded a web and mobile studio for small businesses.", "Take each build from brief to launch and upkeep.", "Mentor interns on real client projects."] })}
     ${entry({ title: londonSuccessAcademy.title, org: londonSuccessAcademy.company, when: londonSuccessAcademy.dateRange, bullets: ["Built ETL pipelines on Google Cloud for clickstream and transactions.", "Scaled processing with PySpark and Parquet."] })}
   </main>
-  ${folio("Rachel Cooray · CV", "01")}
+  ${folio("Rachel Cooray, CV", "01")}
 </section>
 
 <section class="page">
@@ -243,7 +243,7 @@ li::marker { color: #46521a; }
       <div class="side-h">Recognition</div>
       <ul class="list">${achievements.map((a) => `<li><b>${esc(a.title)}</b>, ${esc(a.year)}</li>`).join("")}</ul>
     </div>
-    <div class="bot">${bot}<p><b>Ask my agent.</b>Questions about my work, answered from my portfolio.</p></div>
+    <div class="bot">${bot}<p><b>Ask my agent anything</b>Questions about my work, answered from my portfolio.</p></div>
   </aside>
   <main class="main">
     <div class="top">Continued<em>rachelcooray.com</em></div>

@@ -56,7 +56,7 @@ export default function ValueChain() {
   return (
     <section className="chain" aria-label="Where each use case sits in the value chain">
       <div className="chain-top">
-        <span className="kicker">The value chain · where each use case sits</span>
+        <span className="kicker">The value chain, where each use case sits</span>
         { }
         <img loading="lazy" decoding="async" src="/images/logo-octave.jpeg" alt="OCTAVE" />
       </div>

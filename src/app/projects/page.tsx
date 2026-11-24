@@ -11,21 +11,21 @@ export const metadata: Metadata = {
 export default function Projects() {
   return (
     <div className="wrap page">
-      <PageHead folio="Projects · 14" title="Research software, client products and independent builds." />
+      <PageHead folio="Projects, p. 14" title="Research software, client products and independent builds." />
       <div className="cards">
         <article className="card lead">
           <img loading="lazy" decoding="async" src="/images/mag/pcos-app.webp" alt="The PCOS Care web app home page" width={2000} height={1250} style={{ objectPosition: "top" }} />
-          <span className="meta">Research · 2025</span>
+          <span className="meta">Research, 2025</span>
           <h2>PCOS Care</h2>
           <p>{research.paper.description}</p>
           <p className="small">
-            <Link href="/research">Read the research feature</Link> · <a href={research.paper.appUrl}>Try the app</a>
+            <Link href="/research">Read the research feature</Link>, <a href={research.paper.appUrl}>Try the app</a>
           </p>
         </article>
         <article className="card lead">
           <img loading="lazy" decoding="async" src={layer1.logo} alt="Layer1 Studio" width={600} height={375} style={{ objectFit: "contain", background: "var(--sand)" }} />
           <span className="meta">
-            {layer1.title} · {layer1.dateRange}
+            {layer1.title}, {layer1.dateRange}
           </span>
           <h2>{layer1.company}</h2>
           <p>{layer1.description}</p>

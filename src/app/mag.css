@@ -849,3 +849,18 @@ button, input, select, textarea { font-family: inherit; }
 /* Projects: the tools each build used, as the same neat pills as Skills */
 .card .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 4px 0 0; padding: 0; }
 .card .tags li { font-family: var(--sans); font-size: 13px; line-height: 1.2; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); }
+
+/* No AI-slop tells: nothing pulses, glows or fades in, no coloured left
+   borders, no decorative icons on value tiles. Content is simply there. */
+.chain-node, .locator li.is-here .locator-dot, .robot-bulb, .ask-fab { animation: none !important; }
+.ask-fab { box-shadow: 0 4px 12px rgba(43, 35, 24, 0.18); }
+.locator li.is-here .locator-dot { box-shadow: none; }
+.robot-bulb { fill: var(--lime); }
+.step, .stack-layer, .stack-tools li, .aic-list li, .cloud-w, .skills-page .cloud-w, .bubble-q, .bubble-a, .bubble-face, .robot-say { animation: none !important; opacity: 1 !important; transform: none !important; }
+.ask-pop { box-shadow: 0 18px 48px rgba(43, 35, 24, 0.35); outline: 0; }
+.talk-about { border-left: 0; padding-left: 0; }
+.story-quote { border-left: 0; padding-left: 0; }
+.story-quote p::before { content: none; }
+.agent-details { border-left: 0; border-top: 2px solid var(--olive); }
+.spine-link[aria-current="page"] { border-left-color: transparent; }
+.value-tile svg { display: none; }

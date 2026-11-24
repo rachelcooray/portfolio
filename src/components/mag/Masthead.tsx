@@ -30,7 +30,7 @@ export default function Masthead() {
         <Link href="/" className="spine-mark" aria-label="Rachel Cooray, cover">
           <span>Rachel</span> <span>Cooray</span>
         </Link>
-        <span className="spine-issue">Issue 01 · November 2026</span>
+        <span className="spine-issue">Issue 01, November 2026</span>
         <button type="button" className="spine-toggle" aria-expanded={open} aria-controls="spine-nav" onClick={() => setOpen((o) => !o)}>
           {open ? "Close" : "Contents"}
         </button>

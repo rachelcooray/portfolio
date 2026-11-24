@@ -12,7 +12,7 @@ export default function Volunteering() {
   const csr = buildLog.find((b) => b.id === "build-csr-street-vendors");
   return (
     <div className="wrap page">
-      <PageHead folio="Volunteering · 24" title="Community and cultural volunteering." dek={volunteer.summary} />
+      <PageHead folio="Volunteering, p. 24" title="Community and cultural volunteering." dek={volunteer.summary} />
       <div className="cards">
         {volunteer.items.map((v) => (
           <article key={v.id} className="card">

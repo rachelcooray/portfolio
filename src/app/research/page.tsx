@@ -11,12 +11,12 @@ export default function Research() {
   const p = research.paper;
   return (
     <div className="wrap page">
-      <Folio right="Research · 12" />
+      <Folio right="Research, 12" />
       <div className="research">
         <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-          <span className="kicker">Applied machine learning · {p.venue}</span>
+          <span className="kicker">Applied machine learning, {p.venue}</span>
           <h1>
-            PCOS Care: <em>explainable early-risk screening.</em>
+            PCOS Care: explainable early-risk screening.
           </h1>
           <p className="dek">A final year project that became a published paper.</p>
           <figure>

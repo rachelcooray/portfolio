@@ -388,7 +388,7 @@ export const layer1 = {
     "Develop websites and mobile applications.",
     "Contribute to interface design, application architecture and backend integration.",
     "Coordinate development and deployment, and support maintenance and iterative improvements.",
-    "Mentor interns and involve them in real client projects.",
+    "Mentor interns and involve them in live client projects.",
     "Contribute to business development and the growth of the studio.",
   ],
   builtFor: [
@@ -611,7 +611,7 @@ export const teaching = {
       title: "Mentoring interns",
       institution: "Layer1 Studio",
       dateRange: "Dec 2025 to present",
-      summary: "Interns work on real client projects.",
+      summary: "Interns work on live client projects.",
     },
   ],
 };
@@ -960,7 +960,7 @@ export const workCases: WorkCase[] = [
       "Communicated the research through an academic paper and conference publication.",
     ],
     solution: "A deployed web application with 2 screening pathways that explains each prediction. A screening-support tool, not a diagnostic system or a replacement for medical advice.",
-    evaluation: ["Stratified cross-validation, favouring recall, since a missed case costs more than a false alarm.", "A structured usability study with real users."],
+    evaluation: ["Stratified cross-validation, favouring recall, since a missed case costs more than a false alarm.", "A structured usability study with actual patients and students."],
     outcomes: [
       "Published at IEEE ICAHS 2025.",
       "Third place at the University of Westminster final year project showcase, 2025.",
@@ -982,7 +982,7 @@ export const workCases: WorkCase[] = [
     tags: ["Software", "Digital Products", "Layer1.Studio"],
     question: "How does a rough brief become a product a small business can run?",
     summary: "Websites, mobile applications and digital experiences for clients across different industries.",
-    contribution: "Requirements, design, development, deployment and maintenance, with interns on real client projects.",
+    contribution: "Requirements, design, development, deployment and maintenance, with interns on live client projects.",
     diagram: ["Rough brief", "Scope", "Build", "Launch and maintain"],
     challenge: "Small businesses arrive with an informal brief, a few spreadsheets and a process held together by messages and paper.",
     context: "The product has to be one the owner can run without us: scoped tightly, shipped quickly and maintained after launch.",
@@ -991,7 +991,7 @@ export const workCases: WorkCase[] = [
       "Build the operational pieces first, such as sign-ups, bookings, payments and reminders.",
       "A lightweight serverless stack and optimistic UI updates, so products stay responsive on ordinary mobile networks.",
     ],
-    role: ["Client requirements and scoping.", "Interface design, architecture and backend integration.", "Development, deployment and maintenance.", "Mentoring interns on real client projects."],
+    role: ["Client requirements and scoping.", "Interface design, architecture and backend integration.", "Development, deployment and maintenance.", "Mentoring interns on live client projects."],
     solution: "Products in use across fitness, food, e-commerce, marketing, arts and publishing, workplace culture and sports. No client is named here without permission.",
     evaluation: [],
     outcomes: ["A repeatable delivery model: brief, scope, build, launch, maintain."],
@@ -1002,14 +1002,14 @@ export const workCases: WorkCase[] = [
 // Page copy for the multi-page site. Facts come from the sections above.
 export const site = {
   hero: {
-    eyebrow: "Portfolio / 2026 · Computer Science · Data · Technology · Business",
+    eyebrow: "Portfolio / 2026, Computer Science, Data, Technology, Business",
     title: "Building at the intersection of technology, people and possibility.",
     lead: "A multidisciplinary technologist exploring how intelligent systems can solve meaningful problems.",
     paragraphs: [
       "I'm a computer science graduate and technology professional exploring how data, AI and software can solve meaningful problems.",
       "From building intelligent applications and conducting research to delivering data-driven solutions in enterprise environments, I enjoy working across disciplines to turn complex ideas into things people can actually use.",
     ],
-    meta: "Colombo, Sri Lanka · Working across technology, research and business",
+    meta: "Colombo, Sri Lanka, Working across technology, research and business",
   },
   world: [
     { title: "AI & Data", line: "Building intelligent, data-informed solutions.", href: "/research" },
@@ -1026,14 +1026,14 @@ export const site = {
     { year: "2026", text: "Analyst role, co-founded Layer1.Studio, and research, technology and community work." },
   ],
   closing: {
-    title: "Curiosity is where it starts. Building is where it becomes real.",
+    title: "Curiosity is where it starts. Building is where it starts to work.",
     text: "I'm interested in people, ideas and opportunities that bring technology and meaningful problems together.",
   },
   about: {
     title: "A curious mind, a multidisciplinary approach.",
     paragraphs: [
       "I have always been interested in understanding how things work: not just technically, but how they connect to people, organisations and the world around us.",
-      "My journey began with an interest in computing and problem-solving. Studying Computer Science gave me a foundation in software engineering, data science and analytical thinking. Working on real business problems then introduced me to commercial decision-making, project delivery, stakeholder management, research, communication and leadership.",
+      "My journey began with an interest in computing and problem-solving. Studying Computer Science gave me a foundation in software engineering, data science and analytical thinking. Working on business problems then introduced me to commercial decision-making, project delivery, stakeholder management, research, communication and leadership.",
       "I found that the most interesting problems rarely sit within one discipline.",
       "Today I work in Data and AI at OCTAVE, part of John Keells Holdings, on technology and analytics initiatives in the FMCG sector. Alongside this, I co-founded Layer1.Studio, where I work on digital products and software for businesses.",
       "My interests extend into academic research, responsible technology, entrepreneurship and community. I don't see these as unrelated pursuits. They are different ways of understanding problems, developing ideas and creating value.",
@@ -1046,7 +1046,7 @@ export const site = {
     ],
     direction: {
       title: "Broad foundations. Deeper expertise.",
-      text: "I am building towards a career that combines technical understanding, research, organisational problem-solving and leadership. I'm interested in how intelligent systems move beyond experimentation into real-world use, and how to make that transition effective, responsible and human-centred.",
+      text: "I am building towards a career that combines technical understanding, research, organisational problem-solving and leadership. I'm interested in how intelligent systems move beyond experimentation into everyday use, and how to make that transition effective, responsible and human-centred.",
       interests: [
         "Applied artificial intelligence and machine learning",
         "Human-centred intelligent systems",
@@ -1079,7 +1079,7 @@ export const site = {
     intro: "Most recent first. The roles that shaped my work get the most room.",
   },
   work: {
-    title: "Ideas become valuable when they work in the real world.",
+    title: "Ideas become valuable when they work outside the lab.",
     intro: [
       "A selection of projects across enterprise analytics, applied AI, software engineering and digital product development.",
       "I enjoy working across the full problem-solving process: understanding a challenge, exploring solutions, building or coordinating implementation, and evaluating what changes as a result.",
@@ -1089,12 +1089,12 @@ export const site = {
   },
   research: {
     title: "Research driven by questions worth exploring.",
-    intro: "My academic interests sit where computer science, artificial intelligence and real-world applications meet: how computational methods can help us understand complex problems, support decisions and make technology more accessible.",
+    intro: "My academic interests sit where computer science, artificial intelligence and practical applications meet: how computational methods can help us understand complex problems, support decisions and make technology more accessible.",
     interests: [
       "Human-centred artificial intelligence",
       "Explainability and trust in intelligent systems",
       "Responsible AI and governance",
-      "Applied machine learning in real-world environments",
+      "Applied machine learning in working environments",
       "AI adoption and decision-making in organisations",
     ],
   },
@@ -1605,8 +1605,8 @@ export type MagUseCase = {
 export const magazine = {
   issue: "Issue 01",
   issueDate: "November 2026",
-  strap: "Data · AI · Business · People",
-  coverHeadline: "Applying AI and analytics to real business decisions.",
+  strap: "Data, AI, Business, People",
+  coverHeadline: "Applying AI and analytics to business decisions.",
   coverDeck: "Analyst, Data and AI at OCTAVE, John Keells Holdings. Published researcher and co-founder of Layer1 Studio.",
   useCasesHeadline: "From the factory production line to the outlet shelves.",
   useCasesDeck: "The AI and analytics use cases I own at OCTAVE, and my part in each.",
@@ -1616,14 +1616,14 @@ export const magazine = {
     story: { kicker: "Cover story", title: "Data and AI, put to work across the FMCG value chain.", dek: "The 6 AI and analytics use cases I own at OCTAVE, John Keells Holdings, from the factory to the outlet shelf." },
     research: { kicker: "Research", title: "PCOS Care, from final year project to IEEE ICAHS 2025." },
     ask: { kicker: "New this issue", title: "Ask me anything. An agent that answers from my own work, and shows its source." },
-    alsoInside: "A First Class at Westminster · Head Prefect, 2020 · Volunteering with the John Keells Foundation · Project Uplift",
+    alsoInside: "A First Class at Westminster, Head Prefect, 2020, Volunteering with the John Keells Foundation, Project Uplift",
   },
   useCasesIntro:
     "As Analyst, Data and AI at OCTAVE, John Keells Holdings, I own 6 use cases across the value chain, from the analysis and the solution design to the problem solving along the way, working with data science, engineering and the commercial teams who use the results. Each one asks the same question in a different place: is the distributor being asked for the right thing, and rewarded for the right reason?",
   chain: [
     { stage: "Factory", icon: "factory", label: "Production planning" },
     { stage: "Dispatch", icon: "truck", label: "Permanent Dispatch Planning" },
-    { stage: "Distributor warehouse", icon: "warehouse", label: "Replenishment · Ice cream margins and targets · Beverage margins" },
+    { stage: "Distributor warehouse", icon: "warehouse", label: "Replenishment, Ice cream margins and targets, Beverage margins" },
     { stage: "Outlets", icon: "shop", label: "Weather and sales" },
   ],
   useCases: [
@@ -1670,7 +1670,7 @@ export const magazine = {
       stage: "Distributor",
       name: "Beverages Distributor Margins",
       line: "Beverage distributors used to earn a mostly fixed margin, whether they pushed hard or not. Now part of it is paid only when they beat target, with an extra bonus tied to a second condition that can rotate to whichever measure needs lifting next. Targets are set by a model, so pay is earned rather than given away.",
-      part: "I track who qualifies each month, watch for payments that reward catching up rather than real growth, and weigh the extra volume against what the bonus costs. The tracking feeds the weekly governance calls with the business.",
+      part: "I track who qualifies each month, watch for payments that reward catching up rather than genuine growth, and weigh the extra volume against what the bonus costs. The tracking feeds the weekly governance calls with the business.",
     },
     {
       id: "weather",
@@ -1685,7 +1685,7 @@ export const magazine = {
   measureQuote: "Operational indicators first, then commercial outcomes, always separating association from proven impact.",
   delivery: ["Problem statement", "Requirements", "Build with data science and engineering", "Validate", "Measure", "Govern with the business"],
   confidentiality: "OCTAVE work is shown without confidential data, client information or results.",
-  backPage: "Curiosity is where it starts. Building is where it becomes real.",
+  backPage: "Curiosity is where it starts. Building is where it starts to work.",
 };
 
 export function buildMagazinePassages(): Passage[] {
@@ -1758,7 +1758,7 @@ export const useCaseStories: Record<string, UseCaseStory> = {
     solution:
       "A digital twin of the factory: a model of the lines that can be run forward in time. It recommends the schedule for each production line so every product stays in stock while the stock held, and the working capital tied up in it, stays as low as it can be.",
     analytics: [
-      "Tests a schedule in the twin before it runs on the real lines.",
+      "Tests a schedule in the twin before it runs on the factory lines.",
       "Weighs keeping products available against the cost of holding stock, instead of treating them as separate goals.",
       "Turns a planner's trade-off into a recommendation that can be checked and explained.",
     ],
@@ -1813,7 +1813,7 @@ export const useCaseStories: Record<string, UseCaseStory> = {
   },
   icdm: {
     problem:
-      "Ice cream distributors can earn monthly bonuses on top of their margin for hitting targets on sales, product mix, outlet coverage and range. A bonus only works if it is paid by the rules, rewards real effort rather than clever timing, and is measured against a target that is fair.",
+      "Ice cream distributors can earn monthly bonuses on top of their margin for hitting targets on sales, product mix, outlet coverage and range. A bonus only works if it is paid by the rules, rewards effort rather than clever timing, and is measured against a target that is fair.",
     solution:
       "A monitoring view that checks who was paid against the rules and whether the bonuses are changing behaviour, alongside a model that sets each distributor's monthly target from past sales adjusted for seasonality, a fair share of the business unit's total and a small stretch.",
     analytics: [
@@ -1839,7 +1839,7 @@ export const useCaseStories: Record<string, UseCaseStory> = {
     analytics: [
       "Tracks which distributors qualify each month and why.",
       "Weighs the extra volume against what the bonus costs.",
-      "Watches for payments that reward catching up after a dip rather than real growth, which shaped the proposal for guardrails.",
+      "Watches for payments that reward catching up after a dip rather than genuine growth, which shaped the proposal for guardrails.",
     ],
     value: [
       "A margin that gives distributors a reason to push, and to push on what the business needs.",
@@ -1960,7 +1960,7 @@ export const askMore = [
   },
   {
     q: "Layer1 Studio",
-    a: "Layer1 Studio is a web and mobile development venture Rachel co-founded in December 2025. She builds websites and apps for small businesses, from shaping the brief to shipping and maintaining them, and mentors interns on real client projects.",
+    a: "Layer1 Studio is a web and mobile development venture Rachel co-founded in December 2025. She builds websites and apps for small businesses, from shaping the brief to shipping and maintaining them, and mentors interns on live client projects.",
     href: "/projects",
     label: "Projects",
     keywords: ["layer1", "layer", "studio", "venture", "startup", "founder", "founded", "freelance", "websites", "web dev", "web development", "side business", "company"],
@@ -2002,7 +2002,7 @@ export const askMore = [
   },
   {
     q: "Why hire her",
-    a: "She connects data, AI and the business: she owns use cases from analysis through to adoption, has published machine learning research, and ships real products. Add a First Class degree, CIMA business training and a record of leadership since school.",
+    a: "She connects data, AI and the business: she owns use cases from analysis through to adoption, has published machine learning research, and ships products people use. Add a First Class degree, CIMA business training and a record of leadership since school.",
     href: "/use-cases",
     label: "Use cases",
     keywords: ["hire", "hiring", "strength", "strengths", "good fit", "stand out", "recruit", "recommend", "why should"],
