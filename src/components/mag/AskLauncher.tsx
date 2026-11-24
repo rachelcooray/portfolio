@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import AskAgent from "@/components/mag/AskAgent";
 
@@ -10,6 +10,8 @@ export default function AskLauncher() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const [bubble, setBubble] = useState(false);
+  const fab = useRef<HTMLButtonElement>(null);
+  const pop = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let seen = false;
@@ -21,11 +23,21 @@ export default function AskLauncher() {
     return () => clearTimeout(t);
   }, []);
 
+  // Keyboard: opening moves focus to the question box; Escape closes and
+  // hands focus back to the button that opened it.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const t = window.setTimeout(() => pop.current?.querySelector<HTMLInputElement>(".ask-form input")?.focus(), 60);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      fab.current?.focus();
+    };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   if (path === "/ask") return null;
@@ -40,10 +52,18 @@ export default function AskLauncher() {
   return (
     <div className="ask-fab-wrap">
       {open ? (
-        <div className="ask-pop ask" role="dialog" aria-label="Ask me anything">
+        <div ref={pop} className="ask-pop ask" role="dialog" aria-label="Ask me anything">
           <div className="ask-pop-head">
             <span className="kicker">Ask me anything</span>
-            <button type="button" className="ask-pop-close" aria-label="Close" onClick={() => setOpen(false)}>
+            <button
+              type="button"
+              className="ask-pop-close"
+              aria-label="Close"
+              onClick={() => {
+                setOpen(false);
+                fab.current?.focus();
+              }}
+            >
               ×
             </button>
           </div>
@@ -61,6 +81,7 @@ export default function AskLauncher() {
         </div>
       ) : null}
       <button
+        ref={fab}
         type="button"
         className={open ? "ask-fab is-open" : "ask-fab"}
         aria-expanded={open}

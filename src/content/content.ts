@@ -1909,7 +1909,7 @@ export const askFaqs = [
     a: "BSc (Hons) Computer Science with First Class Honours from the University of Westminster, 2022 to 2025, with a Data Science specialisation. She also holds the CIMA Certificate in Business Accounting, and was Head Prefect at St. Bridget's Convent, Colombo.",
     href: "/education",
     label: "Education",
-    keywords: ["education", "edu", "degree", "university", "study", "studied", "qualification", "school", "background"],
+    keywords: ["education", "edu", "degree", "university", "study", "studied", "qualification", "qualifications", "certified", "certification", "certificate", "school", "background"],
   },
   {
     q: "What's her experience?",
@@ -1956,7 +1956,7 @@ export const askMore = [
     a: "It does not use a language model. It searches Rachel's published pages and quotes them, so it never invents anything, and nothing you type is stored. When a question needs Rachel herself, it passes your request to her.",
     href: "/ask",
     label: "Ask",
-    keywords: ["ai model", "what model", "which model", "language model", "llm", "gpt", "chatgpt", "claude", "openai", "how does this work", "how do you work", "are you a bot", "are you ai", "are you real", "who built you", "what are you"],
+    keywords: ["this agent", "this bot", "this chatbot", "the agent", "how does it work", "ai model", "what model", "which model", "language model", "llm", "gpt", "chatgpt", "claude", "openai", "how does this work", "how do you work", "are you a bot", "are you ai", "are you real", "who built you", "what are you"],
   },
   {
     q: "Layer1 Studio",
@@ -1970,14 +1970,14 @@ export const askMore = [
     a: "Analyst, Data and AI at OCTAVE, John Keells Holdings, since July 2026, after moving from intern to associate to analyst. She owns 6 AI and analytics use cases across the FMCG value chain.",
     href: "/experience",
     label: "Experience",
-    keywords: ["current", "currently", "role", "title", "position", "now", "today", "employer", "works"],
+    keywords: ["current", "currently", "role", "title", "position", "now", "employer", "works", "where does she work"],
   },
   {
     q: "Skills",
     a: "Python, SQL, PySpark, Databricks and Delta Lake at work; machine learning, statistics and model evaluation in research; Power BI for reporting; and React, Node.js and Flutter for products.",
     href: "/skills",
     label: "Skills",
-    keywords: ["skills", "skill", "tools", "technologies", "technical", "tech stack", "programming", "languages", "coding"],
+    keywords: ["skills", "skill", "tools", "technologies", "technical", "tech stack", "programming", "languages", "coding", "code", "develop"],
   },
   {
     q: "Awards",
@@ -1991,7 +1991,7 @@ export const askMore = [
     a: "Leadership runs through her record: Head Prefect of St. Bridget's Convent and School Prefect of the Year in 2020. At work she owns 6 use cases from analysis to adoption, co-founded Layer1 Studio and mentors its interns.",
     href: "/education",
     label: "Education",
-    keywords: ["leader", "leadership", "lead", "manage", "management", "mentor", "prefect", "captain"],
+    keywords: ["leader", "leadership", "led", "lead", "manage", "management", "mentor", "prefect", "captain", "head prefect"],
   },
   {
     q: "Location",

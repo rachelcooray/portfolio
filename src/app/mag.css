@@ -779,3 +779,17 @@ a.toc-item:hover .leader { border-color: var(--olive); }
 @media (max-width: 520px) { .story-card { grid-template-columns: 1fr; } .story-card img { width: 100%; height: auto; aspect-ratio: 16 / 10; } }
 .org-link { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .org-link:hover { color: var(--olive-2); text-decoration-color: var(--olive); }
+
+/* The Ask pop-up sits on green pages: a cream frame keeps it distinct */
+.ask-pop { border: 2px solid var(--pale) !important; outline: 1px solid var(--olive-2); outline-offset: -6px; border-radius: 4px; box-shadow: 0 0 0 6px rgba(250, 247, 239, 0.14), 0 18px 48px rgba(43, 35, 24, 0.35); }
+.ask-pop-head { border-bottom-color: rgba(207, 198, 174, 0.45) !important; }
+
+/* Three typefaces only. Form controls inherit them instead of the browser's
+   own font, and the mono face is kept for short labels, never sentences. */
+button, input, select, textarea { font-family: inherit; }
+.agent-note { font-family: var(--sans); font-size: 13px; letter-spacing: 0; line-height: 1.5; }
+.back-links { font-family: var(--sans); font-size: 17px; }
+.ask-form input { font-family: var(--sans); }
+.ask-form button { font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.chip, .agent-follow-btn { font-family: var(--sans); }
+.cform select, .cform input, .cform textarea, .handoff input, .handoff textarea { font-family: var(--sans); }
