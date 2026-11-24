@@ -845,3 +845,7 @@ button, input, select, textarea { font-family: inherit; }
   .sk-ai { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) { .skills-page .cloud-w { animation: none; opacity: 1; transform: none; } }
+
+/* Projects: the tools each build used, as the same neat pills as Skills */
+.card .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 4px 0 0; padding: 0; }
+.card .tags li { font-family: var(--sans); font-size: 13px; line-height: 1.2; padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); }
