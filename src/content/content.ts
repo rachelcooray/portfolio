@@ -679,6 +679,11 @@ export type Recognition = {
   link?: string;
   image?: string;
   imageAlt?: string;
+  // In the news: one line on what the story is, and Rachel's own words where
+  // they exist (from her paper, application or interview). Never invented.
+  dek?: string;
+  quote?: string;
+  quoteBy?: string;
 };
 
 export const achievements: Recognition[] = [
@@ -719,6 +724,9 @@ export const press: Recognition[] = [
     organization: "IEEE",
     year: "2025",
     summary: "The published paper in the IEEE ICAHS 2025 proceedings.",
+    dek: "The PCOS Care paper, presented in Hammamet, Tunisia, and published in the IEEE proceedings.",
+    quote: "Polycystic Ovary Syndrome (PCOS) is a common but underdiagnosed hormonal disorder.",
+    quoteBy: "From the paper's abstract",
     link: "https://doi.org/10.1109/ICAHS66950.2025.11553077",
     image: "/images/mag/icahs-certificate.webp",
     imageAlt: "IEEE ICAHS 2025 participation certificate presented to Rachel Cooray for presenting the PCOS Care paper, Hammamet, Tunisia",
@@ -729,6 +737,7 @@ export const press: Recognition[] = [
     organization: "John Keells Holdings",
     year: "2026",
     summary: "JKH Intercompany Swimming Meet.",
+    dek: "John Keells Holdings on its 2026 intercompany swimming meet, where Team OCTAVE took the overall women's championship.",
     link: "https://www.linkedin.com/posts/jkh-intercompanyswimming-swimmingmeet-ugcPost-7503426930759593986-LQqx/",
     image: "/images/mag/swimming-meet.webp",
     imageAlt: "Team OCTAVE at the John Keells intercompany swimming meet",
@@ -739,6 +748,7 @@ export const press: Recognition[] = [
     organization: "University of Westminster blog",
     year: "2025",
     summary: "",
+    dek: "The university's write-up of the final year project showcase, where PCOS Care placed third.",
     link: "https://blog.westminster.ac.uk/wearewestminster/celebrating-innovation-at-the-computer-science-and-engineering-final-year-project-showcase/",
     image: "/images/netcompany-group-pic.jpg",
     imageAlt: "Students and judges at the Westminster final year project showcase",
@@ -749,6 +759,7 @@ export const press: Recognition[] = [
     organization: "University of Westminster news",
     year: "2025",
     summary: "",
+    dek: "Netcompany's prizes for the best final year projects, judged with SmartDCC, including PCOS Care.",
     link: "https://www.westminster.ac.uk/news/westminster-computer-science-and-engineering-students-receive-prizes-from-netcompany-at-annual-final-year-project-showcase",
     image: "/images/mag/blog.webp",
     imageAlt: "University of Westminster news article",
@@ -759,6 +770,9 @@ export const press: Recognition[] = [
     organization: "Daily FT",
     year: "2020",
     summary: "",
+    dek: "Women in Management and the National Youth Services Council name the New Generation Award winners, including School Prefect of the Year.",
+    quote: "One of the most important duties of a Head Prefect is to lead by example.",
+    quoteBy: "From my award application",
     link: "https://www.ft.lk/Front-Page/WIM-NYSC-recognise-youth-with-New-Generation-Awards/44-711214",
     image: "/images/mag/daily-ft.webp",
     imageAlt: "Daily FT front page article on the New Generation Awards",
@@ -769,6 +783,9 @@ export const press: Recognition[] = [
     organization: "LMD",
     year: "2020",
     summary: "",
+    dek: "LMD's Youth Forum asks young Sri Lankans about the country, its challenges and its future.",
+    quote: "More women are getting into senior management positions in organizations.",
+    quoteBy: "My answer on women's empowerment",
     link: "https://lmd.lk/youth-forum-32/",
     image: "/images/mag/youth-forum.webp",
     imageAlt: "LMD Youth Forum interview page",
