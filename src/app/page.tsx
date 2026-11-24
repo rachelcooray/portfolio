@@ -11,7 +11,7 @@ const TOC = [
   { n: "18", href: "/ask", t: "Ask me anything", d: "An agent that knows my work and answers with its source." },
   { n: "20", href: "/education", t: "Education", d: "A First Class in Computer Science at Westminster, CIMA, and school." },
   { n: "24", href: "/volunteering", t: "Volunteering", d: "The John Keells Foundation, City of Dreams and community research." },
-  { n: "26", href: "/achievements", t: "Achievements", d: "Prizes, a hackathon final, school leadership and gold in the pool." },
+  { n: "26", href: "/achievements", t: "Achievements", d: "Prizes, a hackathon final, a scholarship and school leadership." },
   { n: "28", href: "/news", t: "In the news", d: "Westminster, IEEE, John Keells, the Daily FT and LMD." },
   { n: "29", href: "/skills", t: "Skills", d: "The toolkit, and where each capability shows up." },
   { n: "30", href: "/pictures", t: "In pictures", d: "Graduation, the research, on stage, awards and builds." },

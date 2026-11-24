@@ -29,6 +29,11 @@ export default function News() {
             <p className="small muted">
               {t.event}. {t.org}.
             </p>
+            <p className="talk-about">{t.about}</p>
+            <figure className="talk-title">
+              <img src={t.titleImage} alt={t.titleImageAlt} width={480} height={360} loading="lazy" decoding="async" />
+              <figcaption>The event&apos;s title slide, 20 March 2021.</figcaption>
+            </figure>
             <p>{t.role}</p>
             <span className="kicker">What I said</span>
             <ul className="talk-points">

@@ -746,3 +746,8 @@ a.toc-item:hover .leader { border-color: var(--olive); }
 @media (max-width: 760px) { .school-pics { grid-template-columns: 1fr; } }
 .g-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px; }
 .card img[src*="icahs-certificate"] { object-fit: contain; background: #fff; }
+
+/* CSW65: what it was, and the event's title slide */
+.talk-about { font-size: 16px; line-height: 1.6; border-left: 3px solid var(--olive); padding-left: 14px; }
+.talk-title { max-width: 360px; }
+.talk-title img { border: 1px solid var(--line); aspect-ratio: 4 / 3; object-fit: cover; }

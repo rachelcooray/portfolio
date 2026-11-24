@@ -16,7 +16,7 @@ const PICS: Record<number, { src: string; alt: string; contain?: boolean }> = {
 export default function Achievements() {
   return (
     <div className="wrap page">
-      <PageHead folio="Achievements · 26" title="Awards and recognition." dek="Prizes and recognition I have been given, and one good day in the pool." />
+      <PageHead folio="Achievements · 26" title="Awards and recognition." dek="Prizes and recognition I have been given." />
       <div className="cards">
         {achievements.map((a, i) => (
           <article key={a.id} className={i === 0 ? "card lead" : "card"}>
@@ -31,7 +31,7 @@ export default function Achievements() {
         <article className="card">
           <img loading="lazy" decoding="async" src="/images/mag/swimming-meet.webp" alt="Team OCTAVE at the John Keells intercompany swimming meet" width={399} height={501} />
           <span className="meta">JKH Intercompany Swimming Meet · 2026</span>
-          <h2>Gold in the pool</h2>
+          <h2>JKH Intercompany Swimming Meet</h2>
           <p className="small">{volunteer.swimming}</p>
         </article>
       </div>

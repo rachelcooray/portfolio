@@ -1567,7 +1567,7 @@ export const magazine = {
     story: { kicker: "Cover story", title: "Data and AI, put to work across the FMCG value chain.", dek: "The 6 AI and analytics use cases I own at OCTAVE, John Keells Holdings, from the factory to the outlet shelf." },
     research: { kicker: "Research", title: "PCOS Care, from final year project to IEEE ICAHS 2025." },
     ask: { kicker: "New this issue", title: "Ask me anything. An agent that answers from my own work, and shows its source." },
-    alsoInside: "A First Class at Westminster · Gold in the pool · Head Prefect, 2020 · Volunteering with the John Keells Foundation",
+    alsoInside: "A First Class at Westminster · Head Prefect, 2020 · Volunteering with the John Keells Foundation · Project Uplift",
   },
   useCasesIntro:
     "As Analyst, Data and AI at OCTAVE, John Keells Holdings, I own 6 use cases across the value chain, from the analysis and the solution design to the problem solving along the way, working with data science, engineering and the commercial teams who use the results. Each one asks the same question in a different place: is the distributor being asked for the right thing, and rewarded for the right reason?",
@@ -2022,6 +2022,9 @@ export const talks = [
     event: "CSW65 panel event, led by and for girls",
     org: "Good Shepherd Asia Pacific, during the 65th session of the UN Commission on the Status of Women",
     date: "March 2021",
+    about: "CSW65 was the 65th session of the United Nations Commission on the Status of Women, the main UN body for gender equality, held in March 2021. Alongside it, Good Shepherd Asia Pacific ran Together We Can, a panel led by and for girls; I spoke on its first panel, the impact of COVID-19 on girl children.",
+    titleImage: "/images/mag/csw65-title.webp",
+    titleImageAlt: "Title slide: Together We Can, Good Shepherd Asia Pacific, 20 March 2021. Panel 1, impact of COVID on girl children, lists Rachel Cooray for Sri Lanka",
     role: "Panellist representing Sri Lanka, alongside girls from Myanmar, Indonesia, the Philippines and India.",
     link: "https://www.youtube.com/watch?v=0nycsR3NRJ0&t=5171s",
     image: "/images/mag/csw65.webp",
