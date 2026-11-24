@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Folio from "@/components/mag/Folio";
+import { OpenAgain } from "@/components/mag/Opening";
 import { identity, magazine } from "@/content/content";
 
 const TOC = [
@@ -51,6 +52,7 @@ export default function Cover() {
           <p className="cover-also">
             <span className="kicker">Also inside</span> {c.alsoInside}
           </p>
+          <OpenAgain />
         </div>
         <figure className="cover-photo">
           <img fetchPriority="high" src="/images/mag/london.webp" alt="Rachel Cooray on the South Bank in London, in a black coat, with the London Eye behind her" width={1062} height={1600} />

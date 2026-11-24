@@ -1564,7 +1564,7 @@ export const magazine = {
   footerLine: "Rachel Cooray. Analyst, Data and AI. Colombo, Sri Lanka.",
   pullQuote: "The most interesting problems rarely sit within one discipline.",
   cover: {
-    story: { kicker: "Cover story", title: "From the factory production line to the outlet shelves.", dek: "How an analyst owns the work from the factory line to the shop shelf at OCTAVE, John Keells Holdings." },
+    story: { kicker: "Cover story", title: "Data and AI, put to work across the FMCG value chain.", dek: "The six AI and analytics use cases I own at OCTAVE, John Keells Holdings, from the factory to the outlet shelf." },
     research: { kicker: "Research", title: "PCOS Care, from final year project to IEEE ICAHS 2025." },
     ask: { kicker: "New this issue", title: "Ask me anything. An agent that answers from my own work, and shows its source." },
     alsoInside: "A First Class at Westminster · Gold in the pool · Head Prefect, 2020 · Volunteering with the John Keells Foundation",
